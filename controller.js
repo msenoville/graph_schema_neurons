@@ -22,7 +22,7 @@ graphSchemaApp.controller('scotchController', function($scope) {
 });
 
 graphSchemaApp.controller('graphController', function($scope) {
-	var globalFunct = function(){
+	// var globalFunct = function(){
 		if (!mxClient.isBrowserSupported())
 		{
 			// Displays an error message if the browser is not supported.
@@ -77,6 +77,7 @@ graphSchemaApp.controller('graphController', function($scope) {
 
 				//create left vertical toolbar
 				var div_toolbar = document.createElement('div');
+				document.getElementById("container").appendChild(div_toolbar);
 				div_toolbar.style.width = '48px';
 				div_toolbar.style.float = 'left';
 				document.body.appendChild(div_toolbar);
@@ -87,6 +88,7 @@ graphSchemaApp.controller('graphController', function($scope) {
 				div_toolbar.appendChild(button_zoom_out);
 
 				var container = document.createElement('div');
+				document.getElementById("container").appendChild(container);
 				container.style.overflow = 'scroll';
 				container.style.position = 'relative';
 				container.style.float = 'left';
@@ -317,5 +319,5 @@ graphSchemaApp.controller('graphController', function($scope) {
 			// Restores original drag icon while outside of graph
 			ds.createDragElement = mxDragSource.prototype.createDragElement;
 		}
-	}
+	// }
 });
