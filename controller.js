@@ -1,7 +1,9 @@
 var graphSchemaApp = angular.module('graphSchemaApp');
 
 graphSchemaApp.controller('scotchController', function($scope) {
-    
+	// document.getElementById("div_toolbar").style.display("none");
+	// document.getElementById("svg_container").style.display("none");
+
     $scope.message = 'test';
    
     $scope.scotches = [
@@ -41,8 +43,10 @@ graphSchemaApp.controller('graphController', function($scope) {
 			mxEdgeHandler.prototype.snapToTerminals = true;
 			
 			var graphs = [];
+			// Detect existings elements in the DOM
+			if(document.getElementById("div_toolbar") || document.getElementById("svg_container")){ var i = 1; } else { var i = 0; }
 			// Creates the graph inside the given container
-			for (var i = 0; i < 1; i++)
+			for (i; i < 1; i++)
 			{
 				// Creates a DOM node that acts as the drag source
 				var img = mxUtils.createImage('img/gear.png');
@@ -77,10 +81,11 @@ graphSchemaApp.controller('graphController', function($scope) {
 
 				//create left vertical toolbar
 				var div_toolbar = document.createElement('div');
-				document.getElementById("container").appendChild(div_toolbar);
+				div_toolbar.id = 'div_toolbar';
 				div_toolbar.style.width = '48px';
 				div_toolbar.style.float = 'left';
-				document.body.appendChild(div_toolbar);
+				// document.body.appendChild(div_toolbar);
+				document.getElementById("container").appendChild(div_toolbar);
 				div_toolbar.appendChild(img);
 				div_toolbar.appendChild(img2);
 				div_toolbar.appendChild(img3);
@@ -88,7 +93,7 @@ graphSchemaApp.controller('graphController', function($scope) {
 				div_toolbar.appendChild(button_zoom_out);
 
 				var container = document.createElement('div');
-				document.getElementById("container").appendChild(container);
+				container.id = 'svg_container';
 				container.style.overflow = 'scroll';
 				container.style.position = 'relative';
 				container.style.float = 'left';
@@ -96,9 +101,8 @@ graphSchemaApp.controller('graphController', function($scope) {
 				container.style.height = '291px';
 				container.style.background = 'url(\'img/grid.gif\')';
 				container.style.cursor = 'default';
-				
-
-				document.body.appendChild(container);
+				// document.body.appendChild(container);
+				document.getElementById("container").appendChild(container);
 				
 				var graph = new mxGraph(container);
 				graph.gridSize = 30;
