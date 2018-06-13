@@ -1,10 +1,6 @@
 var graphSchemaApp = angular.module('graphSchemaApp');
 
 graphSchemaApp.controller('scotchController', function($scope) {
-	// if(!!document.getElementById("div_toolbar") && !!document.getElementById("svg_container")){
-	// 	document.getElementById("div_toolbar").style.display="none";
-	// 	document.getElementById("svg_container").style.display="none";
-	// }
     $scope.message = 'test';
    
     $scope.scotches = [
@@ -24,15 +20,13 @@ graphSchemaApp.controller('scotchController', function($scope) {
     
 });
 
-graphSchemaApp.controller('graphController', function($scope) {
+graphSchemaApp.controller('graphController', function($scope, $state) {
+	// $state.reload();
 	if (!mxClient.isBrowserSupported())
 	{
 		// Displays an error message if the browser is not supported.
 		mxUtils.error('Browser is not supported!', 200, false);
 	} else {
-		// document.getElementById("div_toolbar").style.display="block";
-		// document.getElementById("svg_container").style.display="block";
-	
 		// Enables guides
 		mxGraphHandler.prototype.guidesEnabled = true;
 		
@@ -127,6 +121,8 @@ graphSchemaApp.controller('graphController', function($scope) {
 			mxCellRendererCreateControl = mxCellRenderer.prototype.createControl;
 			mxCellRenderer.prototype.createControl = function(state)
 			{
+				// console.log(" this : " + this);
+				// console.log(" arguments : " + JSON.stringify(JSON.decycle(arguments[0])));
 				mxCellRendererCreateControl.apply(this, arguments);
 				
 				var graph = state.view.graph;
