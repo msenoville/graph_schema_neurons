@@ -76,6 +76,16 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 			button_zoom_out.style.background = 'url(\'img/zoom-out.png\') no-repeat';
 			button_zoom_out.style.backgroundSize = '100%';
 
+			var button_save = mxUtils.button('', function(){
+				var encoder = new mxCodec();
+				var node = encoder.encode(graph.getModel());
+			});
+			button_save.style.width = '48px';
+			button_save.style.height = '48px';
+			button_save.style.border = 'none';
+			button_save.style.background = 'url(\'img/save.png\') no-repeat';
+			button_save.style.backgroundSize = '100%';
+
 			//create left vertical toolbar
 			var div_toolbar = document.createElement('div');
 			div_toolbar.id = 'div_toolbar';
@@ -88,7 +98,8 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 			div_toolbar.appendChild(img3);
 			div_toolbar.appendChild(button_zoom_in);
 			div_toolbar.appendChild(button_zoom_out);
-
+			div_toolbar.appendChild(button_save);
+			
 			var container = document.createElement('div');
 			container.id = 'svg_container';
 			container.style.overflow = 'scroll';
