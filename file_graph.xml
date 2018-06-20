@@ -1,0 +1,10 @@
+<root>
+    <mxCell id="2" value="World!Vishal" vertex="1">
+        <mxGeometry x="200" y="150" width="80" height="30" as="geometry"/>
+    </mxCell>
+    <mxCell id="3" edge="1" source="2">
+        <mxGeometry relative="1" as="geometry">
+            <mxPoint x="440" y="90" as="targetPoint"/>
+        </mxGeometry>
+    </mxCell>
+</root>

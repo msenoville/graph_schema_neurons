@@ -116,6 +116,14 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 			// Specifies the URL and size of the new control
 			var deleteImage = new mxImage('img/overlays/forbidden.png', 16, 16);
 
+			// var read = function(graph, filename)
+			// {
+			// 	var req = mxUtils.load(filename);
+			// 	var root = req.getDocumentElement();
+			// 	var dec = new mxCodec(root.ownerDocument);
+				
+			// 	dec.decode(root, graph.getModel());
+			// };
 
 			// Overridden to add an additional control to the state at creation time
 			if ($rootScope.ctrlAllreadyOverwritten == null){ $rootScope.ctrlAllreadyOverwritten = false; }
@@ -223,9 +231,22 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 			graph.getModel().beginUpdate();
 			try
 			{
-				var v1 = graph.insertVertex(parent, null, 'Hello,', 20, 20, 80, 30);
-				var v2 = graph.insertVertex(parent, null, 'World!', 200, 150, 80, 30);
-				var e1 = graph.insertEdge(parent, null, '', v1, v2);
+				// var v1 = graph.insertVertex(parent, null, 'Hello,', 20, 20, 80, 30);
+				// var v2 = graph.insertVertex(parent, null, 'World!', 200, 150, 80, 30);
+				// var e1 = graph.insertEdge(parent, null, '', v1, v2);
+				// read(graph, 'file_graph.xml');
+				var xml = mxUtils.load('file_graph.xml');
+				//var xml = '';
+				var doc = mxUtils.parseXml(xml.request.response);
+			   	var codec = new mxCodec(doc);
+			   	var elt = doc.documentElement.firstChild;
+			   	var cells = [];
+			   	while (elt != null){
+					cells.push(codec.decodeCell(elt));
+					graph.refresh();
+					elt = elt.nextSibling;
+			   	}
+		   		graph.addCells(cells);
 			}
 			finally
 			{
