@@ -40,6 +40,5 @@ graphSchemaApp.config(function($stateProvider, $urlRouterProvider) {
             }
             
         });
-        
 });
 

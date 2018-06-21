@@ -77,8 +77,12 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 			button_zoom_out.style.backgroundSize = '100%';
 
 			var button_save = mxUtils.button('', function(){
+				// var FileSaver = require('file-saver');
 				var encoder = new mxCodec();
 				var node = encoder.encode(graph.getModel());
+
+				var blob = new Blob([node], {type: "text/plain;charset=utf-8"});
+				FileSaver.saveAs(blob, "file_graph.xml");
 				
 				console.log((node));
 			});
