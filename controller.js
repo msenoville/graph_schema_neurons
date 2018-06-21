@@ -79,6 +79,8 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 			var button_save = mxUtils.button('', function(){
 				var encoder = new mxCodec();
 				var node = encoder.encode(graph.getModel());
+				
+				console.log((node));
 			});
 			button_save.style.width = '48px';
 			button_save.style.height = '48px';
