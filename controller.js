@@ -20,7 +20,7 @@ graphSchemaApp.controller('scotchController', function($scope) {
     
 });
 
-graphSchemaApp.controller('graphController', function($scope, $rootScope, $state) {
+graphSchemaApp.controller('graphController', function($scope, $rootScope, $state, FileSaver) {
 	// $state.reload();
 	if (!mxClient.isBrowserSupported())
 	{
