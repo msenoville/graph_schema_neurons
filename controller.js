@@ -80,11 +80,10 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 				// var FileSaver = require('file-saver');
 				var encoder = new mxCodec();
 				var node = encoder.encode(graph.getModel());
-
-				var blob = new Blob([node], {type: "text/plain;charset=utf-8"});
+				var nodeText = new XMLSerializer().serializeToString(node);
+				console.log((nodeText));
+				var blob = new Blob([nodeText], {type: "text/plain;charset=utf-8"});
 				FileSaver.saveAs(blob, "file_graph.xml");
-				
-				console.log((node));
 			});
 			button_save.style.width = '48px';
 			button_save.style.height = '48px';
