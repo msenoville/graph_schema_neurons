@@ -255,7 +255,7 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 				//var xml = '';
 				var doc = mxUtils.parseXml(xml.request.response);
 			   	var codec = new mxCodec(doc);
-			   	var elt = doc.documentElement.firstChild;
+			   	var elt = doc.documentElement.firstChild.firstChild;
 			   	var cells = [];
 			   	while (elt != null){
 					cells.push(codec.decodeCell(elt));
