@@ -41,237 +41,225 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 		
 		var graphs = [];
 		// Detect existings elements in the DOM
-		// if(document.getElementById("div_toolbar") || document.getElementById("svg_container")){ var i = 1; } else { var i = 0; }
-		// Creates the graph inside the given container
-		// for (i; i < 1; i++)
-		// {
-			// Creates a DOM node that acts as the drag source
-			var img = mxUtils.createImage('img/gear.png');
-			img.style.width = '48px';
-			img.style.height = '48px';
-			var img2 = mxUtils.createImage('img/gearRed.png');
-			img2.style.width = '48px';
-			img2.style.height = '48px';
-			var img3 = mxUtils.createImage('img/gearGreen.png');
-			img3.style.width = '48px';
-			img3.style.height = '48px';
+		// Creates a DOM node that acts as the drag source
+		var img = mxUtils.createImage('img/gear.png');
+		img.class = 'img_utils';
+		img.style.width = '48px';
+		img.style.height = '48px';
+		var img2 = mxUtils.createImage('img/gearRed.png');
+		img2.style.width = '48px';
+		img2.style.height = '48px';
+		var img3 = mxUtils.createImage('img/gearGreen.png');
+		img3.style.width = '48px';
+		img3.style.height = '48px';
 
-			var button_zoom_in = mxUtils.button('', function()
+		var button_zoom_in = mxUtils.button('', function()
+		{
+			graph.zoomIn();
+		});
+		button_zoom_in.style.width = '48px';
+		button_zoom_in.style.height = '48px';
+		button_zoom_in.style.border = 'none';
+		button_zoom_in.style.background = 'url(\'img/zoom-in.png\') no-repeat';
+		button_zoom_in.style.backgroundSize = '100%';
+		
+		var button_zoom_out = mxUtils.button('', function()
+		{
+			graph.zoomOut();
+		});
+		button_zoom_out.style.width = '48px';
+		button_zoom_out.style.height = '48px';
+		button_zoom_out.style.border = 'none';
+		button_zoom_out.style.background = 'url(\'img/zoom-out.png\') no-repeat';
+		button_zoom_out.style.backgroundSize = '100%';
+
+		var button_save = mxUtils.button('', function(){
+			// var FileSaver = require('file-saver');
+			var encoder = new mxCodec();
+			var node = encoder.encode(graph.getModel());
+			var nodeText = new XMLSerializer().serializeToString(node);
+			console.log((nodeText));
+			var blob = new Blob([nodeText], {type: "text/plain;charset=utf-8"});
+			FileSaver.saveAs(blob, "file_graph.xml");
+		});
+		button_save.style.width = '48px';
+		button_save.style.height = '48px';
+		button_save.style.border = 'none';
+		button_save.style.background = 'url(\'img/save.png\') no-repeat';
+		button_save.style.backgroundSize = '100%';
+
+		//create left vertical toolbar
+		var div_toolbar = document.createElement('div');
+		div_toolbar.id = 'div_toolbar';
+		div_toolbar.style.width = '100%';
+		div_toolbar.style.float = 'left';
+		// document.body.appendChild(div_toolbar);
+		document.getElementById("id_graph_editor").appendChild(div_toolbar);
+		div_toolbar.appendChild(img);
+		div_toolbar.appendChild(img2);
+		div_toolbar.appendChild(img3);
+		div_toolbar.appendChild(button_zoom_in);
+		div_toolbar.appendChild(button_zoom_out);
+		div_toolbar.appendChild(button_save);
+		
+		var container = document.createElement('div');
+		container.id = 'svg_container';
+		container.style.overflow = 'scroll';
+		container.style.position = 'relative';
+		container.style.float = 'left';
+		container.style.minWidth = '750px';
+		container.style.minWidth = '90%';
+		container.style.height = '75%';
+		container.style.background = 'url(\'img/grid.gif\')';
+		container.style.cursor = 'default';
+		// document.body.appendChild(container);
+		document.getElementById("id_graph_editor").appendChild(container);
+		
+		var graph = new mxGraph(container);
+		graph.gridSize = 30;
+		graph.centerZoom = false;
+
+		//get connectable cells and modify style of edge
+		graph.setConnectable(true);
+		var style = graph.getStylesheet().getDefaultEdgeStyle();
+		style[mxConstants.STYLE_ROUNDED] = true;
+		style[mxConstants.STYLE_EDGE] = mxEdgeStyle.ElbowConnector;
+
+		graph.setPanning(true);
+
+		// Specifies the URL and size of the new control
+		var deleteImage = new mxImage('img/overlays/forbidden.png', 16, 16);
+
+		// Overridden to add an additional control to the state at creation time
+		if ($rootScope.ctrlAllreadyOverwritten == null){ $rootScope.ctrlAllreadyOverwritten = false; }
+		console.log("$rootScope.ctrlAllreadyOverwritten : " + $rootScope.ctrlAllreadyOverwritten);
+		if (!$rootScope.ctrlAllreadyOverwritten) {
+			mxCellRendererCreateControl = mxCellRenderer.prototype.createControl;
+			mxCellRenderer.prototype.createControl = function(state)
 			{
-				graph.zoomIn();
-			});
-			button_zoom_in.style.width = '48px';
-			button_zoom_in.style.height = '48px';
-			button_zoom_in.style.border = 'none';
-			button_zoom_in.style.background = 'url(\'img/zoom-in.png\') no-repeat';
-			button_zoom_in.style.backgroundSize = '100%';
-			
-			var button_zoom_out = mxUtils.button('', function()
-			{
-				graph.zoomOut();
-			});
-			button_zoom_out.style.width = '48px';
-			button_zoom_out.style.height = '48px';
-			button_zoom_out.style.border = 'none';
-			button_zoom_out.style.background = 'url(\'img/zoom-out.png\') no-repeat';
-			button_zoom_out.style.backgroundSize = '100%';
+				mxCellRendererCreateControl.apply(this, arguments);
+				$rootScope.ctrlAllreadyOverwritten = true;
 
-			var button_save = mxUtils.button('', function(){
-				// var FileSaver = require('file-saver');
-				var encoder = new mxCodec();
-				var node = encoder.encode(graph.getModel());
-				var nodeText = new XMLSerializer().serializeToString(node);
-				console.log((nodeText));
-				var blob = new Blob([nodeText], {type: "text/plain;charset=utf-8"});
-				FileSaver.saveAs(blob, "file_graph.xml");
-			});
-			button_save.style.width = '48px';
-			button_save.style.height = '48px';
-			button_save.style.border = 'none';
-			button_save.style.background = 'url(\'img/save.png\') no-repeat';
-			button_save.style.backgroundSize = '100%';
-
-			//create left vertical toolbar
-			var div_toolbar = document.createElement('div');
-			div_toolbar.id = 'div_toolbar';
-			div_toolbar.style.width = '48px';
-			div_toolbar.style.float = 'left';
-			// document.body.appendChild(div_toolbar);
-			document.getElementById("id_graph_editor").appendChild(div_toolbar);
-			div_toolbar.appendChild(img);
-			div_toolbar.appendChild(img2);
-			div_toolbar.appendChild(img3);
-			div_toolbar.appendChild(button_zoom_in);
-			div_toolbar.appendChild(button_zoom_out);
-			div_toolbar.appendChild(button_save);
-			
-			var container = document.createElement('div');
-			container.id = 'svg_container';
-			container.style.overflow = 'scroll';
-			container.style.position = 'relative';
-			container.style.float = 'left';
-			container.style.width = '521px';
-			container.style.height = '291px';
-			container.style.background = 'url(\'img/grid.gif\')';
-			container.style.cursor = 'default';
-			// document.body.appendChild(container);
-			document.getElementById("id_graph_editor").appendChild(container);
-			
-			var graph = new mxGraph(container);
-			graph.gridSize = 30;
-			graph.centerZoom = false;
-
-			//get connectable cells and modify style of edge
-			graph.setConnectable(true);
-			var style = graph.getStylesheet().getDefaultEdgeStyle();
-			style[mxConstants.STYLE_ROUNDED] = true;
-			style[mxConstants.STYLE_EDGE] = mxEdgeStyle.ElbowConnector;
-
-			graph.setPanning(true);
-
-			// Specifies the URL and size of the new control
-			var deleteImage = new mxImage('img/overlays/forbidden.png', 16, 16);
-
-			// var read = function(graph, filename)
-			// {
-			// 	var req = mxUtils.load(filename);
-			// 	var root = req.getDocumentElement();
-			// 	var dec = new mxCodec(root.ownerDocument);
+				var graph = state.view.graph;
 				
-			// 	dec.decode(root, graph.getModel());
-			// };
-
-			// Overridden to add an additional control to the state at creation time
-			if ($rootScope.ctrlAllreadyOverwritten == null){ $rootScope.ctrlAllreadyOverwritten = false; }
-			console.log("$rootScope.ctrlAllreadyOverwritten : " + $rootScope.ctrlAllreadyOverwritten);
-			if (!$rootScope.ctrlAllreadyOverwritten) {
-				mxCellRendererCreateControl = mxCellRenderer.prototype.createControl;
-				mxCellRenderer.prototype.createControl = function(state)
+				if (graph.getModel().isVertex(state.cell))
 				{
-					mxCellRendererCreateControl.apply(this, arguments);
-					$rootScope.ctrlAllreadyOverwritten = true;
-
-					var graph = state.view.graph;
-					
-					if (graph.getModel().isVertex(state.cell))
+					if (state.deleteControl == null)
 					{
-						if (state.deleteControl == null)
-						{
-							var b = new mxRectangle(0, 0, deleteImage.width, deleteImage.height);
-							state.deleteControl = new mxImageShape(b, deleteImage.src);
-							state.deleteControl.dialect = graph.dialect;
-							state.deleteControl.preserveImageAspect = false;
-							
-							this.initControl(state, state.deleteControl, false, function (evt)
-							{
-								if (graph.isEnabled())
-								{
-									graph.removeCells([state.cell]);
-									mxEvent.consume(evt);
-								}
-							});
-						}
-					}
-					else if (state.deleteControl != null)
-					{
-						state.deleteControl.destroy();
-						state.deleteControl = null;
-					}
-				};
-
-				// Helper function to compute the bounds of the control
-				var getDeleteControlBounds = function(state)
-				{
-					if (state.deleteControl != null)
-					{
-						var oldScale = state.deleteControl.scale;
-						var w = state.deleteControl.bounds.width / oldScale;
-						var h = state.deleteControl.bounds.height / oldScale;
-						var s = state.view.scale;			
-
-						return (state.view.graph.getModel().isEdge(state.cell)) ? 
-							new mxRectangle(state.x + state.width / 2 - w / 2 * s,
-								state.y + state.height / 2 - h / 2 * s, w * s, h * s)
-							: new mxRectangle(state.x + state.width - w * s,
-								state.y, w * s, h * s);
-					}
-					
-					return null;
-				};
-				
-				// Overridden to update the scale and bounds of the control
-				mxCellRendererRedrawControl = mxCellRenderer.prototype.redrawControl;
-				mxCellRenderer.prototype.redrawControl = function(state)
-				{
-					mxCellRendererRedrawControl.apply(this, arguments);
-					
-					if (state.deleteControl != null)
-					{
-						var bounds = getDeleteControlBounds(state);
-						var s = state.view.scale;
+						var b = new mxRectangle(0, 0, deleteImage.width, deleteImage.height);
+						state.deleteControl = new mxImageShape(b, deleteImage.src);
+						state.deleteControl.dialect = graph.dialect;
+						state.deleteControl.preserveImageAspect = false;
 						
-						if (state.deleteControl.scale != s || !state.deleteControl.bounds.equals(bounds))
+						this.initControl(state, state.deleteControl, false, function (evt)
 						{
-							state.deleteControl.bounds = bounds;
-							state.deleteControl.scale = s;
-							state.deleteControl.redraw();
-						}
+							if (graph.isEnabled())
+							{
+								graph.removeCells([state.cell]);
+								mxEvent.consume(evt);
+							}
+						});
 					}
-				};
-				
-				// Overridden to remove the control if the state is destroyed
-				mxCellRendererDestroy = mxCellRenderer.prototype.destroy;
-				mxCellRenderer.prototype.destroy = function(state)
+				}
+				else if (state.deleteControl != null)
 				{
-					mxCellRendererDestroy.apply(this, arguments);
+					state.deleteControl.destroy();
+					state.deleteControl = null;
+				}
+			};
 
-					if (state.deleteControl != null)
+			// Helper function to compute the bounds of the control
+			var getDeleteControlBounds = function(state)
+			{
+				if (state.deleteControl != null)
+				{
+					var oldScale = state.deleteControl.scale;
+					var w = state.deleteControl.bounds.width / oldScale;
+					var h = state.deleteControl.bounds.height / oldScale;
+					var s = state.view.scale;			
+
+					return (state.view.graph.getModel().isEdge(state.cell)) ? 
+						new mxRectangle(state.x + state.width / 2 - w / 2 * s,
+							state.y + state.height / 2 - h / 2 * s, w * s, h * s)
+						: new mxRectangle(state.x + state.width - w * s,
+							state.y, w * s, h * s);
+				}
+				
+				return null;
+			};
+			
+			// Overridden to update the scale and bounds of the control
+			mxCellRendererRedrawControl = mxCellRenderer.prototype.redrawControl;
+			mxCellRenderer.prototype.redrawControl = function(state)
+			{
+				mxCellRendererRedrawControl.apply(this, arguments);
+				
+				if (state.deleteControl != null)
+				{
+					var bounds = getDeleteControlBounds(state);
+					var s = state.view.scale;
+					
+					if (state.deleteControl.scale != s || !state.deleteControl.bounds.equals(bounds))
 					{
-						state.deleteControl.destroy();
-						state.deleteControl = null;
+						state.deleteControl.bounds = bounds;
+						state.deleteControl.scale = s;
+						state.deleteControl.redraw();
 					}
-				};
-			}
-			// Uncomment the following if you want the container
-			// to fit the size of the graph
-			//graph.setResizeContainer(true);
+				}
+			};
 			
-			// Enables rubberband selection
-			new mxRubberband(graph);
-			
-			// Gets the default parent for inserting new cells. This
-			// is normally the first child of the root (ie. layer 0).
-			var parent = graph.getDefaultParent();
-							
-			// Adds cells to the model in a single step
-			graph.getModel().beginUpdate();
-			try
+			// Overridden to remove the control if the state is destroyed
+			mxCellRendererDestroy = mxCellRenderer.prototype.destroy;
+			mxCellRenderer.prototype.destroy = function(state)
 			{
-				// var v1 = graph.insertVertex(parent, null, 'Hello,', 20, 20, 80, 30);
-				// var v2 = graph.insertVertex(parent, null, 'World!', 200, 150, 80, 30);
-				// var e1 = graph.insertEdge(parent, null, '', v1, v2);
-				// read(graph, 'file_graph.xml');
-				var xml = mxUtils.load('file_graph.xml');
-				//var xml = '';
-				var doc = mxUtils.parseXml(xml.request.response);
-			   	var codec = new mxCodec(doc);
-			   	var elt = doc.documentElement.firstChild.firstChild;
-			   	var cells = [];
-			   	while (elt != null){
-					cells.push(codec.decodeCell(elt));
-					graph.refresh();
-					elt = elt.nextSibling;
-			   	}
-		   		graph.addCells(cells);
+				mxCellRendererDestroy.apply(this, arguments);
+
+				if (state.deleteControl != null)
+				{
+					state.deleteControl.destroy();
+					state.deleteControl = null;
+				}
+			};
+		}
+		// Uncomment the following if you want the container
+		// to fit the size of the graph
+		//graph.setResizeContainer(true);
+		
+		// Enables rubberband selection
+		new mxRubberband(graph);
+		
+		// Gets the default parent for inserting new cells. This
+		// is normally the first child of the root (ie. layer 0).
+		var parent = graph.getDefaultParent();
+						
+		// Adds cells to the model in a single step
+		graph.getModel().beginUpdate();
+		try
+		{
+			// var v1 = graph.insertVertex(parent, null, 'Hello,', 20, 20, 80, 30);
+			// var v2 = graph.insertVertex(parent, null, 'World!', 200, 150, 80, 30);
+			// var e1 = graph.insertEdge(parent, null, '', v1, v2);
+			// read(graph, 'file_graph.xml');
+			var xml = mxUtils.load('file_graph.xml');
+			//var xml = '';
+			var doc = mxUtils.parseXml(xml.request.response);
+			var codec = new mxCodec(doc);
+			var elt = doc.documentElement.firstChild.firstChild;
+			var cells = [];
+			while (elt != null){
+				cells.push(codec.decodeCell(elt));
+				graph.refresh();
+				elt = elt.nextSibling;
 			}
-			finally
-			{
-				// Updates the display
-				graph.getModel().endUpdate();
-			}
-			
-			graphs.push(graph);
-		// }
+			graph.addCells(cells);
+		}
+		finally
+		{
+			// Updates the display
+			graph.getModel().endUpdate();
+		}
+		
+		graphs.push(graph);
 
 		// Returns the graph under the mouse
 		var graphF = function(evt)
