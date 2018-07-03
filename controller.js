@@ -153,6 +153,7 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 
 		// Specifies the URL and size of the new control
 		var deleteImage = new mxImage('img/overlays/forbidden.png', 16, 16);
+		var editImage = new mxImage('img/edit.png', 16, 16);
 
 		// Overridden to add an additional control to the state at creation time
 		if ($rootScope.ctrlAllreadyOverwritten == null){ $rootScope.ctrlAllreadyOverwritten = false; }
