@@ -1,4 +1,4 @@
-var graphSchemaApp = angular.module('graphSchemaApp', ['ui.router', 'ngFileSaver']);
+var graphSchemaApp = angular.module('graphSchemaApp', ['ui.router', 'ngFileSaver','ngSanitize', 'ui.bootstrap']);
 
 graphSchemaApp.config(function($stateProvider, $urlRouterProvider) {
     
