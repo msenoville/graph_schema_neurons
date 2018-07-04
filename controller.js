@@ -233,9 +233,9 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 					var s = state.view.scale;			
 
 					return (state.view.graph.getModel().isEdge(state.cell)) ? 
-						new mxRectangle(state.x + state.width / 2 - w / 2 * s,
+						new mxRectangle((state.x - 15) + state.width / 2 - w / 2 * s,
 							state.y + state.height / 2 - h / 2 * s, w * s, h * s)
-						: new mxRectangle(state.x + state.width - w * s,
+						: new mxRectangle((state.x - 15) + state.width - w * s,
 							state.y, w * s, h * s);
 				}
 				return null;
@@ -261,7 +261,7 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 				}
 				if (state.editControl != null)
 				{
-					var bounds = getDeleteControlBounds(state);
+					var bounds = getEditControlBounds(state);
 					var s = state.view.scale;
 					
 					if (state.editControl.scale != s || !state.editControl.bounds.equals(bounds))
