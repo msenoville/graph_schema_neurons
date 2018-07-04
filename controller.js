@@ -189,9 +189,11 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 						state.editControl.preserveImageAspect = false;
 						this.initControl(state, state.editControl, false, function (evt)
 						{
+
 							if (graph.isEnabled())
 							{
-								graph.removeCells([state.cell]);
+								//graph.removeCells([state.cell]);
+								// alert("toto");
 								mxEvent.consume(evt);
 							}
 						});
@@ -233,9 +235,9 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 					var s = state.view.scale;			
 
 					return (state.view.graph.getModel().isEdge(state.cell)) ? 
-						new mxRectangle((state.x - 15) + state.width / 2 - w / 2 * s,
+						new mxRectangle((state.x - 64) + state.width / 2 - w / 2 * s,
 							state.y + state.height / 2 - h / 2 * s, w * s, h * s)
-						: new mxRectangle((state.x - 15) + state.width - w * s,
+						: new mxRectangle((state.x - 64) + state.width - w * s,
 							state.y, w * s, h * s);
 				}
 				return null;
