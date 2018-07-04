@@ -182,6 +182,20 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 							}
 						});
 					}
+					if (state.editControl == null){
+						var c = new mxRectangle(0, 0, editImage.width, editImage.height);
+						state.editControl = new mxImageShape(b, editImage.src);
+						state.editControl.dialect = graph.dialect;
+						state.editControl.preserveImageAspect = false;
+						this.initControl(state, state.editControl, false, function (evt)
+						{
+							if (graph.isEnabled())
+							{
+								graph.removeCells([state.cell]);
+								mxEvent.consume(evt);
+							}
+						});
+					}
 				}
 				else if (state.deleteControl != null)
 				{
@@ -206,10 +220,27 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 						: new mxRectangle(state.x + state.width - w * s,
 							state.y, w * s, h * s);
 				}
-				
 				return null;
 			};
-			
+
+			var getEditControlBounds = function(state)
+			{
+				if (state.editControl != null)
+				{
+					var oldScale = state.editControl.scale;
+					var w = state.editControl.bounds.width / oldScale;
+					var h = state.editControl.bounds.height / oldScale;
+					var s = state.view.scale;			
+
+					return (state.view.graph.getModel().isEdge(state.cell)) ? 
+						new mxRectangle(state.x + state.width / 2 - w / 2 * s,
+							state.y + state.height / 2 - h / 2 * s, w * s, h * s)
+						: new mxRectangle(state.x + state.width - w * s,
+							state.y, w * s, h * s);
+				}
+				return null;
+			}
+
 			// Overridden to update the scale and bounds of the control
 			mxCellRendererRedrawControl = mxCellRenderer.prototype.redrawControl;
 			mxCellRenderer.prototype.redrawControl = function(state)
@@ -228,6 +259,18 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 						state.deleteControl.redraw();
 					}
 				}
+				if (state.editControl != null)
+				{
+					var bounds = getDeleteControlBounds(state);
+					var s = state.view.scale;
+					
+					if (state.editControl.scale != s || !state.editControl.bounds.equals(bounds))
+					{
+						state.editControl.bounds = bounds;
+						state.editControl.scale = s;
+						state.editControl.redraw();
+					}
+				}
 			};
 			
 			// Overridden to remove the control if the state is destroyed
@@ -235,11 +278,15 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 			mxCellRenderer.prototype.destroy = function(state)
 			{
 				mxCellRendererDestroy.apply(this, arguments);
-
 				if (state.deleteControl != null)
 				{
 					state.deleteControl.destroy();
 					state.deleteControl = null;
+				}
+				if (state.editControl != null)
+				{
+					state.editControl.destroy();
+					state.editControl = null;
 				}
 			};
 		}
