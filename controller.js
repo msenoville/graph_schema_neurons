@@ -173,6 +173,7 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 						state.deleteControl = new mxImageShape(b, deleteImage.src);
 						state.deleteControl.dialect = graph.dialect;
 						state.deleteControl.preserveImageAspect = false;
+
 						this.initControl(state, state.deleteControl, false, function (evt)
 						{
 							if (graph.isEnabled())
@@ -187,13 +188,19 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 						state.editControl = new mxImageShape(b, editImage.src);
 						state.editControl.dialect = graph.dialect;
 						state.editControl.preserveImageAspect = false;
+
+						// var node_lnk = document.createElement("a");
+						// node_lnk.href = "#";
+						// node_lnk.setAttribute('uib-popover-template', "'dynamicPopover.templateUrl'");
+						// editImage.appendChild(node_lnk);
+
 						this.initControl(state, state.editControl, false, function (evt)
 						{
-
 							if (graph.isEnabled())
 							{
 								//graph.removeCells([state.cell]);
 								// alert("toto");
+								console.log("docimg : " + JSON.stringify(document.images));
 								mxEvent.consume(evt);
 							}
 						});
