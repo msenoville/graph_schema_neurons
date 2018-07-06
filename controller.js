@@ -19,32 +19,7 @@ graphSchemaApp.controller('scotchController', function($scope) {
     ];    
 });
 
-graphSchemaApp.controller('graphController', function($scope, $rootScope, $state, FileSaver, $sce) {
-	$scope.dynamicPopover = {
-		content: 'Hello, World!',
-		templateUrl: 'myPopoverTemplate.html',
-		title: 'Title'
-	};
-	$scope.placement = {
-		options: [
-		  'top',
-		  'top-left',
-		  'top-right',
-		  'bottom',
-		  'bottom-left',
-		  'bottom-right',
-		  'left',
-		  'left-top',
-		  'left-bottom',
-		  'right',
-		  'right-top',
-		  'right-bottom'
-		],
-		selected: 'top'
-	  };
-	  
-	  $scope.htmlPopover = $sce.trustAsHtml('<b style="color: red">I can</b> have <div class="label label-success">HTML</div> content');
-	
+graphSchemaApp.controller('graphController', function($scope, $rootScope, $state, FileSaver, $sce) {	
 	// $state.reload();
 	if (!mxClient.isBrowserSupported())
 	{
@@ -132,7 +107,7 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 		container.style.position = 'relative';
 		container.style.float = 'left';
 		container.style.minWidth = '750px';
-		container.style.minWidth = '90%';
+		container.style.minWidth = '70%';
 		container.style.height = '75%';
 		container.style.background = 'url(\'img/grid.gif\')';
 		container.style.cursor = 'default';
@@ -200,7 +175,9 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 							{
 								//graph.removeCells([state.cell]);
 								// alert("toto");
-								console.log("docimg : " + JSON.stringify(document.images));
+								// console.log("docimg : " + JSON.stringify(document.images));
+								//console.log("state.cell : " + state.cell);
+								document.getElementById("template_form_cell").style.display = "block";
 								mxEvent.consume(evt);
 							}
 						});

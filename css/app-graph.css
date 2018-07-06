@@ -1,3 +1,8 @@
 #div_toolbar img {
     vertical-align: top;
 }
+#template_form_cell {
+    position: relative;
+    float: left;
+    display:none;
+}
