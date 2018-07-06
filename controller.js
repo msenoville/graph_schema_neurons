@@ -153,7 +153,12 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 						{
 							if (graph.isEnabled())
 							{
-								graph.removeCells([state.cell]);
+								bootbox.confirm( "Do you really remove this cell ?",
+									function(result){
+										if(result == true){
+											graph.removeCells([state.cell]);
+										}
+									});
 								mxEvent.consume(evt);
 							}
 						});
@@ -163,7 +168,6 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 						state.editControl = new mxImageShape(b, editImage.src);
 						state.editControl.dialect = graph.dialect;
 						state.editControl.preserveImageAspect = false;
-
 						// var node_lnk = document.createElement("a");
 						// node_lnk.href = "#";
 						// node_lnk.setAttribute('uib-popover-template', "'dynamicPopover.templateUrl'");
@@ -177,6 +181,7 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 								// alert("toto");
 								// console.log("docimg : " + JSON.stringify(document.images));
 								//console.log("state.cell : " + state.cell);
+								$scope.form_title = "toto";
 								document.getElementById("template_form_cell").style.display = "block";
 								mxEvent.consume(evt);
 							}
