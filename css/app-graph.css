@@ -6,9 +6,6 @@
     float: left;
     display:none;
 }
-/* .modal-body {
-    min-height: calc(60% - 25px);
-} */
-/* .modal-footer {
-    max-height: 30px;
-} */
+.modal-body {
+    display: inline;
+}
