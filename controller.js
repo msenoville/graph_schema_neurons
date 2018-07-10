@@ -181,8 +181,37 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 								// alert("toto");
 								// console.log("docimg : " + JSON.stringify(document.images));
 								//console.log("state.cell : " + state.cell);
-								$scope.form_title = "toto";
-								document.getElementById("template_form_cell").style.display = "block";
+								
+								//$scope.form_title = "toto";
+								// document.getElementById("form-pop-neurons").style.display = "block";
+								var modal = bootbox.dialog({
+									message: $(".form-pop-neurons").html(),
+									title: "Population of neurons",
+									buttons: [
+										{
+										  label: "Save",
+										  className: "btn btn-primary pull-left",
+										  callback: function() {
+							  
+											// alert($('form #email').val());
+										   
+											return false;
+										  }
+										},
+										{
+										  label: "Close",
+										  className: "btn btn-default pull-left",
+										  callback: function() {
+											console.log("just do something on close");
+										  }
+										}
+									  ],
+									  show: false,
+									  onEscape: function() {
+										modal.modal("hide");
+									  }
+								});
+								modal.modal("show");
 								mxEvent.consume(evt);
 							}
 						});
