@@ -412,3 +412,10 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 		ds.createDragElement = mxDragSource.prototype.createDragElement;
 	}
 });
+
+
+graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title', 'close',
+	function($scope, $element, title, close) {
+		$scope.title = title;
+	}
+]);
