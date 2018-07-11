@@ -19,7 +19,7 @@ graphSchemaApp.controller('scotchController', function($scope) {
     ];    
 });
 
-graphSchemaApp.controller('graphController', function($scope, $rootScope, $state, FileSaver, $sce) {	
+graphSchemaApp.controller('graphController', function($scope, $rootScope, $state, FileSaver, $sce, ModalService) {	
 	// $state.reload();
 	if (!mxClient.isBrowserSupported())
 	{
@@ -177,46 +177,14 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 						{
 							if (graph.isEnabled())
 							{
-								//graph.removeCells([state.cell]);
-								// alert("toto");
-								// console.log("docimg : " + JSON.stringify(document.images));
-								//console.log("state.cell : " + state.cell);
-								
-								//$scope.form_title = "toto";
-								// document.getElementById("form-pop-neurons").style.display = "block";
-								var modal = bootbox.dialog({
-									message: $("#div-form-pop-neurons").html(),
-									title: "Population of neurons",
-									buttons: [
-										{
-										  label: "Save",
-										  className: "btn btn-primary pull-left",
-										  callback: function(result) {
-											// alert($('form #email').val());
-											var text = $('#form-pop-neurons').find('input[name="level"]').val();
-											//var text = $('#form-pop-neurons').find('input[name="level"]').val();
-											// var text = $('#level').attr('value');
-											console.log("result : " + text);
-											// if(result == true) {
-												$('#form-pop-neurons').submit();
-											// }
-											return false;
-										  }
-										},
-										{
-										  label: "Close",
-										  className: "btn btn-default pull-left",
-										  callback: function() {
-											console.log("just do something on close");
-										  }
-										}
-									  ],
-									  show: false,
-									  onEscape: function() {
-										modal.modal("hide");
-									  }
+								//modal.modal("show");
+								ModalService.showModal({
+									templateUrl: "modal_pop_dialog.html",
+    								controller: "PopDialogController",
+									inputs: {
+										title : "Population Form Editor"
+									}
 								});
-								modal.modal("show");
 								mxEvent.consume(evt);
 							}
 						});

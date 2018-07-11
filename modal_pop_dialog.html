@@ -1,0 +1,97 @@
+    
+<div class="modal fade">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" ng-click="close()" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">{{title}}</h4>
+            </div>
+            <div class="modal-body">
+                <form id="form-pop-neurons" class="form-horizontal col-sm-12" role="form">
+                    <!-- Text input-->
+                    <div class="form-group col-sm-12">
+                        <label class="control-label col-sm-2" for="level">Level : </label>  
+                        <div class="col-sm-10">
+                            <input id="level" name="level" type="text" placeholder="level..." class="form-control input-md" ng-model="pop.level">
+                        </div>
+                    </div>
+                    
+                    <!-- Text input-->
+                    <div class="form-group col-sm-12">
+                        <label class="control-label col-sm-2" for="size">Size : </label>
+                        <div class="col-sm-3">
+                            <input id="size" name="size" type="number" min="0" step="1" placeholder="size" class="form-control input-md">
+                        </div>
+                    </div>
+                    
+                    <!-- Select Basic -->
+                    <div class="form-group col-sm-12">
+                        <label class="control-label col-sm-2" for="celltype">Cell Type : </label>
+                        <div class="col-sm-10">
+                            <select id="celltype" name="celltype" class="form-control">
+                                <option value="IF_curr_alpha">IF_curr_alpha</option>
+                                <option value="IF_curr_exp">IF_curr_exp</option>
+                                <option value="IF_cond_alpha">IF_cond_alpha</option>
+                                <option value="IF_cond_exp">IF_cond_exp</option>
+                                <option value="HH_cond_exp">HH_cond_exp</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-12">
+                        <div class="control-label col-sm-2"><b>Parameters</b></div>
+                        <label class="control-label col-sm-2" for="param_v_rest">v_rest : </label>
+                        <div class="col-sm-3">
+                            <input id="param_v_rest" name="param_v_rest" type="number" min="0" step="1" placeholder="param_v_rest" class="form-control input-md">
+                        </div>
+                        <div class="control-label col-sm-2">mF</div>
+                    </div>
+                    <div class="form-group col-sm-12">
+                        <div class="control-label col-sm-2"></div>
+                        <label class="control-label col-sm-2" for="param_cm">cm : </label>
+                        <div class="col-sm-3">
+                            <input id="param_cm" name="param_cm" type="number" min="0" step="1" placeholder="param_cm" class="form-control input-md">
+                        </div>
+                        <div class="control-label col-sm-2">nF</div>
+                    </div>
+                    <div class="form-group col-sm-12">
+                        <div class="control-label col-sm-2"></div>
+                        <label class="control-label col-sm-2" for="param_tau_m">tau_m : </label>
+                        <div class="col-sm-3">
+                            <input id="param_tau_m" name="param_tau_m" type="number" min="0" step="1" placeholder="param_tau_m" class="form-control input-md">
+                        </div>
+                        <div class="control-label col-sm-2">mS</div>
+                    </div>
+                    <div class="form-group col-sm-12">
+                        <div class="control-label col-sm-2"><b>Init Values</b></div>
+                        <label class="control-label col-sm-2" for="v_rest">v_rest : </label>
+                        <div class="col-sm-3">
+                            <input id="v_rest" name="v_rest" type="number" min="0" step="1" placeholder="v_rest" class="form-control input-md">
+                        </div>
+                        <div class="control-label col-sm-2">mF</div>
+                    </div>
+                    <div class="form-group col-sm-12">
+                        <div class="control-label col-sm-2"></div>
+                        <label class="control-label col-sm-2" for="cm">cm : </label>
+                        <div class="col-sm-3">
+                            <input id="cm" name="cm" type="number" min="0" step="1" placeholder="cm" class="form-control input-md">
+                        </div>
+                        <div class="control-label col-sm-2">nF</div>
+                    </div>
+                    <div class="form-group col-sm-12">
+                        <div class="control-label col-sm-2"></div>
+                        <label class="control-label col-sm-2" for="tau_m">tau_m : </label>
+                        <div class="col-sm-3">
+                            <input id="tau_m" name="tau_m" type="number" min="0" step="1" placeholder="tau_m" class="form-control input-md">
+                        </div>
+                        <div class="control-label col-sm-2">mS</div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" ng-click="close()" class="btn btn-primary" data-dismiss="modal">OK</button>
+                <button type="button" ng-click="cancel()" class="btn">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+  
