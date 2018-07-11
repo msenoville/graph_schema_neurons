@@ -185,16 +185,21 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 								//$scope.form_title = "toto";
 								// document.getElementById("form-pop-neurons").style.display = "block";
 								var modal = bootbox.dialog({
-									message: $(".form-pop-neurons").html(),
+									message: $("#div-form-pop-neurons").html(),
 									title: "Population of neurons",
 									buttons: [
 										{
 										  label: "Save",
 										  className: "btn btn-primary pull-left",
-										  callback: function() {
-							  
+										  callback: function(result) {
 											// alert($('form #email').val());
-										   
+											var text = $('#form-pop-neurons').find('input[name="level"]').val();
+											//var text = $('#form-pop-neurons').find('input[name="level"]').val();
+											// var text = $('#level').attr('value');
+											console.log("result : " + text);
+											// if(result == true) {
+												$('#form-pop-neurons').submit();
+											// }
 											return false;
 										  }
 										},

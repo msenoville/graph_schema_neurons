@@ -19,14 +19,14 @@
     </div>
 </div> -->
 
-<div id="form-pop-neurons" class="form-pop-neurons bootbox-body row" style="display:none;">
-    <form class="form-horizontal col-sm-12" role="form">
+<div id="div-form-pop-neurons" class="form-pop-neurons bootbox-body row" style="display:none;">
+    <form id="form-pop-neurons" class="form-horizontal col-sm-12" role="form">
                 
         <!-- Text input-->
         <div class="form-group col-sm-12">
-            <label class="control-label col-sm-2" for="textinput">Level : </label>  
+            <label class="control-label col-sm-2" for="level">Level : </label>  
             <div class="col-sm-10">
-                <input id="textinput" name="textinput" type="text" placeholder="level..." class="form-control input-md">
+                <input id="level" name="level" type="text" placeholder="level..." class="form-control input-md" ng-model="pop.level">
             </div>
         </div>
         
