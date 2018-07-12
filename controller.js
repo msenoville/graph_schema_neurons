@@ -431,6 +431,9 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 				param_v_rest: $scope.param_v_rest,
 				param_cm: $scope.param_cm,
 				param_tau_m: $scope.param_tau_m,
+				init_v_rest: $scope.init_v_rest,
+				init_cm: $scope.init_cm,
+				init_tau_m: $scope.init_tau_m,
 			}, 100);
 			$('.modal-backdrop').remove();
 		};
@@ -441,8 +444,16 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 			$element.modal('hide');
 			//  Now call close, returning control to the caller.
 			close({
-				event: $scope.event,
-			}, 100); // close, but give 500ms for bootstrap to animate
+				level: $scope.level,
+				size: $scope.size,
+				celltype: $scope.celltype,
+				param_v_rest: $scope.param_v_rest,
+				param_cm: $scope.param_cm,
+				param_tau_m: $scope.param_tau_m,
+				init_v_rest: $scope.init_v_rest,
+				init_cm: $scope.init_cm,
+				init_tau_m: $scope.init_tau_m,
+			}, 100); // close, but give 100ms for bootstrap to animate
 			$('.modal-backdrop').remove();
 		};
 	}
