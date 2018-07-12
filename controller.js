@@ -184,6 +184,11 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 									inputs: {
 										title : "Population Form Editor"
 									}
+								}).then(function(modal) {
+									modal.element.modal();
+									modal.close.then(function(result) {
+										
+									});
 								});
 								mxEvent.consume(evt);
 							}
