@@ -187,7 +187,7 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 								}).then(function(modal) {
 									modal.element.modal();
 									modal.close.then(function(result) {
-										
+										console.log(JSON.stringify(result));
 									});
 								});
 								mxEvent.consume(evt);
@@ -422,5 +422,17 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title', 'close',
 	function($scope, $element, title, close) {
 		$scope.title = title;
+
+		$scope.close = function() {
+			close({
+				level: $scope.level,
+				size: $scope.size,
+				celltype: $scope.celltype,
+				param_v_rest: $scope.param_v_rest,
+				param_cm: $scope.param_cm,
+				param_tau_m: $scope.param_tau_m,
+			}, 100);
+			$('.modal-backdrop').remove();
+		};
 	}
 ]);
