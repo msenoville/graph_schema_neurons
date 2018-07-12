@@ -6,3 +6,14 @@
     float: left;
     display:none;
 }
+
+.modal
+{
+    overflow-y: auto !important;
+}
+
+.modal-open {
+    overflow: auto !important;
+    overflow-x: hidden !important;
+    padding-right: 15px !important;
+}

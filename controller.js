@@ -434,5 +434,16 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 			}, 100);
 			$('.modal-backdrop').remove();
 		};
+		//  This cancel function must use the bootstrap, 'modal' function because
+		//  the doesn't have the 'data-dismiss' attribute.
+		$scope.cancel = function() {
+			//  Manually hide the modal.
+			$element.modal('hide');
+			//  Now call close, returning control to the caller.
+			close({
+				event: $scope.event,
+			}, 100); // close, but give 500ms for bootstrap to animate
+			$('.modal-backdrop').remove();
+		};
 	}
 ]);
