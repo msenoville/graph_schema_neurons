@@ -215,14 +215,9 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 								}).then(function(modal) {
 									modal.element.modal();
 									modal.close.then(function(result) {
-										console.log(JSON.stringify(result));
-										console.log("state 2a : " + state.cell.value);
 										state.cell.value = json_data_array[0] + "|" + JSON.stringify(result)
-										console.log("state.cell.value : " + state.cell.value);
 									});
-									console.log("state 2b : " + state.cell.value);
 								});
-								console.log("state 2c : " + state.cell.value);
 								mxEvent.consume(evt);
 							}
 						});
@@ -486,15 +481,15 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 			$element.modal('hide');
 			//  Now call close, returning control to the caller.
 			close({
-				level: $scope.level,
-				size: $scope.size,
-				celltype: $scope.celltype,
-				param_v_rest: $scope.param_v_rest,
-				param_cm: $scope.param_cm,
-				param_tau_m: $scope.param_tau_m,
-				init_v_rest: $scope.init_v_rest,
-				init_cm: $scope.init_cm,
-				init_tau_m: $scope.init_tau_m,
+				level: level,
+				size: size,
+				celltype: celltype,
+				param_v_rest: param_v_rest,
+				param_cm: param_cm,
+				param_tau_m: param_tau_m,
+				init_v_rest: init_v_rest,
+				init_cm: init_cm,
+				init_tau_m: init_tau_m,
 			}, 100); // close, but give 100ms for bootstrap to animate
 			$('.modal-backdrop').remove();
 		};
