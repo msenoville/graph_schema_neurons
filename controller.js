@@ -217,7 +217,7 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 									modal.close.then(function(result) {
 										console.log(JSON.stringify(result));
 										console.log("state 2a : " + state.cell.value);
-										state.cell.value = state.cell.value + "|" + JSON.stringify(result)
+										state.cell.value = json_data_array[0] + "|" + JSON.stringify(result)
 										console.log("state.cell.value : " + state.cell.value);
 									});
 									console.log("state 2b : " + state.cell.value);
