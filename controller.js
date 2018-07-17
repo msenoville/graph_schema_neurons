@@ -186,6 +186,7 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 									var json_data = JSON.parse(json_data_array[1]);
 								} else {
 									var json_data = {
+										"name_value": "",
 										"level": "",
 										"size": "",
 										"celltype": "",
@@ -202,6 +203,7 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
     								controller: "PopDialogController",
 									inputs: {
 										title : "Population Form Editor",
+										name_value: json_data_array[0],
 										level: json_data.level,
 										size: json_data.size,
 										celltype: json_data.celltype,
@@ -215,7 +217,7 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 								}).then(function(modal) {
 									modal.element.modal();
 									modal.close.then(function(result) {
-										state.cell.value = json_data_array[0] + "|" + JSON.stringify(result)
+										state.cell.value = result.name_value + "|" + JSON.stringify(result)
 									});
 								});
 								mxEvent.consume(evt);
@@ -447,9 +449,10 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 });
 
 
-graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title', 'close', 'level', 'size', 'celltype', 'param_v_rest', 'param_cm', 'param_tau_m', 'init_v_rest', 'init_cm', 'init_tau_m',
-	function($scope, $element, title, close, level, size, celltype, param_v_rest, param_cm, param_tau_m, init_v_rest, init_cm, init_tau_m) {
+graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title', 'close', 'name_value', 'level', 'size', 'celltype', 'param_v_rest', 'param_cm', 'param_tau_m', 'init_v_rest', 'init_cm', 'init_tau_m',
+	function($scope, $element, title, close, name_value, level, size, celltype, param_v_rest, param_cm, param_tau_m, init_v_rest, init_cm, init_tau_m) {
 		$scope.title = title;
+		$scope.name_value = name_value;
 		$scope.level = level;
 		$scope.size = size;
 		$scope.celltype = celltype;
@@ -462,6 +465,7 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 
 		$scope.close = function() {
 			close({
+				name_value: $scope.name_value,
 				level: $scope.level,
 				size: $scope.size,
 				celltype: $scope.celltype,
@@ -481,6 +485,7 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 			$element.modal('hide');
 			//  Now call close, returning control to the caller.
 			close({
+				name_value: name_value,
 				level: level,
 				size: size,
 				celltype: celltype,
