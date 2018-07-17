@@ -153,6 +153,7 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 						{
 							if (graph.isEnabled())
 							{
+								console.log("state 1 : " + state);
 								bootbox.confirm( "Do you really remove this cell ?",
 									function(result){
 										if(result == true){
@@ -178,18 +179,25 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 							if (graph.isEnabled())
 							{
 								//modal.modal("show");
+								console.log("state 2 : " + state.cell.value);
 								ModalService.showModal({
 									templateUrl: "modal_pop_dialog.html",
     								controller: "PopDialogController",
 									inputs: {
-										title : "Population Form Editor"
+										title : "Population Form Editor",
+										state_cell: state.cell,
 									}
 								}).then(function(modal) {
 									modal.element.modal();
 									modal.close.then(function(result) {
 										console.log(JSON.stringify(result));
+										console.log("state 2a : " + state.cell.value);
+										state.cell.value = state.cell.value + JSON.stringify(result)
+										console.log("state.cell.value : " + state.cell.value);
 									});
+									console.log("state 2b : " + state.cell.value);
 								});
+								console.log("state 2c : " + state.cell.value);
 								mxEvent.consume(evt);
 							}
 						});
@@ -419,9 +427,10 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 });
 
 
-graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title', 'close',
-	function($scope, $element, title, close) {
+graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title', 'close', 'state_cell',
+	function($scope, $element, title, close, state_cell) {
 		$scope.title = title;
+		$scope.state_cell = state_cell;
 
 		$scope.close = function() {
 			close({
