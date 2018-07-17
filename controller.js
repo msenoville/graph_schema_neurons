@@ -180,19 +180,44 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 							{
 								//modal.modal("show");
 								console.log("state 2 : " + state.cell.value);
+								var json_data_array = state.cell.value.split("|");
+								
+								if(json_data_array.length >= 2){
+									var json_data = JSON.parse(json_data_array[1]);
+								} else {
+									var json_data = {
+										"level": "",
+										"size": "",
+										"celltype": "",
+										"param_v_rest": "",
+										"param_cm": "",
+										"param_tau_m": "",
+										"init_v_rest": "",
+										"init_cm": "",
+										"init_tau_m": "",
+									};
+								}
 								ModalService.showModal({
 									templateUrl: "modal_pop_dialog.html",
     								controller: "PopDialogController",
 									inputs: {
 										title : "Population Form Editor",
-										state_cell: state.cell,
+										level: json_data.level,
+										size: json_data.size,
+										celltype: json_data.celltype,
+										param_v_rest: json_data.param_v_rest,
+										param_cm: json_data.param_cm,
+										param_tau_m: json_data.param_tau_m,
+										init_v_rest: json_data.init_v_rest,
+										init_cm: json_data.init_cm,
+										init_tau_m: json_data.init_tau_m,
 									}
 								}).then(function(modal) {
 									modal.element.modal();
 									modal.close.then(function(result) {
 										console.log(JSON.stringify(result));
 										console.log("state 2a : " + state.cell.value);
-										state.cell.value = state.cell.value + JSON.stringify(result)
+										state.cell.value = state.cell.value + "|" + JSON.stringify(result)
 										console.log("state.cell.value : " + state.cell.value);
 									});
 									console.log("state 2b : " + state.cell.value);
@@ -427,10 +452,18 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 });
 
 
-graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title', 'close', 'state_cell',
-	function($scope, $element, title, close, state_cell) {
+graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title', 'close', 'level', 'size', 'celltype', 'param_v_rest', 'param_cm', 'param_tau_m', 'init_v_rest', 'init_cm', 'init_tau_m',
+	function($scope, $element, title, close, level, size, celltype, param_v_rest, param_cm, param_tau_m, init_v_rest, init_cm, init_tau_m) {
 		$scope.title = title;
-		$scope.state_cell = state_cell;
+		$scope.level = level;
+		$scope.size = size;
+		$scope.celltype = celltype;
+		$scope.param_v_rest = param_v_rest;
+		$scope.param_cm = param_cm;
+		$scope.param_tau_m = param_tau_m;
+		$scope.init_v_rest = init_v_rest;
+		$scope.init_cm = init_cm;
+		$scope.init_tau_m = init_tau_m;
 
 		$scope.close = function() {
 			close({
