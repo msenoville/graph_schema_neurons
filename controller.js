@@ -28,7 +28,10 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 	} else {
 		// Enables guides
 		mxGraphHandler.prototype.guidesEnabled = true;
-		
+
+		// Disables built-in context menu
+		mxEvent.disableContextMenu(document.body);
+
 		// Alt disables guides
 		mxGuide.prototype.isEnabledForEvent = function(evt)
 		{
@@ -114,7 +117,10 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 		// document.body.appendChild(container);
 		document.getElementById("id_graph_editor").appendChild(container);
 		
+		// Creates the graph inside the given container
 		var graph = new mxGraph(container);
+		graph.setTooltips(true);
+
 		graph.gridSize = 30;
 		graph.centerZoom = false;
 
@@ -217,7 +223,11 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 								}).then(function(modal) {
 									modal.element.modal();
 									modal.close.then(function(result) {
-										state.cell.value = result.name_value + "|" + JSON.stringify(result)
+										// state.cell.setValue(result.name_value);
+										console.log("get value : " + state.cell.getValue());
+										state.cell.value = result.name_value + "|" + JSON.stringify(result);
+										state.cell.setValue(state.cell.value);
+										console.log("get after set value : " + state.cell.getValue());
 									});
 								});
 								mxEvent.consume(evt);
@@ -445,6 +455,37 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 		
 		// Restores original drag icon while outside of graph
 		ds.createDragElement = mxDragSource.prototype.createDragElement;
+
+
+		// Configures automatic expand on mouseover
+		graph.popupMenuHandler.autoExpand = true;
+
+		// Installs context menu
+		graph.popupMenuHandler.factoryMethod = function(menu, cell, evt)
+		{
+			menu.addItem('Item 1', null, function()
+			{
+				alert('Item 1');
+			});
+			
+			menu.addItem('Item 2', null, function()
+			{
+				alert('Item 2');
+			});
+
+			menu.addSeparator();
+			
+			var submenu1 = menu.addItem('Submenu 1', null, null);
+			
+			menu.addItem('Subitem 1', null, function()
+			{
+				alert('Subitem 1');
+			}, submenu1);
+			menu.addItem('Subitem 2', null, function()
+			{
+				alert('Subitem 2');
+			}, submenu1);
+		};
 	}
 });
 
