@@ -456,36 +456,52 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 		// Restores original drag icon while outside of graph
 		ds.createDragElement = mxDragSource.prototype.createDragElement;
 
-
 		// Configures automatic expand on mouseover
 		graph.popupMenuHandler.autoExpand = true;
 
+		// ispopuptrigger = graph.popupMenuHandler.isPopupTrigger(mouseDown);
+		// alert("trigger : " + ispopuptrigger);
 		// Installs context menu
 		graph.popupMenuHandler.factoryMethod = function(menu, cell, evt)
 		{
-			menu.addItem('Item 1', null, function()
+			// if (graph.getSelectionCount() == 1 && !graph.getModel().isEdge(cell) && !graph.isSwimlane(cell) && graph.getModel().getChildCount(cell) > 0)
+			if (graph.getSelectionCount() == 1 && graph.getModel().isEdge(cell))
 			{
-				alert('Item 1');
-			});
-			
-			menu.addItem('Item 2', null, function()
-			{
-				alert('Item 2');
-			});
-
-			menu.addSeparator();
-			
-			var submenu1 = menu.addItem('Submenu 1', null, null);
-			
-			menu.addItem('Subitem 1', null, function()
-			{
-				alert('Subitem 1');
-			}, submenu1);
-			menu.addItem('Subitem 2', null, function()
-			{
-				alert('Subitem 2');
-			}, submenu1);
+				menu.addItem('Delete link', null, function()
+				{
+					alert('Delete link' + 'selection count : ' + graph.getSelectionCount());
+				});
+				menu.addItem('Configure link', null, function()
+				{
+					alert('Configure link' + 'selection count : ' + graph.getSelectionCount());
+				});
+			}	
 		};
+		// graph.popupMenuHandler.factoryMethod = function(menu, cell, evt)
+		// {
+		// 	menu.addItem('Item 1', null, function()
+		// 	{
+		// 		alert('Item 1' + 'selection count : ' + graph.getSelectionCount());
+		// 	});
+			
+		// 	menu.addItem('Item 2', null, function()
+		// 	{
+		// 		alert('Item 2');
+		// 	});
+
+		// 	menu.addSeparator();
+			
+		// 	var submenu1 = menu.addItem('Submenu 1', null, null);
+			
+		// 	menu.addItem('Subitem 1', null, function()
+		// 	{
+		// 		alert('Subitem 1');
+		// 	}, submenu1);
+		// 	menu.addItem('Subitem 2', null, function()
+		// 	{
+		// 		alert('Subitem 2');
+		// 	}, submenu1);
+		// };
 	}
 });
 
