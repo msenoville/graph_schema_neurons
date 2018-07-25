@@ -459,9 +459,6 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 		// Configures automatic expand on mouseover
 		graph.popupMenuHandler.autoExpand = true;
 
-		// ispopuptrigger = graph.popupMenuHandler.isPopupTrigger(mouseDown);
-		// alert("trigger : " + ispopuptrigger);
-		// Installs context menu
 		graph.popupMenuHandler.factoryMethod = function(menu, cell, evt)
 		{
 			// if (graph.getSelectionCount() == 1 && !graph.getModel().isEdge(cell) && !graph.isSwimlane(cell) && graph.getModel().getChildCount(cell) > 0)
@@ -469,7 +466,13 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 			{
 				menu.addItem('Delete link', null, function()
 				{
-					alert('Delete link' + 'selection count : ' + graph.getSelectionCount());
+					bootbox.confirm( "Do you really remove this link ?",
+					function(result){
+						if(result == true){
+							graph.removeCells([cell]);
+						}
+					});
+					mxEvent.consume(evt);
 				});
 				menu.addItem('Configure link', null, function()
 				{
