@@ -175,10 +175,6 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 						state.editControl = new mxImageShape(b, editImage.src);
 						state.editControl.dialect = graph.dialect;
 						state.editControl.preserveImageAspect = false;
-						// var node_lnk = document.createElement("a");
-						// node_lnk.href = "#";
-						// node_lnk.setAttribute('uib-popover-template', "'dynamicPopover.templateUrl'");
-						// editImage.appendChild(node_lnk);
 
 						this.initControl(state, state.editControl, false, function (evt)
 						{
@@ -476,7 +472,55 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 				});
 				menu.addItem('Configure link', null, function()
 				{
-					alert('Configure link' + 'selection count : ' + graph.getSelectionCount());
+					console.log('Configure link' + 'selection count : ' + graph.getSelectionCount());
+					console.log("state 2 : " + cell.value);
+					if (graph.isEnabled()){
+						var json_data_array = cell.value.split("|");
+								
+						if(json_data_array.length >= 2){
+							var json_data = JSON.parse(json_data_array[1]);
+						} else {
+							var json_data = {
+								"name_value": "",
+								"level": "",
+								"size": "",
+								"celltype": "",
+								"param_v_rest": "",
+								"param_cm": "",
+								"param_tau_m": "",
+								"init_v_rest": "",
+								"init_cm": "",
+								"init_tau_m": "",
+							};
+						}
+						ModalService.showModal({
+							templateUrl: "modal_pop_dialog.html",
+							controller: "PopDialogController",
+							inputs: {
+								title : "Population Form Editor",
+								name_value: json_data_array[0],
+								level: json_data.level,
+								size: json_data.size,
+								celltype: json_data.celltype,
+								param_v_rest: json_data.param_v_rest,
+								param_cm: json_data.param_cm,
+								param_tau_m: json_data.param_tau_m,
+								init_v_rest: json_data.init_v_rest,
+								init_cm: json_data.init_cm,
+								init_tau_m: json_data.init_tau_m,
+							}
+						}).then(function(modal) {
+							modal.element.modal();
+							modal.close.then(function(result) {
+								// state.cell.setValue(result.name_value);
+								console.log("get value : " + cell.getValue());
+								cell.value = result.name_value + "|" + JSON.stringify(result);
+								cell.setValue(cell.value);
+								console.log("get after set value : " + cell.getValue());
+							});
+						});
+						mxEvent.consume(evt);
+					}
 				});
 			}	
 		};
