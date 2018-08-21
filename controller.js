@@ -475,7 +475,12 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 					console.log('Configure link' + 'selection count : ' + graph.getSelectionCount());
 					console.log("state 2 : " + cell.value);
 					if (graph.isEnabled()){
-						var json_data_array = cell.value.split("|");
+						if(cell.value === undefined){
+							cell.value = "";
+							json_data_array = "";
+						} else {
+							var json_data_array = cell.value.split("|");
+						}
 								
 						if(json_data_array.length >= 2){
 							var json_data = JSON.parse(json_data_array[1]);
