@@ -56,7 +56,9 @@ table.mxPopupMenu tr {
     font-size: 4pt;
 }
 
-
+.upload{
+    display: none;
+}
 .upload .browse input[type='file']{
     position: absolute;
     margin-top: 3px;
