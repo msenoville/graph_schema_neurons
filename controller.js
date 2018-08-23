@@ -90,6 +90,16 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 		button_save.style.background = 'url(\'img/save.png\') no-repeat';
 		button_save.style.backgroundSize = '100%';
 
+		//create button to open and load file
+		var button_load = mxUtils.button('', function(){
+			$('.upload input').click();
+		});
+		button_load.style.width = '48px';
+		button_load.style.height = '48px';
+		button_load.style.border = 'none';
+		button_load.style.background = 'url(\'img/open.png\') no-repeat';
+		button_load.style.backgroundSize = '100%';
+
 		//create left vertical toolbar
 		var div_toolbar = document.createElement('div');
 		div_toolbar.id = 'div_toolbar';
@@ -103,6 +113,7 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 		div_toolbar.appendChild(button_zoom_in);
 		div_toolbar.appendChild(button_zoom_out);
 		div_toolbar.appendChild(button_save);
+		div_toolbar.appendChild(button_load);
 		
 		var container = document.createElement('div');
 		container.id = 'svg_container';

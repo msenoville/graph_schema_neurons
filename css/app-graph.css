@@ -55,3 +55,13 @@ table.mxPopupMenu hr {
 table.mxPopupMenu tr {
     font-size: 4pt;
 }
+
+
+.upload .browse input[type='file']{
+    position: absolute;
+    margin-top: 3px;
+    margin-left: 3px;
+    height: 1px;
+    width: 1px;
+    z-index: -5;
+}
