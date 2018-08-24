@@ -93,6 +93,10 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 		//create button to open and load file
 		var button_load = mxUtils.button('', function(){
 			$('.upload input').click();
+			var myFile = $('.upload input').prop('files')[0];
+			console.log("toto : " + myFile);
+			var xml = mxUtils.load(myFile);
+			console.log("xml : " + xml);
 		});
 		button_load.style.width = '48px';
 		button_load.style.height = '48px';
