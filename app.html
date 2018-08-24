@@ -57,11 +57,12 @@
 	<div class="container" id="container">
 		<div class="upload">
 			<h1 class="browse">Sélectionnez des vidéos à charger :</h1>
-			<input type="file" name="film" id="file" class="browse" accept="text/xml" multiple>
+			<input type="file" name="xml_graph_file" id="xml_graph_file" class="browse" accept="text/xml" multiple>
 			<span id="file-select-button" class="browse button black">Sélectionnez des fichiers</span>
 			<p class="browse"><strong>Taille maximale :</strong> 2 GB.</p>
 			<p class="browse"><strong>Formats supportés :</strong> avi, flv, mp4, m4v, mkv, mov, mpg, mpeg, ogg, ogv, wmv, 3gp, 3g2.</p>
 		</div>
+		<div id="file-content"></div>
 		
 		<div ui-view></div>
 	</div>

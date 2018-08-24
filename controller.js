@@ -92,11 +92,40 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 
 		//create button to open and load file
 		var button_load = mxUtils.button('', function(){
-			$('.upload input').click();
-			var myFile = $('.upload input').prop('files')[0];
-			console.log("toto : " + myFile);
-			var xml = mxUtils.load(myFile);
-			console.log("xml : " + xml);
+			$('#xml_graph_file').click();
+			// var myFile = $('.upload input').prop('files')[0];
+			// console.log("toto : " + myFile);
+			// var xml = mxUtils.load(myFile);
+			// console.log("xml : " + xml);
+			// $('#xml_graph_file').on('change', function () {
+				// var fileReader = new FileReader();
+				// fileReader.onload = function () {
+				//   var data = fileReader.result;  // data <-- in this var you have the file data in Base64 format
+				// };
+				// fileReader.readAsDataURL($('#xml_graph_file').prop('files')[0]);
+			// });
+
+			// $( '#xml_graph_file' ).click( function () {
+			// 	if ( ! window.FileReader ) {
+			// 		return alert( 'FileReader API is not supported by your browser.' );
+			// 	}
+			// 	var $i = $( '#file' ), // Put file input ID here
+			// 		input = $i[0]; // Getting the element from jQuery
+			// 	if ( input.files && input.files[0] ) {
+			// 		file = input.files[0]; // The file
+			// 		fr = new FileReader(); // FileReader instance
+			// 		fr.onload = function () {
+			// 			// Do stuff on onload, use fr.result for contents of file
+			// 			$( '#file-content' ).append( $( '<div/>' ).html( fr.result ) )
+			// 		};
+			// 		//fr.readAsText( file );
+			// 		fr.readAsDataURL( file );
+			// 	} else {
+			// 		// Handle errors here
+			// 		alert( "File not selected or browser incompatible." )
+			// 	}
+			// } );
+		
 		});
 		button_load.style.width = '48px';
 		button_load.style.height = '48px';
