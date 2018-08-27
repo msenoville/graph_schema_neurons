@@ -97,13 +97,26 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 			$('input').on('change', function(evt){
 				var f = evt.target.files[0]; 
 				if (f){
-				var r = new FileReader();
-				r.onload = function(e){          
-					console.log(e.target.result);
-				};
+					var r = new FileReader();
+					r.onload = function(e){
+						graph.getModel().clear();
+						console.log(e.target.result);
+						// var xml = mxUtils.load('file_graph.xml');
+						var xml = e.target.result;
+						var doc = mxUtils.parseXml(xml);
+						var codec = new mxCodec(doc);
+						var elt = doc.documentElement.firstChild.firstChild;
+						var cells = [];
+						while (elt != null){
+							cells.push(codec.decodeCell(elt));
+							graph.refresh();
+							elt = elt.nextSibling;
+						}
+						graph.addCells(cells);
+
+					};
 					r.readAsText(f);
-				} else 
-				{
+				} else {
 					console.log("failed");
 				}
 			});
@@ -369,18 +382,20 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 			// var v2 = graph.insertVertex(parent, null, 'World!', 200, 150, 80, 30);
 			// var e1 = graph.insertEdge(parent, null, '', v1, v2);
 			// read(graph, 'file_graph.xml');
-			var xml = mxUtils.load('file_graph.xml');
-			//var xml = '';
-			var doc = mxUtils.parseXml(xml.request.response);
-			var codec = new mxCodec(doc);
-			var elt = doc.documentElement.firstChild.firstChild;
-			var cells = [];
-			while (elt != null){
-				cells.push(codec.decodeCell(elt));
-				graph.refresh();
-				elt = elt.nextSibling;
-			}
-			graph.addCells(cells);
+
+
+			// var xml = mxUtils.load('file_graph.xml');
+			// //var xml = '';
+			// var doc = mxUtils.parseXml(xml.request.response);
+			// var codec = new mxCodec(doc);
+			// var elt = doc.documentElement.firstChild.firstChild;
+			// var cells = [];
+			// while (elt != null){
+			// 	cells.push(codec.decodeCell(elt));
+			// 	graph.refresh();
+			// 	elt = elt.nextSibling;
+			// }
+			// graph.addCells(cells);
 		}
 		finally
 		{
