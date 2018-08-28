@@ -77,12 +77,21 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 
 		var button_save = mxUtils.button('', function(){
 			// var FileSaver = require('file-saver');
-			var encoder = new mxCodec();
-			var node = encoder.encode(graph.getModel());
-			var nodeText = new XMLSerializer().serializeToString(node);
-			console.log((nodeText));
-			var blob = new Blob([nodeText], {type: "text/plain;charset=utf-8"});
-			FileSaver.saveAs(blob, "file_graph.xml");
+			bootbox.prompt("Please give the name to the file (.xml extension added automatically) :", function(filename){
+				var encoder = new mxCodec();
+				var node = encoder.encode(graph.getModel());
+				var nodeText = new XMLSerializer().serializeToString(node);
+				console.log((nodeText));
+				var blob = new Blob([nodeText], {type: "text/plain;charset=utf-8"});
+				//in case of cancelation => filename == null
+				if(filename != null){
+					if(filename.length <1){
+						FileSaver.saveAs(blob, "file_graph.xml");
+					} else {
+						FileSaver.saveAs(blob, filename + ".xml");
+					}
+				}
+			});
 		});
 		button_save.style.width = '48px';
 		button_save.style.height = '48px';
@@ -113,7 +122,6 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 							elt = elt.nextSibling;
 						}
 						graph.addCells(cells);
-
 					};
 					r.readAsText(f);
 				} else {
@@ -127,6 +135,25 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 		button_load.style.border = 'none';
 		button_load.style.background = 'url(\'img/open.png\') no-repeat';
 		button_load.style.backgroundSize = '100%';
+
+		//create a button to clear schema
+		var button_clear = mxUtils.button('', function(){
+			bootbox.confirm({ 
+				size: "small",
+				message: "Are you sure to clear the graph ?", 
+				callback: function(result){ /* result is a boolean; true = OK, false = Cancel*/ 
+					if(result == true){
+						graph.getModel().clear();
+					}
+				}
+			});
+		});
+		button_clear.style.width = '48px';
+		button_clear.style.height = '48px';
+		button_clear.style.border = 'none';
+		button_clear.style.background = 'url(\'img/delete_clear.png\') no-repeat';
+		button_clear.style.backgroundSize = '100%';
+
 
 		//create left vertical toolbar
 		var div_toolbar = document.createElement('div');
@@ -142,6 +169,7 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 		div_toolbar.appendChild(button_zoom_out);
 		div_toolbar.appendChild(button_save);
 		div_toolbar.appendChild(button_load);
+		div_toolbar.appendChild(button_clear);
 		
 		var container = document.createElement('div');
 		container.id = 'svg_container';
@@ -490,7 +518,7 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 					console.log('Configure link' + 'selection count : ' + graph.getSelectionCount());
 					console.log("state 2 : " + cell.value);
 					if (graph.isEnabled()){
-						if(cell.value === undefined){
+						if((cell.value === undefined) | (cell.value === null)){
 							cell.value = "";
 							json_data_array = "";
 						} else {
