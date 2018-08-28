@@ -376,8 +376,8 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 						
 		// Adds cells to the model in a single step
 		graph.getModel().beginUpdate();
-		try
-		{
+		// try
+		// {
 			// var v1 = graph.insertVertex(parent, null, 'Hello,', 20, 20, 80, 30);
 			// var v2 = graph.insertVertex(parent, null, 'World!', 200, 150, 80, 30);
 			// var e1 = graph.insertEdge(parent, null, '', v1, v2);
@@ -396,12 +396,12 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 			// 	elt = elt.nextSibling;
 			// }
 			// graph.addCells(cells);
-		}
-		finally
-		{
-			// Updates the display
+		// }
+		// finally
+		// {
+		// 	// Updates the display
 			graph.getModel().endUpdate();
-		}
+		// }
 		
 		graphs.push(graph);
 
