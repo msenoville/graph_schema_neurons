@@ -376,33 +376,7 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 						
 		// Adds cells to the model in a single step
 		graph.getModel().beginUpdate();
-		// try
-		// {
-			// var v1 = graph.insertVertex(parent, null, 'Hello,', 20, 20, 80, 30);
-			// var v2 = graph.insertVertex(parent, null, 'World!', 200, 150, 80, 30);
-			// var e1 = graph.insertEdge(parent, null, '', v1, v2);
-			// read(graph, 'file_graph.xml');
-
-
-			// var xml = mxUtils.load('file_graph.xml');
-			// //var xml = '';
-			// var doc = mxUtils.parseXml(xml.request.response);
-			// var codec = new mxCodec(doc);
-			// var elt = doc.documentElement.firstChild.firstChild;
-			// var cells = [];
-			// while (elt != null){
-			// 	cells.push(codec.decodeCell(elt));
-			// 	graph.refresh();
-			// 	elt = elt.nextSibling;
-			// }
-			// graph.addCells(cells);
-		// }
-		// finally
-		// {
-		// 	// Updates the display
-			graph.getModel().endUpdate();
-		// }
-		
+		graph.getModel().endUpdate();
 		graphs.push(graph);
 
 		// Returns the graph under the mouse
