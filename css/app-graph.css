@@ -71,3 +71,7 @@ table.mxPopupMenu tr {
 .modal-body {
     overflow-y: auto;
 }
+
+text {
+    display:none!important;
+}
