@@ -290,6 +290,7 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 										console.log("get value : " + state.cell.getValue());
 										state.cell.value = result.name_value + "|" + JSON.stringify(result);
 										state.cell.setValue(state.cell.value);
+										graph.refresh();
 										console.log("get after set value : " + state.cell.getValue());
 									});
 								});
@@ -564,6 +565,7 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 								console.log("get value : " + cell.getValue());
 								cell.value = result.name_value + "|" + JSON.stringify(result);
 								cell.setValue(cell.value);
+								graph.refresh();
 								console.log("get after set value : " + cell.getValue());
 								var txtdisplay = $('text').text();
 								console.log("txtdisplay : " + txtdisplay);
