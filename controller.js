@@ -565,6 +565,8 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 								cell.value = result.name_value + "|" + JSON.stringify(result);
 								cell.setValue(cell.value);
 								console.log("get after set value : " + cell.getValue());
+								var txtdisplay = $('text').text();
+								console.log("txtdisplay : " + txtdisplay);
 							});
 						});
 						mxEvent.consume(evt);
