@@ -30,7 +30,7 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 		mxGraphHandler.prototype.guidesEnabled = true;
 
 		// Disables built-in context menu
-		mxEvent.disableContextMenu(document.body);
+		mxEvent.disableContextMenu(document.getElementById("id_graph_editor"));
 
 		// Alt disables guides
 		mxGuide.prototype.isEnabledForEvent = function(evt)
@@ -543,10 +543,10 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 							};
 						}
 						ModalService.showModal({
-							templateUrl: "modal_pop_dialog.html",
+							templateUrl: "modal_pop_dialog_2.html",
 							controller: "PopDialogController",
 							inputs: {
-								title : "Population Form Editor",
+								title : "Projection Form Editor",
 								name_value: json_data_array[0],
 								level: json_data.level,
 								size: json_data.size,
@@ -574,7 +574,7 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 						mxEvent.consume(evt);
 					}
 				});
-			}	
+			}
 		};
 	}
 });
