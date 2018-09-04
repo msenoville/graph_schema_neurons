@@ -594,6 +594,11 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 		$scope.init_cm = init_cm;
 		$scope.init_tau_m = init_tau_m;
 
+
+		$scope.updateForm = function() {
+			console.log("selected celltype : " + $scope.selectedType);
+		};
+
 		$scope.close = function() {
 			close({
 				name_value: $scope.name_value,
