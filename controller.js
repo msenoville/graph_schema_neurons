@@ -597,6 +597,54 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 
 		$scope.updateForm = function() {
 			console.log("selected celltype : " + $scope.selectedType);
+			if($scope.selectedType == "IF_curr_alpha"){
+				document.getElementById("div_param_v_rest").style.display = "block";
+				document.getElementById("div_param_cm").style.display = "block";
+				document.getElementById("div_param_tau_m").style.display = "none";
+				document.getElementById("div_init_v_rest").style.display = "none";
+				document.getElementById("div_init_v_rest").style.display = "none";
+				document.getElementById("div_init_tau_m").style.display = "none";
+			}
+			if($scope.selectedType == "IF_curr_exp"){
+				document.getElementById("div_param_v_rest").style.display = "block";
+				document.getElementById("div_param_cm").style.display = "block";
+				document.getElementById("div_param_tau_m").style.display = "none";
+				document.getElementById("div_init_v_rest").style.display = "none";
+				document.getElementById("div_init_v_rest").style.display = "none";
+				document.getElementById("div_init_tau_m").style.display = "none";
+			}
+			if($scope.selectedType == "IF_cond_alpha"){
+				document.getElementById("div_param_v_rest").style.display = "none";
+				document.getElementById("div_param_cm").style.display = "none";
+				document.getElementById("div_param_tau_m").style.display = "block";
+				document.getElementById("div_init_v_rest").style.display = "block";
+				document.getElementById("div_init_v_rest").style.display = "none";
+				document.getElementById("div_init_tau_m").style.display = "none";
+			}
+			if($scope.selectedType == "IF_cond_exp"){
+				document.getElementById("div_param_v_rest").style.display = "block";
+				document.getElementById("div_param_cm").style.display = "block";
+				document.getElementById("div_param_tau_m").style.display = "block";
+				document.getElementById("div_init_v_rest").style.display = "none";
+				document.getElementById("div_init_v_rest").style.display = "none";
+				document.getElementById("div_init_tau_m").style.display = "none";
+			}
+			if($scope.selectedType == "HH_cond_exp"){
+				document.getElementById("div_param_v_rest").style.display = "block";
+				document.getElementById("div_param_cm").style.display = "block";
+				document.getElementById("div_param_tau_m").style.display = "block";
+				document.getElementById("div_init_v_rest").style.display = "none";
+				document.getElementById("div_init_v_rest").style.display = "none";
+				document.getElementById("div_init_tau_m").style.display = "none";
+			}
+			if($scope.selectedType == "EIF_cond_alpha_isfa_ista"){
+				document.getElementById("div_param_v_rest").style.display = "none";
+				document.getElementById("div_param_cm").style.display = "none";
+				document.getElementById("div_param_tau_m").style.display = "none";
+				document.getElementById("div_init_v_rest").style.display = "none";
+				document.getElementById("div_init_v_rest").style.display = "block";
+				document.getElementById("div_init_tau_m").style.display = "block";
+			}
 		};
 
 		$scope.close = function() {
