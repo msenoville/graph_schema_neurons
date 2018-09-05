@@ -594,60 +594,70 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 		$scope.init_cm = init_cm;
 		$scope.init_tau_m = init_tau_m;
 
+		// $scope.fields_display_management();
 
 		$scope.updateForm = function() {
-			console.log("selected celltype : " + $scope.selectedType);
-			if($scope.selectedType == "IF_curr_alpha"){
-				document.getElementById("div_param_v_rest").style.display = "block";
+			console.log("selected celltype : " + $scope.celltype);
+			if($scope.celltype == "IF_curr_alpha"){
 				document.getElementById("param_v_rest").value = "12";
-				document.getElementById("div_param_cm").style.display = "block";
-				document.getElementById("div_param_tau_m").style.display = "none";
-				document.getElementById("div_init_v_rest").style.display = "none";
-				document.getElementById("div_init_v_rest").style.display = "none";
-				document.getElementById("div_init_tau_m").style.display = "none";
 			}
-			if($scope.selectedType == "IF_curr_exp"){
-				document.getElementById("div_param_v_rest").style.display = "block";
+			if($scope.celltype == "IF_curr_exp"){
 				document.getElementById("param_v_rest").value = "5";
-				document.getElementById("div_param_cm").style.display = "block";
-				document.getElementById("div_param_tau_m").style.display = "none";
-				document.getElementById("div_init_v_rest").style.display = "none";
-				document.getElementById("div_init_v_rest").style.display = "none";
-				document.getElementById("div_init_tau_m").style.display = "none";
 			}
-			if($scope.selectedType == "IF_cond_alpha"){
-				document.getElementById("div_param_v_rest").style.display = "none";
-				document.getElementById("div_param_cm").style.display = "none";
-				document.getElementById("div_param_tau_m").style.display = "block";
-				document.getElementById("div_init_v_rest").style.display = "block";
-				document.getElementById("div_init_v_rest").style.display = "none";
-				document.getElementById("div_init_tau_m").style.display = "none";
+			$scope.fields_display_management();
+		};
+
+		$scope.fields_display_management = function() {
+			if($scope.celltype == "IF_curr_alpha"){
+				$("#div_param_v_rest").show();
+				$("#div_param_cm").show();
+				$("#div_param_tau_m").hide();
+				$("#div_init_v_rest").hide();
+				$("#div_init_v_rest").hide();
+				$("#div_init_tau_m").hide();
 			}
-			if($scope.selectedType == "IF_cond_exp"){
-				document.getElementById("div_param_v_rest").style.display = "block";
-				document.getElementById("div_param_cm").style.display = "block";
-				document.getElementById("div_param_tau_m").style.display = "block";
-				document.getElementById("div_init_v_rest").style.display = "none";
-				document.getElementById("div_init_v_rest").style.display = "none";
-				document.getElementById("div_init_tau_m").style.display = "none";
+			if($scope.celltype == "IF_curr_exp"){
+				$("#div_param_v_rest").show();
+				$("#div_param_cm").show();
+				$("#div_param_tau_m").hide();
+				$("#div_init_v_rest").hide();
+				$("#div_init_v_rest").hide();
+				$("#div_init_tau_m").hide();
 			}
-			if($scope.selectedType == "HH_cond_exp"){
-				document.getElementById("div_param_v_rest").style.display = "block";
-				document.getElementById("div_param_cm").style.display = "block";
-				document.getElementById("div_param_tau_m").style.display = "block";
-				document.getElementById("div_init_v_rest").style.display = "none";
-				document.getElementById("div_init_v_rest").style.display = "none";
-				document.getElementById("div_init_tau_m").style.display = "none";
+			if($scope.celltype == "IF_cond_alpha"){
+				$("#div_param_v_rest").hide();
+				$("#div_param_cm").hide();
+				$("#div_param_tau_m").show();
+				$("#div_init_v_rest").show();
+				$("#div_init_v_rest").hide();
+				$("#div_init_tau_m").hide();
 			}
-			if($scope.selectedType == "EIF_cond_alpha_isfa_ista"){
-				document.getElementById("div_param_v_rest").style.display = "none";
-				document.getElementById("div_param_cm").style.display = "none";
-				document.getElementById("div_param_tau_m").style.display = "none";
-				document.getElementById("div_init_v_rest").style.display = "none";
-				document.getElementById("div_init_v_rest").style.display = "block";
-				document.getElementById("div_init_tau_m").style.display = "block";
+			if($scope.celltype == "IF_cond_exp"){
+				$("#div_param_v_rest").show();
+				$("#div_param_cm").show();
+				$("#div_param_tau_m").show();
+				$("#div_init_v_rest").hide();
+				$("#div_init_v_rest").hide();
+				$("#div_init_tau_m").hide();
+			}
+			if($scope.celltype == "HH_cond_exp"){
+				$("#div_param_v_rest").show();
+				$("#div_param_cm").show();
+				$("#div_param_tau_m").show();
+				$("#div_init_v_rest").hide();
+				$("#div_init_v_rest").hide();
+				$("#div_init_tau_m").hide();
+			}
+			if($scope.celltype == "EIF_cond_alpha_isfa_ista"){
+				$("#div_param_v_rest").hide();
+				$("#div_param_cm").hide();
+				$("#div_param_tau_m").hide();
+				$("#div_init_v_rest").hide();
+				$("#div_init_v_rest").show();
+				$("#div_init_tau_m").show();
 			}
 		};
+		$scope.fields_display_management();
 
 		$scope.close = function() {
 			close({
