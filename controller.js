@@ -580,8 +580,8 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 });
 
 
-graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title', 'close', 'name_value', 'level', 'size', 'celltype', 'param_v_rest', 'param_cm', 'param_tau_m', 'init_v_rest', 'init_cm', 'init_tau_m',
-	function($scope, $element, title, close, name_value, level, size, celltype, param_v_rest, param_cm, param_tau_m, init_v_rest, init_cm, init_tau_m) {
+graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title', 'close', 'name_value', 'level', 'size', 'celltype', 'param_v_rest', 'param_cm', 'param_tau_m', 'init_v_rest', 'init_cm', 'init_tau_m', 'ngLoad',
+	function($scope, $element, title, close, name_value, level, size, celltype, param_v_rest, param_cm, param_tau_m, init_v_rest, init_cm, init_tau_m, ngLoad) {
 		$scope.title = title;
 		$scope.name_value = name_value;
 		$scope.level = level;
