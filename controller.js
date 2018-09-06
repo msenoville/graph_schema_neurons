@@ -598,66 +598,79 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 
 		$scope.updateForm = function() {
 			console.log("selected celltype : " + $scope.celltype);
-			if($scope.celltype == "IF_curr_alpha"){
-				document.getElementById("param_v_rest").value = "12";
-			}
-			if($scope.celltype == "IF_curr_exp"){
-				document.getElementById("param_v_rest").value = "5";
-			}
+			// if($scope.celltype == "IF_curr_alpha"){
+			// 	document.getElementById("param_v_rest").value = "12";
+			// }
+			// if($scope.celltype == "IF_curr_exp"){
+			// 	document.getElementById("param_v_rest").value = "5";
+			// }
 			$scope.fields_display_management();
 		};
 
+		$scope.showDiv = function(id){
+			document.getElementById(id).style.display = "block";
+			document.getElementById(id).style.display = "none";
+			document.getElementById(id).style.display = "block";
+		};
+		$scope.hideDiv = function(id){
+			document.getElementById(id).style.display = "none";
+			document.getElementById(id).style.display = "block";
+			document.getElementById(id).style.display = "none";
+		};
 		$scope.fields_display_management = function() {
 			if($scope.celltype == "IF_curr_alpha"){
-				$("#div_param_v_rest").show();
-				$("#div_param_cm").show();
-				$("#div_param_tau_m").hide();
-				$("#div_init_v_rest").hide();
-				$("#div_init_v_rest").hide();
-				$("#div_init_tau_m").hide();
+				$scope.showDiv("div_param_v_rest");
+				$scope.showDiv("div_param_cm");
+				$scope.hideDiv("div_param_tau_m");
+				$scope.hideDiv("div_init_v_rest");
+				$scope.hideDiv("div_init_cm");
+				$scope.hideDiv("div_init_tau_m");
 			}
 			if($scope.celltype == "IF_curr_exp"){
-				$("#div_param_v_rest").show();
-				$("#div_param_cm").show();
-				$("#div_param_tau_m").hide();
-				$("#div_init_v_rest").hide();
-				$("#div_init_v_rest").hide();
-				$("#div_init_tau_m").hide();
+				$scope.hideDiv("div_param_v_rest");
+				$scope.showDiv("div_param_cm");
+				$scope.hideDiv("div_param_tau_m");
+				$scope.hideDiv("div_init_v_rest");
+				$scope.showDiv("div_init_cm");
+				$scope.hideDiv("div_init_tau_m");
 			}
 			if($scope.celltype == "IF_cond_alpha"){
-				$("#div_param_v_rest").hide();
-				$("#div_param_cm").hide();
-				$("#div_param_tau_m").show();
-				$("#div_init_v_rest").show();
-				$("#div_init_v_rest").hide();
-				$("#div_init_tau_m").hide();
+				$scope.hideDiv("div_param_v_rest");
+				$scope.hideDiv("div_param_cm");
+				$scope.showDiv("div_param_tau_m");
+				$scope.hideDiv("div_init_v_rest");
+				$scope.showDiv("div_init_cm");
+				$scope.hideDiv("div_init_tau_m");
 			}
 			if($scope.celltype == "IF_cond_exp"){
-				$("#div_param_v_rest").show();
-				$("#div_param_cm").show();
-				$("#div_param_tau_m").show();
-				$("#div_init_v_rest").hide();
-				$("#div_init_v_rest").hide();
-				$("#div_init_tau_m").hide();
+				$scope.showDiv("div_param_v_rest");
+				$scope.showDiv("div_param_cm");
+				$scope.showDiv("div_param_tau_m");
+				$scope.hideDiv("div_init_v_rest");
+				$scope.hideDiv("div_init_cm");
+				$scope.hideDiv("div_init_tau_m");
 			}
 			if($scope.celltype == "HH_cond_exp"){
-				$("#div_param_v_rest").show();
-				$("#div_param_cm").show();
-				$("#div_param_tau_m").show();
-				$("#div_init_v_rest").hide();
-				$("#div_init_v_rest").hide();
-				$("#div_init_tau_m").hide();
+				$scope.hideDiv("div_param_v_rest");
+				$scope.showDiv("div_param_cm");
+				$scope.showDiv("div_param_tau_m");
+				$scope.showDiv("div_init_v_rest");
+				$scope.hideDiv("div_init_cm");
+				$scope.hideDiv("div_init_tau_m");
 			}
 			if($scope.celltype == "EIF_cond_alpha_isfa_ista"){
-				$("#div_param_v_rest").hide();
-				$("#div_param_cm").hide();
-				$("#div_param_tau_m").hide();
-				$("#div_init_v_rest").hide();
-				$("#div_init_v_rest").show();
-				$("#div_init_tau_m").show();
+				$scope.hideDiv("div_param_v_rest");
+				$scope.hideDiv("div_param_cm");
+				$scope.hideDiv("div_param_tau_m");
+				$scope.hideDiv("div_init_v_rest");
+				$scope.showDiv("div_init_cm");
+				$scope.showDiv("div_init_tau_m");
 			}
 		};
-		$scope.fields_display_management();
+		if(($scope.celltype == "") || ($scope.celltype == null)){
+			$scope.celltype = "IF_curr_alpha";
+		}
+		//$scope.fields_display_management();
 
 		$scope.close = function() {
 			close({
