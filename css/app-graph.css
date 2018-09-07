@@ -76,3 +76,6 @@ table.mxPopupMenu tr {
     display:none;
     /* clear: both; */
 }
+#celltype {
+    display:block!important;
+}

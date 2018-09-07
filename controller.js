@@ -594,10 +594,9 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 		$scope.init_cm = init_cm;
 		$scope.init_tau_m = init_tau_m;
 
-		// $scope.fields_display_management();
-
 		$scope.updateForm = function() {
 			console.log("selected celltype : " + $scope.celltype);
+			// $("#celltype").blur();
 			// if($scope.celltype == "IF_curr_alpha"){
 			// 	document.getElementById("param_v_rest").value = "12";
 			// }
@@ -671,6 +670,7 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 			$scope.celltype = "IF_curr_alpha";
 		}
 		//$scope.fields_display_management();
+		// $("#celltype").focus();
 
 		$scope.close = function() {
 			close({
