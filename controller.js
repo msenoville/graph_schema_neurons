@@ -607,12 +607,12 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 		};
 
 		$scope.showDiv = function(id){
-			document.getElementById(id).style.display = "block";
+			// document.getElementById(id).style.display = "block";
 			document.getElementById(id).style.display = "none";
 			document.getElementById(id).style.display = "block";
 		};
 		$scope.hideDiv = function(id){
-			document.getElementById(id).style.display = "none";
+			// document.getElementById(id).style.display = "none";
 			document.getElementById(id).style.display = "block";
 			document.getElementById(id).style.display = "none";
 		};
