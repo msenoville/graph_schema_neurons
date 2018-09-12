@@ -34,65 +34,20 @@
                     
                     <!-- Select Basic -->
                     <div class="form-group col-sm-12">
-                        <label class="control-label col-sm-2" for="celltype">Connexion Type : </label>
+                        <label class="control-label col-sm-2" for="celltype">Spike sources (input neurons) : </label>
                         <div class="col-sm-10">
                             <select id="celltype" name="celltype" class="form-control" ng-model="celltype">
-                                <option value="IF_curr_alpha">IF_curr_alpha</option>
-                                <option value="IF_curr_exp">IF_curr_exp</option>
-                                <option value="IF_cond_alpha">IF_cond_alpha</option>
-                                <option value="IF_cond_exp">IF_cond_exp</option>
-                                <option value="HH_cond_exp">HH_cond_exp</option>
-                                <option value="EIF_cond_alpha_isfa_ista">EIF_cond_alpha_isfa_ista</option>
+                                <option value="SpikeSourcePoisson">SpikeSourcePoisson</option>
+                                <option value="SpikeSourceArray">SpikeSourceArray</option>
+                                <!-- <option value="SpikeSourceInhGamma">SpikeSourceInhGamma</option> -->
                             </select>
                         </div>
                     </div>
-                    <div class="form-group col-sm-12">
-                        <div class="control-label col-sm-2"><b>Parameters</b></div>
-                        <label class="control-label col-sm-2" for="param_v_rest">v_rest : </label>
-                        <div class="col-sm-3">
-                            <input id="param_v_rest" name="param_v_rest" type="number" min="0" step="1" placeholder="v_rest..." class="form-control input-md" ng-model="param_v_rest">
-                        </div>
-                        <div class="control-label col-sm-2">mF</div>
+                    <div class="form-group col-sm-12" id="div_param_cm" ng-if="celltype == 'SpikeSourcePoisson'">
+                        <p>SpikeSourcePoisson</p>
                     </div>
-                    <div class="form-group col-sm-12">
-                        <div class="control-label col-sm-2"></div>
-                        <label class="control-label col-sm-2" for="param_cm">cm : </label>
-                        <div class="col-sm-3">
-                            <input id="param_cm" name="param_cm" type="number" min="0" step="1" placeholder="cm..." class="form-control input-md" ng-model="param_cm">
-                        </div>
-                        <div class="control-label col-sm-2">nF</div>
-                    </div>
-                    <div class="form-group col-sm-12">
-                        <div class="control-label col-sm-2"></div>
-                        <label class="control-label col-sm-2" for="param_tau_m">tau_m : </label>
-                        <div class="col-sm-3">
-                            <input id="param_tau_m" name="param_tau_m" type="number" min="0" step="1" placeholder="tau_m..." class="form-control input-md" ng-model="param_tau_m">
-                        </div>
-                        <div class="control-label col-sm-2">mS</div>
-                    </div>
-                    <div class="form-group col-sm-12">
-                        <div class="control-label col-sm-2"><b>Init Values</b></div>
-                        <label class="control-label col-sm-2" for="init_v_rest">v_rest : </label>
-                        <div class="col-sm-3">
-                            <input id="init_v_rest" name="init_v_rest" type="number" min="0" step="1" placeholder="v_rest..." class="form-control input-md" ng-model="init_v_rest">
-                        </div>
-                        <div class="control-label col-sm-2">mF</div>
-                    </div>
-                    <div class="form-group col-sm-12">
-                        <div class="control-label col-sm-2"></div>
-                        <label class="control-label col-sm-2" for="init_cm">cm : </label>
-                        <div class="col-sm-3">
-                            <input id="init_cm" name="init_cm" type="number" min="0" step="1" placeholder="cm..." class="form-control input-md" ng-model="init_cm">
-                        </div>
-                        <div class="control-label col-sm-2">nF</div>
-                    </div>
-                    <div class="form-group col-sm-12">
-                        <div class="control-label col-sm-2"></div>
-                        <label class="control-label col-sm-2" for="init_tau_m">tau_m : </label>
-                        <div class="col-sm-3">
-                            <input id="init_tau_m" name="init_tau_m" type="number" min="0" step="1" placeholder="tau_m..." class="form-control input-md" ng-model="init_tau_m">
-                        </div>
-                        <div class="control-label col-sm-2">mS</div>
+                    <div class="form-group col-sm-12" id="div_param_cm" ng-if="celltype == 'SpikeSourceArray'">
+                        <p>SpikeSourceArray</p>
                     </div>
                 </form>
             </div>
