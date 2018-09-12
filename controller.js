@@ -603,7 +603,7 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 			// if($scope.celltype == "IF_curr_exp"){
 			// 	document.getElementById("param_v_rest").value = "5";
 			// }
-			$scope.fields_display_management();
+			// $scope.fields_display_management();
 		};
 
 		$scope.showDiv = function(id){

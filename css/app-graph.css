@@ -73,7 +73,7 @@ table.mxPopupMenu tr {
 }
 
 #div_param_v_rest, #div_param_cm, #div_param_tau_m, #div_init_v_rest, #div_init_cm, #div_init_tau_m {
-    display:none;
+    /* display:none; */
     /* clear: both; */
 }
 #celltype {
