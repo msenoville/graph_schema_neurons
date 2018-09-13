@@ -82,21 +82,44 @@
                         </div>
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"></div>
-                            <label class="control-label col-sm-2" for="param_v_rest">v_rest : </label>
+                            <label class="control-label col-sm-2" for="param_tau_syn_E">tau_syn_E : </label>
                             <div class="col-sm-3">
-                                <input id="param_v_rest" name="param_v_rest" type="number" min="0" step="1" placeholder="v_rest..." class="form-control input-md" ng-model="param_v_rest">
+                                <input id="param_tau_syn_E" name="param_tau_syn_E" type="number" min="0" step="1" placeholder="tau_syn_E..." class="form-control input-md" ng-model="param_tau_syn_E">
+                            </div>
+                            <div class="control-label col-sm-2">ms</div>
+                        </div>
+                        <div class="form-group col-sm-12">
+                            <div class="control-label col-sm-2"></div>
+                            <label class="control-label col-sm-2" for="param_tau_syn_I">tau_syn_I : </label>
+                            <div class="col-sm-3">
+                                <input id="param_tau_syn_I" name="param_tau_syn_I" type="number" min="0" step="1" placeholder="tau_syn_I..." class="form-control input-md" ng-model="param_tau_syn_I">
+                            </div>
+                            <div class="control-label col-sm-2">ms</div>
+                        </div>
+                        <div class="form-group col-sm-12">
+                            <div class="control-label col-sm-2"></div>
+                            <label class="control-label col-sm-2" for="param_i_offset">i_offset : </label>
+                            <div class="col-sm-3">
+                                <input id="param_i_offset" name="param_i_offset" type="number" min="0" step="1" placeholder="i_offset..." class="form-control input-md" ng-model="param_i_offset">
                             </div>
                             <div class="control-label col-sm-2">mF</div>
                         </div>
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"></div>
-                            <label class="control-label col-sm-2" for="param_v_rest">v_rest : </label>
+                            <label class="control-label col-sm-2" for="param_v_reset">v_reset : </label>
                             <div class="col-sm-3">
-                                <input id="param_v_rest" name="param_v_rest" type="number" min="0" step="1" placeholder="v_rest..." class="form-control input-md" ng-model="param_v_rest">
+                                <input id="param_v_reset" name="param_v_reset" type="number" min="0" step="1" placeholder="v_reset..." class="form-control input-md" ng-model="param_v_reset">
+                            </div>
+                            <div class="control-label col-sm-2">mV</div>
+                        </div>
+                        <div class="form-group col-sm-12">
+                            <div class="control-label col-sm-2"></div>
+                            <label class="control-label col-sm-2" for="param_v_thresh">v_thresh : </label>
+                            <div class="col-sm-3">
+                                <input id="param_v_thresh" name="param_v_thresh" type="number" min="0" step="1" placeholder="v_thresh..." class="form-control input-md" ng-model="param_v_thresh">
                             </div>
                             <div class="control-label col-sm-2">mF</div>
                         </div>
-
 
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"><b>Initials Values :</b></div>

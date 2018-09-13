@@ -596,6 +596,17 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 
 		$scope.updateForm = function() {
 			console.log("selected celltype : " + $scope.celltype);
+			if($scope.celltype == "IF_curr_alpha"){
+				$scope.param_v_rest = -65,0;
+				$scope.param_cm = 1,0;
+				$scope.param_tau_m = 20,0;
+				$scope.param_tau_refrac = 0,0;
+				$scope.param_tau_syn_E = 5,0;
+				$scope.param_tau_syn_I = 5,0;
+				$scope.param_i_offset = 0,0;
+				$scope.param_v_reset = -65,0;
+				$scope.param_v_thresh = -50,0;
+			}
 		};
 
 		$scope.showDiv = function(id){
