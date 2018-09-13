@@ -606,6 +606,95 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 				$scope.param_i_offset = 0,0;
 				$scope.param_v_reset = -65,0;
 				$scope.param_v_thresh = -50,0;
+				$scope.init_v = -65,0;
+				$scope.init_isyn_exc = 0,0;
+				$scope.init_isyn_inh = 0,0;
+			}
+			if($scope.celltype == "IF_curr_exp"){
+				$scope.param_v_rest = -65,0;
+				$scope.param_cm = 1,0;
+				$scope.param_tau_m = 20,0;
+				$scope.param_tau_refrac = 0,0;
+				$scope.param_tau_syn_E = 5,0;
+				$scope.param_tau_syn_I = 5,0;
+				$scope.param_i_offset = 0,0;
+				$scope.param_v_reset = -65,0;
+				$scope.param_v_thresh = -50,0;
+				$scope.init_v = -65,0;
+				$scope.init_isyn_exc = 0,0;
+				$scope.init_isyn_inh = 0,0;
+			}
+			if($scope.celltype == "IF_cond_alpha"){
+				$scope.param_v_rest = -65,0;
+				$scope.param_cm = 1,0;
+				$scope.param_tau_m = 20,0;
+				$scope.param_tau_refrac = 0,0;
+				$scope.param_tau_syn_E = 5,0;
+				$scope.param_tau_syn_I = 5,0;
+				$scope.param_e_rev_E = 5.0;
+				$scope.param_e_rev_I = 0.0;
+				$scope.param_i_offset = 0,0;
+				$scope.param_v_reset = -65,0;
+				$scope.param_v_thresh = -50,0;
+				$scope.init_v = -65,0;
+				$scope.init_gsyn_exc = 0,0;
+				$scope.init_gsyn_inh = 0,0;
+			}
+			if($scope.celltype == "IF_cond_exp"){
+				$scope.param_v_rest = -65,0;
+				$scope.param_cm = 1,0;
+				$scope.param_tau_m = 20,0;
+				$scope.param_tau_refrac = 0,0;
+				$scope.param_tau_syn_E = 5,0;
+				$scope.param_tau_syn_I = 5,0;
+				$scope.param_e_rev_E = 5.0;
+				$scope.param_e_rev_I = 0.0;
+				$scope.param_i_offset = 0,0;
+				$scope.param_v_reset = -65,0;
+				$scope.param_v_thresh = -50,0;
+				$scope.init_v = -65,0;
+				$scope.init_gsyn_exc = 0,0;
+				$scope.init_gsyn_inh = 0,0;
+			}
+			if($scope.celltype == "HH_cond_exp"){
+				$scope.param_gbar_Na = 20,0;
+				$scope.param_gbar_K = 6.0;
+				$scope.param_g_leak = 0,01;
+				$scope.param_cm = 0,2;
+				$scope.param_v_offset = -63,0;
+				$scope.param_e_rev_Na = 50,0;
+				$scope.param_e_rev_K = -90,0;
+				$scope.param_e_rev_leak = 65,0;
+				$scope.param_e_rev_E = 0,0;
+				$scope.param_e_rev_I = -80,0;
+				$scope.param_tau_syn_E = 5,0;
+				$scope.param_e_rev_I = -80,0;
+				$scope.param_tau_syn_I = 5,0;
+				$scope.init_v = -65,0;
+				$scope.init_gsyn_exc = 0,0;
+				$scope.init_gsyn_inh = 0,0;
+			}
+			if($scope.celltype == "EIF_cond_alpha_isfa_ista"){
+				$scope.param_tau_cm = 0,281;
+				$scope.param_tau_refrac = 0,0;
+				$scope.param_v_spike = 0,0;
+				$scope.param_v_reset = -70,6;
+				$scope.param_v_rest = -70,6;
+				$scope.param_tau_m = 9,3667;
+				$scope.param_i_offset = 0,0;
+				$scope.param_a = 4,0;
+				$scope.param_b = 0,0805;
+				$scope.param_delta_T = 2,0;
+				$scope.param_tau_w = 144,0;
+				$scope.param_v_thresh = -50,4;
+				$scope.param_e_rev_E = 0,0;
+				$scope.param_tau_syn_E = 5,0;
+				$scope.param_e_rev_I = -80,0;
+				$scope.param_tau_syn_I = 5,0;
+				$scope.init_v = -65,0;
+				$scope.init_w = 0,0;
+				$scope.init_gsyn_exc = 0,0;
+				$scope.init_gsyn_inh = 0,0;
 			}
 		};
 
