@@ -127,6 +127,7 @@
                             <div class="col-sm-3">
                                 <input id="init_v" name="init_v" type="number" min="0" step="1" placeholder="v..." class="form-control input-md" ng-model="init_v">
                             </div>
+                            <div class="control-label col-sm-2">mV</div>
                         </div>
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"></div>
@@ -134,6 +135,7 @@
                             <div class="col-sm-3">
                                 <input id="init_isyn_exc" name="init_isyn_exc" type="number" min="0" step="1" placeholder="isyn_exc..." class="form-control input-md" ng-model="init_isyn_exc">
                             </div>
+                            <div class="control-label col-sm-2">nA</div>
                         </div>
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"></div>
@@ -141,6 +143,7 @@
                             <div class="col-sm-3">
                                 <input id="init_isyn_inh" name="init_isyn_inh" type="number" min="0" step="1" placeholder="isyn_inh..." class="form-control input-md" ng-model="init_isyn_inh">
                             </div>
+                            <div class="control-label col-sm-2">nA</div>
                         </div>
                     </div>
                     <div ng-if="celltype == 'IF_cond_alpha' || celltype == 'IF_cond_exp'">
@@ -152,6 +155,7 @@
                             <div class="col-sm-3">
                                 <input id="init_v" name="init_v" type="number" min="0" step="1" placeholder="v..." class="form-control input-md" ng-model="init_v">
                             </div>
+                            <div class="control-label col-sm-2">mV</div>
                         </div>
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"></div>
@@ -159,6 +163,7 @@
                             <div class="col-sm-3">
                                 <input id="init_gsyn_exc" name="init_gsyn_exc" type="number" min="0" step="1" placeholder="gsyn_exc..." class="form-control input-md" ng-model="init_gsyn_exc">
                             </div>
+                            <div class="control-label col-sm-2">nA</div>
                         </div>
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"></div>
@@ -166,17 +171,17 @@
                             <div class="col-sm-3">
                                 <input id="init_gsyn_inh" name="init_gsyn_inh" type="number" min="0" step="1" placeholder="gsyn_inh..." class="form-control input-md" ng-model="init_gsyn_inh">
                             </div>
+                            <div class="control-label col-sm-2">nA</div>
                         </div>
                     </div>
                     <div ng-if="celltype == 'HH_cond_exp'">
-
-
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"><b>Initials Values :</b></div>
                             <label class="control-label col-sm-2" for="init_v">v : </label>
                             <div class="col-sm-3">
                                 <input id="init_v" name="init_v" type="number" min="0" step="1" placeholder="v..." class="form-control input-md" ng-model="init_v">
                             </div>
+                            <div class="control-label col-sm-2">mV</div>
                         </div>
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"></div>
@@ -184,6 +189,7 @@
                             <div class="col-sm-3">
                                 <input id="init_gsyn_exc" name="init_gsyn_exc" type="number" min="0" step="1" placeholder="isyn_exc..." class="form-control input-md" ng-model="init_gsyn_exc">
                             </div>
+                            <div class="control-label col-sm-2">uS</div>
                         </div>
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"></div>
@@ -191,6 +197,7 @@
                             <div class="col-sm-3">
                                 <input id="init_gsyn_inh" name="init_gsyn_inh" type="number" min="0" step="1" placeholder="isyn_inh..." class="form-control input-md" ng-model="init_gsyn_inh">
                             </div>
+                            <div class="control-label col-sm-2">uS</div>
                         </div>
                     </div>
                     <div ng-if="celltype == 'EIF_cond_alpha_isfa_ista'">
@@ -201,13 +208,15 @@
                             <div class="col-sm-3">
                                 <input id="init_v" name="init_v" type="number" min="0" step="1" placeholder="v..." class="form-control input-md" ng-model="init_v">
                             </div>
+                            <div class="control-label col-sm-2">mV</div>
                         </div>
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"></div>
-                            <label class="control-label col-sm-2" for="init_w">v : </label>
+                            <label class="control-label col-sm-2" for="init_w">w : </label>
                             <div class="col-sm-3">
                                 <input id="init_w" name="init_w" type="number" min="0" step="1" placeholder="v..." class="form-control input-md" ng-model="init_w">
                             </div>
+                            <div class="control-label col-sm-2">nA</div>
                         </div>
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"></div>
@@ -215,6 +224,7 @@
                             <div class="col-sm-3">
                                 <input id="init_gsyn_exc" name="init_gsyn_exc" type="number" min="0" step="1" placeholder="isyn_exc..." class="form-control input-md" ng-model="init_gsyn_exc">
                             </div>
+                            <div class="control-label col-sm-2">uS</div>
                         </div>
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"></div>
@@ -222,6 +232,7 @@
                             <div class="col-sm-3">
                                 <input id="init_gsyn_inh" name="init_gsyn_inh" type="number" min="0" step="1" placeholder="isyn_inh..." class="form-control input-md" ng-model="init_gsyn_inh">
                             </div>
+                            <div class="control-label col-sm-2">uS</div>
                         </div>
                     </div>
                 </form>
