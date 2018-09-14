@@ -145,12 +145,84 @@
                     </div>
                     <div ng-if="celltype == 'IF_cond_alpha' || celltype == 'IF_cond_exp'">
 
+
+                        <div class="form-group col-sm-12">
+                            <div class="control-label col-sm-2"><b>Initials Values :</b></div>
+                            <label class="control-label col-sm-2" for="init_v">v : </label>
+                            <div class="col-sm-3">
+                                <input id="init_v" name="init_v" type="number" min="0" step="1" placeholder="v..." class="form-control input-md" ng-model="init_v">
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-12">
+                            <div class="control-label col-sm-2"></div>
+                            <label class="control-label col-sm-2" for="init_gsyn_exc">isyn_exc : </label>
+                            <div class="col-sm-3">
+                                <input id="init_gsyn_exc" name="init_gsyn_exc" type="number" min="0" step="1" placeholder="gsyn_exc..." class="form-control input-md" ng-model="init_gsyn_exc">
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-12">
+                            <div class="control-label col-sm-2"></div>
+                            <label class="control-label col-sm-2" for="init_gsyn_inh">isyn_inh : </label>
+                            <div class="col-sm-3">
+                                <input id="init_gsyn_inh" name="init_gsyn_inh" type="number" min="0" step="1" placeholder="gsyn_inh..." class="form-control input-md" ng-model="init_gsyn_inh">
+                            </div>
+                        </div>
                     </div>
                     <div ng-if="celltype == 'HH_cond_exp'">
 
+
+                        <div class="form-group col-sm-12">
+                            <div class="control-label col-sm-2"><b>Initials Values :</b></div>
+                            <label class="control-label col-sm-2" for="init_v">v : </label>
+                            <div class="col-sm-3">
+                                <input id="init_v" name="init_v" type="number" min="0" step="1" placeholder="v..." class="form-control input-md" ng-model="init_v">
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-12">
+                            <div class="control-label col-sm-2"></div>
+                            <label class="control-label col-sm-2" for="init_gsyn_exc">gsyn_exc : </label>
+                            <div class="col-sm-3">
+                                <input id="init_gsyn_exc" name="init_gsyn_exc" type="number" min="0" step="1" placeholder="isyn_exc..." class="form-control input-md" ng-model="init_gsyn_exc">
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-12">
+                            <div class="control-label col-sm-2"></div>
+                            <label class="control-label col-sm-2" for="init_gsyn_inh">gsyn_inh : </label>
+                            <div class="col-sm-3">
+                                <input id="init_gsyn_inh" name="init_gsyn_inh" type="number" min="0" step="1" placeholder="isyn_inh..." class="form-control input-md" ng-model="init_gsyn_inh">
+                            </div>
+                        </div>
                     </div>
                     <div ng-if="celltype == 'EIF_cond_alpha_isfa_ista'">
 
+                        <div class="form-group col-sm-12">
+                            <div class="control-label col-sm-2"><b>Initials Values :</b></div>
+                            <label class="control-label col-sm-2" for="init_v">v : </label>
+                            <div class="col-sm-3">
+                                <input id="init_v" name="init_v" type="number" min="0" step="1" placeholder="v..." class="form-control input-md" ng-model="init_v">
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-12">
+                            <div class="control-label col-sm-2"></div>
+                            <label class="control-label col-sm-2" for="init_w">v : </label>
+                            <div class="col-sm-3">
+                                <input id="init_w" name="init_w" type="number" min="0" step="1" placeholder="v..." class="form-control input-md" ng-model="init_w">
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-12">
+                            <div class="control-label col-sm-2"></div>
+                            <label class="control-label col-sm-2" for="init_gsyn_exc">gsyn_exc : </label>
+                            <div class="col-sm-3">
+                                <input id="init_gsyn_exc" name="init_gsyn_exc" type="number" min="0" step="1" placeholder="isyn_exc..." class="form-control input-md" ng-model="init_gsyn_exc">
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-12">
+                            <div class="control-label col-sm-2"></div>
+                            <label class="control-label col-sm-2" for="init_gsyn_inh">gsyn_inh : </label>
+                            <div class="col-sm-3">
+                                <input id="init_gsyn_inh" name="init_gsyn_inh" type="number" min="0" step="1" placeholder="isyn_inh..." class="form-control input-md" ng-model="init_gsyn_inh">
+                            </div>
+                        </div>
                     </div>
                 </form>
             </div>
