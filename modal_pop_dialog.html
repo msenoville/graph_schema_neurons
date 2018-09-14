@@ -118,7 +118,7 @@
                             <div class="col-sm-3">
                                 <input id="param_v_thresh" name="param_v_thresh" type="number" min="0" step="1" placeholder="v_thresh..." class="form-control input-md" ng-model="param_v_thresh">
                             </div>
-                            <div class="control-label col-sm-2">mF</div>
+                            <div class="control-label col-sm-2">mV</div>
                         </div>
 
                         <div class="form-group col-sm-12">
@@ -217,7 +217,7 @@
                             <div class="col-sm-3">
                                 <input id="param_v_thresh" name="param_v_thresh" type="number" min="0" step="1" placeholder="v_thresh..." class="form-control input-md" ng-model="param_v_thresh">
                             </div>
-                            <div class="control-label col-sm-2">mF</div>
+                            <div class="control-label col-sm-2">mV</div>
                         </div>
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"></div>
@@ -391,10 +391,135 @@
                         </div>
                     </div>
                     <div ng-if="celltype == 'EIF_cond_alpha_isfa_ista'">
+                        <div class="form-group col-sm-12">
+                            <div class="control-label col-sm-2"><b>Parameters : </b></div>
+                            <label class="control-label col-sm-2" for="param_cm">cm : </label>
+                            <div class="col-sm-3">
+                                <input id="param_cm" name="param_cm" type="number" min="0" step="1" placeholder="cm..." class="form-control input-md" ng-model="param_cm" value="1">
+                            </div>
+                            <div class="control-label col-sm-2">nF</div>
+                        </div>
+                        <div class="form-group col-sm-12">
+                            <div class="control-label col-sm-2"></div>
+                            <label class="control-label col-sm-2" for="param_tau_refrac">tau_refrac : </label>
+                            <div class="col-sm-3">
+                                <input id="param_tau_refrac" name="param_tau_refrac" type="number" min="0" step="1" placeholder="tau_refrac..." class="form-control input-md" ng-model="param_tau_refrac" value="0">
+                            </div>
+                            <div class="control-label col-sm-2">ms</div>
+                        </div>
+                        <div class="form-group col-sm-12">
+                            <div class="control-label col-sm-2"></div>
+                            <label class="control-label col-sm-2" for="param_v_spike">v_spike : </label>
+                            <div class="col-sm-3">
+                                <input id="param_v_spike" name="param_v_spike" type="number" min="0" step="1" placeholder="v_spike..." class="form-control input-md" ng-model="param_v_spike" value="0">
+                            </div>
+                            <div class="control-label col-sm-2">mV</div>
+                        </div>
+                        <div class="form-group col-sm-12">
+                            <div class="control-label col-sm-2"></div>
+                            <label class="control-label col-sm-2" for="param_v_reset">v_reset : </label>
+                            <div class="col-sm-3">
+                                <input id="param_v_reset" name="param_v_reset" type="number" min="0" step="1" placeholder="v_reset..." class="form-control input-md" ng-model="param_v_reset" value="0">
+                            </div>
+                            <div class="control-label col-sm-2">mV</div>
+                        </div>
+                        <div class="form-group col-sm-12">
+                            <div class="control-label col-sm-2"></div>
+                            <label class="control-label col-sm-2" for="param_v_rest">v_rest : </label>
+                            <div class="col-sm-3">
+                                <input id="param_v_rest" name="param_v_rest" type="number" min="0" step="1" placeholder="v_rest..." class="form-control input-md" ng-model="param_v_rest" value="0">
+                            </div>
+                            <div class="control-label col-sm-2">mV</div>
+                        </div>
+                        <div class="form-group col-sm-12">
+                            <div class="control-label col-sm-2"></div>
+                            <label class="control-label col-sm-2" for="param_tau_m">tau_m : </label>
+                            <div class="col-sm-3">
+                                <input id="param_tau_m" name="param_tau_m" type="number" min="0" step="1" placeholder="tau_m..." class="form-control input-md" ng-model="param_tau_m" value="20">
+                            </div>
+                            <div class="control-label col-sm-2">ms</div>
+                        </div>
+                        <div class="form-group col-sm-12">
+                            <div class="control-label col-sm-2"></div>
+                            <label class="control-label col-sm-2" for="param_i_offset">i_offset : </label>
+                            <div class="col-sm-3">
+                                <input id="param_i_offset" name="param_i_offset" type="number" min="0" step="1" placeholder="i_offset..." class="form-control input-md" ng-model="param_i_offset">
+                            </div>
+                            <div class="control-label col-sm-2">mA</div>
+                        </div>
+                        <div class="form-group col-sm-12">
+                            <div class="control-label col-sm-2"></div>
+                            <label class="control-label col-sm-2" for="param_a">a : </label>
+                            <div class="col-sm-3">
+                                <input id="param_a" name="param_a" type="number" min="0" step="1" placeholder="a..." class="form-control input-md" ng-model="param_a">
+                            </div>
+                            <div class="control-label col-sm-2">nS</div>
+                        </div>
+                        <div class="form-group col-sm-12">
+                            <div class="control-label col-sm-2"></div>
+                            <label class="control-label col-sm-2" for="param_b">b : </label>
+                            <div class="col-sm-3">
+                                <input id="param_b" name="param_b" type="number" min="0" step="1" placeholder="b..." class="form-control input-md" ng-model="param_b">
+                            </div>
+                            <div class="control-label col-sm-2">nA</div>
+                        </div>
+                        <div class="form-group col-sm-12">
+                            <div class="control-label col-sm-2"></div>
+                            <label class="control-label col-sm-2" for="param_delta_T">delta_T : </label>
+                            <div class="col-sm-3">
+                                <input id="param_delta_T" name="param_delta_T" type="number" min="0" step="1" placeholder="delta_T..." class="form-control input-md" ng-model="param_delta_T">
+                            </div>
+                            <div class="control-label col-sm-2">mV</div>
+                        </div>
+                        <div class="form-group col-sm-12">
+                            <div class="control-label col-sm-2"></div>
+                            <label class="control-label col-sm-2" for="param_tau_w">tau_w : </label>
+                            <div class="col-sm-3">
+                                <input id="param_tau_w" name="param_tau_w" type="number" min="0" step="1" placeholder="tau_w..." class="form-control input-md" ng-model="param_tau_w" value="20">
+                            </div>
+                            <div class="control-label col-sm-2">ms</div>
+                        </div>
+                        <div class="form-group col-sm-12">
+                            <div class="control-label col-sm-2"></div>
+                            <label class="control-label col-sm-2" for="param_v_thresh">v_thresh : </label>
+                            <div class="col-sm-3">
+                                <input id="param_v_thresh" name="param_v_thresh" type="number" min="0" step="1" placeholder="v_thresh..." class="form-control input-md" ng-model="param_v_thresh">
+                            </div>
+                            <div class="control-label col-sm-2">mV</div>
+                        </div>
+                        <div class="form-group col-sm-12">
+                            <div class="control-label col-sm-2"></div>
+                            <label class="control-label col-sm-2" for="param_e_rev_E">e_rev_E : </label>
+                            <div class="col-sm-3">
+                                <input id="param_e_rev_E" name="param_e_rev_E" type="number" min="0" step="1" placeholder="e_rev_E..." class="form-control input-md" ng-model="param_e_rev_E">
+                            </div>
+                            <div class="control-label col-sm-2">mV</div>
+                        </div>
+                        <div class="form-group col-sm-12">
+                            <div class="control-label col-sm-2"></div>
+                            <label class="control-label col-sm-2" for="param_tau_syn_E">tau_syn_E : </label>
+                            <div class="col-sm-3">
+                                <input id="param_tau_syn_E" name="param_tau_syn_E" type="number" min="0" step="1" placeholder="tau_syn_E..." class="form-control input-md" ng-model="param_tau_syn_E">
+                            </div>
+                            <div class="control-label col-sm-2">ms</div>
+                        </div>
+                        <div class="form-group col-sm-12">
+                            <div class="control-label col-sm-2"></div>
+                            <label class="control-label col-sm-2" for="param_e_rev_I">e_rev_I : </label>
+                            <div class="col-sm-3">
+                                <input id="param_e_rev_I" name="param_e_rev_I" type="number" min="0" step="1" placeholder="e_rev_I..." class="form-control input-md" ng-model="param_e_rev_I">
+                            </div>
+                            <div class="control-label col-sm-2">mV</div>
+                        </div>
+                        <div class="form-group col-sm-12">
+                            <div class="control-label col-sm-2"></div>
+                            <label class="control-label col-sm-2" for="param_tau_syn_I">tau_syn_I : </label>
+                            <div class="col-sm-3">
+                                <input id="param_tau_syn_I" name="param_tau_syn_I" type="number" min="0" step="1" placeholder="tau_syn_I..." class="form-control input-md" ng-model="param_tau_syn_I">
+                            </div>
+                            <div class="control-label col-sm-2">ms</div>
+                        </div>
 
-
-
-                        
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"><b>Initials Values :</b></div>
                             <label class="control-label col-sm-2" for="init_v">v : </label>
