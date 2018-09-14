@@ -154,8 +154,25 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 		button_clear.style.background = 'url(\'img/delete_clear.png\') no-repeat';
 		button_clear.style.backgroundSize = '100%';
 
+		// create a button to export to python script
+		var button_exp_python = mxUtils.button('', function(){
+			bootbox.confirm({
+				size: "small",
+				message: "This action will export your graph to Python script. Do you want to continue ?", 
+				callback: function(result){ /* result is a boolean; true = OK, false = Cancel*/ 
+					if(result == true){
+						// graph.getModel().clear();
+					}
+				}
+			});
+		});
+		button_exp_python.style.width = '48px';
+		button_exp_python.style.height = '48px';
+		button_exp_python.style.border = 'none';
+		button_exp_python.style.background = 'url(\'img/python.png\') no-repeat';
+		button_exp_python.style.backgroundSize = '100%';		
 
-		//create left vertical toolbar
+		//create toolbar
 		var div_toolbar = document.createElement('div');
 		div_toolbar.id = 'div_toolbar';
 		div_toolbar.style.width = '100%';
@@ -170,6 +187,7 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 		div_toolbar.appendChild(button_save);
 		div_toolbar.appendChild(button_load);
 		div_toolbar.appendChild(button_clear);
+		div_toolbar.appendChild(button_exp_python);
 		
 		var container = document.createElement('div');
 		container.id = 'svg_container';
