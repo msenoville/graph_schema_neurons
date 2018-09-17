@@ -128,7 +128,6 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 					console.log("failed");
 				}
 			});
-
 		});
 		button_load.style.width = '48px';
 		button_load.style.height = '48px';
@@ -297,9 +296,33 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 										param_v_rest: json_data.param_v_rest,
 										param_cm: json_data.param_cm,
 										param_tau_m: json_data.param_tau_m,
-										init_v_rest: json_data.init_v_rest,
-										init_cm: json_data.init_cm,
-										init_tau_m: json_data.init_tau_m,
+										param_tau_refrac: json_data.param_tau_refrac,
+										param_tau_syn_E: json_data.param_tau_syn_E,
+										param_tau_syn_I: json_data.param_tau_syn_I,
+										param_i_offset: json_data.param_i_offset,
+										param_v_reset: json_data.param_v_reset,
+										param_v_thresh: json_data.param_v_thresh,
+										param_e_rev_E: json_data.param_e_rev_E,
+										param_e_rev_I: json_data.param_e_rev_I,
+										param_gbar_Na: json_data.param_gbar_Na,
+										param_gbar_K: json_data.param_gbar_K,
+										param_g_leak: json_data.param_g_leak,
+										param_v_offset: json_data.param_v_offset,
+										param_e_rev_Na: json_data.param_e_rev_Na,
+										param_e_rev_K: json_data.param_e_rev_K,
+										param_e_rev_leak: json_data.param_e_rev_leak,
+										param_tau_cm: json_data.param_tau_cm,
+										param_v_spike: json_data.param_v_spike,
+										param_a: json_data.param_a,
+										param_b: json_data.param_b,
+										param_delta_T: json_data.param_delta_T,
+										param_tau_w: json_data.param_tau_w,
+										init_isyn_exc: json_data.init_isyn_exc,
+										init_isyn_inh: json_data.init_isyn_inh,
+										init_gsyn_exc: json_data.init_gsyn_exc,
+										init_gsyn_inh: json_data.init_gsyn_inh,
+										init_v: json_data.init_v,
+										init_w: json_data.init_w,
 									}
 								}).then(function(modal) {
 									modal.element.modal();
@@ -598,8 +621,8 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 });
 
 
-graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title', 'close', 'name_value', 'level', 'size', 'celltype', 'param_v_rest', 'param_cm', 'param_tau_m', 'init_v_rest', 'init_cm', 'init_tau_m',
-	function($scope, $element, title, close, name_value, level, size, celltype, param_v_rest, param_cm, param_tau_m, init_v_rest, init_cm, init_tau_m) {
+graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title', 'close', 'name_value', 'level', 'size', 'celltype', 'param_v_rest', 'param_cm', 'param_tau_m', 'param_tau_m', 'param_tau_m', 'param_tau_refrac', 'param_tau_syn_E', 'param_tau_syn_I', 'param_i_offset', 'param_v_reset', 'param_v_thresh', 'param_e_rev_E', 'param_e_rev_I', 'param_gbar_Na', 'param_gbar_K', 'param_g_leak', 'param_v_offset', 'param_e_rev_Na', 'param_e_rev_K', 'param_e_rev_leak', 'param_tau_cm', 'param_v_spike', 'param_a', 'param_b', 'param_delta_T', 'param_tau_w', 'init_isyn_exc', 'init_isyn_inh', 'init_gsyn_exc', 'init_gsyn_inh', 'init_v', 'init_w',
+	function($scope, $element, title, close, name_value, level, size, celltype, param_v_rest, param_cm, param_tau_m, param_tau_m, param_tau_m, param_tau_refrac, param_tau_syn_E, param_tau_syn_I, param_i_offset, param_v_reset, param_v_thresh, param_e_rev_E, param_e_rev_I, param_gbar_Na, param_gbar_K, param_g_leak, param_v_offset, param_e_rev_Na, param_e_rev_K, param_e_rev_leak, param_tau_cm, param_v_spike, param_a, param_b, param_delta_T, param_tau_w, init_isyn_exc, init_isyn_inh, init_gsyn_exc, init_gsyn_inh, init_v, init_w) {
 		$scope.title = title;
 		$scope.name_value = name_value;
 		$scope.level = level;
@@ -608,9 +631,34 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 		$scope.param_v_rest = param_v_rest;
 		$scope.param_cm = param_cm;
 		$scope.param_tau_m = param_tau_m;
-		$scope.init_v_rest = init_v_rest;
-		$scope.init_cm = init_cm;
-		$scope.init_tau_m = init_tau_m;
+		$scope.param_tau_refrac = param_tau_refrac;
+		$scope.param_tau_syn_E = param_tau_syn_E;
+		$scope.param_tau_syn_I = param_tau_syn_I;
+		$scope.param_i_offset = param_i_offset;
+		$scope.param_v_reset = param_v_reset;
+		$scope.param_v_thresh = param_v_thresh;
+		$scope.param_e_rev_E = param_e_rev_E;
+		$scope.param_e_rev_I = param_e_rev_I;
+		$scope.param_gbar_Na = param_gbar_Na;
+		$scope.param_gbar_K = param_gbar_K;
+		$scope.param_g_leak = param_g_leak;
+		$scope.param_v_offset = param_v_offset;
+		$scope.param_e_rev_Na = param_e_rev_Na;
+		$scope.param_e_rev_K = param_e_rev_K;
+		$scope.param_e_rev_leak = param_e_rev_leak;
+		$scope.param_tau_cm = param_tau_cm;
+		$scope.param_v_spike = param_v_spike;
+		$scope.param_a = param_a;
+		$scope.param_b = param_b;
+		$scope.param_delta_T = param_delta_T;
+		$scope.param_tau_w = param_tau_w;
+		$scope.init_isyn_exc = init_isyn_exc;
+		$scope.init_isyn_inh = init_isyn_inh;
+		$scope.init_gsyn_exc = init_gsyn_exc;
+		$scope.init_gsyn_inh = init_gsyn_inh;
+		$scope.init_v = init_v;
+		$scope.init_w = init_w;
+		
 
 		$scope.updateForm = function() {
 			console.log("selected celltype : " + $scope.celltype);
@@ -729,9 +777,33 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 				param_v_rest: $scope.param_v_rest,
 				param_cm: $scope.param_cm,
 				param_tau_m: $scope.param_tau_m,
-				init_v_rest: $scope.init_v_rest,
-				init_cm: $scope.init_cm,
-				init_tau_m: $scope.init_tau_m,
+				param_tau_refrac: $scope.param_tau_refrac,
+				param_tau_syn_E: $scope.param_tau_syn_E,
+				param_tau_syn_I: $scope.param_tau_syn_I,
+				param_i_offset: $scope.param_i_offset,
+				param_v_reset: $scope.param_v_reset,
+				param_v_thresh: $scope.param_v_thresh,
+				param_e_rev_E: $scope.param_e_rev_E,
+				param_e_rev_I: $scope.param_e_rev_I,
+				param_gbar_Na: $scope.param_gbar_Na,
+				param_gbar_K: $scope.param_gbar_K,
+				param_g_leak: $scope.param_g_leak,
+				param_v_offset: $scope.param_v_offset,
+				param_e_rev_Na: $scope.param_e_rev_Na,
+				param_e_rev_K: $scope.param_e_rev_K,
+				param_e_rev_leak: $scope.param_e_rev_leak,
+				param_tau_cm: $scope.param_tau_cm,
+				param_v_spike: $scope.param_v_spike,
+				param_a: $scope.param_a,
+				param_b: $scope.param_b,
+				param_delta_T: $scope.param_delta_T,
+				param_tau_w: $scope.param_tau_w,
+				init_isyn_exc: $scope.init_isyn_exc,
+				init_isyn_inh: $scope.init_isyn_inh,
+				init_gsyn_exc: $scope.init_gsyn_exc,
+				init_gsyn_inh: $scope.init_gsyn_inh,
+				init_v: $scope.init_v,
+				init_w: $scope.init_w,
 			}, 100);
 			$('.modal-backdrop').remove();
 		};
@@ -749,9 +821,33 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 				param_v_rest: param_v_rest,
 				param_cm: param_cm,
 				param_tau_m: param_tau_m,
-				init_v_rest: init_v_rest,
-				init_cm: init_cm,
-				init_tau_m: init_tau_m,
+				param_tau_refrac: param_tau_refrac,
+				param_tau_syn_E: param_tau_syn_E,
+				param_tau_syn_I: param_tau_syn_I,
+				param_i_offset: param_i_offset,
+				param_v_reset: param_v_reset,
+				param_v_thresh: param_v_thresh,
+				param_e_rev_E: param_e_rev_E,
+				param_e_rev_I: param_e_rev_I,
+				param_gbar_Na: param_gbar_Na,
+				param_gbar_K: param_gbar_K,
+				param_g_leak: param_g_leak,
+				param_v_offset: param_v_offset,
+				param_e_rev_Na: param_e_rev_Na,
+				param_e_rev_K: param_e_rev_K,
+				param_e_rev_leak: param_e_rev_leak,
+				param_tau_cm: param_tau_cm,
+				param_v_spike: param_v_spike,
+				param_a: param_a,
+				param_b: param_b,
+				param_delta_T: param_delta_T,
+				param_tau_w: param_tau_w,
+				init_isyn_exc: init_isyn_exc,
+				init_isyn_inh: init_isyn_inh,
+				init_gsyn_exc: init_gsyn_exc,
+				init_gsyn_inh: init_gsyn_inh,
+				init_v: init_v,
+				init_w: init_w,
 			}, 100); // close, but give 100ms for bootstrap to animate
 			$('.modal-backdrop').remove();
 		};
