@@ -156,12 +156,12 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 
 		// create a button to export to python script
 		var button_exp_python = mxUtils.button('', function(){
-			bootbox.confirm({
-				size: "small",
-				message: "This action will export your graph to Python script. Do you want to continue ?", 
-				callback: function(result){ /* result is a boolean; true = OK, false = Cancel*/ 
-					if(result == true){
-						// graph.getModel().clear();
+			bootbox.prompt("Please give the name to the file (.py extension added automatically) :", function(filename){
+				if(filename != null){
+					if(filename.length <1){
+						FileSaver.saveAs(blob, "graph_model.py");
+					} else {
+						FileSaver.saveAs(blob, filename + ".py");
 					}
 				}
 			});
