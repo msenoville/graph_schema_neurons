@@ -48,7 +48,7 @@
                             </select>
                         </div>
                     </div>
-                    <div ng-if="celltype == 'IF_curr_alpha' || celltype == 'IF_curr_exp'">
+                    <div ng-show="celltype == 'IF_curr_alpha' || celltype == 'IF_curr_exp'">
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"><b>Parameters :</b></div>
                             <label class="control-label col-sm-2" for="param_v_rest">v_rest : </label>
@@ -147,7 +147,7 @@
                             <div class="control-label col-sm-2">nA</div>
                         </div>
                     </div>
-                    <div ng-if="celltype == 'IF_cond_alpha' || celltype == 'IF_cond_exp'">
+                    <div ng-show="celltype == 'IF_cond_alpha' || celltype == 'IF_cond_exp'">
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"><b>Parameters :</b></div>
                             <label class="control-label col-sm-2" for="param_v_rest">v_rest : </label>
@@ -261,7 +261,7 @@
                             <div class="control-label col-sm-2">nA</div>
                         </div>
                     </div>
-                    <div ng-if="celltype == 'HH_cond_exp'">
+                    <div ng-show="celltype == 'HH_cond_exp'">
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"><b>Parameters :</b></div>
                             <label class="control-label col-sm-2" for="param_gbar_Na">gbar_Na : </label>
@@ -391,7 +391,7 @@
                             <div class="control-label col-sm-2">uS</div>
                         </div>
                     </div>
-                    <div ng-if="celltype == 'EIF_cond_alpha_isfa_ista'">
+                    <div ng-show="celltype == 'EIF_cond_alpha_isfa_ista'">
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"><b>Parameters : </b></div>
                             <label class="control-label col-sm-2" for="param_cm">cm : </label>
