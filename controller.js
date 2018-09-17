@@ -599,12 +599,10 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 								"level": "",
 								"size": "",
 								"celltype": "",
-								"param_v_rest": "",
-								"param_cm": "",
-								"param_tau_m": "",
-								"init_v_rest": "",
-								"init_cm": "",
-								"init_tau_m": "",
+								"param_rate": "",
+								"param_start": "",
+								"param_duration": "",
+								"param_spike_times": "",						
 							};
 						}
 						ModalService.showModal({
@@ -615,13 +613,11 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 								name_value: json_data_array[0],
 								level: json_data.level,
 								size: json_data.size,
-								celltype: json_data.celltype,
-								param_v_rest: json_data.param_v_rest,
-								param_cm: json_data.param_cm,
-								param_tau_m: json_data.param_tau_m,
-								init_v_rest: json_data.init_v_rest,
-								init_cm: json_data.init_cm,
-								init_tau_m: json_data.init_tau_m,
+								celltype: json_data.celltype,								
+								param_rate: json_data.param_rate,
+								param_start: json_data.param_start,
+								param_duration: json_data.param_duration,
+								param_spike_times: json_data.param_spike_times,						
 							}
 						}).then(function(modal) {
 							modal.element.modal();
@@ -848,127 +844,29 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 ]);
 
 
-graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 'title', 'close', 'name_value', 'level', 'size', 'celltype', 'param_v_rest', 'param_cm', 'param_tau_m', 'init_v_rest', 'init_cm', 'init_tau_m',
-	function($scope, $element, title, close, name_value, level, size, celltype, param_v_rest, param_cm, param_tau_m, init_v_rest, init_cm, init_tau_m) {
+graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 'title', 'close', 'name_value', 'level', 'size', 'celltype', 'param_rate', 'param_start', 'param_duration', 'param_spike_times',
+	function($scope, $element, title, close, name_value, level, size, celltype, param_rate, param_start, param_duration, param_spike_times) {
 		$scope.title = title;
 		$scope.name_value = name_value;
 		$scope.level = level;
 		$scope.size = size;
-		// $scope.celltype = celltype;
-		// $scope.param_v_rest = param_v_rest;
-		// $scope.param_cm = param_cm;
-		// $scope.param_tau_m = param_tau_m;
-		// $scope.init_v_rest = init_v_rest;
-		// $scope.init_cm = init_cm;
-		// $scope.init_tau_m = init_tau_m;
-
-		// $scope.updateForm = function() {
-		// 	console.log("selected celltype : " + $scope.celltype);
-		// 	if($scope.celltype == "IF_curr_alpha"){
-		// 		$scope.param_v_rest = -65,0;
-		// 		$scope.param_cm = 1,0;
-		// 		$scope.param_tau_m = 20,0;
-		// 		$scope.param_tau_refrac = 0,0;
-		// 		$scope.param_tau_syn_E = 5,0;
-		// 		$scope.param_tau_syn_I = 5,0;
-		// 		$scope.param_i_offset = 0,0;
-		// 		$scope.param_v_reset = -65,0;
-		// 		$scope.param_v_thresh = -50,0;
-		// 		$scope.init_v = -65,0;
-		// 		$scope.init_isyn_exc = 0,0;
-		// 		$scope.init_isyn_inh = 0,0;
-		// 	}
-		// 	if($scope.celltype == "IF_curr_exp"){
-		// 		$scope.param_v_rest = -65,0;
-		// 		$scope.param_cm = 1,0;
-		// 		$scope.param_tau_m = 20,0;
-		// 		$scope.param_tau_refrac = 0,0;
-		// 		$scope.param_tau_syn_E = 5,0;
-		// 		$scope.param_tau_syn_I = 5,0;
-		// 		$scope.param_i_offset = 0,0;
-		// 		$scope.param_v_reset = -65,0;
-		// 		$scope.param_v_thresh = -50,0;
-		// 		$scope.init_v = -65,0;
-		// 		$scope.init_isyn_exc = 0,0;
-		// 		$scope.init_isyn_inh = 0,0;
-		// 	}
-		// 	if($scope.celltype == "IF_cond_alpha"){
-		// 		$scope.param_v_rest = -65,0;
-		// 		$scope.param_cm = 1,0;
-		// 		$scope.param_tau_m = 20,0;
-		// 		$scope.param_tau_refrac = 0,0;
-		// 		$scope.param_tau_syn_E = 5,0;
-		// 		$scope.param_tau_syn_I = 5,0;
-		// 		$scope.param_e_rev_E = 5.0;
-		// 		$scope.param_e_rev_I = 0.0;
-		// 		$scope.param_i_offset = 0,0;
-		// 		$scope.param_v_reset = -65,0;
-		// 		$scope.param_v_thresh = -50,0;
-		// 		$scope.init_v = -65,0;
-		// 		$scope.init_gsyn_exc = 0,0;
-		// 		$scope.init_gsyn_inh = 0,0;
-		// 	}
-		// 	if($scope.celltype == "IF_cond_exp"){
-		// 		$scope.param_v_rest = -65,0;
-		// 		$scope.param_cm = 1,0;
-		// 		$scope.param_tau_m = 20,0;
-		// 		$scope.param_tau_refrac = 0,0;
-		// 		$scope.param_tau_syn_E = 5,0;
-		// 		$scope.param_tau_syn_I = 5,0;
-		// 		$scope.param_e_rev_E = 5.0;
-		// 		$scope.param_e_rev_I = 0.0;
-		// 		$scope.param_i_offset = 0,0;
-		// 		$scope.param_v_reset = -65,0;
-		// 		$scope.param_v_thresh = -50,0;
-		// 		$scope.init_v = -65,0;
-		// 		$scope.init_gsyn_exc = 0,0;
-		// 		$scope.init_gsyn_inh = 0,0;
-		// 	}
-		// 	if($scope.celltype == "HH_cond_exp"){
-		// 		$scope.param_gbar_Na = 20,0;
-		// 		$scope.param_gbar_K = 6.0;
-		// 		$scope.param_g_leak = 0,01;
-		// 		$scope.param_cm = 0,2;
-		// 		$scope.param_v_offset = -63,0;
-		// 		$scope.param_e_rev_Na = 50,0;
-		// 		$scope.param_e_rev_K = -90,0;
-		// 		$scope.param_e_rev_leak = 65,0;
-		// 		$scope.param_e_rev_E = 0,0;
-		// 		$scope.param_e_rev_I = -80,0;
-		// 		$scope.param_tau_syn_E = 5,0;
-		// 		$scope.param_e_rev_I = -80,0;
-		// 		$scope.param_tau_syn_I = 5,0;
-		// 		$scope.init_v = -65,0;
-		// 		$scope.init_gsyn_exc = 0,0;
-		// 		$scope.init_gsyn_inh = 0,0;
-		// 	}
-		// 	if($scope.celltype == "EIF_cond_alpha_isfa_ista"){
-		// 		$scope.param_tau_cm = 0,281;
-		// 		$scope.param_tau_refrac = 0,0;
-		// 		$scope.param_v_spike = 0,0;
-		// 		$scope.param_v_reset = -70,6;
-		// 		$scope.param_v_rest = -70,6;
-		// 		$scope.param_tau_m = 9,3667;
-		// 		$scope.param_i_offset = 0,0;
-		// 		$scope.param_a = 4,0;
-		// 		$scope.param_b = 0,0805;
-		// 		$scope.param_delta_T = 2,0;
-		// 		$scope.param_tau_w = 144,0;
-		// 		$scope.param_v_thresh = -50,4;
-		// 		$scope.param_e_rev_E = 0,0;
-		// 		$scope.param_tau_syn_E = 5,0;
-		// 		$scope.param_e_rev_I = -80,0;
-		// 		$scope.param_tau_syn_I = 5,0;
-		// 		$scope.init_v = -65,0;
-		// 		$scope.init_w = 0,0;
-		// 		$scope.init_gsyn_exc = 0,0;
-		// 		$scope.init_gsyn_inh = 0,0;
-		// 	}
-		// };
+		$scope.celltype = celltype;
+		$scope.param_rate = param_rate;
+		$scope.param_start = param_start;
+		$scope.param_duration = param_duration;
+		$scope.param_spike_times = param_spike_times;
 
 		if(($scope.celltype == "") || ($scope.celltype == null)){
 			$scope.celltype = "SpikeSourcePoisson";
 		}
+
+		$scope.updateForm = function() {
+			if($scope.celltype == "SpikeSourcePoisson"){
+				if(($scope.param_rate == "") || ($scope.param_rate == null)){ $scope.param_rate = 1,0; }
+				if(($scope.param_start == "") || ($scope.param_start == null)){ $scope.param_start = 0,0; }
+				if(($scope.param_duration == "") || ($scope.param_duration == null)){ $scope.param_duration = 1e10; }
+			}
+		};
 
 		$scope.close = function() {
 			close({
@@ -976,12 +874,10 @@ graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 't
 				level: $scope.level,
 				size: $scope.size,
 				celltype: $scope.celltype,
-				param_v_rest: $scope.param_v_rest,
-				param_cm: $scope.param_cm,
-				param_tau_m: $scope.param_tau_m,
-				init_v_rest: $scope.init_v_rest,
-				init_cm: $scope.init_cm,
-				init_tau_m: $scope.init_tau_m,
+				param_rate: $scope.param_rate,
+				param_start: $scope.param_start,
+				param_duration: $scope.param_duration,
+				param_spike_times: $scope.param_spike_times,						
 			}, 100);
 			$('.modal-backdrop').remove();
 		};
@@ -996,12 +892,10 @@ graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 't
 				level: level,
 				size: size,
 				celltype: celltype,
-				param_v_rest: param_v_rest,
-				param_cm: param_cm,
-				param_tau_m: param_tau_m,
-				init_v_rest: init_v_rest,
-				init_cm: init_cm,
-				init_tau_m: init_tau_m,
+				param_rate: $scope.param_rate,
+				param_start: $scope.param_start,
+				param_duration: $scope.param_duration,
+				param_spike_times: $scope.param_spike_times,						
 			}, 100); // close, but give 100ms for bootstrap to animate
 			$('.modal-backdrop').remove();
 		};
