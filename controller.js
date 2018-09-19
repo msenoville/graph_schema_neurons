@@ -155,10 +155,28 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 
 		// create a button to export to python script
 		var button_exp_python = mxUtils.button('', function(){
+			var encoder = new mxCodec();
+			var node = encoder.encode(graph.getModel());
+			//var nodeText = new XMLSerializer().serializeToString(node);
+			var scriptText = `
+			from social.backends.oauth import BaseOAuth2
+			from jwt import decode as jwt_decode
+			
+			import time
+			
+			import hbp_app_python_auth.settings as s
+			
+			
+			def get_auth_header(social_auth):
+				'''Return authentication header'''
+				return '%s %s' % (get_token_type(social_auth), get_access_token(social_auth))
+			`;
+			console.log((scriptText));
+			var blob = new Blob([scriptText], {type: "text/plain;charset=utf-8"});
 			bootbox.prompt("Please give the name to the file (.py extension added automatically) :", function(filename){
 				if(filename != null){
 					if(filename.length <1){
-						FileSaver.saveAs(blob, "graph_model.py");
+						FileSaver.saveAs(blob, "exp_python.py");
 					} else {
 						FileSaver.saveAs(blob, filename + ".py");
 					}
