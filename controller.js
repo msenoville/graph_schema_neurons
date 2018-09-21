@@ -158,19 +158,21 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 			var encoder = new mxCodec();
 			var node = encoder.encode(graph.getModel());
 			//var nodeText = new XMLSerializer().serializeToString(node);
+			var test_v = "a01";
 			var scriptText = `
-			from social.backends.oauth import BaseOAuth2
-			from jwt import decode as jwt_decode
-			
-			import time
-			
-			import hbp_app_python_auth.settings as s
-			
-			
-			def get_auth_header(social_auth):
-				'''Return authentication header'''
-				return '%s %s' % (get_token_type(social_auth), get_access_token(social_auth))
+from social.backends.oauth import BaseOAuth2
+from jwt import decode as jwt_decode
+
+import time `+ test_v +`
+
+import hbp_app_python_auth.settings as s
+
+
+def get_auth_header(social_auth):
+	'''Return authentication header'''
+	return '%s %s' % (get_token_type(social_auth), get_access_token(social_auth))
 			`;
+			var scriptText_2 = ``;
 			console.log((scriptText));
 			var blob = new Blob([scriptText], {type: "text/plain;charset=utf-8"});
 			bootbox.prompt("Please give the name to the file (.py extension added automatically) :", function(filename){
