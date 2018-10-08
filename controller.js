@@ -160,17 +160,10 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 			//var nodeText = new XMLSerializer().serializeToString(node);
 			var test_v = "a01";
 			var scriptText = `
-from social.backends.oauth import BaseOAuth2
-from jwt import decode as jwt_decode
+import numpy
+import pyNN.nest as sim
 
-import time `+ test_v +`
-
-import hbp_app_python_auth.settings as s
-
-
-def get_auth_header(social_auth):
-	'''Return authentication header'''
-	return '%s %s' % (get_token_type(social_auth), get_access_token(social_auth))
+test `+ test_v +`
 			`;
 			var scriptText_2 = ``;
 			console.log((scriptText));
