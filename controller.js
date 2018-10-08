@@ -158,6 +158,8 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 			var encoder = new mxCodec();
 			var node = encoder.encode(graph.getModel());
 			//var nodeText = new XMLSerializer().serializeToString(node);
+			var cells = graph.getModel().cells;
+			console.log(cells);
 			var test_v = "a01";
 			var scriptText = `
 import numpy
