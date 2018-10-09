@@ -160,6 +160,32 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 			//var nodeText = new XMLSerializer().serializeToString(node);
 			var cells = graph.getModel().cells;
 			console.log(cells);
+			angular.forEach(cells, function(val, key){
+				if(val.value != undefined){
+					console.log("cell : " + key + " - " + val);
+					var cell_1 = val.value.split("|");
+					var pop_name = cell_1[0];
+					var json_pop_param = JSON.parse(cell_1[1]);
+					if(json_pop_param.celltype == "IF_curr_alpha"){
+
+					}
+					if(json_pop_param.celltype == "IF_curr_exp"){
+					
+					}
+					if(json_pop_param.celltype == "IF_cond_alpha"){
+					
+					}
+					if(json_pop_param.celltype == "IF_cond_exp"){
+					
+					}
+					if(json_pop_param.celltype == "HH_cond_exp"){
+					
+					}
+					if(json_pop_param.celltype == "EIF_cond_alpha_isfa_ista"){
+					
+					}
+				}
+			});
 			var test_v = "a01";
 			var scriptText = `
 import numpy
