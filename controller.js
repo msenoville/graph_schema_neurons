@@ -159,6 +159,7 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 			var node = encoder.encode(graph.getModel());
 			//var nodeText = new XMLSerializer().serializeToString(node);
 			var cells = graph.getModel().cells;
+			var str_inst = "";
 			console.log(cells);
 			angular.forEach(cells, function(val, key){
 				if(val.value != undefined){
@@ -166,32 +167,38 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 					var cell_1 = val.value.split("|");
 					var pop_name = cell_1[0];
 					var json_pop_param = JSON.parse(cell_1[1]);
+					
 					if(json_pop_param.celltype == "IF_curr_alpha"){
-
+						str_inst += "var pop_"+ key +" = " +
+						"p.Population(1, sim.IF_curr_alpha(v_rest="+json_pop_param.param_v_rest +
+						" ,cm="+json_pop_param.param_cm +
+						", tau_m="+json_pop_param.param_tau_m +
+						" , tau_refrac="+json_pop_param.param_tau_refrac +
+						" ))\n";
 					}
 					if(json_pop_param.celltype == "IF_curr_exp"){
-					
+						str_inst += "var pop_"+ key +" = p.Population(1, sim.IF_curr_exp())";
 					}
 					if(json_pop_param.celltype == "IF_cond_alpha"){
-					
+						str_inst += "var pop_"+ key +" = p.Population(1, sim.IF_cond_alpha())";
 					}
 					if(json_pop_param.celltype == "IF_cond_exp"){
-					
+						str_inst += "var pop_"+ key +" = p.Population(1, sim.IF_cond_exp())";
 					}
 					if(json_pop_param.celltype == "HH_cond_exp"){
-					
+						str_inst += "var pop_"+ key +" = p.Population(1, sim.HH_cond_exp())";
 					}
 					if(json_pop_param.celltype == "EIF_cond_alpha_isfa_ista"){
-					
+						str_inst += "var pop_"+ key +" = p.Population(1, sim.EIF_cond_alpha_isfa_ista())";
 					}
 				}
 			});
-			var test_v = "a01";
 			var scriptText = `
 import numpy
-import pyNN.nest as sim
+import pyNN.nest as p
+p.setup()
 
-test `+ test_v +`
+`+ str_inst +`
 			`;
 			var scriptText_2 = ``;
 			console.log((scriptText));
