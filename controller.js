@@ -174,22 +174,28 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 						" ,cm="+json_pop_param.param_cm +
 						", tau_m="+json_pop_param.param_tau_m +
 						" , tau_refrac="+json_pop_param.param_tau_refrac +
-						" ))\n";
+						" ))\n"+ 
+						"var pop_"+ key +"initialize()";
 					}
 					if(json_pop_param.celltype == "IF_curr_exp"){
-						str_inst += "var pop_"+ key +" = p.Population(1, sim.IF_curr_exp())";
+						str_inst += "var pop_"+ key +" = p.Population(1, sim.IF_curr_exp())"+
+						"var pop_"+ key +"initialize()";
 					}
 					if(json_pop_param.celltype == "IF_cond_alpha"){
-						str_inst += "var pop_"+ key +" = p.Population(1, sim.IF_cond_alpha())";
+						str_inst += "var pop_"+ key +" = p.Population(1, sim.IF_cond_alpha())"+
+						"var pop_"+ key +"initialize()";
 					}
 					if(json_pop_param.celltype == "IF_cond_exp"){
-						str_inst += "var pop_"+ key +" = p.Population(1, sim.IF_cond_exp())";
+						str_inst += "var pop_"+ key +" = p.Population(1, sim.IF_cond_exp())"+
+						"var pop_"+ key +"initialize()";
 					}
 					if(json_pop_param.celltype == "HH_cond_exp"){
-						str_inst += "var pop_"+ key +" = p.Population(1, sim.HH_cond_exp())";
+						str_inst += "var pop_"+ key +" = p.Population(1, sim.HH_cond_exp())"+
+						"var pop_"+ key +"initialize()";
 					}
 					if(json_pop_param.celltype == "EIF_cond_alpha_isfa_ista"){
-						str_inst += "var pop_"+ key +" = p.Population(1, sim.EIF_cond_alpha_isfa_ista())";
+						str_inst += "var pop_"+ key +" = p.Population(1, sim.EIF_cond_alpha_isfa_ista())"+
+						"var pop_"+ key +"initialize()";
 					}
 				}
 			});
