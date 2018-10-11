@@ -171,7 +171,7 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 					if(json_pop_param.celltype == "IF_curr_alpha"){
 						str_inst += "pop_"+ key +" = " +
 						"p.Population(1, p.IF_curr_alpha(v_rest="+json_pop_param.param_v_rest +
-						" ,cm="+json_pop_param.param_cm +
+						" , cm="+json_pop_param.param_cm +
 						" , tau_m="+json_pop_param.param_tau_m +
 						" , tau_refrac="+json_pop_param.param_tau_refrac +
 						" , tau_syn_E="+json_pop_param.param_tau_syn_E +
@@ -184,7 +184,7 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 					}
 					if(json_pop_param.celltype == "IF_curr_exp"){
 						str_inst += "pop_"+ key +" = p.Population(1, p.IF_curr_exp(v_rest="+json_pop_param.param_v_rest +
-						" ,cm="+json_pop_param.param_cm +
+						" , cm="+json_pop_param.param_cm +
 						" , tau_m="+json_pop_param.param_tau_m +
 						" , tau_refrac="+json_pop_param.param_tau_refrac +
 						" , tau_syn_E="+json_pop_param.param_tau_syn_E +
@@ -196,20 +196,70 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 						"pop_"+ key +".initialize()\n";
 					}
 					if(json_pop_param.celltype == "IF_cond_alpha"){
-						str_inst += "pop_"+ key +" = p.Population(1, p.IF_cond_alpha())\n"+
+						str_inst += "pop_"+ key +" = p.Population(1, p.IF_cond_alpha(v_rest="+json_pop_param.param_v_rest +
+						" , cm="+json_pop_param.param_cm +
+						" , tau_m="+json_pop_param.param_tau_m +
+						" , tau_refrac="+json_pop_param.param_tau_refrac +
+						" , tau_syn_E="+json_pop_param.param_tau_syn_E +
+						" , tau_syn_I="+json_pop_param.param_tau_syn_I +
+						" , e_rev_E="+json_pop_param.param_e_rev_E +
+						" , e_rev_I="+json_pop_param.param_e_rev_I +
+						" , v_thresh="+json_pop_param.param_v_thresh +
+						" , v_reset="+json_pop_param.param_v_reset +
+						" , i_offset="+json_pop_param.param_i_offset +
+						"))\n"+
 						"pop_"+ key +".initialize()\n";
 					}
 					if(json_pop_param.celltype == "IF_cond_exp"){
-						str_inst += "pop_"+ key +" = p.Population(1, p.IF_cond_exp())\n"+
+						str_inst += "pop_"+ key +" = p.Population(1, p.IF_cond_exp(v_rest="+json_pop_param.param_v_rest +
+						" , cm="+json_pop_param.param_cm +
+						" , tau_m="+json_pop_param.param_tau_m +
+						" , tau_refrac="+json_pop_param.param_tau_refrac +
+						" , tau_syn_E="+json_pop_param.param_tau_syn_E +
+						" , tau_syn_I="+json_pop_param.param_tau_syn_I +
+						" , e_rev_E="+json_pop_param.param_e_rev_E +
+						" , e_rev_I="+json_pop_param.param_e_rev_I +
+						" , v_thresh="+json_pop_param.param_v_thresh +
+						" , v_reset="+json_pop_param.param_v_reset +
+						" , i_offset="+json_pop_param.param_i_offset +
+						"))\n"+
 						"pop_"+ key +".initialize()\n";
 					}
 					if(json_pop_param.celltype == "HH_cond_exp"){
-						str_inst += "pop_"+ key +" = p.Population(1, p.HH_cond_exp())\n"+
+						str_inst += "pop_"+ key +" = p.Population(1, p.HH_cond_exp(gbar_Na="+param_gbar_Na +
+						" , gbar_K="+json_pop_param.param_gbar_K +
+						" , g_leak="+json_pop_param.param_g_leak +
+						" , cm="+json_pop_param.param_cm +
+						" , v_offset="+json_pop_param.param_v_offset +
+						" , e_rev_Na="+json_pop_param.param_e_rev_Na +
+						" , e_rev_K="+json_pop_param.param_e_rev_K +
+						" , e_rev_leak="+json_pop_param.param_e_rev_leak +
+						" , e_rev_E="+json_pop_param.param_e_rev_E +
+						" , e_rev_I="+json_pop_param.param_e_rev_I +
+						" , tau_syn_E="+json_pop_param.param_tau_syn_E +
+						" , tau_syn_I="+json_pop_param.param_tau_syn_I +
+						" , i_offset="+json_pop_param.param_i_offset +
+						"))\n"+
 						"pop_"+ key +".initialize()\n";
 					}
 					if(json_pop_param.celltype == "EIF_cond_alpha_isfa_ista"){
 						str_inst += "pop_"+ key +" = p.Population(1, p.EIF_cond_alpha_isfa_ista())\n"+
-						"pop_"+ key +".initialize()\n";
+						" , tau_refrac="+json_pop_param.param_tau_refrac +
+						" , v_spike="+json_pop_param.param_v_spike +
+						" , v_reset="+json_pop_param.param_v_reset +
+						" , v_rest="+json_pop_param.param_v_rest +
+						" , tau_m="+json_pop_param.param_tau_m +
+						" , i_offset="+json_pop_param.param_i_offset +
+						" , a="+json_pop_param.param_a +
+						" , b="+json_pop_param.param_b +
+						" , delta_T="+json_pop_param.param_delta_T +
+						" , tau_w="+json_pop_param.param_tau_w +
+						" , v_thresh="+json_pop_param.param_v_thresh +
+						" , e_rev_E="+json_pop_param.param_e_rev_E +
+						" , tau_syn_E="+json_pop_param.param_tau_syn_E +
+						" , e_rev_I="+json_pop_param.param_e_rev_I +
+						" , tau_syn_I="+json_pop_param.param_tau_syn_I +
+						")\n";
 					}
 				}
 			});
