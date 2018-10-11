@@ -172,13 +172,27 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 						str_inst += "pop_"+ key +" = " +
 						"p.Population(1, p.IF_curr_alpha(v_rest="+json_pop_param.param_v_rest +
 						" ,cm="+json_pop_param.param_cm +
-						", tau_m="+json_pop_param.param_tau_m +
+						" , tau_m="+json_pop_param.param_tau_m +
 						" , tau_refrac="+json_pop_param.param_tau_refrac +
+						" , tau_syn_E="+json_pop_param.param_tau_syn_E +
+						" , tau_syn_I="+json_pop_param.param_tau_syn_I +
+						" , i_offset="+json_pop_param.param_i_offset +
+						" , v_reset="+json_pop_param.param_v_reset +
+						" , v_thresh="+json_pop_param.param_v_thresh +
 						" ))\n"+ 
 						"pop_"+ key +".initialize()\n";
 					}
 					if(json_pop_param.celltype == "IF_curr_exp"){
-						str_inst += "pop_"+ key +" = p.Population(1, p.IF_curr_exp())\n"+
+						str_inst += "pop_"+ key +" = p.Population(1, p.IF_curr_exp(v_rest="+json_pop_param.param_v_rest +
+						" ,cm="+json_pop_param.param_cm +
+						" , tau_m="+json_pop_param.param_tau_m +
+						" , tau_refrac="+json_pop_param.param_tau_refrac +
+						" , tau_syn_E="+json_pop_param.param_tau_syn_E +
+						" , tau_syn_I="+json_pop_param.param_tau_syn_I +
+						" , i_offset="+json_pop_param.param_i_offset +
+						" , v_reset="+json_pop_param.param_v_reset +
+						" , v_thresh="+json_pop_param.param_v_thresh +
+						"))\n"+
 						"pop_"+ key +".initialize()\n";
 					}
 					if(json_pop_param.celltype == "IF_cond_alpha"){
