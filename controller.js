@@ -169,8 +169,8 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 					var json_pop_param = JSON.parse(cell_1[1]);
 					
 					if(json_pop_param.celltype == "IF_curr_alpha"){
-						str_inst += "var pop_"+ key +" = " +
-						"p.Population(1, sim.IF_curr_alpha(v_rest="+json_pop_param.param_v_rest +
+						str_inst += "pop_"+ key +" = " +
+						"p.Population(1, p.IF_curr_alpha(v_rest="+json_pop_param.param_v_rest +
 						" ,cm="+json_pop_param.param_cm +
 						", tau_m="+json_pop_param.param_tau_m +
 						" , tau_refrac="+json_pop_param.param_tau_refrac +
@@ -178,23 +178,23 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 						"pop_"+ key +".initialize()\n";
 					}
 					if(json_pop_param.celltype == "IF_curr_exp"){
-						str_inst += "var pop_"+ key +" = p.Population(1, sim.IF_curr_exp())\n"+
+						str_inst += "pop_"+ key +" = p.Population(1, p.IF_curr_exp())\n"+
 						"pop_"+ key +".initialize()\n";
 					}
 					if(json_pop_param.celltype == "IF_cond_alpha"){
-						str_inst += "var pop_"+ key +" = p.Population(1, sim.IF_cond_alpha())\n"+
+						str_inst += "pop_"+ key +" = p.Population(1, p.IF_cond_alpha())\n"+
 						"pop_"+ key +".initialize()\n";
 					}
 					if(json_pop_param.celltype == "IF_cond_exp"){
-						str_inst += "var pop_"+ key +" = p.Population(1, sim.IF_cond_exp())\n"+
+						str_inst += "pop_"+ key +" = p.Population(1, p.IF_cond_exp())\n"+
 						"pop_"+ key +".initialize()\n";
 					}
 					if(json_pop_param.celltype == "HH_cond_exp"){
-						str_inst += "var pop_"+ key +" = p.Population(1, sim.HH_cond_exp())\n"+
+						str_inst += "pop_"+ key +" = p.Population(1, p.HH_cond_exp())\n"+
 						"pop_"+ key +".initialize()\n";
 					}
 					if(json_pop_param.celltype == "EIF_cond_alpha_isfa_ista"){
-						str_inst += "var pop_"+ key +" = p.Population(1, sim.EIF_cond_alpha_isfa_ista())\n"+
+						str_inst += "pop_"+ key +" = p.Population(1, p.EIF_cond_alpha_isfa_ista())\n"+
 						"pop_"+ key +".initialize()\n";
 					}
 				}
