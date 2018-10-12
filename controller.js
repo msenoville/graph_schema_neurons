@@ -238,7 +238,7 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 						" )\n";
 					}
 					if(json_pop_param.celltype == "HH_cond_exp"){
-						str_inst += "pop_"+ key +" = p.Population(1, p.HH_cond_exp(gbar_Na="+param_gbar_Na +
+						str_inst += "pop_"+ key +" = p.Population(1, p.HH_cond_exp(gbar_Na="+json_pop_param.param_gbar_Na +
 						" , gbar_K="+json_pop_param.param_gbar_K +
 						" , g_leak="+json_pop_param.param_g_leak +
 						" , cm="+json_pop_param.param_cm +
@@ -258,7 +258,7 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 						" )\n";
 					}
 					if(json_pop_param.celltype == "EIF_cond_alpha_isfa_ista"){
-						str_inst += "pop_"+ key +" = p.Population(1, p.EIF_cond_alpha_isfa_ista(\n"+
+						str_inst += "pop_"+ key +" = p.Population(1, p.EIF_cond_alpha_isfa_ista(cm="+json_pop_param.param_cm +
 						" , tau_refrac="+json_pop_param.param_tau_refrac +
 						" , v_spike="+json_pop_param.param_v_spike +
 						" , v_reset="+json_pop_param.param_v_reset +
