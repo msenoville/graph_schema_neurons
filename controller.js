@@ -163,10 +163,12 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 			console.log(cells);
 			angular.forEach(cells, function(val, key){
 				if(val.value != undefined){
-					console.log("cell : " + key + " - " + val);
-					var cell_1 = val.value.split("|");
-					var pop_name = cell_1[0];
-					var json_pop_param = JSON.parse(cell_1[1]);
+					// console.log("cell : " + key + " - " + val);
+					// var cell_1 = val.value.split("|");
+					// var pop_name = cell_1[0];
+					// var json_pop_param = JSON.parse(cell_1[1]);
+					var pop_name = val.value;
+					var json_pop_param = val.data_cell;
 					
 					if(json_pop_param.celltype == "IF_curr_alpha"){
 						str_inst += "pop_"+ key +" = " +
@@ -403,11 +405,11 @@ p.setup()
 							if (graph.isEnabled())
 							{
 								//modal.modal("show");
-								console.log("state 2 : " + state.cell.value);
-								var json_data_array = state.cell.value.split("|");
+								// console.log("state 2 : " + state.cell.value);
+								// var json_data_array = state.cell.value.split("|");
 								
-								if(json_data_array.length >= 2){
-									var json_data = JSON.parse(json_data_array[1]);
+								if((state.cell.data_cell != null) & (state.cell.data_cell != "")){
+									var json_data = state.cell.data_cell;
 								} else {
 									var json_data = {
 										"name_value": "",
@@ -451,7 +453,7 @@ p.setup()
     								controller: "PopDialogController",
 									inputs: {
 										title : "Population Form Editor",
-										name_value: json_data_array[0],
+										name_value: state.cell.value,
 										level: json_data.level,
 										size: json_data.size,
 										celltype: json_data.celltype,
@@ -491,8 +493,11 @@ p.setup()
 									modal.close.then(function(result) {
 										// state.cell.setValue(result.name_value);
 										console.log("get value : " + state.cell.getValue());
-										state.cell.value = result.name_value + "|" + JSON.stringify(result);
+										// state.cell.value = result.name_value + "|" + JSON.stringify(result);
+										state.cell.value = result.name_value;
+										state.cell.data_cell = JSON.stringify(result);
 										state.cell.setValue(state.cell.value);
+										state.cell.setData_cell(state.cell.data_cell);
 										graph.refresh();
 										console.log("get after set value : " + state.cell.getValue());
 									});

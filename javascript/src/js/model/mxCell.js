@@ -64,11 +64,12 @@
  * geometry - Optional <mxGeometry> that specifies the geometry.
  * style - Optional formatted string that defines the style.
  */
-function mxCell(value, geometry, style)
+function mxCell(value, geometry, style, data_cell)
 {
 	this.value = value;
 	this.setGeometry(geometry);
 	this.setStyle(style);
+	this.data_cell = data_cell;
 	
 	if (this.onInit != null)
 	{
@@ -228,6 +229,22 @@ mxCell.prototype.setValue = function(value)
 {
 	this.value = value;
 };
+
+/**
+ * 
+ */
+mxCell.prototype.getData_cell = function()
+{
+	return this.data_cell;
+};
+
+/**
+ * 
+ */
+mxCell.prototype.setData_cell = function(value)
+{
+	this.data_cell = value;
+}
 
 /**
  * Function: valueChanged
