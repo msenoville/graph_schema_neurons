@@ -727,15 +727,15 @@ p.setup()
 					console.log('Configure link' + 'selection count : ' + graph.getSelectionCount());
 					console.log("state 2 : " + cell.value);
 					if (graph.isEnabled()){
-						if((cell.value === undefined) | (cell.value === null)){
-							cell.value = "";
-							json_data_array = "";
-						} else {
-							var json_data_array = cell.value.split("|");
-						}
+						// if((cell.value === undefined) | (cell.value === null)){
+						// 	cell.value = "";
+						// 	json_data_array = "";
+						// } else {
+						// 	var json_data_array = cell.value.split("|");
+						// }
 								
-						if(json_data_array.length >= 2){
-							var json_data = JSON.parse(json_data_array[1]);
+						if(cell.data_cell >= 2){
+							var json_data = JSON.parse(cell.data_cell);
 						} else {
 							var json_data = {
 								"name_value": "",
@@ -767,8 +767,11 @@ p.setup()
 							modal.close.then(function(result) {
 								// state.cell.setValue(result.name_value);
 								console.log("get value : " + cell.getValue());
-								cell.value = result.name_value + "|" + JSON.stringify(result);
+								// cell.value = result.name_value + "|" + JSON.stringify(result);
+								cell.value = result.name_value;
+								cell.data_cell = JSON.stringify(result);
 								cell.setValue(cell.value);
+								cell.setData_cell(cell.data_cell);
 								graph.refresh();
 								console.log("get after set value : " + cell.getValue());
 								var txtdisplay = $('text').text();
