@@ -409,7 +409,7 @@ p.setup()
 								// var json_data_array = state.cell.value.split("|");
 								
 								if((state.cell.data_cell != null) & (state.cell.data_cell != "")){
-									var json_data = state.cell.data_cell;
+									var json_data = JSON.parse(state.cell.data_cell);
 								} else {
 									var json_data = {
 										"name_value": "",
@@ -727,14 +727,11 @@ p.setup()
 					console.log('Configure link' + 'selection count : ' + graph.getSelectionCount());
 					console.log("state 2 : " + cell.value);
 					if (graph.isEnabled()){
-						// if((cell.value === undefined) | (cell.value === null)){
-						// 	cell.value = "";
-						// 	json_data_array = "";
-						// } else {
-						// 	var json_data_array = cell.value.split("|");
-						// }
+						if((cell.value === undefined) | (cell.value === null)){
+							cell.value = "";
+						}
 								
-						if(cell.data_cell >= 2){
+						if((cell.data_cell != undefined) | (cell.data_cell != null) ){
 							var json_data = JSON.parse(cell.data_cell);
 						} else {
 							var json_data = {
@@ -753,7 +750,7 @@ p.setup()
 							controller: "PopDialogController_spike",
 							inputs: {
 								title : "Projection Form Editor",
-								name_value: json_data_array[0],
+								name_value: cell.value,
 								level: json_data.level,
 								size: json_data.size,
 								celltype: json_data.celltype,								
