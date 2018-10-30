@@ -168,11 +168,11 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 					// var pop_name = cell_1[0];
 					// var json_pop_param = JSON.parse(cell_1[1]);
 					var pop_name = val.value;
-					var json_pop_param = val.data_cell;
+					var json_pop_param = JSON.parse(val.data_cell);
 					
 					if(json_pop_param.celltype == "IF_curr_alpha"){
 						str_inst += "pop_"+ key +" = " +
-						"p.Population(1, p.IF_curr_alpha(v_rest="+json_pop_param.param_v_rest +
+						"p.Population(" + json_pop_param.size + ", p.IF_curr_alpha(v_rest="+json_pop_param.param_v_rest +
 						" , cm="+json_pop_param.param_cm +
 						" , tau_m="+json_pop_param.param_tau_m +
 						" , tau_refrac="+json_pop_param.param_tau_refrac +
@@ -185,10 +185,11 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 						"pop_"+ key +".initialize(v="+json_pop_param.init_v +
 						" , isyn_exc="+json_pop_param.init_isyn_exc +
 						" , isyn_inh="+json_pop_param.init_isyn_inh +
+						" , label="+json_pop_param.name_value +
 						" )\n";
 					}
 					if(json_pop_param.celltype == "IF_curr_exp"){
-						str_inst += "pop_"+ key +" = p.Population(1, p.IF_curr_exp(v_rest="+json_pop_param.param_v_rest +
+						str_inst += "pop_"+ key +" = p.Population(" + json_pop_param.size + ", p.IF_curr_exp(v_rest="+json_pop_param.param_v_rest +
 						" , cm="+json_pop_param.param_cm +
 						" , tau_m="+json_pop_param.param_tau_m +
 						" , tau_refrac="+json_pop_param.param_tau_refrac +
@@ -201,10 +202,11 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 						"pop_"+ key +".initialize(v="+json_pop_param.init_v +
 						" , isyn_exc="+json_pop_param.init_isyn_exc +
 						" , isyn_inh="+json_pop_param.init_isyn_inh +
+						" , label="+json_pop_param.name_value +
 						" )\n";
 					}
 					if(json_pop_param.celltype == "IF_cond_alpha"){
-						str_inst += "pop_"+ key +" = p.Population(1, p.IF_cond_alpha(v_rest="+json_pop_param.param_v_rest +
+						str_inst += "pop_"+ key +" = p.Population(" + json_pop_param.size + ", p.IF_cond_alpha(v_rest="+json_pop_param.param_v_rest +
 						" , cm="+json_pop_param.param_cm +
 						" , tau_m="+json_pop_param.param_tau_m +
 						" , tau_refrac="+json_pop_param.param_tau_refrac +
@@ -219,10 +221,11 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 						"pop_"+ key +".initialize(v="+json_pop_param.init_v +
 						" , gsyn_exc="+json_pop_param.init_gsyn_exc +
 						" , gsyn_inh="+json_pop_param.init_gsyn_inh +
+						" , label="+json_pop_param.name_value +
 						" )\n";
 					}
 					if(json_pop_param.celltype == "IF_cond_exp"){
-						str_inst += "pop_"+ key +" = p.Population(1, p.IF_cond_exp(v_rest="+json_pop_param.param_v_rest +
+						str_inst += "pop_"+ key +" = p.Population(" + json_pop_param.size + ", p.IF_cond_exp(v_rest="+json_pop_param.param_v_rest +
 						" , cm="+json_pop_param.param_cm +
 						" , tau_m="+json_pop_param.param_tau_m +
 						" , tau_refrac="+json_pop_param.param_tau_refrac +
@@ -237,10 +240,11 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 						"pop_"+ key +".initialize(v="+json_pop_param.init_v +
 						" , gsyn_exc="+json_pop_param.init_gsyn_exc +
 						" , gsyn_inh="+json_pop_param.init_gsyn_inh +
+						" , label="+json_pop_param.name_value +
 						" )\n";
 					}
 					if(json_pop_param.celltype == "HH_cond_exp"){
-						str_inst += "pop_"+ key +" = p.Population(1, p.HH_cond_exp(gbar_Na="+json_pop_param.param_gbar_Na +
+						str_inst += "pop_"+ key +" = p.Population(" + json_pop_param.size + ", p.HH_cond_exp(gbar_Na="+json_pop_param.param_gbar_Na +
 						" , gbar_K="+json_pop_param.param_gbar_K +
 						" , g_leak="+json_pop_param.param_g_leak +
 						" , cm="+json_pop_param.param_cm +
@@ -257,10 +261,11 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 						"pop_"+ key +".initialize(v="+json_pop_param.init_v +
 						" , gsyn_exc="+json_pop_param.init_gsyn_exc +
 						" , gsyn_inh="+json_pop_param.init_gsyn_inh +
+						" , label="+json_pop_param.name_value +
 						" )\n";
 					}
 					if(json_pop_param.celltype == "EIF_cond_alpha_isfa_ista"){
-						str_inst += "pop_"+ key +" = p.Population(1, p.EIF_cond_alpha_isfa_ista(cm="+json_pop_param.param_cm +
+						str_inst += "pop_"+ key +" = p.Population(" + json_pop_param.size + ", p.EIF_cond_alpha_isfa_ista(cm="+json_pop_param.param_cm +
 						" , tau_refrac="+json_pop_param.param_tau_refrac +
 						" , v_spike="+json_pop_param.param_v_spike +
 						" , v_reset="+json_pop_param.param_v_reset +
@@ -281,7 +286,14 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 						" , w="+json_pop_param.init_w +
 						" , gsyn_exc="+json_pop_param.init_gsyn_exc +
 						" , gsyn_inh="+json_pop_param.init_gsyn_inh +
+						" , label="+json_pop_param.name_value +
 						" )\n";
+					}
+					if(json_pop_param.celltype == "SpikeSourcePoisson"){
+						str_inst += "proj_" + key + " = p.Projection()\n";
+					}
+					if(json_pop_param.celltype == "SpikeSourceArray"){
+						str_inst += "proj_" + key + " = p.Projection()\n";
 					}
 				}
 			});
@@ -413,7 +425,7 @@ p.setup()
 								} else {
 									var json_data = {
 										"name_value": "",
-										"level": "",
+										// "level": "",
 										"size": "",
 										"celltype": "",
 										"param_v_rest": "",
@@ -454,7 +466,7 @@ p.setup()
 									inputs: {
 										title : "Population Form Editor",
 										name_value: state.cell.value,
-										level: json_data.level,
+										// level: json_data.level,
 										size: json_data.size,
 										celltype: json_data.celltype,
 										param_v_rest: json_data.param_v_rest,
@@ -731,12 +743,12 @@ p.setup()
 							cell.value = "";
 						}
 								
-						if((cell.data_cell != undefined) | (cell.data_cell != null) ){
+						if((cell.data_cell != undefined) | (cell.data_cell != null)){
 							var json_data = JSON.parse(cell.data_cell);
 						} else {
 							var json_data = {
 								"name_value": "",
-								"level": "",
+								// "level": "",
 								"size": "",
 								"celltype": "",
 								"param_rate": "",
@@ -751,7 +763,7 @@ p.setup()
 							inputs: {
 								title : "Projection Form Editor",
 								name_value: cell.value,
-								level: json_data.level,
+								// level: json_data.level,
 								size: json_data.size,
 								celltype: json_data.celltype,								
 								param_rate: json_data.param_rate,
@@ -784,11 +796,11 @@ p.setup()
 });
 
 
-graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title', 'close', 'name_value', 'level', 'size', 'celltype', 'param_v_rest', 'param_cm', 'param_tau_m', 'param_tau_m', 'param_tau_m', 'param_tau_refrac', 'param_tau_syn_E', 'param_tau_syn_I', 'param_i_offset', 'param_v_reset', 'param_v_thresh', 'param_e_rev_E', 'param_e_rev_I', 'param_gbar_Na', 'param_gbar_K', 'param_g_leak', 'param_v_offset', 'param_e_rev_Na', 'param_e_rev_K', 'param_e_rev_leak', 'param_tau_cm', 'param_v_spike', 'param_a', 'param_b', 'param_delta_T', 'param_tau_w', 'init_isyn_exc', 'init_isyn_inh', 'init_gsyn_exc', 'init_gsyn_inh', 'init_v', 'init_w',
-	function($scope, $element, title, close, name_value, level, size, celltype, param_v_rest, param_cm, param_tau_m, param_tau_m, param_tau_m, param_tau_refrac, param_tau_syn_E, param_tau_syn_I, param_i_offset, param_v_reset, param_v_thresh, param_e_rev_E, param_e_rev_I, param_gbar_Na, param_gbar_K, param_g_leak, param_v_offset, param_e_rev_Na, param_e_rev_K, param_e_rev_leak, param_tau_cm, param_v_spike, param_a, param_b, param_delta_T, param_tau_w, init_isyn_exc, init_isyn_inh, init_gsyn_exc, init_gsyn_inh, init_v, init_w) {
+graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title', 'close', 'name_value', 'size', 'celltype', 'param_v_rest', 'param_cm', 'param_tau_m', 'param_tau_m', 'param_tau_m', 'param_tau_refrac', 'param_tau_syn_E', 'param_tau_syn_I', 'param_i_offset', 'param_v_reset', 'param_v_thresh', 'param_e_rev_E', 'param_e_rev_I', 'param_gbar_Na', 'param_gbar_K', 'param_g_leak', 'param_v_offset', 'param_e_rev_Na', 'param_e_rev_K', 'param_e_rev_leak', 'param_tau_cm', 'param_v_spike', 'param_a', 'param_b', 'param_delta_T', 'param_tau_w', 'init_isyn_exc', 'init_isyn_inh', 'init_gsyn_exc', 'init_gsyn_inh', 'init_v', 'init_w',
+	function($scope, $element, title, close, name_value, size, celltype, param_v_rest, param_cm, param_tau_m, param_tau_m, param_tau_m, param_tau_refrac, param_tau_syn_E, param_tau_syn_I, param_i_offset, param_v_reset, param_v_thresh, param_e_rev_E, param_e_rev_I, param_gbar_Na, param_gbar_K, param_g_leak, param_v_offset, param_e_rev_Na, param_e_rev_K, param_e_rev_leak, param_tau_cm, param_v_spike, param_a, param_b, param_delta_T, param_tau_w, init_isyn_exc, init_isyn_inh, init_gsyn_exc, init_gsyn_inh, init_v, init_w) {
 		$scope.title = title;
 		$scope.name_value = name_value;
-		$scope.level = level;
+		// $scope.level = level;
 		$scope.size = size;
 		$scope.celltype = celltype;
 		$scope.param_v_rest = param_v_rest;
@@ -903,7 +915,7 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 		$scope.close = function() {
 			close({
 				name_value: $scope.name_value,
-				level: $scope.level,
+				// level: $scope.level,
 				size: $scope.size,
 				celltype: $scope.celltype,
 				param_v_rest: $scope.param_v_rest,
@@ -947,7 +959,7 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 			//  Now call close, returning control to the caller.
 			close({
 				name_value: name_value,
-				level: level,
+				// level: level,
 				size: size,
 				celltype: celltype,
 				param_v_rest: param_v_rest,
@@ -987,11 +999,11 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 ]);
 
 
-graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 'title', 'close', 'name_value', 'level', 'size', 'celltype', 'param_rate', 'param_start', 'param_duration', 'param_spike_times',
-	function($scope, $element, title, close, name_value, level, size, celltype, param_rate, param_start, param_duration, param_spike_times) {
+graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 'title', 'close', 'name_value', 'size', 'celltype', 'param_rate', 'param_start', 'param_duration', 'param_spike_times',
+	function($scope, $element, title, close, name_value, size, celltype, param_rate, param_start, param_duration, param_spike_times) {
 		$scope.title = title;
 		$scope.name_value = name_value;
-		$scope.level = level;
+		// $scope.level = level;
 		$scope.size = size;
 		$scope.celltype = celltype;
 		$scope.param_rate = param_rate;
@@ -1014,7 +1026,7 @@ graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 't
 		$scope.close = function() {
 			close({
 				name_value: $scope.name_value,
-				level: $scope.level,
+				// level: $scope.level,
 				size: $scope.size,
 				celltype: $scope.celltype,
 				param_rate: $scope.param_rate,
@@ -1032,7 +1044,7 @@ graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 't
 			//  Now call close, returning control to the caller.
 			close({
 				name_value: name_value,
-				level: level,
+				// level: level,
 				size: size,
 				celltype: celltype,
 				param_rate: $scope.param_rate,
