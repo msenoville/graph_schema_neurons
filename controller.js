@@ -290,10 +290,12 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 						" )\n";
 					}
 					if(json_pop_param.celltype == "SpikeSourcePoisson"){
-						str_inst += "proj_" + key + " = p.Projection()\n";
+						// str_inst += "proj_" + key + " = p.Projection()\n";
+						str_inst += "";
 					}
 					if(json_pop_param.celltype == "SpikeSourceArray"){
-						str_inst += "proj_" + key + " = p.Projection()\n";
+						// str_inst += "proj_" + key + " = p.Projection()\n";
+						str_inst += "";
 					}
 				}
 			});
@@ -905,6 +907,14 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 				if(($scope.init_w == "") || ($scope.init_w == null)){ $scope.init_w = 0,0; }
 				if(($scope.init_gsyn_exc == "") || ($scope.init_gsyn_exc == null)){ $scope.init_gsyn_exc = 0,0; }
 				if(($scope.init_gsyn_inh == "") || ($scope.init_gsyn_inh == null)){ $scope.init_gsyn_inh = 0,0; }
+			}
+			if($scope.celltype == "SpikeSourcePoisson"){
+				if(($scope.param_rate == "") || ($scope.param_rate == null)){ $scope.param_rate = 1; }
+				if(($scope.param_start == "") || ($scope.param_start == null)){ $scope.param_start = 0; }
+				if(($scope.param_duration == "") || ($scope.param_duration == null)){ $scope.param_duration = 10000000000; }
+			}
+			if($scope.celltype == "SpikeSourceArray"){
+				if(($scope.param_duration == "") || ($scope.param_duration == null)){ $scope.param_duration = 10000000000; }
 			}
 		};
 
