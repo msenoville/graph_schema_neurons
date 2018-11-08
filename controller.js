@@ -767,11 +767,17 @@ p.setup()
 								name_value: cell.value,
 								// level: json_data.level,
 								size: json_data.size,
-								celltype: json_data.celltype,								
-								param_rate: json_data.param_rate,
-								param_start: json_data.param_start,
-								param_duration: json_data.param_duration,
-								param_spike_times: json_data.param_spike_times,						
+								synapse_type: json_data.synapse_type,
+								connectors_type: json_data.connectors_type,
+								FixedProbability_p_connect: json_data.FixedProbability_p_connect,
+								FixedProbability_allow_self_connections: json_data.FixedProbability_allow_self_connections,
+								FromFile_file: json_data.FromFile_file,
+								FromFile_distributed: json_data.FromFile_distributed,
+								FromFile_safe: json_data.FromFile_safe,
+								FromFile_callback: json_data.FromFile_callback,
+								FixedNumberPre_n: json_data.FixedNumberPre_n,
+								FixedNumberPre_with_replacement: json_data.FixedNumberPre_with_replacement,
+								FixedNumberPre_allow_self_connections: json_data.FixedNumberPre_allow_self_connections,
 							}
 						}).then(function(modal) {
 							modal.element.modal();
@@ -1009,29 +1015,37 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 ]);
 
 
-graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 'title', 'close', 'name_value', 'size', 'celltype', 'param_rate', 'param_start', 'param_duration', 'param_spike_times',
-	function($scope, $element, title, close, name_value, size, celltype, param_rate, param_start, param_duration, param_spike_times) {
+graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 'title', 'close', 'name_value', 'size', 'synapse_type', 'connectors_type', 'FixedProbability_p_connect', 'FixedProbability_allow_self_connections', 'FromFile_file', 'FromFile_distributed', 'FromFile_safe', 'FromFile_callback', 'FixedNumberPre_n', 'FixedNumberPre_with_replacement', 'FixedNumberPre_allow_self_connections',
+	function($scope, $element, title, close, name_value, size, synapse_type, connectors_type, FixedProbability_p_connect, FixedProbability_allow_self_connections, FromFile_file, FromFile_distributed, FromFile_safe, FromFile_callback, FixedNumberPre_n, FixedNumberPre_with_replacement, FixedNumberPre_allow_self_connections) {
 		$scope.title = title;
 		$scope.name_value = name_value;
 		// $scope.level = level;
 		$scope.size = size;
-		$scope.celltype = celltype;
-		$scope.param_rate = param_rate;
-		$scope.param_start = param_start;
-		$scope.param_duration = param_duration;
-		$scope.param_spike_times = param_spike_times;
+		$synapse_type.synapse_type = synapse_type;
+		$scope.connectors_type = connectors_type;
+		$scope.FixedProbability_p_connect = FixedProbability_p_connect;
+		$scope.FixedProbability_allow_self_connections = FixedProbability_allow_self_connections;
+		$scope.FromFile_file = FromFile_file;
+		$scope.FromFile_distributed = FromFile_distributed;
+		$scope.FromFile_safe = FromFile_safe;
+		$scope.FromFile_callback = FromFile_callback;
+		$scope.FixedNumberPre_n = FixedNumberPre_n;
+		$scope.FixedNumberPre_with_replacement = FixedNumberPre_with_replacement;
+		$scope.FixedNumberPre_allow_self_connections = FixedNumberPre_allow_self_connections;		
 
-		if(($scope.celltype == "") || ($scope.celltype == null)){
-			$scope.celltype = "SpikeSourcePoisson";
+		if(($scope.synapse_type == "") || ($scope.synapse_type == null)){
+			$scope.synapse_type = "static";
 		}
 
-		$scope.updateForm = function() {
-			if($scope.celltype == "SpikeSourcePoisson"){
-				if(($scope.param_rate == "") || ($scope.param_rate == null)){ $scope.param_rate = 1,0; }
-				if(($scope.param_start == "") || ($scope.param_start == null)){ $scope.param_start = 0,0; }
-				if(($scope.param_duration == "") || ($scope.param_duration == null)){ $scope.param_duration = 1e10; }
-			}
-		};
+		if(($scope.connectors_type == "") || ($scope.connectors_type == null)){
+			$scope.connectors_type = "AllToAll";
+		}
+
+		// $scope.updateForm = function() {
+		// 	if($scope.connectors_type == null){
+		// 		//$scope.connectors_type == "AllToAll";
+		// 	}
+		// };
 
 		$scope.close = function() {
 			close({
