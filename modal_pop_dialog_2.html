@@ -113,21 +113,41 @@
                         </div>
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2">&nbsp;</div>
-                            <label class="control-label col-sm-2" for="FixedNumberPost_with_replacement">with_replacement : </label>
+                            <label class="control-label col-sm-2" for="FixedNumberPre_with_replacement">with replacement : </label>
+                            <div class="col-sm-3">
+                                <input id="FixedNumberPre_with_replacement" name="FixedNumberPre_with_replacement" type="checkbox" class="form-check-input" ng-model="FixedNumberPre_with_replacement">
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-12">
+                            <div class="control-label col-sm-2">&nbsp;</div>
+                            <label class="control-label col-sm-2" for="FixedNumberPre_allow_self_connections">allow self connections : </label>
+                            <div class="col-sm-3">
+                                <input id="FixedNumberPre_allow_self_connections" name="FixedNumberPre_allow_self_connections" type="checkbox" class="form-check-input" ng-model="FixedNumberPre_allow_self_connections">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-12" ng-show="connectors_type == 'FixedNumberPost'">
+                        <div class="form-group col-sm-12">
+                            <div class="control-label col-sm-2"><b>Parameters :</b></div>
+                            <label class="control-label col-sm-2" for="FixedNumberPost_n">n : </label>
+                            <div class="col-sm-3">
+                                <input id="FixedNumberPost_n" name="FixedNumberPost_n" type="number" min="0" step="1" placeholder="number" class="form-control input-md" ng-model="FixedNumberPost_n">
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-12">
+                            <div class="control-label col-sm-2">&nbsp;</div>
+                            <label class="control-label col-sm-2" for="FixedNumberPost_with_replacement">with replacement : </label>
                             <div class="col-sm-3">
                                 <input id="FixedNumberPost_with_replacement" name="FixedNumberPost_with_replacement" type="checkbox" class="form-check-input" ng-model="FixedNumberPost_with_replacement">
                             </div>
                         </div>
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2">&nbsp;</div>
-                            <label class="control-label col-sm-2" for="FixedNumberPost_allow_self_connections">allow_self_connections : </label>
+                            <label class="control-label col-sm-2" for="FixedNumberPost_allow_self_connections">allow self connections : </label>
                             <div class="col-sm-3">
                                 <input id="FixedNumberPost_allow_self_connections" name="FixedNumberPost_allow_self_connections" type="checkbox" class="form-check-input" ng-model="FixedNumberPost_allow_self_connections">
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group col-sm-12" ng-show="connectors_type == 'FixedNumberPost'">
-
                     </div>
                 </form>
             </div>
