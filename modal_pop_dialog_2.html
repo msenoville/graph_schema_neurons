@@ -57,6 +57,79 @@
                             </select>
                         </div>
                     </div>
+                    <div class="form-group col-sm-12" ng-show="connectors_type == 'FixedProbability'">
+                        <div class="form-group col-sm-12">
+                            <div class="control-label col-sm-2"><b>Parameters :</b></div>
+                            <label class="control-label col-sm-2" for="FixedProbability_p_connect">p_connect : </label>
+                            <div class="col-sm-3">
+                                <input id="FixedProbability_p_connect" name="FixedProbability_p_connect" type="number" min="0" max="1" step="0.1" placeholder="p_connect..." class="form-control input-md" ng-model="FixedProbability_p_connect">
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-12">
+                            <div class="control-label col-sm-2">&nbsp;</div>
+                            <label class="control-label col-sm-2" for="connectors_allow_self_connections">allow self connections : </label>
+                            <div class="col-sm-3">
+                                <input id="FixedProbability_allow_self_connections" name="FixedProbability_allow_self_connections" type="checkbox" class="form-check-input" ng-model="FixedProbability_allow_self_connections">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-12" ng-show="connectors_type == 'FromFile'">
+                        <div class="form-group col-sm-12">
+                            <div class="control-label col-sm-2"><b>Parameters :</b></div>
+                            <label class="control-label col-sm-2" for="FromFile_file">file : </label>
+                            <div class="col-sm-3">
+                                <input type="file" class="form-control-file" id="FromFile_file" name="FromFile_file" ng-model="FromFile_file">
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-12">
+                            <div class="control-label col-sm-2">&nbsp;</div>
+                            <label class="control-label col-sm-2" for="FromFile_distributed">distributed : </label>
+                            <div class="col-sm-3">
+                                <input id="FromFile_distributed" name="FromFile_distributed" type="checkbox" class="form-check-input" ng-model="FromFile_distributed">
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-12">
+                            <div class="control-label col-sm-2">&nbsp;</div>
+                            <label class="control-label col-sm-2" for="FromFile_safe">safe : </label>
+                            <div class="col-sm-3">
+                                <input id="FromFile_safe" name="FromFile_safe" type="checkbox" class="form-check-input" ng-model="FromFile_safe">
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-12">
+                            <div class="control-label col-sm-2">&nbsp;</div>
+                            <label class="control-label col-sm-2" for="FromFile_callback">callback : </label>
+                            <div class="col-sm-3">
+                                <input id="FromFile_callback" name="FromFile_callback" type="checkbox" class="form-check-input" ng-model="FromFile_callback">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-12" ng-show="connectors_type == 'FixedNumberPre'">
+                        <div class="form-group col-sm-12">
+                            <div class="control-label col-sm-2"><b>Parameters :</b></div>
+                            <label class="control-label col-sm-2" for="FixedNumberPre_n">n : </label>
+                            <div class="col-sm-3">
+                                <input id="FixedNumberPre_n" name="FixedNumberPre_n" type="number" min="0" step="1" placeholder="number" class="form-control input-md" ng-model="FixedNumberPre_n">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-12" ng-show="connectors_type == 'FixedNumberPost'">
+                        <div class="form-group col-sm-12">
+                            <div class="control-label col-sm-2">&nbsp;</div>
+                            <label class="control-label col-sm-2" for="FixedNumberPost_with_replacement">with_replacement : </label>
+                            <div class="col-sm-3">
+                                <input id="FixedNumberPost_with_replacement" name="FixedNumberPost_with_replacement" type="checkbox" class="form-check-input" ng-model="FixedNumberPost_with_replacement">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-12" ng-show="connectors_type == 'FixedNumberPost'">
+                        <div class="form-group col-sm-12">
+                            <div class="control-label col-sm-2">&nbsp;</div>
+                            <label class="control-label col-sm-2" for="FixedNumberPost_allow_self_connections">allow_self_connections : </label>
+                            <div class="col-sm-3">
+                                <input id="FixedNumberPost_allow_self_connections" name="FixedNumberPost_allow_self_connections" type="checkbox" class="form-check-input" ng-model="FixedNumberPost_allow_self_connections">
+                            </div>
+                        </div>
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">
