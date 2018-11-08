@@ -1021,7 +1021,7 @@ graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 't
 		$scope.name_value = name_value;
 		// $scope.level = level;
 		$scope.size = size;
-		$synapse_type.synapse_type = synapse_type;
+		$scope.synapse_type = synapse_type;
 		$scope.connectors_type = connectors_type;
 		$scope.FixedProbability_p_connect = FixedProbability_p_connect;
 		$scope.FixedProbability_allow_self_connections = FixedProbability_allow_self_connections;
@@ -1052,11 +1052,17 @@ graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 't
 				name_value: $scope.name_value,
 				// level: $scope.level,
 				size: $scope.size,
-				celltype: $scope.celltype,
-				param_rate: $scope.param_rate,
-				param_start: $scope.param_start,
-				param_duration: $scope.param_duration,
-				param_spike_times: $scope.param_spike_times,						
+				synapse_type: $scope.synapse_type,
+				connectors_type: $scope.connectors_type,
+				FixedProbability_p_connect: $scope.FixedProbability_p_connec,
+				FixedProbability_allow_self_connections: $scope.FixedProbability_allow_self_connections,
+				FromFile_file: $scope.FromFile_file,
+				FromFile_distributed: $scope.FromFile_distributed,
+				FromFile_safe: $scope.FromFile_safe,
+				FromFile_callback: $scope.FromFile_callback,
+				FixedNumberPre_n: $scope.FixedNumberPre_n,
+				FixedNumberPre_with_replacement: $scope.FixedNumberPre_with_replacement,
+				FixedNumberPre_allow_self_connections: $scope.FixedNumberPre_allow_self_connections,
 			}, 100);
 			$('.modal-backdrop').remove();
 		};
@@ -1070,11 +1076,17 @@ graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 't
 				name_value: name_value,
 				// level: level,
 				size: size,
-				celltype: celltype,
-				param_rate: $scope.param_rate,
-				param_start: $scope.param_start,
-				param_duration: $scope.param_duration,
-				param_spike_times: $scope.param_spike_times,						
+				synapse_type: $scope.synapse_type,
+				connectors_type: $scope.connectors_type,
+				FixedProbability_p_connect: $scope.FixedProbability_p_connec,
+				FixedProbability_allow_self_connections: $scope.FixedProbability_allow_self_connections,
+				FromFile_file: $scope.FromFile_file,
+				FromFile_distributed: $scope.FromFile_distributed,
+				FromFile_safe: $scope.FromFile_safe,
+				FromFile_callback: $scope.FromFile_callback,
+				FixedNumberPre_n: $scope.FixedNumberPre_n,
+				FixedNumberPre_with_replacement: $scope.FixedNumberPre_with_replacement,
+				FixedNumberPre_allow_self_connections: $scope.FixedNumberPre_allow_self_connections,						
 			}, 100); // close, but give 100ms for bootstrap to animate
 			$('.modal-backdrop').remove();
 		};
