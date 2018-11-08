@@ -14,68 +14,46 @@
                             <input id="name_value" name="name_value" type="text" placeholder="Name..." class="form-control input-md" ng-model="name_value">
                         </div>
                     </div>
-                        
-                    <!-- Text input-->
-                    <!-- <div class="form-group col-sm-12">
-                        <label class="control-label col-sm-2" for="level">Level : </label>  
-                        <div class="col-sm-10">
-                            <input id="level" name="level" type="text" placeholder="level..." class="form-control input-md" ng-model="level">
-                        </div>
-                    </div> -->
-                    
-                    <!-- Text input-->
+
                     <div class="form-group col-sm-12">
                         <label class="control-label col-sm-2" for="size">Size : </label>
                         <div class="col-sm-3">
                             <input id="size" name="size" type="number" min="0" step="1" placeholder="size" class="form-control input-md" ng-model="size">
                         </div>
                     </div>
-                    
-                    <!-- Select Basic -->
+
                     <div class="form-group col-sm-12">
-                        <label class="control-label col-sm-2" for="celltype">Spike sources : </label>
+                        <label class="control-label col-sm-2" for="synapse_type">Synapse type : </label>
                         <div class="col-sm-10">
-                            <select id="celltype" name="celltype" class="form-control" ng-model="celltype" ng-change="updateForm()" ng-show="updateForm()">
-                                <option value="SpikeSourcePoisson">SpikeSourcePoisson</option>
-                                <option value="SpikeSourceArray">SpikeSourceArray</option>
-                                <!-- <option value="SpikeSourceInhGamma">SpikeSourceInhGamma</option> -->
+                            <select id="synapse_type" name="synapse_type" class="form-control" ng-model="synapse_type" ng-change="updateForm()">
+                                <option value="static">Static</option>
+                                <option value="receptor_type">Receptor Type</option>
                             </select>
                         </div>
                     </div>
-                    <div class="form-group col-sm-12" ng-show="celltype == 'SpikeSourcePoisson'">
-                        <div class="form-group col-sm-12">
-                            <div class="control-label col-sm-2"><b>Parameters : </b></div>
-                            <label class="control-label col-sm-2" for="param_rate">rate : </label>
-                            <div class="col-sm-3">
-                                <input id="param_rate" name="param_rate" type="number" min="0" step="1" placeholder="rate..." class="form-control input-md" ng-model="param_rate">
-                            </div>
-                            <div class="control-label col-sm-2">Hz</div>
-                        </div>
-                        <div class="form-group col-sm-12">
-                            <div class="control-label col-sm-2"></div>
-                            <label class="control-label col-sm-2" for="param_start">start : </label>
-                            <div class="col-sm-3">
-                                <input id="param_start" name="param_start" type="number" min="0" step="1" placeholder="start..." class="form-control input-md" ng-model="param_start">
-                            </div>
-                            <div class="control-label col-sm-2">ms</div>
-                        </div>
-                        <div class="form-group col-sm-12">
-                            <div class="control-label col-sm-2"></div>
-                            <label class="control-label col-sm-2" for="param_duration">Duration : </label>
-                            <div class="col-sm-3">
-                                <input id="param_duration" name="param_duration" type="number" min="0" step="1" placeholder="duration..." class="form-control input-md" ng-model="param_duration">
-                            </div>
-                            <div class="control-label col-sm-2">ms</div>
+                    <div class="form-group col-sm-12" ng-show="synapse_type == 'static'">
+                        <div class="col-sm-2">&nbsp;</div>
+                        <div class="col-sm-10">
+                            <p>synapse static</p>
                         </div>
                     </div>
-                    <div class="form-group col-sm-12" ng-show="celltype == 'SpikeSourceArray'">
-                        <div class="form-group col-sm-12">
-                            <div class="control-label col-sm-2"><b>Parameters :</b></div>
-                            <label class="control-label col-sm-2" for="param_spike_times">spike_times : </label>
-                            <div class="col-sm-3">
-                                <input id="param_spike_times" name="param_spike_times" type="number" min="0" step="1" placeholder="spike_times..." class="form-control input-md" ng-model="param_spike_times">
-                            </div>
-                            <div class="control-label col-sm-2">mF</div>
+                    <div class="form-group col-sm-12" ng-show="synapse_type == 'receptor_type'">
+                        <div class="col-sm-2">&nbsp;</div>
+                        <div class="col-sm-10">
+                            <p>receptor type</p>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-12">
+                        <label class="control-label col-sm-2" for="connectors_type">Connectors type : </label>
+                        <div class="col-sm-10">
+                            <select id="connectors_type" name="connectors_type" class="form-control" ng-model="connectors_type" ng-change="updateForm()">
+                                <option value="AllToAll">AllToAll</option>
+                                <option value="OneToOne">OneToOne</option>
+                                <option value="FromFile">FromFile</option>
+                                <option value="FixedNumberPre">FixedNumberPre</option>
+                                <option value="FixedNumberPost">FixedNumberPost</option>
+                                <option value="FixedTotalNumber">FixedTotalNumber</option>
+                            </select>
                         </div>
                     </div>
                 </form>
