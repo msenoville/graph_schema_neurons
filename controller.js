@@ -778,6 +778,9 @@ p.setup()
 								FixedNumberPre_n: json_data.FixedNumberPre_n,
 								FixedNumberPre_with_replacement: json_data.FixedNumberPre_with_replacement,
 								FixedNumberPre_allow_self_connections: json_data.FixedNumberPre_allow_self_connections,
+								FixedNumberPost_n: json_data.FixedNumberPost_n,
+								FixedNumberPost_with_replacement: json_data.FixedNumberPost_with_replacement,
+								FixedNumberPost_allow_self_connections: json_data.FixedNumberPost_allow_self_connections,
 							}
 						}).then(function(modal) {
 							modal.element.modal();
@@ -1015,8 +1018,8 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 ]);
 
 
-graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 'title', 'close', 'name_value', 'size', 'synapse_type', 'connectors_type', 'FixedProbability_p_connect', 'FixedProbability_allow_self_connections', 'FromFile_file', 'FromFile_distributed', 'FromFile_safe', 'FromFile_callback', 'FixedNumberPre_n', 'FixedNumberPre_with_replacement', 'FixedNumberPre_allow_self_connections',
-	function($scope, $element, title, close, name_value, size, synapse_type, connectors_type, FixedProbability_p_connect, FixedProbability_allow_self_connections, FromFile_file, FromFile_distributed, FromFile_safe, FromFile_callback, FixedNumberPre_n, FixedNumberPre_with_replacement, FixedNumberPre_allow_self_connections) {
+graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 'title', 'close', 'name_value', 'size', 'synapse_type', 'connectors_type', 'FixedProbability_p_connect', 'FixedProbability_allow_self_connections', 'FromFile_file', 'FromFile_distributed', 'FromFile_safe', 'FromFile_callback', 'FixedNumberPre_n', 'FixedNumberPre_with_replacement', 'FixedNumberPre_allow_self_connections', 'FixedNumberPost_n', 'FixedNumberPost_with_replacement', 'FixedNumberPost_allow_self_connections',
+	function($scope, $element, title, close, name_value, size, synapse_type, connectors_type, FixedProbability_p_connect, FixedProbability_allow_self_connections, FromFile_file, FromFile_distributed, FromFile_safe, FromFile_callback, FixedNumberPre_n, FixedNumberPre_with_replacement, FixedNumberPre_allow_self_connections, FixedNumberPost_n, FixedNumberPost_with_replacement, FixedNumberPost_allow_self_connections) {
 		$scope.title = title;
 		$scope.name_value = name_value;
 		// $scope.level = level;
@@ -1031,7 +1034,10 @@ graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 't
 		$scope.FromFile_callback = FromFile_callback;
 		$scope.FixedNumberPre_n = FixedNumberPre_n;
 		$scope.FixedNumberPre_with_replacement = FixedNumberPre_with_replacement;
-		$scope.FixedNumberPre_allow_self_connections = FixedNumberPre_allow_self_connections;		
+		$scope.FixedNumberPre_allow_self_connections = FixedNumberPre_allow_self_connections;
+		$scope.FixedNumberPost_n = FixedNumberPost_n;
+		$scope.FixedNumberPost_with_replacement = FixedNumberPost_with_replacement;
+		$scope.FixedNumberPost_allow_self_connections = FixedNumberPost_allow_self_connections;
 
 		if(($scope.synapse_type == "") || ($scope.synapse_type == null)){
 			$scope.synapse_type = "static";
@@ -1054,7 +1060,7 @@ graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 't
 				size: $scope.size,
 				synapse_type: $scope.synapse_type,
 				connectors_type: $scope.connectors_type,
-				FixedProbability_p_connect: $scope.FixedProbability_p_connec,
+				FixedProbability_p_connect: $scope.FixedProbability_p_connect,
 				FixedProbability_allow_self_connections: $scope.FixedProbability_allow_self_connections,
 				FromFile_file: $scope.FromFile_file,
 				FromFile_distributed: $scope.FromFile_distributed,
@@ -1063,6 +1069,9 @@ graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 't
 				FixedNumberPre_n: $scope.FixedNumberPre_n,
 				FixedNumberPre_with_replacement: $scope.FixedNumberPre_with_replacement,
 				FixedNumberPre_allow_self_connections: $scope.FixedNumberPre_allow_self_connections,
+				FixedNumberPost_n: $scope.FixedNumberPost_n,
+				FixedNumberPost_with_replacement: $scope.FixedNumberPost_with_replacement,
+				FixedNumberPost_allow_self_connections: $scope.FixedNumberPost_allow_self_connections,
 			}, 100);
 			$('.modal-backdrop').remove();
 		};
@@ -1086,7 +1095,10 @@ graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 't
 				FromFile_callback: $scope.FromFile_callback,
 				FixedNumberPre_n: $scope.FixedNumberPre_n,
 				FixedNumberPre_with_replacement: $scope.FixedNumberPre_with_replacement,
-				FixedNumberPre_allow_self_connections: $scope.FixedNumberPre_allow_self_connections,						
+				FixedNumberPre_allow_self_connections: $scope.FixedNumberPre_allow_self_connections,
+				FixedNumberPost_n: $scope.FixedNumberPost_n,
+				FixedNumberPost_with_replacement: $scope.FixedNumberPost_with_replacement,
+				FixedNumberPost_allow_self_connections: $scope.FixedNumberPost_allow_self_connections,
 			}, 100); // close, but give 100ms for bootstrap to animate
 			$('.modal-backdrop').remove();
 		};
