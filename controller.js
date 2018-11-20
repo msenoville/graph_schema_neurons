@@ -295,58 +295,60 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 						}
 						if(json_pop_param.celltype == "SpikeSourceArray"){
 							str_inst += "";
-						}	
-					} else if(json_pop_param.synapse_type != null){
-						// if(synapse_type == 'static'){
-						// 	str_inst += "" +
-						// 	" )\n";
-						// } else if(synapse_type == 'receptor_type'){
-						// 	str_inst += "" +
-						// 	" )\n";
-						// }
-						if(json_pop_param.connectors_type == "AllToAll"){
-							if(synapse_type == 'static'){
-								str_inst += "prj = p.Projection('', '', p.AllToAllConnector())" +
-								"p.StaticSynapse() )\n";
-							} else if(synapse_type == 'receptor_type'){
-								str_inst += "" +
-								" )\n";
-							}
 						}
-						if(json_pop_param.connectors_type == "OneToOne"){
-							if(synapse_type == 'static'){
-								str_inst += "prj = p.Projection('', '', p.OneToOneConnector())" +
-								"p.StaticSynapse() )\n";
+						if(json_pop_param.celltype == "projection"){
+							
+							// if(synapse_type == 'static'){
+							// 	str_inst += "" +
+							// 	" )\n";
+							// } else if(synapse_type == 'receptor_type'){
+							// 	str_inst += "" +
+							// 	" )\n";
+							// }
+							if(json_pop_param.connectors_type == "AllToAll"){
+								if(synapse_type == 'static'){
+									str_inst += "prj = p.Projection('', '', p.AllToAllConnector())" +
+									"p.StaticSynapse() )\n";
+								} else if(synapse_type == 'receptor_type'){
+									str_inst += "" +
+									" )\n";
+								}
 							}
-						}
-						if(json_pop_param.connectors_type == "FixedProbability"){
-							if(synapse_type == 'static'){
-								str_inst += "prj = p.Projection('', '', p.FixedProbabilityConnector())" +
-								"p.StaticSynapse() )\n";
+							if(json_pop_param.connectors_type == "OneToOne"){
+								if(synapse_type == 'static'){
+									str_inst += "prj = p.Projection('', '', p.OneToOneConnector())" +
+									"p.StaticSynapse() )\n";
+								}
 							}
-						}
-						if(json_pop_param.connectors_type == "FromFile"){
-							if(synapse_type == 'static'){
-								str_inst += "prj = p.Projection('', '', p.FromFileConnector())" +
-								"p.StaticSynapse() )\n";
+							if(json_pop_param.connectors_type == "FixedProbability"){
+								if(synapse_type == 'static'){
+									str_inst += "prj = p.Projection('', '', p.FixedProbabilityConnector())" +
+									"p.StaticSynapse() )\n";
+								}
 							}
-						}
-						if(json_pop_param.connectors_type == "FixedNumberPre"){
-							if(synapse_type == 'static'){
-								str_inst += "prj = p.Projection('', '', p.FixedNumberPreConnector())" +
-								"p.StaticSynapse() )\n";
+							if(json_pop_param.connectors_type == "FromFile"){
+								if(synapse_type == 'static'){
+									str_inst += "prj = p.Projection('', '', p.FromFileConnector())" +
+									"p.StaticSynapse() )\n";
+								}
 							}
-						}
-						if(json_pop_param.connectors_type == "FixedNumberPost"){
-							if(synapse_type == 'static'){
-								str_inst += "prj = p.Projection('', '', p.FixedNumberPostConnector())" +
-								"p.StaticSynapse() )\n";
+							if(json_pop_param.connectors_type == "FixedNumberPre"){
+								if(synapse_type == 'static'){
+									str_inst += "prj = p.Projection('', '', p.FixedNumberPreConnector())" +
+									"p.StaticSynapse() )\n";
+								}
 							}
-						}
-						if(json_pop_param.connectors_type == "FixedTotalNumber"){
-							if(synapse_type == 'static'){
-								str_inst += "prj = p.Projection('', '', p.FixedTotalNumberConnector())" +
-								"p.StaticSynapse() )\n";
+							if(json_pop_param.connectors_type == "FixedNumberPost"){
+								if(synapse_type == 'static'){
+									str_inst += "prj = p.Projection('', '', p.FixedNumberPostConnector())" +
+									"p.StaticSynapse() )\n";
+								}
+							}
+							if(json_pop_param.connectors_type == "FixedTotalNumber"){
+								if(synapse_type == 'static'){
+									str_inst += "prj = p.Projection('', '', p.FixedTotalNumberConnector())" +
+									"p.StaticSynapse() )\n";
+								}
 							}
 						}
 					}
