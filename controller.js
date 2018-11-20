@@ -315,25 +315,45 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 							}
 							if(json_pop_param.connectors_type == "FixedProbability"){
 								if(synapse_type == 'static'){
-									str_inst += "prj_"+ val.id +" = p.Projection(pop_"+val.source.id+", pop_"+val.target.id+", p.FixedProbabilityConnector()," +
+									str_inst += "prj_"+ val.id +" = p.Projection(pop_"+val.source.id+", pop_"+val.target.id+
+									", p.FixedProbabilityConnector(" + 
+									json_pop_param.FixedProbability_p_connect + ", " + 
+									json_pop_param.FixedProbability_allow_self_connections +
+									")," +
 									"p.StaticSynapse())\n";
 								}
 							}
 							if(json_pop_param.connectors_type == "FromFile"){
 								if(synapse_type == 'static'){
-									str_inst += "prj_"+ val.id +" = p.Projection(pop_"+val.source.id+", pop_"+val.target.id+", p.FromFileConnector()," +
+									str_inst += "prj_"+ val.id +" = p.Projection(pop_"+val.source.id + ", pop_"+val.target.id + 
+									", p.FromFileConnector(" +
+									json_pop_param.FromFile_file + ", " + 
+									json_pop_param.FromFile_distributed + ", " + 
+									json_pop_param.FromFile_safe + ", " + 
+									json_pop_param.FromFile_callback + 
+									")," +
 									"p.StaticSynapse())\n";
 								}
 							}
 							if(json_pop_param.connectors_type == "FixedNumberPre"){
 								if(synapse_type == 'static'){
-									str_inst += "prj_"+ val.id +" = p.Projection(pop_"+val.source.id+", pop_"+val.target.id+", p.FixedNumberPreConnector()," +
+									str_inst += "prj_"+ val.id +" = p.Projection(pop_"+val.source.id+", pop_"+val.target.id + 
+									", p.FixedNumberPreConnector(" + 
+									json_pop_param.FixedNumberPre_n + ", " +
+									json_pop_param.FixedNumberPre_with_replacement + ", " +
+									json_pop_param.FixedNumberPre_allow_self_connections +
+									")," +
 									"p.StaticSynapse())\n";
 								}
 							}
 							if(json_pop_param.connectors_type == "FixedNumberPost"){
 								if(synapse_type == 'static'){
-									str_inst += "prj_"+ val.id +" = p.Projection(pop_"+val.source.id+", pop_"+val.target.id+", p.FixedNumberPostConnector()," +
+									str_inst += "prj_"+ val.id +" = p.Projection(pop_"+val.source.id+", pop_"+val.target.id + 
+									", p.FixedNumberPostConnector(" + 
+									json_pop_param.FixedNumberPost_n + ", " +
+									json_pop_param.FixedNumberPost_with_replacement + ", " +
+									json_pop_param.FixedNumberPost_allow_self_connections +
+									")," +
 									"p.StaticSynapse())\n";
 								}
 							}
