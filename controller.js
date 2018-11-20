@@ -81,7 +81,6 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 				var encoder = new mxCodec();
 				var node = encoder.encode(graph.getModel());
 				var nodeText = new XMLSerializer().serializeToString(node);
-				console.log((nodeText));
 				var blob = new Blob([nodeText], {type: "text/plain;charset=utf-8"});
 				//in case of cancelation => filename == null
 				if(filename != null){
@@ -109,7 +108,6 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 					var r = new FileReader();
 					r.onload = function(e){
 						graph.getModel().clear();
-						console.log(e.target.result);
 						// var xml = mxUtils.load('file_graph.xml');
 						var xml = e.target.result;
 						var doc = mxUtils.parseXml(xml);
@@ -377,7 +375,6 @@ p.setup()
 
 `+ str_inst +`
 			`;
-			var scriptText_2 = ``;
 			console.log((scriptText));
 			var blob = new Blob([scriptText], {type: "text/plain;charset=utf-8"});
 			bootbox.prompt("Please give the name to the file (.py extension added automatically) :", function(filename){
@@ -447,7 +444,6 @@ p.setup()
 
 		// Overridden to add an additional control to the state at creation time
 		if ($rootScope.ctrlAllreadyOverwritten == null){ $rootScope.ctrlAllreadyOverwritten = false; }
-		console.log("$rootScope.ctrlAllreadyOverwritten : " + $rootScope.ctrlAllreadyOverwritten);
 		if (!$rootScope.ctrlAllreadyOverwritten) {
 			mxCellRendererCreateControl = mxCellRenderer.prototype.createControl;
 			mxCellRenderer.prototype.createControl = function(state)
@@ -468,7 +464,6 @@ p.setup()
 						{
 							if (graph.isEnabled())
 							{
-								console.log("state 1 : " + state);
 								bootbox.confirm( "Do you really remove this cell ?",
 									function(result){
 										if(result == true){
@@ -577,14 +572,12 @@ p.setup()
 									modal.element.modal();
 									modal.close.then(function(result) {
 										// state.cell.setValue(result.name_value);
-										console.log("get value : " + state.cell.getValue());
 										// state.cell.value = result.name_value + "|" + JSON.stringify(result);
 										state.cell.value = result.name_value;
 										state.cell.data_cell = JSON.stringify(result);
 										state.cell.setValue(state.cell.value);
 										state.cell.setData_cell(state.cell.data_cell);
 										graph.refresh();
-										console.log("get after set value : " + state.cell.getValue());
 									});
 								});
 								mxEvent.consume(evt);
@@ -809,8 +802,6 @@ p.setup()
 				});
 				menu.addItem('Configure link', null, function()
 				{
-					console.log('Configure link' + 'selection count : ' + graph.getSelectionCount());
-					console.log("state 2 : " + cell.value);
 					if (graph.isEnabled()){
 						if((cell.value === undefined) | (cell.value === null)){
 							cell.value = "";
@@ -857,16 +848,13 @@ p.setup()
 							modal.element.modal();
 							modal.close.then(function(result) {
 								// state.cell.setValue(result.name_value);
-								console.log("get value : " + cell.getValue());
 								// cell.value = result.name_value + "|" + JSON.stringify(result);
 								cell.value = result.name_value;
 								cell.data_cell = JSON.stringify(result);
 								cell.setValue(cell.value);
 								cell.setData_cell(cell.data_cell);
 								graph.refresh();
-								console.log("get after set value : " + cell.getValue());
 								var txtdisplay = $('text').text();
-								console.log("txtdisplay : " + txtdisplay);
 							});
 						});
 						mxEvent.consume(evt);
@@ -918,7 +906,6 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 		
 
 		$scope.updateForm = function() {
-			console.log("selected celltype : " + $scope.celltype);
 			if(($scope.celltype == "IF_curr_alpha") || ($scope.celltype == "IF_curr_exp")){
 				if(($scope.param_v_rest == "") || ($scope.param_v_rest == null)){ $scope.param_v_rest = -65,0; }
 				if(($scope.param_cm == "") || ($scope.param_cm == null)){ $scope.param_cm = 1,0; }
