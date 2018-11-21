@@ -25,7 +25,7 @@
                     <div class="form-group col-sm-12">
                         <label class="control-label col-sm-2" for="synapse_type">Synapse type : </label>
                         <div class="col-sm-10">
-                            <select id="synapse_type" name="synapse_type" class="form-control" ng-model="synapse_type" ng-change="updateForm()">
+                            <select id="synapse_type" name="synapse_type" class="form-control" ng-model="synapse_type">
                                 <option value="static">Static</option>
                                 <option value="receptor_type">Receptor Type</option>
                             </select>
@@ -46,7 +46,7 @@
                     <div class="form-group col-sm-12">
                         <label class="control-label col-sm-2" for="connectors_type">Connectors type : </label>
                         <div class="col-sm-10">
-                            <select id="connectors_type" name="connectors_type" class="form-control" ng-model="connectors_type" ng-change="updateForm()">
+                            <select id="connectors_type" name="connectors_type" class="form-control" ng-model="connectors_type">
                                 <option value="AllToAll">AllToAll</option>
                                 <option value="OneToOne">OneToOne</option>
                                 <option value="FixedProbability">FixedProbability</option>
