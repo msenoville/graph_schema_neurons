@@ -162,10 +162,10 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 			angular.forEach(cells, function(val, key){
 				console.log("data cell : " + val.data_cell);
 				if(val.value != undefined){
-					try{
+					try {
 						var json_pop_param = JSON.parse(val.data_cell);
 					} catch(error) {
-						var json_pop_param = {celltype: "error"}
+						var json_pop_param = {celltype: "error"};
 					}
 					if(json_pop_param.celltype != "error"){
 						if(json_pop_param.celltype == "IF_curr_alpha"){
@@ -993,7 +993,16 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 		if(($scope.celltype == "") || ($scope.celltype == null)){
 			$scope.celltype = "IF_curr_alpha";
 		}
-
+		$scope.beforeClose = function(){
+			if($scope.name_value == ""){
+				$scope.msgAlert = "Name is required."
+			}
+			else if($scope.size == ""){
+				$scope.msgAlert = "Size value is required."
+			} else{
+				$scope.close()
+			}
+		};
 		$scope.close = function() {
 			close({
 				name_value: $scope.name_value,
@@ -1110,11 +1119,16 @@ graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 't
 			$scope.connectors_type = "AllToAll";
 		}
 
-		// $scope.updateForm = function() {
-		// 	if($scope.connectors_type == null){
-		// 		//$scope.connectors_type == "AllToAll";
-		// 	}
-		// };
+		$scope.beforeClose = function(){
+			if($scope.name_value == ""){
+				$scope.msgAlert = "Name is required."
+			}
+			else if($scope.size == ""){
+				$scope.msgAlert = "Size value is required as integer."
+			} else{
+				$scope.close()
+			}
+		};
 
 		$scope.close = function() {
 			close({
