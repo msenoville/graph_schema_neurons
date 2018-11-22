@@ -160,15 +160,16 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 			var str_inst = "";
 			console.log(cells);
 			angular.forEach(cells, function(val, key){
+				console.log("data cell : " + val.data_cell);
 				if(val.value != undefined){
-					// console.log("cell : " + key + " - " + val);
-					// var cell_1 = val.value.split("|");
-					// var pop_name = cell_1[0];
-					// var json_pop_param = JSON.parse(cell_1[1]);
-					var pop_name = val.value;
-					var json_pop_param = JSON.parse(val.data_cell);
-					
-					if(json_pop_param.celltype != null){
+					// var pop_name = val.value;
+					try{
+						var json_pop_param = JSON.parse(val.data_cell);
+						// console.log("json_pop_param+"+json_pop_param);
+					} catch(error) {
+						var json_pop_param = {celltype: "error"}
+					}
+					if(json_pop_param.celltype != "error"){
 						if(json_pop_param.celltype == "IF_curr_alpha"){
 							str_inst += "pop_"+ val.id +" = " +
 							"p.Population(" + json_pop_param.size + ", p.IF_curr_alpha(v_rest="+json_pop_param.param_v_rest +
@@ -715,7 +716,7 @@ p.setup()
 		// Inserts a cell at the given location
 		var funct = function(graph, evt, target, x, y)
 		{
-			var cell = new mxCell('Test1', new mxGeometry(0, 0, 80, 30));
+			var cell = new mxCell('Pop1', new mxGeometry(0, 0, 80, 30));
 			cell.vertex = true;
 			var cells = graph.importCells([cell], x, y, target);
 
@@ -727,7 +728,7 @@ p.setup()
 		};
 		var funct2 = function(graph, evt, target, x, y)
 		{
-			var cell = new mxCell('Test2', new mxGeometry(0, 0, 80, 30),'fontColor=white;fillColor=red');
+			var cell = new mxCell('Pop2', new mxGeometry(0, 0, 80, 30),'fontColor=white;fillColor=red');
 			cell.vertex = true;
 			var cells = graph.importCells([cell], x, y, target);
 
@@ -739,7 +740,7 @@ p.setup()
 		};
 		var funct3 = function(graph, evt, target, x, y)
 		{
-			var cell = new mxCell('Test3', new mxGeometry(0, 0, 80, 30), 'fontColor=white;fillColor=green');
+			var cell = new mxCell('Pop3', new mxGeometry(0, 0, 80, 30), 'fontColor=white;fillColor=green');
 			cell.vertex = true;
 			var cells = graph.importCells([cell], x, y, target);
 
@@ -806,7 +807,6 @@ p.setup()
 						if((cell.value === undefined) | (cell.value === null)){
 							cell.value = "";
 						}
-								
 						if((cell.data_cell != undefined) | (cell.data_cell != null)){
 							var json_data = JSON.parse(cell.data_cell);
 						} else {
@@ -874,7 +874,6 @@ p.setup()
 	}
 });
 
-
 graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title', 'close', 'name_value', 'size', 'celltype', 'param_v_rest', 'param_cm', 'param_tau_m', 'param_tau_m', 'param_tau_m', 'param_tau_refrac', 'param_tau_syn_E', 'param_tau_syn_I', 'param_i_offset', 'param_v_reset', 'param_v_thresh', 'param_e_rev_E', 'param_e_rev_I', 'param_gbar_Na', 'param_gbar_K', 'param_g_leak', 'param_v_offset', 'param_e_rev_Na', 'param_e_rev_K', 'param_e_rev_leak', 'param_tau_cm', 'param_v_spike', 'param_a', 'param_b', 'param_delta_T', 'param_tau_w', 'init_isyn_exc', 'init_isyn_inh', 'init_gsyn_exc', 'init_gsyn_inh', 'init_v', 'init_w',
 	function($scope, $element, title, close, name_value, size, celltype, param_v_rest, param_cm, param_tau_m, param_tau_m, param_tau_m, param_tau_refrac, param_tau_syn_E, param_tau_syn_I, param_i_offset, param_v_reset, param_v_thresh, param_e_rev_E, param_e_rev_I, param_gbar_Na, param_gbar_K, param_g_leak, param_v_offset, param_e_rev_Na, param_e_rev_K, param_e_rev_leak, param_tau_cm, param_v_spike, param_a, param_b, param_delta_T, param_tau_w, init_isyn_exc, init_isyn_inh, init_gsyn_exc, init_gsyn_inh, init_v, init_w) {
 		$scope.title = title;
@@ -912,7 +911,6 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 		$scope.init_gsyn_inh = init_gsyn_inh;
 		$scope.init_v = init_v;
 		$scope.init_w = init_w;
-		
 
 		$scope.updateForm = function() {
 			if(($scope.celltype == "IF_curr_alpha") || ($scope.celltype == "IF_curr_exp")){
