@@ -162,10 +162,8 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 			angular.forEach(cells, function(val, key){
 				console.log("data cell : " + val.data_cell);
 				if(val.value != undefined){
-					// var pop_name = val.value;
 					try{
 						var json_pop_param = JSON.parse(val.data_cell);
-						// console.log("json_pop_param+"+json_pop_param);
 					} catch(error) {
 						var json_pop_param = {celltype: "error"}
 					}
