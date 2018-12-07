@@ -789,7 +789,7 @@ p.setup()
 			// if (graph.getSelectionCount() == 1 && !graph.getModel().isEdge(cell) && !graph.isSwimlane(cell) && graph.getModel().getChildCount(cell) > 0)
 			if (graph.getSelectionCount() == 1 && graph.getModel().isEdge(cell))
 			{
-				menu.addItem('Delete link', null, function()
+				menu.addItem('Delete Projection', null, function()
 				{
 					bootbox.confirm( "Do you really remove this link ?",
 					function(result){
@@ -799,7 +799,7 @@ p.setup()
 					});
 					mxEvent.consume(evt);
 				});
-				menu.addItem('Configure link', null, function()
+				menu.addItem('Configure Projection', null, function()
 				{
 					if (graph.isEnabled()){
 						if((cell.value === undefined) | (cell.value === null)){
@@ -866,6 +866,10 @@ p.setup()
 						});
 						mxEvent.consume(evt);
 					}
+				});
+			} else if(graph.getSelectionCount() == 1 && graph.getModel().isVertex(cell)){
+				menu.addItem('Create Self Projection', null, function(){
+					graph.insertEdge(cell, null, '', cell, cell)					
 				});
 			}
 		};
