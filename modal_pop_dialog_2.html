@@ -33,12 +33,10 @@
                     <div class="form-group col-sm-12">
                         <label class="control-label col-sm-2" for="receptor_type">Receptor type : </label>
                         <div class="col-sm-10">
-                            <select id="receptor_type" name="receptor_type" class="form-control" ng-model="receptor_type">
-                                <option value="static">Static</option>
-                            </select>
+                            <input id="receptor_type" name="receptor_type" type="text" placeholder="Receptor Type..." class="form-control input-md" ng-model="receptor_type">
                         </div>
                     </div>
-                    <div class="form-group col-sm-12" ng-show="synapse_type == 'static'">
+                    <!-- <div class="form-group col-sm-12" ng-show="synapse_type == 'static'">
                         <div class="col-sm-2">&nbsp;</div>
                         <div class="col-sm-10">
                             <p>synapse static</p>
@@ -49,7 +47,7 @@
                         <div class="col-sm-10">
                             <p>receptor type</p>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="form-group col-sm-12">
                         <label class="control-label col-sm-2" for="connectors_type">Connectors type : </label>
                         <div class="col-sm-10">
@@ -57,7 +55,7 @@
                                 <option value="AllToAll">AllToAll</option>
                                 <option value="OneToOne">OneToOne</option>
                                 <option value="FixedProbability">FixedProbability</option>
-                                <option value="FromFile">FromFile</option>
+                                <!-- <option value="FromFile">FromFile</option> -->
                                 <option value="FixedNumberPre">FixedNumberPre</option>
                                 <option value="FixedNumberPost">FixedNumberPost</option>
                                 <option value="FixedTotalNumber">FixedTotalNumber</option>
@@ -80,7 +78,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group col-sm-12" ng-show="connectors_type == 'FromFile'">
+                    <!-- <div class="form-group col-sm-12" ng-show="connectors_type == 'FromFile'">
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"><b>Parameters :</b></div>
                             <label class="control-label col-sm-2" for="FromFile_file">file : </label>
@@ -109,7 +107,7 @@
                                 <input id="FromFile_callback" name="FromFile_callback" type="checkbox" class="form-check-input" ng-model="FromFile_callback">
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="form-group col-sm-12" ng-show="connectors_type == 'FixedNumberPre'">
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"><b>Parameters :</b></div>

@@ -441,246 +441,6 @@ p.setup()
 
 		graph.setPanning(true);
 
-		// Specifies the URL and size of the new control
-		var deleteImage = new mxImage('img/overlays/forbidden.png', 16, 16);
-		var editImage = new mxImage('img/edit.png', 16, 16);
-
-		// Overridden to add an additional control to the state at creation time
-		if ($rootScope.ctrlAllreadyOverwritten == null){ $rootScope.ctrlAllreadyOverwritten = false; }
-		if (!$rootScope.ctrlAllreadyOverwritten) {
-			mxCellRendererCreateControl = mxCellRenderer.prototype.createControl;
-			mxCellRenderer.prototype.createControl = function(state)
-			{
-				mxCellRendererCreateControl.apply(this, arguments);
-				$rootScope.ctrlAllreadyOverwritten = true;
-				var graph = state.view.graph;
-				if (graph.getModel().isVertex(state.cell))
-				{
-					if (state.deleteControl == null)
-					{
-						var b = new mxRectangle(0, 0, deleteImage.width, deleteImage.height);
-						state.deleteControl = new mxImageShape(b, deleteImage.src);
-						state.deleteControl.dialect = graph.dialect;
-						state.deleteControl.preserveImageAspect = false;
-
-						this.initControl(state, state.deleteControl, false, function (evt)
-						{
-							if (graph.isEnabled())
-							{
-								bootbox.confirm( "Do you really remove this cell ?",
-									function(result){
-										if(result == true){
-											graph.removeCells([state.cell]);
-										}
-									});
-								mxEvent.consume(evt);
-							}
-						});
-					}
-					if (state.editControl == null){
-						var c = new mxRectangle(0, 0, editImage.width, editImage.height);
-						state.editControl = new mxImageShape(b, editImage.src);
-						state.editControl.dialect = graph.dialect;
-						state.editControl.preserveImageAspect = false;
-
-						this.initControl(state, state.editControl, false, function (evt)
-						{
-							if (graph.isEnabled())
-							{
-								//modal.modal("show");
-								// console.log("state 2 : " + state.cell.value);
-								// var json_data_array = state.cell.value.split("|");
-								
-								if((state.cell.data_cell != null) & (state.cell.data_cell != "")){
-									var json_data = JSON.parse(state.cell.data_cell);
-								} else {
-									var json_data = {
-										"name_value": "",
-										// "level": "",
-										"size": "",
-										"celltype": "",
-										"param_v_rest": "",
-										"param_cm": "",
-										"param_tau_m": "",
-										"param_tau_refrac": "",
-										"param_tau_syn_E": "",
-										"param_tau_syn_I": "",
-										"param_i_offset": "",
-										"param_v_reset": "",
-										"param_v_thresh": "",
-										"param_e_rev_E": "",
-										"param_e_rev_I": "",
-										"param_gbar_Na": "",
-										"param_gbar_K": "",
-										"param_g_leak": "",
-										"param_v_offset": "",
-										"param_e_rev_Na": "",
-										"param_e_rev_K": "",
-										"param_e_rev_leak": "",
-										"param_tau_cm": "",
-										"param_v_spike": "",
-										"param_a": "",
-										"param_b": "",
-										"param_delta_T": "",
-										"param_tau_w": "",
-										"init_isyn_exc": "",
-										"init_isyn_inh": "",
-										"init_gsyn_exc": "",
-										"init_gsyn_inh": "",
-										"init_v": "",
-										"init_w": "",
-									};
-								}
-								ModalService.showModal({
-									templateUrl: "modal_pop_dialog.html",
-    								controller: "PopDialogController",
-									inputs: {
-										title : "Population Form Editor",
-										name_value: state.cell.value,
-										// level: json_data.level,
-										size: json_data.size,
-										celltype: json_data.celltype,
-										param_v_rest: json_data.param_v_rest,
-										param_cm: json_data.param_cm,
-										param_tau_m: json_data.param_tau_m,
-										param_tau_refrac: json_data.param_tau_refrac,
-										param_tau_syn_E: json_data.param_tau_syn_E,
-										param_tau_syn_I: json_data.param_tau_syn_I,
-										param_i_offset: json_data.param_i_offset,
-										param_v_reset: json_data.param_v_reset,
-										param_v_thresh: json_data.param_v_thresh,
-										param_e_rev_E: json_data.param_e_rev_E,
-										param_e_rev_I: json_data.param_e_rev_I,
-										param_gbar_Na: json_data.param_gbar_Na,
-										param_gbar_K: json_data.param_gbar_K,
-										param_g_leak: json_data.param_g_leak,
-										param_v_offset: json_data.param_v_offset,
-										param_e_rev_Na: json_data.param_e_rev_Na,
-										param_e_rev_K: json_data.param_e_rev_K,
-										param_e_rev_leak: json_data.param_e_rev_leak,
-										param_tau_cm: json_data.param_tau_cm,
-										param_v_spike: json_data.param_v_spike,
-										param_a: json_data.param_a,
-										param_b: json_data.param_b,
-										param_delta_T: json_data.param_delta_T,
-										param_tau_w: json_data.param_tau_w,
-										init_isyn_exc: json_data.init_isyn_exc,
-										init_isyn_inh: json_data.init_isyn_inh,
-										init_gsyn_exc: json_data.init_gsyn_exc,
-										init_gsyn_inh: json_data.init_gsyn_inh,
-										init_v: json_data.init_v,
-										init_w: json_data.init_w,
-									}
-								}).then(function(modal) {
-									modal.element.modal();
-									modal.close.then(function(result) {
-										// state.cell.setValue(result.name_value);
-										// state.cell.value = result.name_value + "|" + JSON.stringify(result);
-										state.cell.value = result.name_value;
-										state.cell.data_cell = JSON.stringify(result);
-										state.cell.setValue(state.cell.value);
-										state.cell.setData_cell(state.cell.data_cell);
-										graph.refresh();
-									});
-								});
-								mxEvent.consume(evt);
-							}
-						});
-					}
-				}
-				else if (state.deleteControl != null)
-				{
-					state.deleteControl.destroy();
-					state.deleteControl = null;
-				}
-			};
-
-			// Helper function to compute the bounds of the control
-			var getDeleteControlBounds = function(state)
-			{
-				if (state.deleteControl != null)
-				{
-					var oldScale = state.deleteControl.scale;
-					var w = state.deleteControl.bounds.width / oldScale;
-					var h = state.deleteControl.bounds.height / oldScale;
-					var s = state.view.scale;			
-
-					return (state.view.graph.getModel().isEdge(state.cell)) ? 
-						new mxRectangle(state.x + state.width / 2 - w / 2 * s,
-							state.y + state.height / 2 - h / 2 * s, w * s, h * s)
-						: new mxRectangle(state.x + state.width - w * s,
-							state.y, w * s, h * s);
-				}
-				return null;
-			};
-
-			var getEditControlBounds = function(state)
-			{
-				if (state.editControl != null)
-				{
-					var oldScale = state.editControl.scale;
-					var w = state.editControl.bounds.width / oldScale;
-					var h = state.editControl.bounds.height / oldScale;
-					var s = state.view.scale;			
-
-					return (state.view.graph.getModel().isEdge(state.cell)) ? 
-						new mxRectangle((state.x - 64) + state.width / 2 - w / 2 * s,
-							state.y + state.height / 2 - h / 2 * s, w * s, h * s)
-						: new mxRectangle((state.x - 64) + state.width - w * s,
-							state.y, w * s, h * s);
-				}
-				return null;
-			}
-
-			// Overridden to update the scale and bounds of the control
-			mxCellRendererRedrawControl = mxCellRenderer.prototype.redrawControl;
-			mxCellRenderer.prototype.redrawControl = function(state)
-			{
-				mxCellRendererRedrawControl.apply(this, arguments);
-				
-				if (state.deleteControl != null)
-				{
-					var bounds = getDeleteControlBounds(state);
-					var s = state.view.scale;
-					
-					if (state.deleteControl.scale != s || !state.deleteControl.bounds.equals(bounds))
-					{
-						state.deleteControl.bounds = bounds;
-						state.deleteControl.scale = s;
-						state.deleteControl.redraw();
-					}
-				}
-				if (state.editControl != null)
-				{
-					var bounds = getEditControlBounds(state);
-					var s = state.view.scale;
-					
-					if (state.editControl.scale != s || !state.editControl.bounds.equals(bounds))
-					{
-						state.editControl.bounds = bounds;
-						state.editControl.scale = s;
-						state.editControl.redraw();
-					}
-				}
-			};
-			
-			// Overridden to remove the control if the state is destroyed
-			mxCellRendererDestroy = mxCellRenderer.prototype.destroy;
-			mxCellRenderer.prototype.destroy = function(state)
-			{
-				mxCellRendererDestroy.apply(this, arguments);
-				if (state.deleteControl != null)
-				{
-					state.deleteControl.destroy();
-					state.deleteControl = null;
-				}
-				if (state.editControl != null)
-				{
-					state.editControl.destroy();
-					state.editControl = null;
-				}
-			};
-		}
 		// Uncomment the following if you want the container
 		// to fit the size of the graph
 		//graph.setResizeContainer(true);
@@ -873,7 +633,111 @@ p.setup()
 				});
 			} else if(graph.getSelectionCount() == 1 && graph.getModel().isVertex(cell)){
 				menu.addItem('Create Self Projection', null, function(){
-					graph.insertEdge(cell, null, '', cell, cell)					
+					graph.insertEdge(cell, null, '', cell, cell)
+				});
+				menu.addItem('Edit Population', null, function(){
+					if((cell.data_cell != null) & (cell.data_cell != "")){
+						var json_data = JSON.parse(cell.data_cell);
+					} else {
+						var json_data = {
+							"name_value": "",
+							// "level": "",
+							"size": "",
+							"celltype": "",
+							"param_v_rest": "",
+							"param_cm": "",
+							"param_tau_m": "",
+							"param_tau_refrac": "",
+							"param_tau_syn_E": "",
+							"param_tau_syn_I": "",
+							"param_i_offset": "",
+							"param_v_reset": "",
+							"param_v_thresh": "",
+							"param_e_rev_E": "",
+							"param_e_rev_I": "",
+							"param_gbar_Na": "",
+							"param_gbar_K": "",
+							"param_g_leak": "",
+							"param_v_offset": "",
+							"param_e_rev_Na": "",
+							"param_e_rev_K": "",
+							"param_e_rev_leak": "",
+							"param_tau_cm": "",
+							"param_v_spike": "",
+							"param_a": "",
+							"param_b": "",
+							"param_delta_T": "",
+							"param_tau_w": "",
+							"init_isyn_exc": "",
+							"init_isyn_inh": "",
+							"init_gsyn_exc": "",
+							"init_gsyn_inh": "",
+							"init_v": "",
+							"init_w": "",
+						};
+					}
+					ModalService.showModal({
+						templateUrl: "modal_pop_dialog.html",
+						controller: "PopDialogController",
+						inputs: {
+							title : "Population Form Editor",
+							name_value: cell.value,
+							// level: json_data.level,
+							size: json_data.size,
+							celltype: json_data.celltype,
+							param_v_rest: json_data.param_v_rest,
+							param_cm: json_data.param_cm,
+							param_tau_m: json_data.param_tau_m,
+							param_tau_refrac: json_data.param_tau_refrac,
+							param_tau_syn_E: json_data.param_tau_syn_E,
+							param_tau_syn_I: json_data.param_tau_syn_I,
+							param_i_offset: json_data.param_i_offset,
+							param_v_reset: json_data.param_v_reset,
+							param_v_thresh: json_data.param_v_thresh,
+							param_e_rev_E: json_data.param_e_rev_E,
+							param_e_rev_I: json_data.param_e_rev_I,
+							param_gbar_Na: json_data.param_gbar_Na,
+							param_gbar_K: json_data.param_gbar_K,
+							param_g_leak: json_data.param_g_leak,
+							param_v_offset: json_data.param_v_offset,
+							param_e_rev_Na: json_data.param_e_rev_Na,
+							param_e_rev_K: json_data.param_e_rev_K,
+							param_e_rev_leak: json_data.param_e_rev_leak,
+							param_tau_cm: json_data.param_tau_cm,
+							param_v_spike: json_data.param_v_spike,
+							param_a: json_data.param_a,
+							param_b: json_data.param_b,
+							param_delta_T: json_data.param_delta_T,
+							param_tau_w: json_data.param_tau_w,
+							init_isyn_exc: json_data.init_isyn_exc,
+							init_isyn_inh: json_data.init_isyn_inh,
+							init_gsyn_exc: json_data.init_gsyn_exc,
+							init_gsyn_inh: json_data.init_gsyn_inh,
+							init_v: json_data.init_v,
+							init_w: json_data.init_w,
+						}
+					}).then(function(modal) {
+						modal.element.modal();
+						modal.close.then(function(result) {
+							cell.value = result.name_value;
+							cell.data_cell = JSON.stringify(result);
+							cell.setValue(cell.value);
+							cell.setData_cell(cell.data_cell);
+							graph.refresh();
+						});
+					});
+				});
+				menu.addItem('Delete Population', null, function(){
+					if (graph.isEnabled())
+					{
+						bootbox.confirm( "Do you really remove this cell ?",
+							function(result){
+								if(result == true){
+									graph.removeCells([cell]);
+								}
+							});
+						mxEvent.consume(evt);
+					}
 				});
 			}
 		};
@@ -1129,12 +993,14 @@ graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 't
 
 		$scope.beforeClose = function(){
 			if($scope.name_value == ""){
-				$scope.msgAlert = "Name is required."
+				$scope.msgAlert = "Name is required.";
+			} else if($scope.size == ""){
+				$scope.msgAlert = "Size value is required as integer.";
+			} else if($scope.receptor_type == ""){
+				$scope.msgAlert = "Receptor type value is required.";
 			}
-			else if($scope.size == ""){
-				$scope.msgAlert = "Size value is required as integer."
-			} else{
-				$scope.close()
+			else {
+				$scope.close();
 			}
 		};
 
