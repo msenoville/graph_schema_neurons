@@ -163,6 +163,29 @@
                             </div>
                         </div>
                     </div>
+                    <div class="form-group col-sm-12" ng-show="connectors_type == 'FixedTotalNumber'">
+                        <div class="form-group col-sm-12">
+                            <div class="control-label col-sm-2"><b>Parameters :</b></div>
+                            <label class="control-label col-sm-2" for="FixedTotalNumber_n">n : </label>
+                            <div class="col-sm-3">
+                                <input id="FixedTotalNumber_n" name="FixedTotalNumber_n" type="number" min="0" step="1" placeholder="number" class="form-control input-md" ng-model="FixedTotalNumber_n">
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-12">
+                            <div class="control-label col-sm-2">&nbsp;</div>
+                            <label class="control-label col-sm-2" for="FixedTotalNumber_with_replacement">with replacement : </label>
+                            <div class="col-sm-3">
+                                <input id="FixedTotalNumber_with_replacement" name="FixedTotalNumber_with_replacement" type="checkbox" class="form-check-input" ng-model="FixedTotalNumber_with_replacement">
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-12">
+                            <div class="control-label col-sm-2">&nbsp;</div>
+                            <label class="control-label col-sm-2" for="FixedTotalNumber_allow_self_connections">allow self connections : </label>
+                            <div class="col-sm-3">
+                                <input id="FixedTotalNumber_allow_self_connections" name="FixedTotalNumber_allow_self_connections" type="checkbox" class="form-check-input" ng-model="FixedTotalNumber_allow_self_connections">
+                            </div>
+                        </div>
+                    </div>
                 </form>
                 <span style="color:red;">{{msgAlert}}</span>
             </div>
