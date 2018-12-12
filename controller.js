@@ -579,6 +579,7 @@ p.setup()
 								"synapse_type": "",
 								"receptor_type": "",
 								"connectors_type": "",
+								"AllToAll_allow_self_connections": false,
 								"FixedProbability_p_connect": "",
 								"FixedProbability_allow_self_connections": false,
 								"FromFile_file": "",
@@ -591,6 +592,11 @@ p.setup()
 								"FixedNumberPost_n": "",
 								"FixedNumberPost_with_replacement": false,
 								"FixedNumberPost_allow_self_connections": false,
+								"FixedTotalNumber_n": "",
+								"FixedTotalNumber_with_replacement": false,
+								"FixedTotalNumber_allow_self_connections": false,
+								"DistanceDependent_d_expression": "",
+								"DistanceDependent_allow_self_connections": false,
 							};
 						}
 						ModalService.showModal({
@@ -605,6 +611,7 @@ p.setup()
 								receptor_type: json_data.receptor_type,
 								connectors_type: json_data.connectors_type,
 								FixedProbability_p_connect: json_data.FixedProbability_p_connect,
+								AllToAll_allow_self_connections: json_data.AllToAll_allow_self_connections,
 								FixedProbability_allow_self_connections: json_data.FixedProbability_allow_self_connections,
 								FromFile_file: json_data.FromFile_file,
 								FromFile_distributed: json_data.FromFile_distributed,
@@ -616,6 +623,8 @@ p.setup()
 								FixedNumberPost_n: json_data.FixedNumberPost_n,
 								FixedNumberPost_with_replacement: json_data.FixedNumberPost_with_replacement,
 								FixedNumberPost_allow_self_connections: json_data.FixedNumberPost_allow_self_connections,
+								DistanceDependent_d_expression: json_data.DistanceDependent_d_expression,
+								DistanceDependent_allow_self_connections: json_data.DistanceDependent_allow_self_connections,
 							}
 						}).then(function(modal) {
 							modal.element.modal();
@@ -964,8 +973,8 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 ]);
 
 
-graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 'title', 'close', 'name_value', 'size', 'synapse_type','receptor_type', 'connectors_type', 'FixedProbability_p_connect', 'FixedProbability_allow_self_connections', 'FromFile_file', 'FromFile_distributed', 'FromFile_safe', 'FromFile_callback', 'FixedNumberPre_n', 'FixedNumberPre_with_replacement', 'FixedNumberPre_allow_self_connections', 'FixedNumberPost_n', 'FixedNumberPost_with_replacement', 'FixedNumberPost_allow_self_connections',
-	function($scope, $element, title, close, name_value, size, synapse_type, receptor_type, connectors_type, FixedProbability_p_connect, FixedProbability_allow_self_connections, FromFile_file, FromFile_distributed, FromFile_safe, FromFile_callback, FixedNumberPre_n, FixedNumberPre_with_replacement, FixedNumberPre_allow_self_connections, FixedNumberPost_n, FixedNumberPost_with_replacement, FixedNumberPost_allow_self_connections) {
+graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 'title', 'close', 'name_value', 'size', 'synapse_type','receptor_type', 'connectors_type', 'FixedProbability_p_connect', 'AllToAll_allow_self_connections', 'FixedProbability_allow_self_connections', 'FromFile_file', 'FromFile_distributed', 'FromFile_safe', 'FromFile_callback', 'FixedNumberPre_n', 'FixedNumberPre_with_replacement', 'FixedNumberPre_allow_self_connections', 'FixedNumberPost_n', 'FixedNumberPost_with_replacement', 'FixedNumberPost_allow_self_connections', 'DistanceDependent_d_expression', 'DistanceDependent_allow_self_connections',
+	function($scope, $element, title, close, name_value, size, synapse_type, receptor_type, connectors_type, FixedProbability_p_connect, AllToAll_allow_self_connections, FixedProbability_allow_self_connections, FromFile_file, FromFile_distributed, FromFile_safe, FromFile_callback, FixedNumberPre_n, FixedNumberPre_with_replacement, FixedNumberPre_allow_self_connections, FixedNumberPost_n, FixedNumberPost_with_replacement, FixedNumberPost_allow_self_connections, DistanceDependent_d_expression, DistanceDependent_allow_self_connections) {
 		$scope.title = title;
 		$scope.name_value = name_value;
 		// $scope.level = level;
