@@ -982,6 +982,7 @@ graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 't
 		$scope.synapse_type = synapse_type;
 		$scope.receptor_type = receptor_type;
 		$scope.connectors_type = connectors_type;
+		$scope.AllToAll_allow_self_connections = AllToAll_allow_self_connections;
 		$scope.FixedProbability_p_connect = FixedProbability_p_connect;
 		$scope.FixedProbability_allow_self_connections = FixedProbability_allow_self_connections;
 		$scope.FromFile_file = FromFile_file;
@@ -1024,6 +1025,7 @@ graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 't
 				synapse_type: $scope.synapse_type,
 				receptor_type: $scope.receptor_type,
 				connectors_type: $scope.connectors_type,
+				AllToAll_allow_self_connections: $scope.AllToAll_allow_self_connections,
 				FixedProbability_p_connect: $scope.FixedProbability_p_connect,
 				FixedProbability_allow_self_connections: $scope.FixedProbability_allow_self_connections,
 				FromFile_file: $scope.FromFile_file,

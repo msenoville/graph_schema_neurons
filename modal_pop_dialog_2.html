@@ -62,6 +62,15 @@
                             </select>
                         </div>
                     </div>
+                    <div class="form-group col-sm-12" ng-show="connectors_type == 'AllToAll'">
+                        <div class="form-group col-sm-12">
+                            <div class="control-label col-sm-2"><b>Parameters :</b></div>
+                            <label class="control-label col-sm-2" for="AllToAll_allow_self_connections">allow self connections : </label>
+                            <div class="col-sm-3">
+                                <input id="AllToAll_allow_self_connections" name="AllToAll_allow_self_connections" type="checkbox" class="form-check-input" ng-model="AllToAll_allow_self_connections">
+                            </div>
+                        </div>
+                    </div>
                     <div class="form-group col-sm-12" ng-show="connectors_type == 'FixedProbability'">
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"><b>Parameters :</b></div>
@@ -72,7 +81,7 @@
                         </div>
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2">&nbsp;</div>
-                            <label class="control-label col-sm-2" for="connectors_allow_self_connections">allow self connections : </label>
+                            <label class="control-label col-sm-2" for="FixedProbability_allow_self_connections">allow self connections : </label>
                             <div class="col-sm-3">
                                 <input id="FixedProbability_allow_self_connections" name="FixedProbability_allow_self_connections" type="checkbox" class="form-check-input" ng-model="FixedProbability_allow_self_connections">
                             </div>
