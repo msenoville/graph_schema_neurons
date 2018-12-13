@@ -579,6 +579,9 @@ p.setup()
 								"synapse_type": "",
 								"receptor_type": "",
 								"connectors_type": "",
+								"TsodyksMarkram_U": "",
+								"TsodyksMarkram_tau_rec": "",
+								"TsodyksMarkram_tau_facil": "",
 								"AllToAll_allow_self_connections": false,
 								"FixedProbability_p_connect": "",
 								"FixedProbability_allow_self_connections": false,
@@ -610,6 +613,9 @@ p.setup()
 								synapse_type: json_data.synapse_type,
 								receptor_type: json_data.receptor_type,
 								connectors_type: json_data.connectors_type,
+								TsodyksMarkram_U: json_data.TsodyksMarkram_U,
+								TsodyksMarkram_tau_rec: json_data.TsodyksMarkram_tau_rec,
+								TsodyksMarkram_tau_facil: json_data.TsodyksMarkram_tau_facil,				
 								AllToAll_allow_self_connections: json_data.AllToAll_allow_self_connections,
 								FixedProbability_p_connect: json_data.FixedProbability_p_connect,
 								FixedProbability_allow_self_connections: json_data.FixedProbability_allow_self_connections,
@@ -985,13 +991,17 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 
 
 graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 'title', 'close', 'name_value', 'size', 
-'synapse_type','receptor_type', 'connectors_type', 'FixedProbability_p_connect', 'AllToAll_allow_self_connections', 
+'synapse_type','receptor_type', 'connectors_type', 
+'TsodyksMarkram_U', 'TsodyksMarkram_tau_rec', 'TsodyksMarkram_tau_facil',
+'FixedProbability_p_connect', 'AllToAll_allow_self_connections', 
 'FixedProbability_allow_self_connections', 'FromFile_file', 'FromFile_distributed', 'FromFile_safe', 'FromFile_callback', 
 'FixedNumberPre_n', 'FixedNumberPre_with_replacement', 'FixedNumberPre_allow_self_connections', 'FixedNumberPost_n', 
 'FixedNumberPost_with_replacement', 'FixedNumberPost_allow_self_connections', 'FixedTotalNumber_n', 'FixedTotalNumber_with_replacement', 
 'FixedTotalNumber_allow_self_connections', 'DistanceDependent_d_expression', 'DistanceDependent_allow_self_connections',
 	function($scope, $element, title, close, name_value, size, 
-		synapse_type, receptor_type, connectors_type, FixedProbability_p_connect, AllToAll_allow_self_connections, 
+		synapse_type, receptor_type, connectors_type, 
+		TsodyksMarkram_U, TsodyksMarkram_tau_rec, TsodyksMarkram_tau_facil,
+		FixedProbability_p_connect, AllToAll_allow_self_connections, 
 		FixedProbability_allow_self_connections, FromFile_file, FromFile_distributed, FromFile_safe, FromFile_callback, 
 		FixedNumberPre_n, FixedNumberPre_with_replacement, FixedNumberPre_allow_self_connections, FixedNumberPost_n, 
 		FixedNumberPost_with_replacement, FixedNumberPost_allow_self_connections, FixedTotalNumber_n, FixedTotalNumber_with_replacement, 
@@ -1003,6 +1013,9 @@ graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 't
 		$scope.synapse_type = synapse_type;
 		$scope.receptor_type = receptor_type;
 		$scope.connectors_type = connectors_type;
+		$scope.TsodyksMarkram_U = TsodyksMarkram_U;
+		$scope.TsodyksMarkram_tau_rec = TsodyksMarkram_tau_rec;
+		$scope.TsodyksMarkram_tau_facil = TsodyksMarkram_tau_facil;
 		$scope.FixedProbability_p_connect = FixedProbability_p_connect;
 		$scope.AllToAll_allow_self_connections = AllToAll_allow_self_connections;
 		$scope.FixedProbability_allow_self_connections = FixedProbability_allow_self_connections;
@@ -1023,7 +1036,7 @@ graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 't
 		$scope.DistanceDependent_allow_self_connections = DistanceDependent_allow_self_connections;
 
 		if(($scope.synapse_type == "") || ($scope.synapse_type == null)){
-			$scope.synapse_type = "static";
+			$scope.synapse_type = "Static";
 		}
 
 		if(($scope.connectors_type == "") || ($scope.connectors_type == null)){
@@ -1051,6 +1064,9 @@ graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 't
 				synapse_type: $scope.synapse_type,
 				receptor_type: $scope.receptor_type,
 				connectors_type: $scope.connectors_type,
+				TsodyksMarkram_U: $scope.TsodyksMarkram_U,
+				TsodyksMarkram_tau_rec: $scope.TsodyksMarkram_tau_rec,
+				TsodyksMarkram_tau_facil: $scope.TsodyksMarkram_tau_facil,
 				AllToAll_allow_self_connections: $scope.AllToAll_allow_self_connections,
 				FixedProbability_p_connect: $scope.FixedProbability_p_connect,
 				FixedProbability_allow_self_connections: $scope.FixedProbability_allow_self_connections,
@@ -1086,6 +1102,9 @@ graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 't
 				synapse_type: $scope.synapse_type,
 				receptor_type: $scope.receptor_type,
 				connectors_type: $scope.connectors_type,
+				TsodyksMarkram_U: $scope.TsodyksMarkram_U,
+				TsodyksMarkram_tau_rec: $scope.TsodyksMarkram_tau_rec,
+				TsodyksMarkram_tau_facil: $scope.TsodyksMarkram_tau_facil,
 				AllToAll_allow_self_connections: $scope.AllToAll_allow_self_connections,
 				FixedProbability_p_connect: $scope.FixedProbability_p_connec,
 				FixedProbability_allow_self_connections: $scope.FixedProbability_allow_self_connections,
