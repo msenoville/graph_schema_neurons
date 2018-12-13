@@ -624,8 +624,8 @@ p.setup()
 								FixedNumberPost_with_replacement: json_data.FixedNumberPost_with_replacement,
 								FixedNumberPost_allow_self_connections: json_data.FixedNumberPost_allow_self_connections,
 								FixedTotalNumber_n: json_data.FixedTotalNumber_n,
-								FixedTotalNumber_with_replacement: $scope.FixedTotalNumber_with_replacement,
-								FixedTotalNumber_allow_self_connections: $scope.FixedTotalNumber_allow_self_connections,
+								FixedTotalNumber_with_replacement: json_data.FixedTotalNumber_with_replacement,
+								FixedTotalNumber_allow_self_connections: json_data.FixedTotalNumber_allow_self_connections,
 								DistanceDependent_d_expression: json_data.DistanceDependent_d_expression,
 								DistanceDependent_allow_self_connections: json_data.DistanceDependent_allow_self_connections,
 							}
@@ -976,8 +976,18 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 ]);
 
 
-graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 'title', 'close', 'name_value', 'size', 'synapse_type','receptor_type', 'connectors_type', 'FixedProbability_p_connect', 'AllToAll_allow_self_connections', 'FixedProbability_allow_self_connections', 'FromFile_file', 'FromFile_distributed', 'FromFile_safe', 'FromFile_callback', 'FixedNumberPre_n', 'FixedNumberPre_with_replacement', 'FixedNumberPre_allow_self_connections', 'FixedNumberPost_n', 'FixedNumberPost_with_replacement', 'FixedNumberPost_allow_self_connections', 'FixedTotalNumber_n', 'FixedTotalNumber_with_replacement', 'FixedTotalNumber_allow_self_connections', 'DistanceDependent_d_expression', 'DistanceDependent_allow_self_connections',
-	function($scope, $element, title, close, name_value, size, synapse_type, receptor_type, connectors_type, FixedProbability_p_connect, AllToAll_allow_self_connections, FixedProbability_allow_self_connections, FromFile_file, FromFile_distributed, FromFile_safe, FromFile_callback, FixedNumberPre_n, FixedNumberPre_with_replacement, FixedNumberPre_allow_self_connections, FixedNumberPost_n, FixedNumberPost_with_replacement, FixedNumberPost_allow_self_connections, FixedTotalNumber_n, FixedTotalNumber_with_replacement, FixedTotalNumber_allow_self_connections, DistanceDependent_d_expression, DistanceDependent_allow_self_connections) {
+graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 'title', 'close', 'name_value', 'size', 
+'synapse_type','receptor_type', 'connectors_type', 'FixedProbability_p_connect', 'AllToAll_allow_self_connections', 
+'FixedProbability_allow_self_connections', 'FromFile_file', 'FromFile_distributed', 'FromFile_safe', 'FromFile_callback', 
+'FixedNumberPre_n', 'FixedNumberPre_with_replacement', 'FixedNumberPre_allow_self_connections', 'FixedNumberPost_n', 
+'FixedNumberPost_with_replacement', 'FixedNumberPost_allow_self_connections', 'FixedTotalNumber_n', 'FixedTotalNumber_with_replacement', 
+'FixedTotalNumber_allow_self_connections', 'DistanceDependent_d_expression', 'DistanceDependent_allow_self_connections',
+	function($scope, $element, title, close, name_value, size, 
+		synapse_type, receptor_type, connectors_type, FixedProbability_p_connect, AllToAll_allow_self_connections, 
+		FixedProbability_allow_self_connections, FromFile_file, FromFile_distributed, FromFile_safe, FromFile_callback, 
+		FixedNumberPre_n, FixedNumberPre_with_replacement, FixedNumberPre_allow_self_connections, FixedNumberPost_n, 
+		FixedNumberPost_with_replacement, FixedNumberPost_allow_self_connections, FixedTotalNumber_n, FixedTotalNumber_with_replacement, 
+		FixedTotalNumber_allow_self_connections, DistanceDependent_d_expression, DistanceDependent_allow_self_connections) {
 		$scope.title = title;
 		$scope.name_value = name_value;
 		// $scope.level = level;
@@ -985,8 +995,8 @@ graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 't
 		$scope.synapse_type = synapse_type;
 		$scope.receptor_type = receptor_type;
 		$scope.connectors_type = connectors_type;
-		$scope.AllToAll_allow_self_connections = AllToAll_allow_self_connections;
 		$scope.FixedProbability_p_connect = FixedProbability_p_connect;
+		$scope.AllToAll_allow_self_connections = AllToAll_allow_self_connections;
 		$scope.FixedProbability_allow_self_connections = FixedProbability_allow_self_connections;
 		$scope.FromFile_file = FromFile_file;
 		$scope.FromFile_distributed = FromFile_distributed;
