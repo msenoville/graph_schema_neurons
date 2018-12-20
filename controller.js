@@ -514,14 +514,18 @@ p.setup()
 		};
 
 		// Disables built-in DnD in IE (this is needed for cross-frame DnD, see below)
-		if (mxClient.IS_IE)
-		{
+		// if (mxClient.IS_IE)
+		// {
 			mxEvent.addListener(img, 'dragstart', function(evt)
 			{
 				evt.returnValue = false;
 			});
-		}
+		// }
 		
+		// Detect creation of edge (Projections)
+		mxEvent.addListener(mxEvent.CONNECT, function(sender, evt){
+			alert("connect");
+		});
 		// Creates the element that is being for the actual preview.
 		var dragElt = document.createElement('div');
 		dragElt.style.border = 'dashed black 1px';
