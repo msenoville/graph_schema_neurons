@@ -300,10 +300,11 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 									if(synapse_type == 'static'){
 										str_inst += "prj_"+ val.id +" = p.Projection(pop_"+val.source.id+", pop_"+val.target.id+", p.AllToAllConnector(), " +
 										"p.StaticSynapse())\n";
-									} else if(synapse_type == 'receptor_type'){
-										str_inst += "" +
-										" )\n";
 									}
+									// } else if(synapse_type == 'receptor_type'){
+									// 	str_inst += "" +
+									// 	" )\n";
+									// }
 								}
 								if(json_pop_param.connectors_type == "OneToOne"){
 									if(synapse_type == 'static'){
@@ -514,18 +515,18 @@ p.setup()
 		};
 
 		// Disables built-in DnD in IE (this is needed for cross-frame DnD, see below)
-		// if (mxClient.IS_IE)
-		// {
+		if (mxClient.IS_IE)
+		{
 			mxEvent.addListener(img, 'dragstart', function(evt)
 			{
 				evt.returnValue = false;
 			});
-		// }
+		}
 		
 		// Detect creation of edge (Projections)
-		mxEvent.addListener(mxEvent.CONNECT, function(sender, evt){
-			alert("connect");
-		});
+		// mxEvent.addListener(mxEvent.CONNECT, function(sender, evt){
+		// 	alert("connect");
+		// });
 		// Creates the element that is being for the actual preview.
 		var dragElt = document.createElement('div');
 		dragElt.style.border = 'dashed black 1px';
@@ -1040,7 +1041,7 @@ graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 't
 		$scope.DistanceDependent_allow_self_connections = DistanceDependent_allow_self_connections;
 
 		if(($scope.synapse_type == "") || ($scope.synapse_type == null)){
-			$scope.synapse_type = "Static";
+			$scope.synapse_type = "static";
 		}
 
 		if(($scope.connectors_type == "") || ($scope.connectors_type == null)){
