@@ -58360,7 +58360,7 @@ mxGraph.prototype.addCell = function(cell, parent, index, source, target)
 };
 
 /**
- * Function: addCells
+ * Function: s
  * 
  * Adds the cells to the parent at the given index, connecting each cell to
  * the optional source and target terminal. The change is carried out using
