@@ -172,6 +172,10 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 						'}';
 					}
 				}
+				if((val.value == null) && (val.edge == true)){
+					val.value = "default_edge";
+				}
+
 				if(val.value != undefined){
 					try {
 						var json_pop_param = JSON.parse(val.data_cell);
