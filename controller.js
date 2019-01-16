@@ -161,41 +161,16 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 			console.log(cells);
 			angular.forEach(cells, function(val, key){
 				console.log("data cell : " + val.data_cell);
-				if((val.data_cell == undefined) | (val.data_cell == null)){
-					val.data_cell = '{"name_value": "", '+					
-					'"size": "",' +
-					'"celltype": "",' +
-					'"param_v_rest": "",' +
-					'"param_cm": "",' +
-					'"param_tau_m": "",' +
-					'"param_tau_refrac": "",' +
-					'"param_tau_syn_E": "",' +
-					'"param_tau_syn_I": "",' +
-					'"param_i_offset": "",' +
-					'"param_v_reset": "",' +
-					'"param_v_thresh": "",' +
-					'"param_e_rev_E": "",' +
-					'"param_e_rev_I": "",' +
-					'"param_gbar_Na": "",' +
-					'"param_gbar_K": "",' +
-					'"param_g_leak": "",' +
-					'"param_v_offset": "",' +
-					'"param_e_rev_Na": "",' +
-					'"param_e_rev_K": "",' +
-					'"param_e_rev_leak": "",' +
-					'"param_tau_cm": "",' +
-					'"param_v_spike": "",' +
-					'"param_a": "",' +
-					'"param_b": "",' +
-					'"param_delta_T": "",' +
-					'"param_tau_w": "",' +
-					'"init_isyn_exc": "",' +
-					'"init_isyn_inh": "",' +
-					'"init_gsyn_exc": "",' +
-					'"init_gsyn_inh": "",' +
-					'"init_v": "",' +
-					'"init_w": ""' +
-					'}';
+				if((val.data_cell == undefined) | (val.data_cell == null)) {
+					if(val.edge == true){ // Is user doesn't set his own value, generate default line
+						val.data_cell = '{' +
+							'"celltype": "empty_edge"' +
+						'}';
+					} else {
+						val.data_cell = '{' +
+							'"celltype": "empty_no_edge"' +
+						'}';
+					}
 				}
 				if(val.value != undefined){
 					try {
@@ -323,6 +298,14 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 								" , gsyn_inh="+json_pop_param.init_gsyn_inh +
 								" , label="+json_pop_param.name_value +
 								" )\n";
+							}
+							if(json_pop_param.celltype == "empty_edge"){
+								str_inst += "p.Projection(pop_2, pop_2, p.AllToAllConnector(), p.StaticSynapse())";
+							}
+							if(json_pop_param.celltype == "empty_no_edge"){
+								str_inst += "pop_"+ val.id + " = p.Population(" +
+								"1, p.IF_curr_alpha(v_rest=-65 , cm=1 , tau_m=20 , tau_refrac=0 , tau_syn_E=5 , tau_syn_I=5 , i_offset=0 , v_reset=-65 , v_thresh=-50 " +
+								")\n";
 							}
 							if(json_pop_param.celltype == "SpikeSourcePoisson"){
 								str_inst += "";
@@ -850,6 +833,10 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 		$scope.init_gsyn_inh = init_gsyn_inh;
 		$scope.init_v = init_v;
 		$scope.init_w = init_w;
+		
+		if($scope.celltype == "empty_no_edge"){
+			$scope.celltype = "IF_curr_alpha";
+		}
 
 		$scope.updateForm = function() {
 			if(($scope.celltype == "IF_curr_alpha") || ($scope.celltype == "IF_curr_exp")){
@@ -1075,6 +1062,10 @@ graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 't
 		$scope.FixedTotalNumber_allow_self_connections = FixedTotalNumber_allow_self_connections;
 		$scope.DistanceDependent_d_expression = DistanceDependent_d_expression;
 		$scope.DistanceDependent_allow_self_connections = DistanceDependent_allow_self_connections;
+
+		if($scope.celltype == "empty_edge"){
+			$scope.celltype = "projection";
+		}
 
 		if(($scope.synapse_type == "") || ($scope.synapse_type == null)){
 			$scope.synapse_type = "static";
