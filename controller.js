@@ -305,6 +305,7 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 							}
 							if(json_pop_param.celltype == "empty_edge"){
 								str_inst += "p.Projection(pop_2, pop_2, p.AllToAllConnector(), p.StaticSynapse())";
+								str_inst += "pop_3.initialize(v=-65 , isyn_exc=3 , isyn_inh=0 , label=Pop3 )";
 							}
 							if(json_pop_param.celltype == "empty_no_edge"){
 								str_inst += "pop_"+ val.id + " = p.Population(" +
