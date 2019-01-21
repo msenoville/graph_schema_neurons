@@ -791,6 +791,15 @@ p.setup()
 						mxEvent.consume(evt);
 					}
 				});
+				var submenu_color = menu.addItem('Choose color of Cell', null, null);
+				menu.addItem('Subitem 1', null, function()
+				{
+					alert('Subitem 1');
+				}, submenu_color);
+				menu.addItem('Subitem 2', null, function()
+				{
+					alert('Subitem 2');
+				}, submenu_color);
 			}
 		};
 	}
