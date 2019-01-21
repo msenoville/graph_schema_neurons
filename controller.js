@@ -48,12 +48,12 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 		img.class = 'img_utils';
 		img.style.width = '48px';
 		img.style.height = '48px';
-		var img2 = mxUtils.createImage('img/gearRed.png');
-		img2.style.width = '48px';
-		img2.style.height = '48px';
-		var img3 = mxUtils.createImage('img/gearGreen.png');
-		img3.style.width = '48px';
-		img3.style.height = '48px';
+		// var img2 = mxUtils.createImage('img/gearRed.png');
+		// img2.style.width = '48px';
+		// img2.style.height = '48px';
+		// var img3 = mxUtils.createImage('img/gearGreen.png');
+		// img3.style.width = '48px';
+		// img3.style.height = '48px';
 
 		var button_zoom_in = mxUtils.button('', function()
 		{
@@ -429,8 +429,8 @@ p.setup()
 		// document.body.appendChild(div_toolbar);
 		document.getElementById("id_graph_editor").appendChild(div_toolbar);
 		div_toolbar.appendChild(img);
-		div_toolbar.appendChild(img2);
-		div_toolbar.appendChild(img3);
+		// div_toolbar.appendChild(img2);
+		// div_toolbar.appendChild(img3);
 		div_toolbar.appendChild(button_zoom_in);
 		div_toolbar.appendChild(button_zoom_out);
 		div_toolbar.appendChild(button_save);
@@ -513,30 +513,30 @@ p.setup()
 				graph.setSelectionCells(cells);
 			}
 		};
-		var funct2 = function(graph, evt, target, x, y)
-		{
-			var cell = new mxCell('Pop2', new mxGeometry(0, 0, 80, 30),'fontColor=white;fillColor=red');
-			cell.vertex = true;
-			var cells = graph.importCells([cell], x, y, target);
+		// var funct2 = function(graph, evt, target, x, y)
+		// {
+		// 	var cell = new mxCell('Pop2', new mxGeometry(0, 0, 80, 30),'fontColor=white;fillColor=red');
+		// 	cell.vertex = true;
+		// 	var cells = graph.importCells([cell], x, y, target);
 
-			if (cells != null && cells.length > 0)
-			{
-				graph.scrollCellToVisible(cells[0]);
-				graph.setSelectionCells(cells);
-			}
-		};
-		var funct3 = function(graph, evt, target, x, y)
-		{
-			var cell = new mxCell('Pop3', new mxGeometry(0, 0, 80, 30), 'fontColor=white;fillColor=green');
-			cell.vertex = true;
-			var cells = graph.importCells([cell], x, y, target);
+		// 	if (cells != null && cells.length > 0)
+		// 	{
+		// 		graph.scrollCellToVisible(cells[0]);
+		// 		graph.setSelectionCells(cells);
+		// 	}
+		// };
+		// var funct3 = function(graph, evt, target, x, y)
+		// {
+		// 	var cell = new mxCell('Pop3', new mxGeometry(0, 0, 80, 30), 'fontColor=white;fillColor=green');
+		// 	cell.vertex = true;
+		// 	var cells = graph.importCells([cell], x, y, target);
 
-			if (cells != null && cells.length > 0)
-			{
-				graph.scrollCellToVisible(cells[0]);
-				graph.setSelectionCells(cells);
-			}
-		};
+		// 	if (cells != null && cells.length > 0)
+		// 	{
+		// 		graph.scrollCellToVisible(cells[0]);
+		// 		graph.setSelectionCells(cells);
+		// 	}
+		// };
 
 		// Disables built-in DnD in IE (this is needed for cross-frame DnD, see below)
 		if (mxClient.IS_IE)
@@ -562,8 +562,8 @@ p.setup()
 		// the use of the defaults. Note that dx and dy are only used for the
 		// drag icon but not for the preview.
 		var ds = mxUtils.makeDraggable(img, graphF, funct, dragElt, null, null, graph.autoscroll, true);
-		var ds = mxUtils.makeDraggable(img2, graphF, funct2, dragElt, null, null, graph.autoscroll, true);
-		var ds = mxUtils.makeDraggable(img3, graphF, funct3, dragElt, null, null, graph.autoscroll, true);
+		// var ds = mxUtils.makeDraggable(img2, graphF, funct2, dragElt, null, null, graph.autoscroll, true);
+		// var ds = mxUtils.makeDraggable(img3, graphF, funct3, dragElt, null, null, graph.autoscroll, true);
 		// Redirects feature to global switch. Note that this feature should only be used
 		// if the the x and y arguments are used in funct to insert the cell.
 		ds.isGuidesEnabled = function()
