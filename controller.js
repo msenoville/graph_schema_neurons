@@ -54,6 +54,8 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 		// var img3 = mxUtils.createImage('img/gearGreen.png');
 		// img3.style.width = '48px';
 		// img3.style.height = '48px';
+		sp_tb = document.createElement('div');
+		sp_tb.className='space_toolbar';
 
 		var button_zoom_in = mxUtils.button('', function()
 		{
@@ -429,6 +431,7 @@ p.setup()
 		// document.body.appendChild(div_toolbar);
 		document.getElementById("id_graph_editor").appendChild(div_toolbar);
 		div_toolbar.appendChild(img);
+		div_toolbar.appendChild(sp_tb);//blanck space between 2 button in toolbar
 		// div_toolbar.appendChild(img2);
 		// div_toolbar.appendChild(img3);
 		div_toolbar.appendChild(button_zoom_in);

@@ -1,6 +1,13 @@
 #div_toolbar img {
     vertical-align: top;
+    float: left;
 }
+.space_toolbar {
+    float: left;
+    width:48px;
+    height:48px;
+}
+
 #template_form_cell {
     position: relative;
     float: left;
@@ -18,7 +25,9 @@
     padding-right: 15px !important;
 }
 
-
+.navbar {
+    margin-bottom: 0;
+}
 body div.mxPopupMenu {
     -webkit-box-shadow: 3px 3px 6px #C0C0C0;
     -moz-box-shadow: 3px 3px 6px #C0C0C0;
@@ -78,4 +87,8 @@ table.mxPopupMenu tr {
 }
 #celltype {
     display:block!important;
+}
+
+#svg_container{
+    min-width: 100%!important;
 }
