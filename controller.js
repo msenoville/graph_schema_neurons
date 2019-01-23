@@ -792,14 +792,27 @@ p.setup()
 					}
 				});
 				var submenu_color = menu.addItem('Choose color of Cell', null, null);
-				menu.addItem('Subitem 1', null, function()
+				menu.addItem('Red', null, function(state)
 				{
-					alert('Subitem 1');
+					console.log("cell : " + cell.style);
+					cell.style = "fontColor=white;fillColor=red";
 				}, submenu_color);
-				menu.addItem('Subitem 2', null, function()
+				menu.addItem('Green', null, function(state)
 				{
-					alert('Subitem 2');
+					console.log("cell : " + cell.style);
+					cell.style = "fontColor=white;fillColor=green";
 				}, submenu_color);
+				menu.addItem('Blue', null, function(state)
+				{
+					console.log("cell : " + cell.style);
+					cell.style = "fontColor=white;fillColor=blue";
+				}, submenu_color);
+				menu.addItem('Yellow', null, function(state)
+				{
+					console.log("cell : " + cell.style);
+					cell.style = "fontColor=black;fillColor=yellow";
+				}, submenu_color);
+
 			}
 		};
 	}
