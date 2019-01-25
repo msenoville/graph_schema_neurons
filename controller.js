@@ -506,7 +506,7 @@ p.setup()
 		// Inserts a cell at the given location
 		var funct = function(graph, evt, target, x, y)
 		{
-			var cell = new mxCell('Pop1', new mxGeometry(0, 0, 80, 30));
+			var cell = new mxCell('Pop', new mxGeometry(0, 0, 80, 30));
 			cell.vertex = true;
 			var cells = graph.importCells([cell], x, y, target);
 
@@ -792,22 +792,25 @@ p.setup()
 					}
 				});
 				var submenu_color = menu.addItem('Choose color of Cell', null, null);
-				menu.addItem('Red', null, function(state)
+				menu.addItem('Red', null, function()
 				{
 					console.log("cell : " + cell.style);
 					cell.style = "fontColor=white;fillColor=red";
 				}, submenu_color);
-				menu.addItem('Green', null, function(state)
+				menu.addItem('Green', null, function(a, b, c, d)
 				{
 					console.log("cell : " + cell.style);
-					cell.style = "fontColor=white;fillColor=green";
+					graph.getModel().beginUpdate();
+					//cell.style = "fontColor=white;fillColor=green";
+					graph.getModel().cells[cell.id].setStyle("fontColor=white;fillColor=green");
+					graph.getModel().endUpdate();
 				}, submenu_color);
-				menu.addItem('Blue', null, function(state)
+				menu.addItem('Blue', null, function()
 				{
 					console.log("cell : " + cell.style);
 					cell.style = "fontColor=white;fillColor=blue";
 				}, submenu_color);
-				menu.addItem('Yellow', null, function(state)
+				menu.addItem('Yellow', null, function()
 				{
 					console.log("cell : " + cell.style);
 					cell.style = "fontColor=black;fillColor=yellow";
