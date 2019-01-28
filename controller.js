@@ -794,28 +794,34 @@ p.setup()
 				var submenu_color = menu.addItem('Choose color of Cell', null, null);
 				menu.addItem('Red', null, function()
 				{
-					console.log("cell : " + cell.style);
-					cell.style = "fontColor=white;fillColor=red";
+					graph.getModel().cells[cell.id].setStyle("fontColor=white;fillColor=red");
+					graph.refresh();
 				}, submenu_color);
 				menu.addItem('Green', null, function(a, b, c, d)
 				{
-					console.log("cell : " + cell.style);
-					graph.getModel().beginUpdate();
-					//cell.style = "fontColor=white;fillColor=green";
 					graph.getModel().cells[cell.id].setStyle("fontColor=white;fillColor=green");
-					graph.getModel().endUpdate();
+					graph.refresh();
 				}, submenu_color);
 				menu.addItem('Blue', null, function()
 				{
-					console.log("cell : " + cell.style);
-					cell.style = "fontColor=white;fillColor=blue";
+					graph.getModel().cells[cell.id].setStyle("fontColor=white;fillColor=blue");
+					graph.refresh();
 				}, submenu_color);
 				menu.addItem('Yellow', null, function()
 				{
-					console.log("cell : " + cell.style);
-					cell.style = "fontColor=black;fillColor=yellow";
+					graph.getModel().cells[cell.id].setStyle("fontColor=black;fillColor=yellow");
+					graph.refresh();
 				}, submenu_color);
-
+				menu.addItem('Orange', null, function()
+				{
+					graph.getModel().cells[cell.id].setStyle("fontColor=black;fillColor=#ffb700");
+					graph.refresh();
+				}, submenu_color);
+				menu.addItem('Violet', null, function()
+				{
+					graph.getModel().cells[cell.id].setStyle("fontColor=white;fillColor=#9900ff");
+					graph.refresh();
+				}, submenu_color);
 			}
 		};
 	}
