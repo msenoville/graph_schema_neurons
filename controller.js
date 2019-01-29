@@ -792,6 +792,11 @@ p.setup()
 					}
 				});
 				var submenu_color = menu.addItem('Choose color of Cell', null, null);
+				menu.addItem('Default (Light Blue)', null, function()
+				{
+					graph.getModel().cells[cell.id].setStyle("fontColor=#774400;fillColor=#c3d9ff");
+					graph.refresh();
+				}, submenu_color);
 				menu.addItem('Red', null, function()
 				{
 					graph.getModel().cells[cell.id].setStyle("fontColor=white;fillColor=red");
