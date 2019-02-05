@@ -423,6 +423,17 @@ p.setup()
 		button_exp_python.style.background = 'url(\'img/python.png\') no-repeat';
 		button_exp_python.style.backgroundSize = '100%';		
 
+		//create a button to submit job
+		var button_submit = mxUtils.button('', function(){
+
+		});
+		button_submit.style.width = '48px';
+		button_submit.style.height = '48px';
+		button_submit.style.border = 'none';
+		button_submit.style.background = 'url(\'img/submit.png\') no-repeat';
+		button_submit.style.backgroundSize = '100%';
+
+
 		//create toolbar
 		var div_toolbar = document.createElement('div');
 		div_toolbar.id = 'div_toolbar';
@@ -440,6 +451,7 @@ p.setup()
 		div_toolbar.appendChild(button_load);
 		div_toolbar.appendChild(button_clear);
 		div_toolbar.appendChild(button_exp_python);
+		div_toolbar.appendChild(button_submit);
 		
 		var container = document.createElement('div');
 		container.id = 'svg_container';
