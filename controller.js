@@ -19,7 +19,7 @@ graphSchemaApp.controller('scotchController', function($scope) {
     ];    
 });
 
-graphSchemaApp.controller('graphController', function($scope, $rootScope, $state, FileSaver, $sce, ModalService) {	
+graphSchemaApp.controller('graphController', function($scope, $rootScope, $state, FileSaver, $sce, ModalService) {
 	// $state.reload();
 	if (!mxClient.isBrowserSupported())
 	{
@@ -425,7 +425,12 @@ p.setup()
 
 		//create a button to submit job
 		var button_submit = mxUtils.button('', function(){
-
+			ModalService.showModal({
+				templateUrl: "modal_pop_dialog_2.html",
+				controller: "PopDialogController_spike",
+			}).then(function(modal) {
+				
+			});
 		});
 		button_submit.style.width = '48px';
 		button_submit.style.height = '48px';
@@ -528,30 +533,6 @@ p.setup()
 				graph.setSelectionCells(cells);
 			}
 		};
-		// var funct2 = function(graph, evt, target, x, y)
-		// {
-		// 	var cell = new mxCell('Pop2', new mxGeometry(0, 0, 80, 30),'fontColor=white;fillColor=red');
-		// 	cell.vertex = true;
-		// 	var cells = graph.importCells([cell], x, y, target);
-
-		// 	if (cells != null && cells.length > 0)
-		// 	{
-		// 		graph.scrollCellToVisible(cells[0]);
-		// 		graph.setSelectionCells(cells);
-		// 	}
-		// };
-		// var funct3 = function(graph, evt, target, x, y)
-		// {
-		// 	var cell = new mxCell('Pop3', new mxGeometry(0, 0, 80, 30), 'fontColor=white;fillColor=green');
-		// 	cell.vertex = true;
-		// 	var cells = graph.importCells([cell], x, y, target);
-
-		// 	if (cells != null && cells.length > 0)
-		// 	{
-		// 		graph.scrollCellToVisible(cells[0]);
-		// 		graph.setSelectionCells(cells);
-		// 	}
-		// };
 
 		// Disables built-in DnD in IE (this is needed for cross-frame DnD, see below)
 		if (mxClient.IS_IE)
