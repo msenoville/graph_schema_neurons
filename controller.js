@@ -426,10 +426,13 @@ p.setup()
 		//create a button to submit job
 		var button_submit = mxUtils.button('', function(){
 			ModalService.showModal({
-				templateUrl: "modal_pop_dialog_2.html",
-				controller: "PopDialogController_spike",
+				templateUrl: "modal_submit_job.html",
+				controller: "Dlg_submit_job",
+				inputs: {
+					title : "Job Submission",
+				}
 			}).then(function(modal) {
-				
+				console.log("toto");
 			});
 		});
 		button_submit.style.width = '48px';
@@ -1196,5 +1199,11 @@ graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 't
 			}, 100); // close, but give 100ms for bootstrap to animate
 			$('.modal-backdrop').remove();
 		};
+	}
+]);
+
+graphSchemaApp.controller('Dlg_submit_job', ['$scope', 
+	function($scope) {
+		console.log("fkfk");
 	}
 ]);
