@@ -432,6 +432,7 @@ p.setup()
 					title : "Job Submission",
 				}
 			}).then(function(modal) {
+				modal.element.modal();
 				console.log("toto");
 			});
 		});
@@ -1202,8 +1203,9 @@ graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 't
 	}
 ]);
 
-graphSchemaApp.controller('Dlg_submit_job', ['$scope', 
-	function($scope) {
+graphSchemaApp.controller('Dlg_submit_job', ['$scope', '$element', 'title', 'close',
+	function($scope, $element, title, close) {
 		console.log("fkfk");
+		$scope.title = title;
 	}
 ]);
