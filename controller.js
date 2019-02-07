@@ -194,7 +194,6 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 					scriptText : scriptText,
 				}
 			}).then(function(modal) {
-				
 				modal.element.modal();
 				console.log("toto");
 			});
