@@ -159,8 +159,55 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 			var node = encoder.encode(graph.getModel());
 			//var nodeText = new XMLSerializer().serializeToString(node);
 			var cells = graph.getModel().cells;
-			var str_inst = "";
 			console.log(cells);
+			var scriptText = $scope.python_script_string(cells);
+			console.log((scriptText));
+			var blob = new Blob([scriptText], {type: "text/plain;charset=utf-8"});
+			bootbox.prompt("Please give the name to the file (.py extension added automatically) :", function(filename){
+				if(filename != null){
+					if(filename.length <1){
+						FileSaver.saveAs(blob, "exp_python.py");
+					} else {
+						FileSaver.saveAs(blob, filename + ".py");
+					}
+				}
+			});
+		});
+		button_exp_python.style.width = '48px';
+		button_exp_python.style.height = '48px';
+		button_exp_python.style.border = 'none';
+		button_exp_python.style.background = 'url(\'img/python.png\') no-repeat';
+		button_exp_python.style.backgroundSize = '100%';		
+
+		//create a button to submit job
+		var button_submit = mxUtils.button('', function(){
+			var cells = graph.getModel().cells;
+			console.log(cells);
+			var scriptText = $scope.python_script_string(cells);
+			console.log((scriptText));
+			ModalService.showModal({
+				templateUrl: "modal_submit_job.html",
+				controller: "Dlg_submit_job",
+				inputs: {
+					title : "Job Submission",
+					hardware_platform : "",
+					scriptText : scriptText,
+				}
+			}).then(function(modal) {
+				
+				modal.element.modal();
+				console.log("toto");
+			});
+		});
+		button_submit.style.width = '48px';
+		button_submit.style.height = '48px';
+		button_submit.style.border = 'none';
+		button_submit.style.background = 'url(\'img/submit.png\') no-repeat';
+		button_submit.style.backgroundSize = '100%';
+
+		// function to generate string of python script
+		$scope.python_script_string = function(cells){
+			var str_inst = "";
 			angular.forEach(cells, function(val, key){
 				console.log("data cell : " + val.data_cell);
 				if((val.data_cell == undefined) | (val.data_cell == null)) {
@@ -306,8 +353,8 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 								" )\n";
 							}
 							if(json_pop_param.celltype == "empty_edge"){
-								str_inst += "p.Projection(pop_2, pop_2, p.AllToAllConnector(), p.StaticSynapse())";
-								str_inst += "pop_3.initialize(v=-65 , isyn_exc=3 , isyn_inh=0 , label=Pop3 )";
+								str_inst += "p.Projection(pop_2, pop_2, p.AllToAllConnector(), p.StaticSynapse())\n";
+								str_inst += "pop_3.initialize(v=-65 , isyn_exc=3 , isyn_inh=0 , label=Pop3 )\n";
 							}
 							if(json_pop_param.celltype == "empty_no_edge"){
 								str_inst += "pop_"+ val.id + " = p.Population(" +
@@ -405,44 +452,8 @@ p.setup()
 
 `+ str_inst +`
 			`;
-			console.log((scriptText));
-			var blob = new Blob([scriptText], {type: "text/plain;charset=utf-8"});
-			bootbox.prompt("Please give the name to the file (.py extension added automatically) :", function(filename){
-				if(filename != null){
-					if(filename.length <1){
-						FileSaver.saveAs(blob, "exp_python.py");
-					} else {
-						FileSaver.saveAs(blob, filename + ".py");
-					}
-				}
-			});
-		});
-		button_exp_python.style.width = '48px';
-		button_exp_python.style.height = '48px';
-		button_exp_python.style.border = 'none';
-		button_exp_python.style.background = 'url(\'img/python.png\') no-repeat';
-		button_exp_python.style.backgroundSize = '100%';		
-
-		//create a button to submit job
-		var button_submit = mxUtils.button('', function(){
-			ModalService.showModal({
-				templateUrl: "modal_submit_job.html",
-				controller: "Dlg_submit_job",
-				inputs: {
-					title : "Job Submission",
-					hardware_platform : "",
-				}
-			}).then(function(modal) {
-				modal.element.modal();
-				console.log("toto");
-			});
-		});
-		button_submit.style.width = '48px';
-		button_submit.style.height = '48px';
-		button_submit.style.border = 'none';
-		button_submit.style.background = 'url(\'img/submit.png\') no-repeat';
-		button_submit.style.backgroundSize = '100%';
-
+			return scriptText;
+		};
 
 		//create toolbar
 		var div_toolbar = document.createElement('div');
@@ -1208,19 +1219,23 @@ graphSchemaApp.controller('Dlg_submit_job', ['$scope', '$element', 'title', 'clo
 	function($scope, $element, title, close, hardware_platform) {
 		$scope.title = title;
 		$scope.hardware_platform = hardware_platform;
-
 		if(($scope.hardware_platform == "") || ($scope.hardware_platform == null)){
 			$scope.hardware_platform = "string:BrainScaleS";
 		}
+		$scope.beforeClose = function(){
+			$scope.close();
+		};
 		$scope.close = function() {
 			close({
 				hardware_platform: $scope.hardware_platform
-			});
+			}, 100);
+			$('.modal-backdrop').remove();
 		};
 		$scope.cancel = function() {
 			close({
 				hardware_platform: $scope.hardware_platform
-			});
+			}, 100);
+			$('.modal-backdrop').remove();
 		};
 	}
 ]);
