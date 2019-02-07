@@ -430,6 +430,7 @@ p.setup()
 				controller: "Dlg_submit_job",
 				inputs: {
 					title : "Job Submission",
+					hardware_platform : "",
 				}
 			}).then(function(modal) {
 				modal.element.modal();
@@ -1203,9 +1204,23 @@ graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 't
 	}
 ]);
 
-graphSchemaApp.controller('Dlg_submit_job', ['$scope', '$element', 'title', 'close',
-	function($scope, $element, title, close) {
-		console.log("fkfk");
+graphSchemaApp.controller('Dlg_submit_job', ['$scope', '$element', 'title', 'close', 'hardware_platform',
+	function($scope, $element, title, close, hardware_platform) {
 		$scope.title = title;
+		$scope.hardware_platform = hardware_platform;
+
+		if(($scope.hardware_platform == "") || ($scope.hardware_platform == null)){
+			$scope.hardware_platform = "string:BrainScaleS";
+		}
+		$scope.close = function() {
+			close({
+				hardware_platform: $scope.hardware_platform
+			});
+		};
+		$scope.cancel = function() {
+			close({
+				hardware_platform: $scope.hardware_platform
+			});
+		};
 	}
 ]);
