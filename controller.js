@@ -1214,13 +1214,46 @@ graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 't
 	}
 ]);
 
-graphSchemaApp.controller('Dlg_submit_job', ['$scope', '$element', 'title', 'close', 'hardware_platform',
-	function($scope, $element, title, close, hardware_platform) {
+graphSchemaApp.controller('Dlg_submit_job', ['$scope', '$element', '$http', 'title', 'scriptText', 'close', 'hardware_platform',
+	function($scope, $element, $http, title, scriptText, close, hardware_platform) {
 		$scope.title = title;
+		$scope.scriptText = scriptText;
+		$scope.base_url = "";
+
+		var curdate = new Date();
+		$scope.job = {};
+
+		$scope.job.id = 304621;  //default value
+		$scope.job.collab_id = 4293;  //default value
+		$scope.job.log = " ";
+        $scope.job.status = "submitted";
+        $scope.job.timestamp_submission = curdate.toUTCString();
+        $scope.job.timestamp_completion = curdate.toUTCString(); 
+        $scope.job.code = $scope.scriptText;
+        $scope.job.command = "";
+        $scope.job.hardware_config = {};
 		$scope.hardware_platform = hardware_platform;
+        $scope.job.tags = [];
+        $scope.job.input_data = [];
+        $scope.job.output_data = []; 
+        $scope.job.resource_uri = ""; 
+		$scope.inputs = [];
+		
 		if(($scope.hardware_platform == "") || ($scope.hardware_platform == null)){
-			$scope.hardware_platform = "string:BrainScaleS";
+			$scope.hardware_platform = "BrainScaleS";
 		}
+
+		$scope.submitJob = function(job){
+			job_p = JSON.stringify(job);
+			$http.post(job_p, 'https://nmpi.hbpneuromorphic.eu/api/v2/queue/?format=json')
+			.then(function(data, status){
+				console.log("succes : +" + data + "/" + status );
+			});
+			// .error(function(data, status){
+			// 	console.log("failled : +" + data + "/" + status );
+			// });
+		};
+
 		$scope.beforeClose = function(){
 			$scope.close();
 		};
@@ -1228,6 +1261,7 @@ graphSchemaApp.controller('Dlg_submit_job', ['$scope', '$element', 'title', 'clo
 			close({
 				hardware_platform: $scope.hardware_platform
 			}, 100);
+			$scope.submitJob($scope.job);
 			$('.modal-backdrop').remove();
 		};
 		$scope.cancel = function() {
