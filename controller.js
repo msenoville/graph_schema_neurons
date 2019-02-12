@@ -1214,8 +1214,8 @@ graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 't
 	}
 ]);
 
-graphSchemaApp.controller('Dlg_submit_job', ['$scope', '$element', '$http', 'title', 'scriptText', 'close', 'hardware_platform',
-	function($scope, $element, $http, title, scriptText, close, hardware_platform) {
+graphSchemaApp.controller('Dlg_submit_job', ['$scope', '$element', '$http', 'title', 'scriptText', 'close', 'hardware_platform', 'jobService',
+	function($scope, $element, $http, title, scriptText, close, hardware_platform, jobs) {
 		$scope.title = title;
 		$scope.scriptText = scriptText;
 		$scope.base_url = "";
@@ -1243,10 +1243,9 @@ graphSchemaApp.controller('Dlg_submit_job', ['$scope', '$element', '$http', 'tit
 			$scope.hardware_platform = "BrainScaleS";
 		}
 
-		$scope.submitJob = function(job){
+		$scope.submitJob = function(job, jobs){
 			job_p = JSON.stringify(job);
-			$http.post(job_p, 'https://nmpi.hbpneuromorphic.eu/api/v2/queue/?format=json')
-			.then(function(data, status){
+			jobs.post(job_p, function(data, status){
 				console.log("succes : +" + data + "/" + status );
 			});
 			// .error(function(data, status){
