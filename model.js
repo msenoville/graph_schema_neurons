@@ -1,6 +1,6 @@
 var jobService = angular.module('jobService', ['ngResource']);
 
-jobService.factory('jobs', ['$resource',
+jobService.factory('jobService', ['$resource',
   function($resource){
     //return $resource( base_url + '/queue', {id:'@eId'}, {
     return $resource( base_url + '/queue', {}, {

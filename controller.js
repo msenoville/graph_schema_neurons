@@ -19,7 +19,7 @@ graphSchemaApp.controller('scotchController', function($scope) {
     ];    
 });
 
-graphSchemaApp.controller('graphController', function($scope, $rootScope, $state, FileSaver, $sce, ModalService) {
+graphSchemaApp.controller('graphController', function($scope, $rootScope, $state, FileSaver, $sce, ModalService, jobService) {
 	// $state.reload();
 	if (!mxClient.isBrowserSupported())
 	{
@@ -1215,7 +1215,7 @@ graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 't
 ]);
 
 graphSchemaApp.controller('Dlg_submit_job', ['$scope', '$element', '$http', 'title', 'scriptText', 'close', 'hardware_platform', 'jobService',
-	function($scope, $element, $http, title, scriptText, close, hardware_platform, jobs) {
+	function($scope, $element, $http, title, scriptText, close, hardware_platform, jobService) {
 		$scope.title = title;
 		$scope.scriptText = scriptText;
 		$scope.base_url = "";
@@ -1243,9 +1243,9 @@ graphSchemaApp.controller('Dlg_submit_job', ['$scope', '$element', '$http', 'tit
 			$scope.hardware_platform = "BrainScaleS";
 		}
 
-		$scope.submitJob = function(job, jobs){
+		$scope.submitJob = function(job, jobService){
 			job_p = JSON.stringify(job);
-			jobs.post(job_p, function(data, status){
+			jobService.post(job_p, function(data, status){
 				console.log("succes : +" + data + "/" + status );
 			});
 			// .error(function(data, status){

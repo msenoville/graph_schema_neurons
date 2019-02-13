@@ -1,4 +1,4 @@
-var graphSchemaApp = angular.module('graphSchemaApp', ['ui.router', 'ngFileSaver','ngSanitize', 'ui.bootstrap', 'angularModalService']);
+var graphSchemaApp = angular.module('graphSchemaApp', ['ui.router', 'ngFileSaver','ngSanitize', 'ui.bootstrap', 'angularModalService', 'jobService']);
 var base_url = "https://nmpi.hbpneuromorphic.eu/api/v2";
 
 graphSchemaApp.config(function($stateProvider, $urlRouterProvider) {
