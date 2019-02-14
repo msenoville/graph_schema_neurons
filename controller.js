@@ -1246,11 +1246,15 @@ graphSchemaApp.controller('Dlg_submit_job', ['$scope', '$element', '$http', 'tit
 
 		$scope.submitJob = function(job, jobService){
 			job_p = JSON.stringify(job);
-			jobService.post(job_p, function(data, status){
-				console.log("succes : +" + data + "/" + status );
-			});
+			try {			
+				jobService.post(job_p, function(data, status){
+					console.log("succes : +" + data + "/" + status );
+				})
+			} catch(error){
+				console.log("error : " + error);
+			}
 			// .error(function(data, status){
-			// 	console.log("failled : +" + data + "/" + status );
+			//  	console.log("failled : +" + data + "/" + status );
 			// });
 		};
 
