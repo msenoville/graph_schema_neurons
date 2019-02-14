@@ -192,6 +192,7 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 					title : "Job Submission",
 					hardware_platform : "",
 					scriptText : scriptText,
+					jobService : jobService,
 				}
 			}).then(function(modal) {
 				modal.element.modal();
@@ -1260,7 +1261,7 @@ graphSchemaApp.controller('Dlg_submit_job', ['$scope', '$element', '$http', 'tit
 			close({
 				hardware_platform: $scope.hardware_platform
 			}, 100);
-			$scope.submitJob($scope.job);
+			$scope.submitJob($scope.job, jobService);
 			$('.modal-backdrop').remove();
 		};
 		$scope.cancel = function() {
