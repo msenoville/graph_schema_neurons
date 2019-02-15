@@ -975,10 +975,10 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 			$scope.celltype = "IF_curr_alpha";
 		}
 		$scope.beforeClose = function(){
-			if($scope.name_value == ""){
+			if(($scope.name_value == "") || ($scope.name_value == null)){
 				$scope.msgAlert = "Name is required."
 			}
-			else if($scope.size == ""){
+			else if(($scope.size == "") || ($scope.size == null)){
 				$scope.msgAlert = "Size value is required."
 			} else{
 				$scope.close()
@@ -1129,11 +1129,11 @@ graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 't
 		}
 
 		$scope.beforeClose = function(){
-			if($scope.name_value == ""){
+			if(($scope.name_value == "") || ($scope.name_value == null)){
 				$scope.msgAlert = "Name is required.";
-			} else if($scope.size == ""){
+			} else if(($scope.size == "") || ($scope.size == null)){
 				$scope.msgAlert = "Size value is required as integer.";
-			} else if($scope.receptor_type == ""){
+			} else if(($scope.receptor_type == "") || ($scope.receptor_type == null)){
 				$scope.msgAlert = "Receptor type value is required.";
 			}
 			else {
