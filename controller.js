@@ -57,6 +57,33 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 		sp_tb = document.createElement('div');
 		sp_tb.className='space_toolbar';
 
+		//create a button to configure job
+		var button_config = mxUtils.button('', function(){
+			var cells = graph.getModel().cells;
+			console.log(cells);
+			var scriptText = $scope.python_script_string(cells);
+			console.log((scriptText));
+			ModalService.showModal({
+				templateUrl: "modal_config_job.html",
+				controller: "Dlg_config_job",
+				inputs: {
+					title : "Job Settings",
+					hardware_platform : "",
+					scriptText : scriptText,
+					jobService : jobService,
+				}
+			}).then(function(modal) {
+				modal.element.modal();
+				console.log("toto");
+			});
+		});
+		button_config.style.width = '48px';
+		button_config.style.height = '48px';
+		button_config.style.border = 'none';
+		button_config.style.background = 'url(\'img/gearBlack.png\') no-repeat';
+		button_config.style.backgroundSize = '100%';
+
+
 		var button_zoom_in = mxUtils.button('', function()
 		{
 			graph.zoomIn();
@@ -463,6 +490,7 @@ p.setup()
 		// document.body.appendChild(div_toolbar);
 		document.getElementById("id_graph_editor").appendChild(div_toolbar);
 		div_toolbar.appendChild(img);
+		div_toolbar.appendChild(button_config);
 		div_toolbar.appendChild(sp_tb);//blanck space between 2 button in toolbar
 		// div_toolbar.appendChild(img2);
 		// div_toolbar.appendChild(img3);
@@ -1216,6 +1244,69 @@ graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 't
 ]);
 
 graphSchemaApp.controller('Dlg_submit_job', ['$scope', '$element', '$http', 'title', 'scriptText', 'close', 'hardware_platform', 'jobService',
+	function($scope, $element, $http, title, scriptText, close, hardware_platform, jobService) {
+		$scope.title = title;
+		$scope.scriptText = scriptText;
+		$scope.base_url = "";
+
+		var curdate = new Date();
+		$scope.job = {};
+
+		$scope.job.id = 304621;  //default value
+		$scope.job.collab_id = 4293;  //default value
+		$scope.job.log = " ";
+        $scope.job.status = "submitted";
+        $scope.job.timestamp_submission = curdate.toUTCString();
+        $scope.job.timestamp_completion = curdate.toUTCString(); 
+        $scope.job.code = $scope.scriptText;
+        $scope.job.command = "";
+        $scope.job.hardware_config = {};
+		$scope.hardware_platform = hardware_platform;
+        $scope.job.tags = [];
+        $scope.job.input_data = [];
+        $scope.job.output_data = []; 
+        $scope.job.resource_uri = ""; 
+		$scope.inputs = [];
+		
+		if(($scope.hardware_platform == "") || ($scope.hardware_platform == null)){
+			$scope.hardware_platform = "BrainScaleS";
+		}
+
+		$scope.submitJob = function(job, jobService){
+			job_p = JSON.stringify(job);
+			try {			
+				jobService.post(job_p, function(data, status){
+					console.log("succes : +" + data + "/" + status );
+				})
+			} catch(error){
+				console.log("error : " + error);
+			}
+			// .error(function(data, status){
+			//  	console.log("failled : +" + data + "/" + status );
+			// });
+		};
+
+		$scope.beforeClose = function(){
+			$scope.close();
+		};
+		$scope.close = function() {
+			close({
+				hardware_platform: $scope.hardware_platform
+			}, 100);
+			$scope.submitJob($scope.job, jobService);
+			$('.modal-backdrop').remove();
+		};
+		$scope.cancel = function() {
+			close({
+				hardware_platform: $scope.hardware_platform
+			}, 100);
+			$('.modal-backdrop').remove();
+		};
+	}
+]);
+
+
+graphSchemaApp.controller('Dlg_config_job', ['$scope', '$element', '$http', 'title', 'scriptText', 'close', 'hardware_platform', 'jobService',
 	function($scope, $element, $http, title, scriptText, close, hardware_platform, jobService) {
 		$scope.title = title;
 		$scope.scriptText = scriptText;
