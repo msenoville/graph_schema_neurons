@@ -155,41 +155,28 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 
 		// create a button to export to python script
 		var button_exp_python = mxUtils.button('', function(){
-			var encoder = new mxCodec();
-			var node = encoder.encode(graph.getModel());
-			//var nodeText = new XMLSerializer().serializeToString(node);
-			var cells = graph.getModel().cells;
-			console.log(cells);
-			var scriptText = $scope.python_script_string(cells);
-			console.log((scriptText));
-			var blob = new Blob([scriptText], {type: "text/plain;charset=utf-8"});
-			// bootbox.prompt("Please give the name to the file (.py extension added automatically) :", function(filename){
-			// 	if(filename != null){
-			// 		if(filename.length <1){
-			// 			FileSaver.saveAs(blob, "exp_python.py");
-			// 		} else {
-			// 			FileSaver.saveAs(blob, filename + ".py");
-			// 		}
-			// 	}
-			// });
+
 			ModalService.showModal({
 				templateUrl: "modal_script_python.html",
 				controller: "Dlg_script_python",
 				inputs: {
 					title : "Python Script Generator",
 					filename : "",
-					hardware_platform : "",
-					// scriptText : scriptText,
-					// jobService : jobService,
+					hardware_platform : "NEST",
 				}
 			}).then(function(modal) {
 				modal.element.modal();
 				modal.close.then(function(result) {
+					var encoder = new mxCodec();
+					var node = encoder.encode(graph.getModel());
+					var cells = graph.getModel().cells;
+					var scriptText = $scope.python_script_string(cells, result.hardware_platform);
+					var blob = new Blob([scriptText], {type: "text/plain;charset=utf-8"});
 
-			 		if(filename.length <1){
+			 		if(result.filename.length <1){
 			 			FileSaver.saveAs(blob, "exp_python.py");
 			 		} else {
-			 			FileSaver.saveAs(blob, filename + ".py");
+			 			FileSaver.saveAs(blob, result.filename + ".py");
 			 		}
 				});
 			});
@@ -226,7 +213,7 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 		button_submit.style.backgroundSize = '100%';
 
 		// function to generate string of python script
-		$scope.python_script_string = function(cells){
+		$scope.python_script_string = function(cells, hardware_platform){
 			var str_inst = "";
 			angular.forEach(cells, function(val, key){
 				console.log("data cell : " + val.data_cell);
@@ -462,12 +449,24 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 					}
 				}
 			});
+
+			var import_platform = "";
+			if(hardware_platform == "NEST"){
+				import_platform = "import pyNN.nest as p";
+			} else if(hardware_platform == "BrainScaleS"){
+				import_platform = "import pyNN.brainscales as p";
+			} else if(hardware_platform == "SpiNNaker"){
+				import_platform = "import pyNN.spiNNaker as p";
+			} else{
+				import_platform = "import pyNN.nest as p";
+			}
+
 			var scriptText = `
 # coding: utf-8
 #!python
 
 import numpy
-import pyNN.nest as p
+`+ import_platform +`
 p.setup()
 
 `+ str_inst +`
@@ -1297,10 +1296,11 @@ graphSchemaApp.controller('Dlg_submit_job', ['$scope', '$element', '$http', 'tit
 	}
 ]);
 
-graphSchemaApp.controller('Dlg_script_python', ['$scope', '$element', 'title', 'filename',
-	function($scope, $element, title, filename){
+graphSchemaApp.controller('Dlg_script_python', ['$scope', '$element', 'title', 'close', 'filename', 'hardware_platform',
+	function($scope, $element, title, close, filename, hardware_platform){
 		$scope.title = title;
 		$scope.filename = filename;
+		$scope.hardware_platform = hardware_platform;
 
 		$scope.beforeClose = function(){
 			$scope.close();
