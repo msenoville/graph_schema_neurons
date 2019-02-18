@@ -163,14 +163,26 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 			var scriptText = $scope.python_script_string(cells);
 			console.log((scriptText));
 			var blob = new Blob([scriptText], {type: "text/plain;charset=utf-8"});
-			bootbox.prompt("Please give the name to the file (.py extension added automatically) :", function(filename){
-				if(filename != null){
-					if(filename.length <1){
-						FileSaver.saveAs(blob, "exp_python.py");
-					} else {
-						FileSaver.saveAs(blob, filename + ".py");
-					}
+			// bootbox.prompt("Please give the name to the file (.py extension added automatically) :", function(filename){
+			// 	if(filename != null){
+			// 		if(filename.length <1){
+			// 			FileSaver.saveAs(blob, "exp_python.py");
+			// 		} else {
+			// 			FileSaver.saveAs(blob, filename + ".py");
+			// 		}
+			// 	}
+			// });
+			ModalService.showModal({
+				templateUrl: "modal_script_python.html",
+				controller: "Dlg_script_python",
+				inputs: {
+					title : "Python Script Generator",
+					// hardware_platform : "",
+					// scriptText : scriptText,
+					// jobService : jobService,
 				}
+			}).then(function(modal) {
+				modal.element.modal();
 			});
 		});
 		button_exp_python.style.width = '48px';
@@ -196,7 +208,6 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 				}
 			}).then(function(modal) {
 				modal.element.modal();
-				console.log("toto");
 			});
 		});
 		button_submit.style.width = '48px';
@@ -1274,5 +1285,11 @@ graphSchemaApp.controller('Dlg_submit_job', ['$scope', '$element', '$http', 'tit
 			}, 100);
 			$('.modal-backdrop').remove();
 		};
+	}
+]);
+
+graphSchemaApp.controller('Dlg_script_python', ['$scope', '$element', 'title',
+	function($scope, $element, title){
+		$scope.title = title;
 	}
 ]);
