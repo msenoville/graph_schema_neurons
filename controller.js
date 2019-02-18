@@ -177,12 +177,21 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 				controller: "Dlg_script_python",
 				inputs: {
 					title : "Python Script Generator",
-					// hardware_platform : "",
+					filename : "",
+					hardware_platform : "",
 					// scriptText : scriptText,
 					// jobService : jobService,
 				}
 			}).then(function(modal) {
 				modal.element.modal();
+				modal.close.then(function(result) {
+
+			 		if(filename.length <1){
+			 			FileSaver.saveAs(blob, "exp_python.py");
+			 		} else {
+			 			FileSaver.saveAs(blob, filename + ".py");
+			 		}
+				});
 			});
 		});
 		button_exp_python.style.width = '48px';
@@ -1288,8 +1297,28 @@ graphSchemaApp.controller('Dlg_submit_job', ['$scope', '$element', '$http', 'tit
 	}
 ]);
 
-graphSchemaApp.controller('Dlg_script_python', ['$scope', '$element', 'title',
-	function($scope, $element, title){
+graphSchemaApp.controller('Dlg_script_python', ['$scope', '$element', 'title', 'filename',
+	function($scope, $element, title, filename){
 		$scope.title = title;
+		$scope.filename = filename;
+
+		$scope.beforeClose = function(){
+			$scope.close();
+		};
+		$scope.close = function() {
+			close({
+				filename: $scope.filename,
+				hardware_platform: $scope.hardware_platform,
+			}, 100);
+			//$scope.submitJob($scope.job, jobService);
+			$('.modal-backdrop').remove();
+		};
+		$scope.cancel = function() {
+			close({
+				filename: $scope.filename,
+				hardware_platform: $scope.hardware_platform,
+			}, 100);
+			$('.modal-backdrop').remove();
+		};
 	}
 ]);
