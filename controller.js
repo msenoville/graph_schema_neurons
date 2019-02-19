@@ -466,9 +466,12 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 
 import numpy
 `+ import_platform +`
+
 sim.setup()
 
 `+ str_inst +`
+
+sim.end()
 			`;
 			return scriptText;
 		};
