@@ -189,10 +189,7 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 
 		//create a button to submit job
 		var button_submit = mxUtils.button('', function(){
-			var cells = graph.getModel().cells;
-			console.log(cells);
-			var scriptText = $scope.python_script_string(cells);
-			console.log((scriptText));
+			var scriptText = "";
 			ModalService.showModal({
 				templateUrl: "modal_submit_job.html",
 				controller: "Dlg_submit_job",
@@ -204,6 +201,12 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 				}
 			}).then(function(modal) {
 				modal.element.modal();
+				modal.close.then(function(result) {
+					var cells = graph.getModel().cells;
+					console.log(cells);
+					scriptText = $scope.python_script_string(cells, result.hardware_platform);
+					console.log((scriptText));
+				});
 			});
 		});
 		button_submit.style.width = '48px';
