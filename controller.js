@@ -383,7 +383,7 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 								if(json_pop_param.connectors_type == "AllToAll"){
 									if(synapse_type == 'static'){
 										str_inst += "prj_"+ val.id +" = sim.Projection(pop_"+val.source.id+", pop_"+val.target.id+", sim.AllToAllConnector(), " +
-										"sim.StaticSynapse())\n";
+										"sim.StaticSynapse(weight=" + json_pop_param.synaptic_weight + ", delay=" + json_pop_param.synaptic_delay + "), receptor_type='" + json_pop_param.receptor_type+"')\n";
 									}
 									// } else if(synapse_type == 'receptor_type'){
 									// 	str_inst += "" +
@@ -393,7 +393,7 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 								if(json_pop_param.connectors_type == "OneToOne"){
 									if(synapse_type == 'static'){
 										str_inst += "prj_"+ val.id +" = sim.Projection(pop_"+val.source.id+", pop_"+val.target.id+", sim.OneToOneConnector()," +
-										"sim.StaticSynapse())\n";
+										"sim.StaticSynapse(weight=" + json_pop_param.synaptic_weight + ", delay=" + json_pop_param.synaptic_delay + "), receptor_type='" + json_pop_param.receptor_type+"')\n";
 									}
 								}
 								if(json_pop_param.connectors_type == "FixedProbability"){
@@ -403,7 +403,7 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 										json_pop_param.FixedProbability_p_connect + ", " + 
 										json_pop_param.FixedProbability_allow_self_connections +
 										")," +
-										"sim.StaticSynapse())\n";
+										"sim.StaticSynapse(weight=" + json_pop_param.synaptic_weight + ", delay=" + json_pop_param.synaptic_delay + "), receptor_type='" + json_pop_param.receptor_type+"')\n";
 									}
 								}
 								if(json_pop_param.connectors_type == "FromFile"){
@@ -415,7 +415,7 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 										json_pop_param.FromFile_safe + ", " + 
 										json_pop_param.FromFile_callback + 
 										")," +
-										"sim.StaticSynapse())\n";
+										"sim.StaticSynapse(weight=" + json_pop_param.synaptic_weight + ", delay=" + json_pop_param.synaptic_delay + "), receptor_type='" + json_pop_param.receptor_type+"')\n";
 									}
 								}
 								if(json_pop_param.connectors_type == "FixedNumberPre"){
@@ -426,7 +426,7 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 										json_pop_param.FixedNumberPre_with_replacement + ", " +
 										json_pop_param.FixedNumberPre_allow_self_connections +
 										")," +
-										"sim.StaticSynapse())\n";
+										"sim.StaticSynapse(weight=" + json_pop_param.synaptic_weight + ", delay=" + json_pop_param.synaptic_delay + "), receptor_type='" + json_pop_param.receptor_type+"')\n";
 									}
 								}
 								if(json_pop_param.connectors_type == "FixedNumberPost"){
@@ -437,13 +437,13 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 										json_pop_param.FixedNumberPost_with_replacement + ", " +
 										json_pop_param.FixedNumberPost_allow_self_connections +
 										")," +
-										"sim.StaticSynapse())\n";
+										"sim.StaticSynapse(weight=" + json_pop_param.synaptic_weight + ", delay=" + json_pop_param.synaptic_delay + "), receptor_type='" + json_pop_param.receptor_type+"')\n";
 									}
 								}
 								if(json_pop_param.connectors_type == "FixedTotalNumber"){
 									if(synapse_type == 'static'){
 										str_inst += "prj_"+ val.id +" = sim.Projection(pop_"+val.source.id+", pop_"+val.target.id+", sim.FixedTotalNumberConnector()," +
-										"sim.StaticSynapse())\n";
+										"sim.StaticSynapse(weight=" + json_pop_param.synaptic_weight + ", delay=" + json_pop_param.synaptic_delay + "), receptor_type='" + json_pop_param.receptor_type+"')\n";
 									}
 								}
 							} else { // For all populations 
