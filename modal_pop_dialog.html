@@ -56,7 +56,7 @@
                             <div class="col-sm-3">
                                 <input id="param_v_rest" name="param_v_rest" type="number" step="0.1" placeholder="v_rest..." class="form-control input-md" ng-model="param_v_rest">
                             </div>
-                            <div class="control-label col-sm-2">mF</div>
+                            <div class="control-label col-sm-2">mV</div>
                         </div>
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"></div>
@@ -104,7 +104,7 @@
                             <div class="col-sm-3">
                                 <input id="param_i_offset" name="param_i_offset" type="number" step="0.1" placeholder="i_offset..." class="form-control input-md" ng-model="param_i_offset">
                             </div>
-                            <div class="control-label col-sm-2">mF</div>
+                            <div class="control-label col-sm-2">mA</div>
                         </div>
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"></div>
@@ -124,7 +124,7 @@
                         </div>
 
                         <div class="form-group col-sm-12">
-                            <div class="control-label col-sm-2"><b>Initials Values :</b></div>
+                            <div class="control-label col-sm-2"><b>Initial Value :</b></div>
                             <label class="control-label col-sm-2" for="init_v">v : </label>
                             <div class="col-sm-3">
                                 <input id="init_v" name="init_v" type="number" step="0.1" placeholder="v..." class="form-control input-md" ng-model="init_v">
@@ -238,7 +238,7 @@
                             <div class="control-label col-sm-2">mF</div>
                         </div>
                         <div class="form-group col-sm-12">
-                            <div class="control-label col-sm-2"><b>Initials Values :</b></div>
+                            <div class="control-label col-sm-2"><b>Initial Value :</b></div>
                             <label class="control-label col-sm-2" for="init_v">v : </label>
                             <div class="col-sm-3">
                                 <input id="init_v" name="init_v" type="number" step="0.1" placeholder="v..." class="form-control input-md" ng-model="init_v">
@@ -368,7 +368,7 @@
                             <div class="control-label col-sm-2">mF</div>
                         </div>
                         <div class="form-group col-sm-12">
-                            <div class="control-label col-sm-2"><b>Initials Values :</b></div>
+                            <div class="control-label col-sm-2"><b>Initial Value :</b></div>
                             <label class="control-label col-sm-2" for="init_v">v : </label>
                             <div class="col-sm-3">
                                 <input id="init_v" name="init_v" type="number" step="0.1" placeholder="v..." class="form-control input-md" ng-model="init_v">
@@ -523,7 +523,7 @@
                         </div>
 
                         <div class="form-group col-sm-12">
-                            <div class="control-label col-sm-2"><b>Initials Values :</b></div>
+                            <div class="control-label col-sm-2"><b>Initial Value :</b></div>
                             <label class="control-label col-sm-2" for="init_v">v : </label>
                             <div class="col-sm-3">
                                 <input id="init_v" name="init_v" type="number" step="0.1" placeholder="v..." class="form-control input-md" ng-model="init_v">
@@ -590,6 +590,40 @@
                                 <input id="param_spike_times" name="param_spike_times" type="number" step="0.1" placeholder="spike_times..." class="form-control input-md" ng-model="param_spike_times">
                             </div>
                             <div class="control-label col-sm-2">mF</div>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-12">
+                        <div class="form-group col-sm-12">
+                            <div class="control-label col-sm-2"><b>Recording :</b></div>
+                            <label class="control-label col-sm-2" for="Recording_spikes">spikes : </label>
+                            <div class="col-sm-3">
+                                <input id="Recording_spikes" name="Recording_spikes" type="checkbox" class="form-check-input" ng-model="Recording_spikes">
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-12">
+                            <div class="control-label col-sm-2">&nbsp;</div>
+                            <label class="control-label col-sm-2" for="Recording_v">v : </label>
+                            <div class="col-sm-3">
+                                <input id="Recording_v" name="Recording_v" type="checkbox" class="form-check-input" ng-model="Recording_v">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-12">
+                        <div class="form-group col-sm-12">
+                            <div class="control-label col-sm-2"><b>Simulation :</b></div>
+                            <label class="control-label col-sm-2" for="Simulation_time">Simulation time : </label>
+                            <div class="col-sm-3">
+                                <input id="Simulation_time" name="Simulation_time" type="number" step="0.1" placeholder="Simulation time..." class="form-control input-md" ng-model="Simulation_time">
+                            </div>
+                            <div class="control-label col-sm-2">ms</div>
+                        </div>
+                        <div class="form-group col-sm-12">
+                            <div class="control-label col-sm-2">&nbsp;</div>
+                            <label class="control-label col-sm-2" for="Simulation_name">Simulation name : </label>
+                            <div class="col-sm-3">
+                                <input id="Simulation_name" name="Simulation_name" type="text" placeholder="Simulation name..." class="form-control input-md" ng-model="Simulation_name">
+                            </div>
+                            <div class="control-label col-sm-2">&nbsp;</div>
                         </div>
                     </div>
                 </form>
