@@ -441,6 +441,19 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 										"sim.StaticSynapse())\n";
 									}
 								}
+							} else { // For all populations 
+								if(json_pop_param.Recording_spikes == true){
+									str_inst = "pop_" + val.id + ".record('spikes')\n";
+								}
+								if(json_pop_param.Recording_v == true){
+									str_inst = "pop_" + val.id + ".record('v')\n";
+								}
+								if((json_pop_param.Simulation_time != null) && (json_pop_param.Simulation_time != "")){
+									str_inst = "sim.run(" + json_pop_param.Simulation_time + ")\n";
+								}
+								if((json_pop_param.Simulation_name != null) && (json_pop_param.Simulation_name != "")){
+									str_inst = "pop_" + val.id + ".write_data(" + json_pop_param.Simulation_name + ")\n";
+								}
 							}
 						} catch(error) {
 							str_inst += "";
@@ -755,7 +768,11 @@ sim.end()
 							"init_gsyn_exc": "",
 							"init_gsyn_inh": "",
 							"init_v": "",
-							"init_w": ""
+							"init_w": "",
+							"Recording_spikes": "",
+							"Recording_v": "",
+							"Simulation_time": "",
+							"Simulation_name": ""
 						};
 					}
 					ModalService.showModal({
@@ -797,6 +814,10 @@ sim.end()
 							init_gsyn_inh: json_data.init_gsyn_inh,
 							init_v: json_data.init_v,
 							init_w: json_data.init_w,
+							Recording_spikes: json_data.Recording_spikes,
+							Recording_v: json_data.Recording_v,
+							Simulation_time: json_data.Simulation_time,
+							Simulation_name: json_data.Simulation_name
 						}
 					}).then(function(modal) {
 						modal.element.modal();
@@ -867,11 +888,13 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 'param_i_offset', 'param_v_reset', 'param_v_thresh', 'param_e_rev_E', 'param_e_rev_I', 'param_gbar_Na', 'param_gbar_K', 'param_g_leak', 
 'param_v_offset', 'param_e_rev_Na', 'param_e_rev_K', 'param_e_rev_leak', 'param_tau_cm', 'param_v_spike', 'param_a', 'param_b', 
 'param_delta_T', 'param_tau_w', 'init_isyn_exc', 'init_isyn_inh', 'init_gsyn_exc', 'init_gsyn_inh', 'init_v', 'init_w',
-	function($scope, $element, title, close, name_value, size, celltype, 
+'Recording_spikes', 'Recording_v', 'Simulation_time', 'Simulation_name',
+	function($scope, $element, title, close, name_value, size, celltype,
 		param_v_rest, param_cm, param_tau_m, param_tau_m, param_tau_m, param_tau_refrac, param_tau_syn_E, param_tau_syn_I, 
 		param_i_offset, param_v_reset, param_v_thresh, param_e_rev_E, param_e_rev_I, param_gbar_Na, param_gbar_K, param_g_leak, 
 		param_v_offset, param_e_rev_Na, param_e_rev_K, param_e_rev_leak, param_tau_cm, param_v_spike, param_a, param_b, 
-		param_delta_T, param_tau_w, init_isyn_exc, init_isyn_inh, init_gsyn_exc, init_gsyn_inh, init_v, init_w) {
+		param_delta_T, param_tau_w, init_isyn_exc, init_isyn_inh, init_gsyn_exc, init_gsyn_inh, init_v, init_w,
+		Recording_spikes, Recording_v, Simulation_time, Simulation_name) {
 		$scope.title = title;
 		$scope.name_value = name_value;
 		// $scope.level = level;
@@ -907,6 +930,10 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 		$scope.init_gsyn_inh = init_gsyn_inh;
 		$scope.init_v = init_v;
 		$scope.init_w = init_w;
+		$scope.Recording_spikes = Recording_spikes;
+		$scope.Recording_v = Recording_v;
+		$scope.Simulation_time = Simulation_time;
+		$scope.Simulation_name = Simulation_name;
 		
 		if($scope.celltype == "empty_no_edge"){
 			$scope.celltype = "IF_curr_alpha";
@@ -1041,6 +1068,10 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 				init_gsyn_inh: $scope.init_gsyn_inh,
 				init_v: $scope.init_v,
 				init_w: $scope.init_w,
+				Recording_spikes: $scope.Recording_spikes,
+				Recording_v: $scope.Recording_v,
+				Simulation_time: $scope.Simulation_time,
+				Simulation_name: $scope.Simulation_name,
 			}, 100);
 			$('.modal-backdrop').remove();
 		};
@@ -1085,6 +1116,10 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 				init_gsyn_inh: init_gsyn_inh,
 				init_v: init_v,
 				init_w: init_w,
+				Recording_spikes: $scope.Recording_spikes,
+				Recording_v: $scope.Recording_v,
+				Simulation_time: $scope.Simulation_time,
+				Simulation_name: $scope.Simulation_name,
 			}, 100); // close, but give 100ms for bootstrap to animate
 			$('.modal-backdrop').remove();
 		};
@@ -1152,8 +1187,8 @@ graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 't
 		$scope.beforeClose = function(){
 			if(($scope.name_value == "") || ($scope.name_value == null)){
 				$scope.msgAlert = "Name is required.";
-			} else if(($scope.size == "") || ($scope.size == null)){
-				$scope.msgAlert = "Size value is required as integer.";
+			// } else if(($scope.size == "") || ($scope.size == null)){
+			// 	$scope.msgAlert = "Size value is required as integer.";
 			} else if(($scope.receptor_type == "") || ($scope.receptor_type == null)){
 				$scope.msgAlert = "Receptor type value is required.";
 			}
