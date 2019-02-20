@@ -171,6 +171,7 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 					var node = encoder.encode(graph.getModel());
 					var cells = graph.getModel().cells;
 					var scriptText = $scope.python_script_string(cells, result.hardware_platform);
+					console.log((scriptText));
 					var blob = new Blob([scriptText], {type: "text/plain;charset=utf-8"});
 
 			 		if(result.filename.length <1){
@@ -245,7 +246,7 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 						try {
 							if(json_pop_param.celltype == "IF_curr_alpha"){
 								str_inst += "pop_"+ val.id +" = " +
-								"p.Population(" + json_pop_param.size + ", p.IF_curr_alpha(v_rest="+json_pop_param.param_v_rest +
+								"sim.Population(" + json_pop_param.size + ", sim.IF_curr_alpha(v_rest="+json_pop_param.param_v_rest +
 								" , cm="+json_pop_param.param_cm +
 								" , tau_m="+json_pop_param.param_tau_m +
 								" , tau_refrac="+json_pop_param.param_tau_refrac +
@@ -262,7 +263,7 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 								" )\n";
 							}
 							if(json_pop_param.celltype == "IF_curr_exp"){
-								str_inst += "pop_"+ val.id +" = p.Population(" + json_pop_param.size + ", p.IF_curr_exp(v_rest="+json_pop_param.param_v_rest +
+								str_inst += "pop_"+ val.id +" = sim.Population(" + json_pop_param.size + ", sim.IF_curr_exp(v_rest="+json_pop_param.param_v_rest +
 								" , cm="+json_pop_param.param_cm +
 								" , tau_m="+json_pop_param.param_tau_m +
 								" , tau_refrac="+json_pop_param.param_tau_refrac +
@@ -279,7 +280,7 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 								" )\n";
 							}
 							if(json_pop_param.celltype == "IF_cond_alpha"){
-								str_inst += "pop_"+ val.id +" = p.Population(" + json_pop_param.size + ", p.IF_cond_alpha(v_rest="+json_pop_param.param_v_rest +
+								str_inst += "pop_"+ val.id +" = sim.Population(" + json_pop_param.size + ", sim.IF_cond_alpha(v_rest="+json_pop_param.param_v_rest +
 								" , cm="+json_pop_param.param_cm +
 								" , tau_m="+json_pop_param.param_tau_m +
 								" , tau_refrac="+json_pop_param.param_tau_refrac +
@@ -298,7 +299,7 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 								" )\n";
 							}
 							if(json_pop_param.celltype == "IF_cond_exp"){
-								str_inst += "pop_"+ val.id +" = p.Population(" + json_pop_param.size + ", p.IF_cond_exp(v_rest="+json_pop_param.param_v_rest +
+								str_inst += "pop_"+ val.id +" = sim.Population(" + json_pop_param.size + ", sim.IF_cond_exp(v_rest="+json_pop_param.param_v_rest +
 								" , cm="+json_pop_param.param_cm +
 								" , tau_m="+json_pop_param.param_tau_m +
 								" , tau_refrac="+json_pop_param.param_tau_refrac +
@@ -317,7 +318,7 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 								" )\n";
 							}
 							if(json_pop_param.celltype == "HH_cond_exp"){
-								str_inst += "pop_"+ val.id +" = p.Population(" + json_pop_param.size + ", p.HH_cond_exp(gbar_Na="+json_pop_param.param_gbar_Na +
+								str_inst += "pop_"+ val.id +" = sim.Population(" + json_pop_param.size + ", sim.HH_cond_exp(gbar_Na="+json_pop_param.param_gbar_Na +
 								" , gbar_K="+json_pop_param.param_gbar_K +
 								" , g_leak="+json_pop_param.param_g_leak +
 								" , cm="+json_pop_param.param_cm +
@@ -338,7 +339,7 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 								" )\n";
 							}
 							if(json_pop_param.celltype == "EIF_cond_alpha_isfa_ista"){
-								str_inst += "pop_"+ val.id +" = p.Population(" + json_pop_param.size + ", p.EIF_cond_alpha_isfa_ista(cm="+json_pop_param.param_cm +
+								str_inst += "pop_"+ val.id +" = sim.Population(" + json_pop_param.size + ", sim.EIF_cond_alpha_isfa_ista(cm="+json_pop_param.param_cm +
 								" , tau_refrac="+json_pop_param.param_tau_refrac +
 								" , v_spike="+json_pop_param.param_v_spike +
 								" , v_reset="+json_pop_param.param_v_reset +
@@ -363,12 +364,12 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 								" )\n";
 							}
 							if(json_pop_param.celltype == "empty_edge"){
-								str_inst += "p.Projection(pop_2, pop_2, p.AllToAllConnector(), p.StaticSynapse())\n";
+								str_inst += "sim.Projection(pop_2, pop_2, sim.AllToAllConnector(), sim.StaticSynapse())\n";
 								str_inst += "pop_3.initialize(v=-65 , isyn_exc=3 , isyn_inh=0 , label=Pop3 )\n";
 							}
 							if(json_pop_param.celltype == "empty_no_edge"){
-								str_inst += "pop_"+ val.id + " = p.Population(" +
-								"1, p.IF_curr_alpha(v_rest=-65 , cm=1 , tau_m=20 , tau_refrac=0 , tau_syn_E=5 , tau_syn_I=5 , i_offset=0 , v_reset=-65 , v_thresh=-50 " +
+								str_inst += "pop_"+ val.id + " = sim.Population(" +
+								"1, sim.IF_curr_alpha(v_rest=-65 , cm=1 , tau_m=20 , tau_refrac=0 , tau_syn_E=5 , tau_syn_I=5 , i_offset=0 , v_reset=-65 , v_thresh=-50 " +
 								")\n";
 							}
 							if(json_pop_param.celltype == "SpikeSourcePoisson"){
@@ -381,69 +382,78 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 								var synapse_type = json_pop_param.synapse_type
 								if(json_pop_param.connectors_type == "AllToAll"){
 									if(synapse_type == 'static'){
-										str_inst += "prj_"+ val.id +" = p.Projection(pop_"+val.source.id+", pop_"+val.target.id+", p.AllToAllConnector(), " +
-										"p.StaticSynapse())\n";
+										str_inst += "prj_"+ val.id +" = sim.Projection(pop_"+val.source.id+", pop_"+val.target.id+", sim.AllToAllConnector(), " +
+										"sim.StaticSynapse())\n";
 									}
-									// } else if(synapse_type == 'receptor_type'){
-									// 	str_inst += "" +
-									// 	" )\n";
-									// }
 								}
 								if(json_pop_param.connectors_type == "OneToOne"){
 									if(synapse_type == 'static'){
-										str_inst += "prj_"+ val.id +" = p.Projection(pop_"+val.source.id+", pop_"+val.target.id+", p.OneToOneConnector()," +
-										"p.StaticSynapse())\n";
+										str_inst += "prj_"+ val.id +" = sim.Projection(pop_"+val.source.id+", pop_"+val.target.id+", sim.OneToOneConnector()," +
+										"sim.StaticSynapse())\n";
 									}
 								}
 								if(json_pop_param.connectors_type == "FixedProbability"){
 									if(synapse_type == 'static'){
-										str_inst += "prj_"+ val.id +" = p.Projection(pop_"+val.source.id+", pop_"+val.target.id+
-										", p.FixedProbabilityConnector(" + 
+										str_inst += "prj_"+ val.id +" = sim.Projection(pop_"+val.source.id+", pop_"+val.target.id+
+										", sim.FixedProbabilityConnector(" + 
 										json_pop_param.FixedProbability_p_connect + ", " + 
 										json_pop_param.FixedProbability_allow_self_connections +
 										")," +
-										"p.StaticSynapse())\n";
+										"sim.StaticSynapse())\n";
 									}
 								}
 								if(json_pop_param.connectors_type == "FromFile"){
 									if(synapse_type == 'static'){
-										str_inst += "prj_"+ val.id +" = p.Projection(pop_"+val.source.id + ", pop_"+val.target.id + 
-										", p.FromFileConnector(" +
+										str_inst += "prj_"+ val.id +" = sim.Projection(pop_"+val.source.id + ", pop_"+val.target.id + 
+										", sim.FromFileConnector(" +
 										json_pop_param.FromFile_file + ", " + 
 										json_pop_param.FromFile_distributed + ", " + 
 										json_pop_param.FromFile_safe + ", " + 
 										json_pop_param.FromFile_callback + 
 										")," +
-										"p.StaticSynapse())\n";
+										"sim.StaticSynapse())\n";
 									}
 								}
 								if(json_pop_param.connectors_type == "FixedNumberPre"){
 									if(synapse_type == 'static'){
-										str_inst += "prj_"+ val.id +" = p.Projection(pop_"+val.source.id+", pop_"+val.target.id + 
-										", p.FixedNumberPreConnector(" + 
+										str_inst += "prj_"+ val.id +" = sim.Projection(pop_"+val.source.id+", pop_"+val.target.id + 
+										", sim.FixedNumberPreConnector(" + 
 										json_pop_param.FixedNumberPre_n + ", " +
 										json_pop_param.FixedNumberPre_with_replacement + ", " +
 										json_pop_param.FixedNumberPre_allow_self_connections +
 										")," +
-										"p.StaticSynapse())\n";
+										"sim.StaticSynapse())\n";
 									}
 								}
 								if(json_pop_param.connectors_type == "FixedNumberPost"){
 									if(synapse_type == 'static'){
-										str_inst += "prj_"+ val.id +" = p.Projection(pop_"+val.source.id+", pop_"+val.target.id + 
-										", p.FixedNumberPostConnector(" + 
+										str_inst += "prj_"+ val.id +" = sim.Projection(pop_"+val.source.id+", pop_"+val.target.id + 
+										", sim.FixedNumberPostConnector(" + 
 										json_pop_param.FixedNumberPost_n + ", " +
 										json_pop_param.FixedNumberPost_with_replacement + ", " +
 										json_pop_param.FixedNumberPost_allow_self_connections +
 										")," +
-										"p.StaticSynapse())\n";
+										"sim.StaticSynapse())\n";
 									}
 								}
 								if(json_pop_param.connectors_type == "FixedTotalNumber"){
 									if(synapse_type == 'static'){
-										str_inst += "prj_"+ val.id +" = p.Projection(pop_"+val.source.id+", pop_"+val.target.id+", p.FixedTotalNumberConnector()," +
-										"p.StaticSynapse())\n";
+										str_inst += "prj_"+ val.id +" = sim.Projection(pop_"+val.source.id+", pop_"+val.target.id+", sim.FixedTotalNumberConnector()," +
+										"sim.StaticSynapse())\n";
 									}
+								}
+							} else { // For all populations 
+								if(json_pop_param.Recording_spikes == true){
+									str_inst += "pop_" + val.id + ".record('spikes')\n";
+								}
+								if(json_pop_param.Recording_v == true){
+									str_inst += "pop_" + val.id + ".record('v')\n";
+								}
+								if((json_pop_param.Simulation_time != null) && (json_pop_param.Simulation_time != "")){
+									str_inst += "sim.run(" + json_pop_param.Simulation_time + ")\n";
+								}
+								if((json_pop_param.Simulation_name != null) && (json_pop_param.Simulation_name != "")){
+									str_inst += "pop_" + val.id + ".write_data(" + json_pop_param.Simulation_name + ")\n";
 								}
 							}
 						} catch(error) {
@@ -455,13 +465,13 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 
 			var import_platform = "";
 			if(hardware_platform == "NEST"){
-				import_platform = "import pyNN.nest as p";
+				import_platform = "import pyNN.nest as sim";
 			} else if(hardware_platform == "BrainScaleS"){
-				import_platform = "import pyNN.brainscales as p";
+				import_platform = "import pyNN.brainscales as sim";
 			} else if(hardware_platform == "SpiNNaker"){
-				import_platform = "import pyNN.spiNNaker as p";
+				import_platform = "import pyNN.spiNNaker as sim";
 			} else{
-				import_platform = "import pyNN.nest as p";
+				import_platform = "import pyNN.nest as sim";
 			}
 
 			var scriptText = `
@@ -470,9 +480,12 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 
 import numpy
 `+ import_platform +`
-p.setup()
+
+sim.setup()
 
 `+ str_inst +`
+
+sim.end()
 			`;
 			return scriptText;
 		};
@@ -756,7 +769,11 @@ p.setup()
 							"init_gsyn_exc": "",
 							"init_gsyn_inh": "",
 							"init_v": "",
-							"init_w": ""
+							"init_w": "",
+							"Recording_spikes": "",
+							"Recording_v": "",
+							"Simulation_time": "",
+							"Simulation_name": ""
 						};
 					}
 					ModalService.showModal({
@@ -798,6 +815,10 @@ p.setup()
 							init_gsyn_inh: json_data.init_gsyn_inh,
 							init_v: json_data.init_v,
 							init_w: json_data.init_w,
+							Recording_spikes: json_data.Recording_spikes,
+							Recording_v: json_data.Recording_v,
+							Simulation_time: json_data.Simulation_time,
+							Simulation_name: json_data.Simulation_name
 						}
 					}).then(function(modal) {
 						modal.element.modal();
@@ -868,11 +889,13 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 'param_i_offset', 'param_v_reset', 'param_v_thresh', 'param_e_rev_E', 'param_e_rev_I', 'param_gbar_Na', 'param_gbar_K', 'param_g_leak', 
 'param_v_offset', 'param_e_rev_Na', 'param_e_rev_K', 'param_e_rev_leak', 'param_tau_cm', 'param_v_spike', 'param_a', 'param_b', 
 'param_delta_T', 'param_tau_w', 'init_isyn_exc', 'init_isyn_inh', 'init_gsyn_exc', 'init_gsyn_inh', 'init_v', 'init_w',
-	function($scope, $element, title, close, name_value, size, celltype, 
+'Recording_spikes', 'Recording_v', 'Simulation_time', 'Simulation_name',
+	function($scope, $element, title, close, name_value, size, celltype,
 		param_v_rest, param_cm, param_tau_m, param_tau_m, param_tau_m, param_tau_refrac, param_tau_syn_E, param_tau_syn_I, 
 		param_i_offset, param_v_reset, param_v_thresh, param_e_rev_E, param_e_rev_I, param_gbar_Na, param_gbar_K, param_g_leak, 
 		param_v_offset, param_e_rev_Na, param_e_rev_K, param_e_rev_leak, param_tau_cm, param_v_spike, param_a, param_b, 
-		param_delta_T, param_tau_w, init_isyn_exc, init_isyn_inh, init_gsyn_exc, init_gsyn_inh, init_v, init_w) {
+		param_delta_T, param_tau_w, init_isyn_exc, init_isyn_inh, init_gsyn_exc, init_gsyn_inh, init_v, init_w,
+		Recording_spikes, Recording_v, Simulation_time, Simulation_name) {
 		$scope.title = title;
 		$scope.name_value = name_value;
 		// $scope.level = level;
@@ -908,6 +931,10 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 		$scope.init_gsyn_inh = init_gsyn_inh;
 		$scope.init_v = init_v;
 		$scope.init_w = init_w;
+		$scope.Recording_spikes = Recording_spikes;
+		$scope.Recording_v = Recording_v;
+		$scope.Simulation_time = Simulation_time;
+		$scope.Simulation_name = Simulation_name;
 		
 		if($scope.celltype == "empty_no_edge"){
 			$scope.celltype = "IF_curr_alpha";
@@ -1042,6 +1069,10 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 				init_gsyn_inh: $scope.init_gsyn_inh,
 				init_v: $scope.init_v,
 				init_w: $scope.init_w,
+				Recording_spikes: $scope.Recording_spikes,
+				Recording_v: $scope.Recording_v,
+				Simulation_time: $scope.Simulation_time,
+				Simulation_name: $scope.Simulation_name,
 			}, 100);
 			$('.modal-backdrop').remove();
 		};
@@ -1086,6 +1117,10 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 				init_gsyn_inh: init_gsyn_inh,
 				init_v: init_v,
 				init_w: init_w,
+				Recording_spikes: $scope.Recording_spikes,
+				Recording_v: $scope.Recording_v,
+				Simulation_time: $scope.Simulation_time,
+				Simulation_name: $scope.Simulation_name,
 			}, 100); // close, but give 100ms for bootstrap to animate
 			$('.modal-backdrop').remove();
 		};
@@ -1153,8 +1188,8 @@ graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 't
 		$scope.beforeClose = function(){
 			if(($scope.name_value == "") || ($scope.name_value == null)){
 				$scope.msgAlert = "Name is required.";
-			} else if(($scope.size == "") || ($scope.size == null)){
-				$scope.msgAlert = "Size value is required as integer.";
+			// } else if(($scope.size == "") || ($scope.size == null)){
+			// 	$scope.msgAlert = "Size value is required as integer.";
 			} else if(($scope.receptor_type == "") || ($scope.receptor_type == null)){
 				$scope.msgAlert = "Receptor type value is required.";
 			}
