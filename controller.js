@@ -171,6 +171,7 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 					var node = encoder.encode(graph.getModel());
 					var cells = graph.getModel().cells;
 					var scriptText = $scope.python_script_string(cells, result.hardware_platform);
+					console.log((scriptText));
 					var blob = new Blob([scriptText], {type: "text/plain;charset=utf-8"});
 
 			 		if(result.filename.length <1){
@@ -443,16 +444,16 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 								}
 							} else { // For all populations 
 								if(json_pop_param.Recording_spikes == true){
-									str_inst = "pop_" + val.id + ".record('spikes')\n";
+									str_inst += "pop_" + val.id + ".record('spikes')\n";
 								}
 								if(json_pop_param.Recording_v == true){
-									str_inst = "pop_" + val.id + ".record('v')\n";
+									str_inst += "pop_" + val.id + ".record('v')\n";
 								}
 								if((json_pop_param.Simulation_time != null) && (json_pop_param.Simulation_time != "")){
-									str_inst = "sim.run(" + json_pop_param.Simulation_time + ")\n";
+									str_inst += "sim.run(" + json_pop_param.Simulation_time + ")\n";
 								}
 								if((json_pop_param.Simulation_name != null) && (json_pop_param.Simulation_name != "")){
-									str_inst = "pop_" + val.id + ".write_data(" + json_pop_param.Simulation_name + ")\n";
+									str_inst += "pop_" + val.id + ".write_data(" + json_pop_param.Simulation_name + ")\n";
 								}
 							}
 						} catch(error) {
