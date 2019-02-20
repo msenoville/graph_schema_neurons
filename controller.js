@@ -638,10 +638,11 @@ p.setup()
 							var json_data = {
 								"name_value": "",
 								// "level": "",
-								"size": "",
 								"synapse_type": "",
 								"receptor_type": "",
 								"connectors_type": "",
+								"synaptic_weight": "",
+								"synaptic_delay": "",
 								"TsodyksMarkram_U": "",
 								"TsodyksMarkram_tau_rec": "",
 								"TsodyksMarkram_tau_facil": "",
@@ -672,10 +673,11 @@ p.setup()
 								title : "Projection Form Editor",
 								name_value: cell.value,
 								// level: json_data.level,
-								size: json_data.size,
 								synapse_type: json_data.synapse_type,
 								receptor_type: json_data.receptor_type,
 								connectors_type: json_data.connectors_type,
+								synaptic_weight: json_data.synaptic_weight,
+								synaptic_delay: json_data.synaptic_delay,
 								TsodyksMarkram_U: json_data.TsodyksMarkram_U,
 								TsodyksMarkram_tau_rec: json_data.TsodyksMarkram_tau_rec,
 								TsodyksMarkram_tau_facil: json_data.TsodyksMarkram_tau_facil,				
@@ -1093,16 +1095,18 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 ]);
 
 
-graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 'title', 'close', 'name_value', 'size', 
-'synapse_type','receptor_type', 'connectors_type', 
+graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 'title', 'close', 'name_value',
+'synapse_type','receptor_type', 'connectors_type',
+'synaptic_weight', 'synaptic_delay',
 'TsodyksMarkram_U', 'TsodyksMarkram_tau_rec', 'TsodyksMarkram_tau_facil',
 'FixedProbability_p_connect', 'AllToAll_allow_self_connections', 
 'FixedProbability_allow_self_connections', 'FromFile_file', 'FromFile_distributed', 'FromFile_safe', 'FromFile_callback', 
 'FixedNumberPre_n', 'FixedNumberPre_with_replacement', 'FixedNumberPre_allow_self_connections', 'FixedNumberPost_n', 
 'FixedNumberPost_with_replacement', 'FixedNumberPost_allow_self_connections', 'FixedTotalNumber_n', 'FixedTotalNumber_with_replacement', 
 'FixedTotalNumber_allow_self_connections', 'DistanceDependent_d_expression', 'DistanceDependent_allow_self_connections',
-	function($scope, $element, title, close, name_value, size, 
-		synapse_type, receptor_type, connectors_type, 
+	function($scope, $element, title, close, name_value, 
+		synapse_type, receptor_type, connectors_type,
+		synaptic_weight, synaptic_delay, 
 		TsodyksMarkram_U, TsodyksMarkram_tau_rec, TsodyksMarkram_tau_facil,
 		FixedProbability_p_connect, AllToAll_allow_self_connections, 
 		FixedProbability_allow_self_connections, FromFile_file, FromFile_distributed, FromFile_safe, FromFile_callback, 
@@ -1112,10 +1116,11 @@ graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 't
 		$scope.title = title;
 		$scope.name_value = name_value;
 		// $scope.level = level;
-		$scope.size = size;
 		$scope.synapse_type = synapse_type;
 		$scope.receptor_type = receptor_type;
 		$scope.connectors_type = connectors_type;
+		$scope.synaptic_weight = synaptic_weight;
+		$scope.synaptic_delay = synaptic_delay;
 		$scope.TsodyksMarkram_U = TsodyksMarkram_U;
 		$scope.TsodyksMarkram_tau_rec = TsodyksMarkram_tau_rec;
 		$scope.TsodyksMarkram_tau_facil = TsodyksMarkram_tau_facil;
@@ -1146,6 +1151,20 @@ graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 't
 			$scope.synapse_type = "static";
 		}
 
+		// $scope.updateForm = function() {
+		// 	if(($scope.synaptic_weight == "") || ($scope.synaptic_weight == null)){ $scope.synaptic_weight = 0,0; }
+		// 	if(($scope.synaptic_delay == "") || ($scope.synaptic_delay == null)){ $scope.synaptic_delay = 0,0; }
+		// 	if(($scope.synapse_type == "TsodyksMarkram")){
+		// 		if(($scope.TsodyksMarkram_U == "") || ($scope.TsodyksMarkram_U == null)){ $scope.TsodyksMarkram_U = 0,5; }
+		// 		if(($scope.TsodyksMarkram_tau_rec == "") || ($scope.TsodyksMarkram_tau_rec == null)){ $scope.TsodyksMarkram_tau_rec = 100,0; }
+		// 		if(($scope.TsodyksMarkram_tau_facil == "") || ($scope.TsodyksMarkram_tau_facil == null)){ $scope.param_tau_m = 0,0; }
+		// 	}
+		// };
+
+		if(($scope.receptor_type == "") || ($scope.receptor_type == null)){
+			$scope.receptor_type = "excitatory";
+		}
+
 		if(($scope.connectors_type == "") || ($scope.connectors_type == null)){
 			$scope.connectors_type = "AllToAll";
 		}
@@ -1153,9 +1172,23 @@ graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 't
 		$scope.beforeClose = function(){
 			if(($scope.name_value == "") || ($scope.name_value == null)){
 				$scope.msgAlert = "Name is required.";
-			} else if(($scope.size == "") || ($scope.size == null)){
-				$scope.msgAlert = "Size value is required as integer.";
-			} else if(($scope.receptor_type == "") || ($scope.receptor_type == null)){
+			}
+			else if(($scope.synaptic_weight == "") || ($scope.synaptic_weight == null)){
+				$scope.msgAlert = "Synaptic weight is required.";
+			} 
+			else if(($scope.synaptic_delay == "") || ($scope.synaptic_delay == null)){
+				$scope.msgAlert = "Synaptic delay is required.";
+			}
+			else if(($scope.synapse_type == 'TsodyksMarkram') && (($scope.TsodyksMarkram_U == "") || ($scope.TsodyksMarkram_U == null))){
+				$scope.msgAlert = "U is required.";
+			}
+			else if(($scope.synapse_type == 'TsodyksMarkram') && (($scope.TsodyksMarkram_tau_facil == "") || ($scope.TsodyksMarkram_tau_facil == null))){
+				$scope.msgAlert = "tau_rec is required.";
+			}
+			else if(($scope.synapse_type == 'TsodyksMarkram') && (($scope.TsodyksMarkram_tau_rec == "") || ($scope.TsodyksMarkram_tau_rec == null))){
+				$scope.msgAlert = "tau_facil is required.";
+			}
+			else if(($scope.receptor_type == "") || ($scope.receptor_type == null)){
 				$scope.msgAlert = "Receptor type value is required.";
 			}
 			else {
@@ -1167,10 +1200,11 @@ graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 't
 			close({
 				name_value: $scope.name_value,
 				// level: $scope.level,
-				size: $scope.size,
 				synapse_type: $scope.synapse_type,
 				receptor_type: $scope.receptor_type,
 				connectors_type: $scope.connectors_type,
+				synaptic_weight: $scope.synaptic_weight,
+				synaptic_delay: $scope.synaptic_delay,
 				TsodyksMarkram_U: $scope.TsodyksMarkram_U,
 				TsodyksMarkram_tau_rec: $scope.TsodyksMarkram_tau_rec,
 				TsodyksMarkram_tau_facil: $scope.TsodyksMarkram_tau_facil,
@@ -1205,10 +1239,11 @@ graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 't
 			close({
 				name_value: name_value,
 				// level: level,
-				size: size,
 				synapse_type: $scope.synapse_type,
 				receptor_type: $scope.receptor_type,
 				connectors_type: $scope.connectors_type,
+				synaptic_weight: $scope.synaptic_weight,
+				synaptic_delay: $scope.synaptic_delay,
 				TsodyksMarkram_U: $scope.TsodyksMarkram_U,
 				TsodyksMarkram_tau_rec: $scope.TsodyksMarkram_tau_rec,
 				TsodyksMarkram_tau_facil: $scope.TsodyksMarkram_tau_facil,
