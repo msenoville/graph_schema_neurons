@@ -219,6 +219,7 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 		// function to generate string of python script
 		$scope.python_script_string = function(cells, hardware_platform){
 			var str_inst = "";
+			var str_rwd = ""; //string for run and write_data function
 			angular.forEach(cells, function(val, key){
 				console.log("data cell : " + val.data_cell);
 				if((val.data_cell == undefined) | (val.data_cell == null)) {
@@ -259,8 +260,8 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 								"pop_"+ val.id +".initialize(v="+json_pop_param.init_v +
 								" , isyn_exc="+json_pop_param.init_isyn_exc +
 								" , isyn_inh="+json_pop_param.init_isyn_inh +
-								" , label="+json_pop_param.name_value +
-								" )\n";
+								" , label=\""+json_pop_param.name_value +
+								"\" )\n";
 							}
 							if(json_pop_param.celltype == "IF_curr_exp"){
 								str_inst += "pop_"+ val.id +" = sim.Population(" + json_pop_param.size + ", sim.IF_curr_exp(v_rest="+json_pop_param.param_v_rest +
@@ -276,8 +277,8 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 								"pop_"+ val.id +".initialize(v="+json_pop_param.init_v +
 								" , isyn_exc="+json_pop_param.init_isyn_exc +
 								" , isyn_inh="+json_pop_param.init_isyn_inh +
-								" , label="+json_pop_param.name_value +
-								" )\n";
+								" , label=\""+json_pop_param.name_value +
+								"\" )\n";
 							}
 							if(json_pop_param.celltype == "IF_cond_alpha"){
 								str_inst += "pop_"+ val.id +" = sim.Population(" + json_pop_param.size + ", sim.IF_cond_alpha(v_rest="+json_pop_param.param_v_rest +
@@ -295,8 +296,8 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 								"pop_"+ val.id +".initialize(v="+json_pop_param.init_v +
 								" , gsyn_exc="+json_pop_param.init_gsyn_exc +
 								" , gsyn_inh="+json_pop_param.init_gsyn_inh +
-								" , label="+json_pop_param.name_value +
-								" )\n";
+								" , label=\""+json_pop_param.name_value +
+								"\" )\n";
 							}
 							if(json_pop_param.celltype == "IF_cond_exp"){
 								str_inst += "pop_"+ val.id +" = sim.Population(" + json_pop_param.size + ", sim.IF_cond_exp(v_rest="+json_pop_param.param_v_rest +
@@ -314,8 +315,8 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 								"pop_"+ val.id +".initialize(v="+json_pop_param.init_v +
 								" , gsyn_exc="+json_pop_param.init_gsyn_exc +
 								" , gsyn_inh="+json_pop_param.init_gsyn_inh +
-								" , label="+json_pop_param.name_value +
-								" )\n";
+								" , label=\""+json_pop_param.name_value +
+								"\" )\n";
 							}
 							if(json_pop_param.celltype == "HH_cond_exp"){
 								str_inst += "pop_"+ val.id +" = sim.Population(" + json_pop_param.size + ", sim.HH_cond_exp(gbar_Na="+json_pop_param.param_gbar_Na +
@@ -335,8 +336,8 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 								"pop_"+ val.id +".initialize(v="+json_pop_param.init_v +
 								" , gsyn_exc="+json_pop_param.init_gsyn_exc +
 								" , gsyn_inh="+json_pop_param.init_gsyn_inh +
-								" , label="+json_pop_param.name_value +
-								" )\n";
+								" , label=\""+json_pop_param.name_value +
+								"\" )\n";
 							}
 							if(json_pop_param.celltype == "EIF_cond_alpha_isfa_ista"){
 								str_inst += "pop_"+ val.id +" = sim.Population(" + json_pop_param.size + ", sim.EIF_cond_alpha_isfa_ista(cm="+json_pop_param.param_cm +
@@ -360,12 +361,12 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 								" , w="+json_pop_param.init_w +
 								" , gsyn_exc="+json_pop_param.init_gsyn_exc +
 								" , gsyn_inh="+json_pop_param.init_gsyn_inh +
-								" , label="+json_pop_param.name_value +
-								" )\n";
+								" , label=\""+json_pop_param.name_value +
+								"\" )\n";
 							}
 							if(json_pop_param.celltype == "empty_edge"){
 								str_inst += "sim.Projection(pop_2, pop_2, sim.AllToAllConnector(), sim.StaticSynapse())\n";
-								str_inst += "pop_3.initialize(v=-65 , isyn_exc=3 , isyn_inh=0 , label=Pop3 )\n";
+								str_inst += "pop_3.initialize(v=-65 , isyn_exc=3 , isyn_inh=0 , label=\"Pop3\" )\n";
 							}
 							if(json_pop_param.celltype == "empty_no_edge"){
 								str_inst += "pop_"+ val.id + " = sim.Population(" +
@@ -450,14 +451,15 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 									str_inst += "pop_" + val.id + ".record('v')\n";
 								}
 								if((json_pop_param.Simulation_time != null) && (json_pop_param.Simulation_time != "")){
-									str_inst += "sim.run(" + json_pop_param.Simulation_time + ")\n";
+									str_rwd += "sim.run(" + json_pop_param.Simulation_time + ")\n";
 								}
 								if((json_pop_param.Simulation_name != null) && (json_pop_param.Simulation_name != "")){
-									str_inst += "pop_" + val.id + ".write_data(" + json_pop_param.Simulation_name + ")\n";
+									str_rwd += "pop_" + val.id + ".write_data(\"" + json_pop_param.Simulation_name + "_pop_" + val.id + ".h5\")\n";
 								}
 							}
 						} catch(error) {
 							str_inst += "";
+							str_rwd += "";
 						}
 					}
 				}
@@ -484,6 +486,7 @@ import numpy
 sim.setup()
 
 `+ str_inst +`
+`+ str_rwd +`
 
 sim.end()
 			`;
