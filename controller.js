@@ -163,6 +163,7 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 					title : "Python Script Generator",
 					filename : "",
 					hardware_platform : "NEST",
+					Simulation_time : "10",
 				}
 			}).then(function(modal) {
 				modal.element.modal();
@@ -170,7 +171,7 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 					var encoder = new mxCodec();
 					var node = encoder.encode(graph.getModel());
 					var cells = graph.getModel().cells;
-					var scriptText = $scope.python_script_string(cells, result.hardware_platform);
+					var scriptText = $scope.python_script_string(cells, result.hardware_platform, result.Simulation_time);
 					console.log((scriptText));
 					var blob = new Blob([scriptText], {type: "text/plain;charset=utf-8"});
 
@@ -197,6 +198,7 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 				inputs: {
 					title : "Job Submission",
 					hardware_platform : "",
+					Simulation_time : "10",
 					scriptText : scriptText,
 					jobService : jobService,
 				}
@@ -205,7 +207,7 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 				modal.close.then(function(result) {
 					var cells = graph.getModel().cells;
 					console.log(cells);
-					scriptText = $scope.python_script_string(cells, result.hardware_platform);
+					scriptText = $scope.python_script_string(cells, result.hardware_platform, result.Simulation_time);
 					console.log((scriptText));
 				});
 			});
@@ -217,7 +219,7 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 		button_submit.style.backgroundSize = '100%';
 
 		// function to generate string of python script
-		$scope.python_script_string = function(cells, hardware_platform){
+		$scope.python_script_string = function(cells, hardware_platform, Simulation_time){
 			var str_inst = "";
 			var str_rwd = ""; //string for run and write_data function
 			angular.forEach(cells, function(val, key){
@@ -450,9 +452,9 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 								if(json_pop_param.Recording_v == true){
 									str_inst += "pop_" + val.id + ".record('v')\n";
 								}
-								if((json_pop_param.Simulation_time != null) && (json_pop_param.Simulation_time != "")){
-									str_rwd += "sim.run(" + json_pop_param.Simulation_time + ")\n";
-								}
+								// if((json_pop_param.Simulation_time != null) && (json_pop_param.Simulation_time != "")){
+								// 	str_rwd += "sim.run(" + json_pop_param.Simulation_time + ")\n";
+								// }
 								if((json_pop_param.Simulation_name != null) && (json_pop_param.Simulation_name != "")){
 									str_rwd += "pop_" + val.id + ".write_data(\"" + json_pop_param.Simulation_name + "_pop_" + val.id + ".h5\")\n";
 								}
@@ -488,6 +490,7 @@ sim.setup()
 `+ str_inst +`
 `+ str_rwd +`
 
+sim.run(` + Simulation_time + `)
 sim.end()
 			`;
 			return scriptText;
@@ -1275,8 +1278,8 @@ graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 't
 	}
 ]);
 
-graphSchemaApp.controller('Dlg_submit_job', ['$scope', '$element', '$http', 'title', 'scriptText', 'close', 'hardware_platform', 'jobService',
-	function($scope, $element, $http, title, scriptText, close, hardware_platform, jobService) {
+graphSchemaApp.controller('Dlg_submit_job', ['$scope', '$element', '$http', 'title', 'scriptText', 'close', 'hardware_platform', 'jobService', 'Simulation_time',
+	function($scope, $element, $http, title, scriptText, close, hardware_platform, jobService, Simulation_time) {
 		$scope.title = title;
 		$scope.scriptText = scriptText;
 		$scope.base_url = "";
@@ -1299,6 +1302,7 @@ graphSchemaApp.controller('Dlg_submit_job', ['$scope', '$element', '$http', 'tit
         $scope.job.output_data = []; 
         $scope.job.resource_uri = ""; 
 		$scope.inputs = [];
+		$scope.Simulation_time = Simulation_time;
 		
 		if(($scope.hardware_platform == "") || ($scope.hardware_platform == null)){
 			$scope.hardware_platform = "BrainScaleS";
@@ -1319,7 +1323,11 @@ graphSchemaApp.controller('Dlg_submit_job', ['$scope', '$element', '$http', 'tit
 		};
 
 		$scope.beforeClose = function(){
-			$scope.close();
+			if(($scope.Simulation_time == "") || ($scope.Simulation_time == null)){
+				$scope.msgAlert = "Simulation time value is required."
+			} else {
+				$scope.close()
+			}
 		};
 		$scope.close = function() {
 			close({
@@ -1337,14 +1345,19 @@ graphSchemaApp.controller('Dlg_submit_job', ['$scope', '$element', '$http', 'tit
 	}
 ]);
 
-graphSchemaApp.controller('Dlg_script_python', ['$scope', '$element', 'title', 'close', 'filename', 'hardware_platform',
-	function($scope, $element, title, close, filename, hardware_platform){
+graphSchemaApp.controller('Dlg_script_python', ['$scope', '$element', 'title', 'close', 'filename', 'hardware_platform', 'Simulation_time',
+	function($scope, $element, title, close, filename, hardware_platform, Simulation_time){
 		$scope.title = title;
 		$scope.filename = filename;
 		$scope.hardware_platform = hardware_platform;
+		$scope.Simulation_time = Simulation_time;
 
 		$scope.beforeClose = function(){
-			$scope.close();
+			if(($scope.Simulation_time == "") || ($scope.Simulation_time == null)){
+				$scope.msgAlert = "Simulation time value is required."
+			} else {
+				$scope.close()
+			}
 		};
 		$scope.close = function() {
 			close({
