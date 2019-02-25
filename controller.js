@@ -163,6 +163,7 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 					title : "Python Script Generator",
 					filename : "",
 					hardware_platform : "NEST",
+					Simulation_time : 10,
 				}
 			}).then(function(modal) {
 				modal.element.modal();
@@ -170,7 +171,7 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 					var encoder = new mxCodec();
 					var node = encoder.encode(graph.getModel());
 					var cells = graph.getModel().cells;
-					var scriptText = $scope.python_script_string(cells, result.hardware_platform);
+					var scriptText = $scope.python_script_string(cells, result.hardware_platform, result.Simulation_time);
 					console.log((scriptText));
 					var blob = new Blob([scriptText], {type: "text/plain;charset=utf-8"});
 
@@ -197,6 +198,7 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 				inputs: {
 					title : "Job Submission",
 					hardware_platform : "",
+					Simulation_time : 10,
 					scriptText : scriptText,
 					jobService : jobService,
 				}
@@ -205,7 +207,7 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 				modal.close.then(function(result) {
 					var cells = graph.getModel().cells;
 					console.log(cells);
-					scriptText = $scope.python_script_string(cells, result.hardware_platform);
+					scriptText = $scope.python_script_string(cells, result.hardware_platform, result.Simulation_time);
 					console.log((scriptText));
 				});
 			});
@@ -217,8 +219,9 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 		button_submit.style.backgroundSize = '100%';
 
 		// function to generate string of python script
-		$scope.python_script_string = function(cells, hardware_platform){
+		$scope.python_script_string = function(cells, hardware_platform, Simulation_time){
 			var str_inst = "";
+			var str_rwd = ""; //string for run and write_data function
 			angular.forEach(cells, function(val, key){
 				console.log("data cell : " + val.data_cell);
 				if((val.data_cell == undefined) | (val.data_cell == null)) {
@@ -259,8 +262,8 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 								"pop_"+ val.id +".initialize(v="+json_pop_param.init_v +
 								" , isyn_exc="+json_pop_param.init_isyn_exc +
 								" , isyn_inh="+json_pop_param.init_isyn_inh +
-								" , label="+json_pop_param.name_value +
-								" )\n";
+								" , label=\""+json_pop_param.name_value +
+								"\" )\n";
 							}
 							if(json_pop_param.celltype == "IF_curr_exp"){
 								str_inst += "pop_"+ val.id +" = sim.Population(" + json_pop_param.size + ", sim.IF_curr_exp(v_rest="+json_pop_param.param_v_rest +
@@ -276,8 +279,8 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 								"pop_"+ val.id +".initialize(v="+json_pop_param.init_v +
 								" , isyn_exc="+json_pop_param.init_isyn_exc +
 								" , isyn_inh="+json_pop_param.init_isyn_inh +
-								" , label="+json_pop_param.name_value +
-								" )\n";
+								" , label=\""+json_pop_param.name_value +
+								"\" )\n";
 							}
 							if(json_pop_param.celltype == "IF_cond_alpha"){
 								str_inst += "pop_"+ val.id +" = sim.Population(" + json_pop_param.size + ", sim.IF_cond_alpha(v_rest="+json_pop_param.param_v_rest +
@@ -295,8 +298,8 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 								"pop_"+ val.id +".initialize(v="+json_pop_param.init_v +
 								" , gsyn_exc="+json_pop_param.init_gsyn_exc +
 								" , gsyn_inh="+json_pop_param.init_gsyn_inh +
-								" , label="+json_pop_param.name_value +
-								" )\n";
+								" , label=\""+json_pop_param.name_value +
+								"\" )\n";
 							}
 							if(json_pop_param.celltype == "IF_cond_exp"){
 								str_inst += "pop_"+ val.id +" = sim.Population(" + json_pop_param.size + ", sim.IF_cond_exp(v_rest="+json_pop_param.param_v_rest +
@@ -314,8 +317,8 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 								"pop_"+ val.id +".initialize(v="+json_pop_param.init_v +
 								" , gsyn_exc="+json_pop_param.init_gsyn_exc +
 								" , gsyn_inh="+json_pop_param.init_gsyn_inh +
-								" , label="+json_pop_param.name_value +
-								" )\n";
+								" , label=\""+json_pop_param.name_value +
+								"\" )\n";
 							}
 							if(json_pop_param.celltype == "HH_cond_exp"){
 								str_inst += "pop_"+ val.id +" = sim.Population(" + json_pop_param.size + ", sim.HH_cond_exp(gbar_Na="+json_pop_param.param_gbar_Na +
@@ -335,8 +338,8 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 								"pop_"+ val.id +".initialize(v="+json_pop_param.init_v +
 								" , gsyn_exc="+json_pop_param.init_gsyn_exc +
 								" , gsyn_inh="+json_pop_param.init_gsyn_inh +
-								" , label="+json_pop_param.name_value +
-								" )\n";
+								" , label=\""+json_pop_param.name_value +
+								"\" )\n";
 							}
 							if(json_pop_param.celltype == "EIF_cond_alpha_isfa_ista"){
 								str_inst += "pop_"+ val.id +" = sim.Population(" + json_pop_param.size + ", sim.EIF_cond_alpha_isfa_ista(cm="+json_pop_param.param_cm +
@@ -360,12 +363,12 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 								" , w="+json_pop_param.init_w +
 								" , gsyn_exc="+json_pop_param.init_gsyn_exc +
 								" , gsyn_inh="+json_pop_param.init_gsyn_inh +
-								" , label="+json_pop_param.name_value +
-								" )\n";
+								" , label=\""+json_pop_param.name_value +
+								"\" )\n";
 							}
 							if(json_pop_param.celltype == "empty_edge"){
 								str_inst += "sim.Projection(pop_2, pop_2, sim.AllToAllConnector(), sim.StaticSynapse())\n";
-								str_inst += "pop_3.initialize(v=-65 , isyn_exc=3 , isyn_inh=0 , label=Pop3 )\n";
+								str_inst += "pop_3.initialize(v=-65 , isyn_exc=3 , isyn_inh=0 , label=\"Pop3\" )\n";
 							}
 							if(json_pop_param.celltype == "empty_no_edge"){
 								str_inst += "pop_"+ val.id + " = sim.Population(" +
@@ -373,7 +376,11 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 								")\n";
 							}
 							if(json_pop_param.celltype == "SpikeSourcePoisson"){
-								str_inst += "";
+								str_inst += "sim.Population(" + json_pop_param.size + ", sim.SpikeSourcePoisson(" +
+								"duration=" + json_pop_param.param_rate +
+								", rate=" + json_pop_param.param_start +
+								", start=" + json_pop_param.param_duration +
+								"))\n";
 							}
 							if(json_pop_param.celltype == "SpikeSourceArray"){
 								str_inst += "";
@@ -401,7 +408,7 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 										str_inst += "prj_"+ val.id +" = sim.Projection(pop_"+val.source.id+", pop_"+val.target.id+
 										", sim.FixedProbabilityConnector(" + 
 										json_pop_param.FixedProbability_p_connect + ", " + 
-										json_pop_param.FixedProbability_allow_self_connections +
+										" allow_self_connections=" + json_pop_param.FixedProbability_allow_self_connections +
 										")," +
 										"sim.StaticSynapse(weight=" + json_pop_param.synaptic_weight + ", delay=" + json_pop_param.synaptic_delay + "), receptor_type='" + json_pop_param.receptor_type+"')\n";
 									}
@@ -453,15 +460,16 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 								if(json_pop_param.Recording_v == true){
 									str_inst += "pop_" + val.id + ".record('v')\n";
 								}
-								if((json_pop_param.Simulation_time != null) && (json_pop_param.Simulation_time != "")){
-									str_inst += "sim.run(" + json_pop_param.Simulation_time + ")\n";
-								}
+								// if((json_pop_param.Simulation_time != null) && (json_pop_param.Simulation_time != "")){
+								// 	str_rwd += "sim.run(" + json_pop_param.Simulation_time + ")\n";
+								// }
 								if((json_pop_param.Simulation_name != null) && (json_pop_param.Simulation_name != "")){
-									str_inst += "pop_" + val.id + ".write_data(" + json_pop_param.Simulation_name + ")\n";
+									str_rwd += "pop_" + val.id + ".write_data(\"" + json_pop_param.Simulation_name + "_pop_" + val.id + ".h5\")\n";
 								}
 							}
 						} catch(error) {
 							str_inst += "";
+							str_rwd += "";
 						}
 					}
 				}
@@ -488,7 +496,9 @@ import numpy
 sim.setup()
 
 `+ str_inst +`
+`+ str_rwd +`
 
+sim.run(` + Simulation_time + `)
 sim.end()
 			`;
 			return scriptText;
@@ -779,7 +789,10 @@ sim.end()
 							"Recording_spikes": "",
 							"Recording_v": "",
 							"Simulation_time": "",
-							"Simulation_name": ""
+							"Simulation_name": "",
+							"param_rate": "",
+							"param_start": "",
+							"param_duration": "",
 						};
 					}
 					ModalService.showModal({
@@ -824,7 +837,10 @@ sim.end()
 							Recording_spikes: json_data.Recording_spikes,
 							Recording_v: json_data.Recording_v,
 							Simulation_time: json_data.Simulation_time,
-							Simulation_name: json_data.Simulation_name
+							Simulation_name: json_data.Simulation_name,
+							param_rate: json_data.param_rate,
+							param_start: json_data.param_start,
+							param_duration: json_data.param_duration,
 						}
 					}).then(function(modal) {
 						modal.element.modal();
@@ -895,13 +911,13 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 'param_i_offset', 'param_v_reset', 'param_v_thresh', 'param_e_rev_E', 'param_e_rev_I', 'param_gbar_Na', 'param_gbar_K', 'param_g_leak', 
 'param_v_offset', 'param_e_rev_Na', 'param_e_rev_K', 'param_e_rev_leak', 'param_tau_cm', 'param_v_spike', 'param_a', 'param_b', 
 'param_delta_T', 'param_tau_w', 'init_isyn_exc', 'init_isyn_inh', 'init_gsyn_exc', 'init_gsyn_inh', 'init_v', 'init_w',
-'Recording_spikes', 'Recording_v', 'Simulation_time', 'Simulation_name',
+'Recording_spikes', 'Recording_v', 'Simulation_time', 'Simulation_name', 'param_rate', 'param_start', 'param_duration',
 	function($scope, $element, title, close, name_value, size, celltype,
 		param_v_rest, param_cm, param_tau_m, param_tau_m, param_tau_m, param_tau_refrac, param_tau_syn_E, param_tau_syn_I, 
 		param_i_offset, param_v_reset, param_v_thresh, param_e_rev_E, param_e_rev_I, param_gbar_Na, param_gbar_K, param_g_leak, 
 		param_v_offset, param_e_rev_Na, param_e_rev_K, param_e_rev_leak, param_tau_cm, param_v_spike, param_a, param_b, 
 		param_delta_T, param_tau_w, init_isyn_exc, init_isyn_inh, init_gsyn_exc, init_gsyn_inh, init_v, init_w,
-		Recording_spikes, Recording_v, Simulation_time, Simulation_name) {
+		Recording_spikes, Recording_v, Simulation_time, Simulation_name, param_rate, param_start, param_duration) {
 		$scope.title = title;
 		$scope.name_value = name_value;
 		// $scope.level = level;
@@ -941,6 +957,9 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 		$scope.Recording_v = Recording_v;
 		$scope.Simulation_time = Simulation_time;
 		$scope.Simulation_name = Simulation_name;
+		$scope.param_rate = param_rate;
+		$scope.param_start = param_start;
+		$scope.param_duration = param_duration;
 		
 		if($scope.celltype == "empty_no_edge"){
 			$scope.celltype = "IF_curr_alpha";
@@ -1079,6 +1098,9 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 				Recording_v: $scope.Recording_v,
 				Simulation_time: $scope.Simulation_time,
 				Simulation_name: $scope.Simulation_name,
+				param_rate: $scope.param_rate,
+				param_start: $scope.param_start,
+				param_duration: $scope.param_duration,
 			}, 100);
 			$('.modal-backdrop').remove();
 		};
@@ -1127,6 +1149,9 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 				Recording_v: $scope.Recording_v,
 				Simulation_time: $scope.Simulation_time,
 				Simulation_name: $scope.Simulation_name,
+				param_rate: $scope.param_rate,
+				param_start: $scope.param_start,
+				param_duration: $scope.param_duration,
 			}, 100); // close, but give 100ms for bootstrap to animate
 			$('.modal-backdrop').remove();
 		};
@@ -1311,8 +1336,8 @@ graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 't
 	}
 ]);
 
-graphSchemaApp.controller('Dlg_submit_job', ['$scope', '$element', '$http', 'title', 'scriptText', 'close', 'hardware_platform', 'jobService',
-	function($scope, $element, $http, title, scriptText, close, hardware_platform, jobService) {
+graphSchemaApp.controller('Dlg_submit_job', ['$scope', '$element', '$http', 'title', 'scriptText', 'close', 'hardware_platform', 'jobService', 'Simulation_time',
+	function($scope, $element, $http, title, scriptText, close, hardware_platform, jobService, Simulation_time) {
 		$scope.title = title;
 		$scope.scriptText = scriptText;
 		$scope.base_url = "";
@@ -1335,6 +1360,7 @@ graphSchemaApp.controller('Dlg_submit_job', ['$scope', '$element', '$http', 'tit
         $scope.job.output_data = []; 
         $scope.job.resource_uri = ""; 
 		$scope.inputs = [];
+		$scope.Simulation_time = Simulation_time;
 		
 		if(($scope.hardware_platform == "") || ($scope.hardware_platform == null)){
 			$scope.hardware_platform = "BrainScaleS";
@@ -1355,37 +1381,49 @@ graphSchemaApp.controller('Dlg_submit_job', ['$scope', '$element', '$http', 'tit
 		};
 
 		$scope.beforeClose = function(){
-			$scope.close();
+			if(($scope.Simulation_time == "") || ($scope.Simulation_time == null)){
+				$scope.msgAlert = "Simulation time value is required."
+			} else {
+				$scope.close()
+			}
 		};
 		$scope.close = function() {
 			close({
-				hardware_platform: $scope.hardware_platform
+				hardware_platform: $scope.hardware_platform,
+				Simulation_time: $scope.Simulation_time,
 			}, 100);
 			$scope.submitJob($scope.job, jobService);
 			$('.modal-backdrop').remove();
 		};
 		$scope.cancel = function() {
 			close({
-				hardware_platform: $scope.hardware_platform
+				hardware_platform: $scope.hardware_platform,
+				Simulation_time: $scope.Simulation_time,
 			}, 100);
 			$('.modal-backdrop').remove();
 		};
 	}
 ]);
 
-graphSchemaApp.controller('Dlg_script_python', ['$scope', '$element', 'title', 'close', 'filename', 'hardware_platform',
-	function($scope, $element, title, close, filename, hardware_platform){
+graphSchemaApp.controller('Dlg_script_python', ['$scope', '$element', 'title', 'close', 'filename', 'hardware_platform', 'Simulation_time',
+	function($scope, $element, title, close, filename, hardware_platform, Simulation_time){
 		$scope.title = title;
 		$scope.filename = filename;
 		$scope.hardware_platform = hardware_platform;
+		$scope.Simulation_time = Simulation_time;
 
 		$scope.beforeClose = function(){
-			$scope.close();
+			if(($scope.Simulation_time == "") || ($scope.Simulation_time == null)){
+				$scope.msgAlert = "Simulation time value is required."
+			} else {
+				$scope.close()
+			}
 		};
 		$scope.close = function() {
 			close({
 				filename: $scope.filename,
 				hardware_platform: $scope.hardware_platform,
+				Simulation_time: $scope.Simulation_time,
 			}, 100);
 			//$scope.submitJob($scope.job, jobService);
 			$('.modal-backdrop').remove();
@@ -1394,6 +1432,7 @@ graphSchemaApp.controller('Dlg_script_python', ['$scope', '$element', 'title', '
 			close({
 				filename: $scope.filename,
 				hardware_platform: $scope.hardware_platform,
+				Simulation_time: $scope.Simulation_time,
 			}, 100);
 			$('.modal-backdrop').remove();
 		};
