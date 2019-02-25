@@ -376,7 +376,11 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 								")\n";
 							}
 							if(json_pop_param.celltype == "SpikeSourcePoisson"){
-								str_inst += "";
+								str_inst += "sim.Population(" + json_pop_param.size + ", sim.SpikeSourcePoisson(" +
+								"duration=" + json_pop_param.param_rate +
+								" , rate=" + json_pop_param.param_start +
+								" , start=" + json_pop_param.param_duration +
+								"))\n";
 							}
 							if(json_pop_param.celltype == "SpikeSourceArray"){
 								str_inst += "";
@@ -404,7 +408,7 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 										str_inst += "prj_"+ val.id +" = sim.Projection(pop_"+val.source.id+", pop_"+val.target.id+
 										", sim.FixedProbabilityConnector(" + 
 										json_pop_param.FixedProbability_p_connect + ", " + 
-										json_pop_param.FixedProbability_allow_self_connections +
+										" allow_self_connections=" + json_pop_param.FixedProbability_allow_self_connections +
 										")," +
 										"sim.StaticSynapse(weight=" + json_pop_param.synaptic_weight + ", delay=" + json_pop_param.synaptic_delay + "), receptor_type='" + json_pop_param.receptor_type+"')\n";
 									}
@@ -785,7 +789,10 @@ sim.end()
 							"Recording_spikes": "",
 							"Recording_v": "",
 							"Simulation_time": "",
-							"Simulation_name": ""
+							"Simulation_name": "",
+							"param_rate": "",
+							"param_start": "",
+							"param_duration": "",
 						};
 					}
 					ModalService.showModal({
@@ -830,7 +837,10 @@ sim.end()
 							Recording_spikes: json_data.Recording_spikes,
 							Recording_v: json_data.Recording_v,
 							Simulation_time: json_data.Simulation_time,
-							Simulation_name: json_data.Simulation_name
+							Simulation_name: json_data.Simulation_name,
+							param_rate: json_data.param_rate,
+							param_start: json_data.param_start,
+							param_duration: json_data.param_duration,
 						}
 					}).then(function(modal) {
 						modal.element.modal();
@@ -901,13 +911,13 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 'param_i_offset', 'param_v_reset', 'param_v_thresh', 'param_e_rev_E', 'param_e_rev_I', 'param_gbar_Na', 'param_gbar_K', 'param_g_leak', 
 'param_v_offset', 'param_e_rev_Na', 'param_e_rev_K', 'param_e_rev_leak', 'param_tau_cm', 'param_v_spike', 'param_a', 'param_b', 
 'param_delta_T', 'param_tau_w', 'init_isyn_exc', 'init_isyn_inh', 'init_gsyn_exc', 'init_gsyn_inh', 'init_v', 'init_w',
-'Recording_spikes', 'Recording_v', 'Simulation_time', 'Simulation_name',
+'Recording_spikes', 'Recording_v', 'Simulation_time', 'Simulation_name', 'param_rate', 'param_start', 'param_duration',
 	function($scope, $element, title, close, name_value, size, celltype,
 		param_v_rest, param_cm, param_tau_m, param_tau_m, param_tau_m, param_tau_refrac, param_tau_syn_E, param_tau_syn_I, 
 		param_i_offset, param_v_reset, param_v_thresh, param_e_rev_E, param_e_rev_I, param_gbar_Na, param_gbar_K, param_g_leak, 
 		param_v_offset, param_e_rev_Na, param_e_rev_K, param_e_rev_leak, param_tau_cm, param_v_spike, param_a, param_b, 
 		param_delta_T, param_tau_w, init_isyn_exc, init_isyn_inh, init_gsyn_exc, init_gsyn_inh, init_v, init_w,
-		Recording_spikes, Recording_v, Simulation_time, Simulation_name) {
+		Recording_spikes, Recording_v, Simulation_time, Simulation_name, param_rate, param_start, param_duration) {
 		$scope.title = title;
 		$scope.name_value = name_value;
 		// $scope.level = level;
@@ -947,6 +957,9 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 		$scope.Recording_v = Recording_v;
 		$scope.Simulation_time = Simulation_time;
 		$scope.Simulation_name = Simulation_name;
+		$scope.param_rate = param_rate;
+		$scope.param_start = param_start;
+		$scope.param_duration = param_duration;
 		
 		if($scope.celltype == "empty_no_edge"){
 			$scope.celltype = "IF_curr_alpha";
