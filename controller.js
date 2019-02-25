@@ -378,8 +378,8 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 							if(json_pop_param.celltype == "SpikeSourcePoisson"){
 								str_inst += "sim.Population(" + json_pop_param.size + ", sim.SpikeSourcePoisson(" +
 								"duration=" + json_pop_param.param_rate +
-								" , rate=" + json_pop_param.param_start +
-								" , start=" + json_pop_param.param_duration +
+								", rate=" + json_pop_param.param_start +
+								", start=" + json_pop_param.param_duration +
 								"))\n";
 							}
 							if(json_pop_param.celltype == "SpikeSourceArray"){
@@ -1098,6 +1098,9 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 				Recording_v: $scope.Recording_v,
 				Simulation_time: $scope.Simulation_time,
 				Simulation_name: $scope.Simulation_name,
+				param_rate: $scope.param_rate,
+				param_start: $scope.param_start,
+				param_duration: $scope.param_duration,
 			}, 100);
 			$('.modal-backdrop').remove();
 		};
@@ -1146,6 +1149,9 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 				Recording_v: $scope.Recording_v,
 				Simulation_time: $scope.Simulation_time,
 				Simulation_name: $scope.Simulation_name,
+				param_rate: $scope.param_rate,
+				param_start: $scope.param_start,
+				param_duration: $scope.param_duration,
 			}, 100); // close, but give 100ms for bootstrap to animate
 			$('.modal-backdrop').remove();
 		};
