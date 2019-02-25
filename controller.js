@@ -163,7 +163,7 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 					title : "Python Script Generator",
 					filename : "",
 					hardware_platform : "NEST",
-					Simulation_time : "10",
+					Simulation_time : 10,
 				}
 			}).then(function(modal) {
 				modal.element.modal();
@@ -198,7 +198,7 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 				inputs: {
 					title : "Job Submission",
 					hardware_platform : "",
-					Simulation_time : "10",
+					Simulation_time : 10,
 					scriptText : scriptText,
 					jobService : jobService,
 				}
@@ -1331,14 +1331,16 @@ graphSchemaApp.controller('Dlg_submit_job', ['$scope', '$element', '$http', 'tit
 		};
 		$scope.close = function() {
 			close({
-				hardware_platform: $scope.hardware_platform
+				hardware_platform: $scope.hardware_platform,
+				Simulation_time: $scope.Simulation_time,
 			}, 100);
 			$scope.submitJob($scope.job, jobService);
 			$('.modal-backdrop').remove();
 		};
 		$scope.cancel = function() {
 			close({
-				hardware_platform: $scope.hardware_platform
+				hardware_platform: $scope.hardware_platform,
+				Simulation_time: $scope.Simulation_time,
 			}, 100);
 			$('.modal-backdrop').remove();
 		};
@@ -1363,6 +1365,7 @@ graphSchemaApp.controller('Dlg_script_python', ['$scope', '$element', 'title', '
 			close({
 				filename: $scope.filename,
 				hardware_platform: $scope.hardware_platform,
+				Simulation_time: $scope.Simulation_time,
 			}, 100);
 			//$scope.submitJob($scope.job, jobService);
 			$('.modal-backdrop').remove();
@@ -1371,6 +1374,7 @@ graphSchemaApp.controller('Dlg_script_python', ['$scope', '$element', 'title', '
 			close({
 				filename: $scope.filename,
 				hardware_platform: $scope.hardware_platform,
+				Simulation_time: $scope.Simulation_time,
 			}, 100);
 			$('.modal-backdrop').remove();
 		};
