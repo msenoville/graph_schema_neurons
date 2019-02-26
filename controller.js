@@ -261,9 +261,9 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 								" ), label='"+json_pop_param.name_value +
 								"')\n"+ 
 								"pop_"+ val.id +".initialize(v="+json_pop_param.init_v +
-								", isyn_exc="+json_pop_param.init_isyn_exc +
-								", isyn_inh="+json_pop_param.init_isyn_inh +
-								", label='"+json_pop_param.name_value +
+								// ", isyn_exc="+json_pop_param.init_isyn_exc +
+								// ", isyn_inh="+json_pop_param.init_isyn_inh +
+								// ", label='"+json_pop_param.name_value +
 								"')\n";
 							}
 							if(json_pop_param.celltype == "IF_curr_exp"){
@@ -279,9 +279,9 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 								" ), label='"+json_pop_param.name_value +
 								"')\n"+
 								"pop_"+ val.id +".initialize(v="+json_pop_param.init_v +
-								", isyn_exc="+json_pop_param.init_isyn_exc +
-								", isyn_inh="+json_pop_param.init_isyn_inh +
-								", label='"+json_pop_param.name_value +
+								// ", isyn_exc="+json_pop_param.init_isyn_exc +
+								// ", isyn_inh="+json_pop_param.init_isyn_inh +
+								// ", label='"+json_pop_param.name_value +
 								"')\n";
 							}
 							if(json_pop_param.celltype == "IF_cond_alpha"){
@@ -299,9 +299,9 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 								" ), label='"+json_pop_param.name_value +
 								"')\n"+
 								"pop_"+ val.id +".initialize(v="+json_pop_param.init_v +
-								", gsyn_exc="+json_pop_param.init_gsyn_exc +
-								", gsyn_inh="+json_pop_param.init_gsyn_inh +
-								", label='"+json_pop_param.name_value +
+								// ", gsyn_exc="+json_pop_param.init_gsyn_exc +
+								// ", gsyn_inh="+json_pop_param.init_gsyn_inh +
+								// ", label='"+json_pop_param.name_value +
 								"')\n";
 							}
 							if(json_pop_param.celltype == "IF_cond_exp"){
@@ -319,9 +319,9 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 								" ), label='"+json_pop_param.name_value +
 								"')\n"+
 								"pop_"+ val.id +".initialize(v="+json_pop_param.init_v +
-								", gsyn_exc="+json_pop_param.init_gsyn_exc +
-								", gsyn_inh="+json_pop_param.init_gsyn_inh +
-								", label='"+json_pop_param.name_value +
+								// ", gsyn_exc="+json_pop_param.init_gsyn_exc +
+								// ", gsyn_inh="+json_pop_param.init_gsyn_inh +
+								// ", label='"+json_pop_param.name_value +
 								"')\n";
 							}
 							if(json_pop_param.celltype == "HH_cond_exp"){
@@ -341,9 +341,9 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 								" ), label='"+json_pop_param.name_value +
 								"')\n"+
 								"pop_"+ val.id +".initialize(v="+json_pop_param.init_v +
-								", gsyn_exc="+json_pop_param.init_gsyn_exc +
-								", gsyn_inh="+json_pop_param.init_gsyn_inh +
-								", label='"+json_pop_param.name_value +
+								// ", gsyn_exc="+json_pop_param.init_gsyn_exc +
+								// ", gsyn_inh="+json_pop_param.init_gsyn_inh +
+								// ", label='"+json_pop_param.name_value +
 								"')\n";
 							}
 							if(json_pop_param.celltype == "EIF_cond_alpha_isfa_ista"){
@@ -369,7 +369,7 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 								", w="+json_pop_param.init_w +
 								// ", gsyn_exc="+json_pop_param.init_gsyn_exc +
 								// ", gsyn_inh="+json_pop_param.init_gsyn_inh +
-								", label='"+json_pop_param.name_value +
+								// ", label='"+json_pop_param.name_value +
 								"')\n";
 							}
 							if(json_pop_param.celltype == "empty_edge"){
