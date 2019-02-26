@@ -383,9 +383,9 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 							}
 							if(json_pop_param.celltype == "SpikeSourcePoisson"){
 								str_inst += "sim.Population(" + json_pop_param.size + ", sim.SpikeSourcePoisson(" +
-								"duration=" + json_pop_param.param_rate +
-								", rate=" + json_pop_param.param_start +
-								", start=" + json_pop_param.param_duration +
+								"rate=" + json_pop_param.param_rate +
+								", start=" + json_pop_param.param_start +
+								", duration=" + json_pop_param.param_duration +
 								"))\n";
 							}
 							if(json_pop_param.celltype == "SpikeSourceArray"){
