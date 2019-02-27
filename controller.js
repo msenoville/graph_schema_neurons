@@ -470,7 +470,7 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 								// 	str_rwd += "sim.run(" + json_pop_param.Simulation_time + "')\n";
 								// }
 								if((json_pop_param.Simulation_name != null) && (json_pop_param.Simulation_name != "")){
-									str_rwd += "pop_" + val.id + ".write_data(" + json_pop_param.Simulation_name + "_pop_" + val.id + ".h5)\n";
+									str_rwd += "'pop_" + val.id + ".write_data(" + json_pop_param.Simulation_name + "_pop_" + val.id + ".h5')\n";
 								}
 							}
 						} catch(error) {
