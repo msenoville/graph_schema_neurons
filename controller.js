@@ -2,7 +2,7 @@ var graphSchemaApp = angular.module('graphSchemaApp');
 
 graphSchemaApp.controller('scotchController', function($scope) {
     $scope.message = 'test';
-   
+
     $scope.scotches = [
         {
             name: 'Macallan 12',
@@ -16,7 +16,7 @@ graphSchemaApp.controller('scotchController', function($scope) {
             name: 'Glenfiddich 1937',
             price: 20000
         }
-    ];    
+    ];
 });
 
 graphSchemaApp.controller('graphController', function($scope, $rootScope, $state, FileSaver, $sce, ModalService, jobService) {
@@ -37,10 +37,10 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 		{
 			return !mxEvent.isAltDown(evt);
 		};
-		
+
 		// Enables snapping waypoints to terminals
 		mxEdgeHandler.prototype.snapToTerminals = true;
-		
+
 		var graphs = [];
 		// Detect existings elements in the DOM
 		// Creates a DOM node that acts as the drag source
@@ -66,7 +66,7 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 		button_zoom_in.style.border = 'none';
 		button_zoom_in.style.background = 'url(\'img/zoom-in.png\') no-repeat';
 		button_zoom_in.style.backgroundSize = '100%';
-		
+
 		var button_zoom_out = mxUtils.button('', function()
 		{
 			graph.zoomOut();
@@ -105,7 +105,7 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 			$('#xml_graph_file').click();
 
 			$('input').on('change', function(evt){
-				var f = evt.target.files[0]; 
+				var f = evt.target.files[0];
 				if (f){
 					var r = new FileReader();
 					r.onload = function(e){
@@ -137,10 +137,10 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 
 		//create a button to clear schema
 		var button_clear = mxUtils.button('', function(){
-			bootbox.confirm({ 
+			bootbox.confirm({
 				size: "small",
-				message: "Are you sure to clear the graph ?", 
-				callback: function(result){ /* result is a boolean; true = OK, false = Cancel*/ 
+				message: "Are you sure to clear the graph ?",
+				callback: function(result){ /* result is a boolean; true = OK, false = Cancel*/
 					if(result == true){
 						graph.getModel().clear();
 					}
@@ -188,7 +188,7 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 		button_exp_python.style.height = '48px';
 		button_exp_python.style.border = 'none';
 		button_exp_python.style.background = 'url(\'img/python.png\') no-repeat';
-		button_exp_python.style.backgroundSize = '100%';		
+		button_exp_python.style.backgroundSize = '100%';
 
 		//create a button to submit job
 		var button_submit = mxUtils.button('', function(){
@@ -261,7 +261,7 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 								", v_reset="+json_pop_param.param_v_reset +
 								", v_thresh="+json_pop_param.param_v_thresh +
 								" ), label='"+json_pop_param.name_value +
-								"')\n"+ 
+								"')\n"+
 								"pop_"+ val.id +".initialize(v="+json_pop_param.init_v +
 								// ", isyn_exc="+json_pop_param.init_isyn_exc +
 								// ", isyn_inh="+json_pop_param.init_isyn_inh +
@@ -414,8 +414,8 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 								if(json_pop_param.connectors_type == "FixedProbability"){
 									if(synapse_type == 'static'){
 										str_inst += "prj_"+ val.id +" = sim.Projection(pop_"+val.source.id+", pop_"+val.target.id+
-										", sim.FixedProbabilityConnector(" + 
-										json_pop_param.FixedProbability_p_connect + ", " + 
+										", sim.FixedProbabilityConnector(" +
+										json_pop_param.FixedProbability_p_connect + ", " +
 										" allow_self_connections=" + json_pop_param.FixedProbability_allow_self_connections +
 										")," +
 										"sim.StaticSynapse(weight=" + json_pop_param.synaptic_weight + ", delay=" + json_pop_param.synaptic_delay + "), receptor_type='" + json_pop_param.receptor_type+"')\n";
@@ -423,20 +423,20 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 								}
 								if(json_pop_param.connectors_type == "FromFile"){
 									if(synapse_type == 'static'){
-										str_inst += "prj_"+ val.id +" = sim.Projection(pop_"+val.source.id + ", pop_"+val.target.id + 
+										str_inst += "prj_"+ val.id +" = sim.Projection(pop_"+val.source.id + ", pop_"+val.target.id +
 										", sim.FromFileConnector(" +
-										json_pop_param.FromFile_file + ", " + 
-										json_pop_param.FromFile_distributed + ", " + 
-										json_pop_param.FromFile_safe + ", " + 
-										json_pop_param.FromFile_callback + 
+										json_pop_param.FromFile_file + ", " +
+										json_pop_param.FromFile_distributed + ", " +
+										json_pop_param.FromFile_safe + ", " +
+										json_pop_param.FromFile_callback +
 										")," +
 										"sim.StaticSynapse(weight=" + json_pop_param.synaptic_weight + ", delay=" + json_pop_param.synaptic_delay + "), receptor_type='" + json_pop_param.receptor_type+"')\n";
 									}
 								}
 								if(json_pop_param.connectors_type == "FixedNumberPre"){
 									if(synapse_type == 'static'){
-										str_inst += "prj_"+ val.id +" = sim.Projection(pop_"+val.source.id+", pop_"+val.target.id + 
-										", sim.FixedNumberPreConnector(" + 
+										str_inst += "prj_"+ val.id +" = sim.Projection(pop_"+val.source.id+", pop_"+val.target.id +
+										", sim.FixedNumberPreConnector(" +
 										json_pop_param.FixedNumberPre_n + ", " +
 										json_pop_param.FixedNumberPre_with_replacement + ", " +
 										json_pop_param.FixedNumberPre_allow_self_connections +
@@ -446,8 +446,8 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 								}
 								if(json_pop_param.connectors_type == "FixedNumberPost"){
 									if(synapse_type == 'static'){
-										str_inst += "prj_"+ val.id +" = sim.Projection(pop_"+val.source.id+", pop_"+val.target.id + 
-										", sim.FixedNumberPostConnector(" + 
+										str_inst += "prj_"+ val.id +" = sim.Projection(pop_"+val.source.id+", pop_"+val.target.id +
+										", sim.FixedNumberPostConnector(" +
 										json_pop_param.FixedNumberPost_n + ", " +
 										json_pop_param.FixedNumberPost_with_replacement + ", " +
 										json_pop_param.FixedNumberPost_allow_self_connections +
@@ -461,7 +461,7 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 										"sim.StaticSynapse(weight=" + json_pop_param.synaptic_weight + ", delay=" + json_pop_param.synaptic_delay + "), receptor_type='" + json_pop_param.receptor_type+"')\n";
 									}
 								}
-							} else { // For all populations 
+							} else { // For all populations
 								if(json_pop_param.Recording_spikes == true){
 									str_inst += "pop_" + val.id + ".record('spikes')\n";
 								}
@@ -530,7 +530,7 @@ sim.end()
 		div_toolbar.appendChild(button_clear);
 		div_toolbar.appendChild(button_exp_python);
 		div_toolbar.appendChild(button_submit);
-		
+
 		var container = document.createElement('div');
 		container.id = 'svg_container';
 		container.style.overflow = 'scroll';
@@ -543,7 +543,7 @@ sim.end()
 		container.style.cursor = 'default';
 		// document.body.appendChild(container);
 		document.getElementById("id_graph_editor").appendChild(container);
-		
+
 		// Creates the graph inside the given container
 		var graph = new mxGraph(container);
 		graph.setTooltips(true);
@@ -562,14 +562,14 @@ sim.end()
 		// Uncomment the following if you want the container
 		// to fit the size of the graph
 		//graph.setResizeContainer(true);
-		
+
 		// Enables rubberband selection
 		new mxRubberband(graph);
-		
+
 		// Gets the default parent for inserting new cells. This
 		// is normally the first child of the root (ie. layer 0).
 		var parent = graph.getDefaultParent();
-						
+
 		// Adds cells to the model in a single step
 		graph.getModel().beginUpdate();
 		graph.getModel().endUpdate();
@@ -581,7 +581,7 @@ sim.end()
 			var x = mxEvent.getClientX(evt);
 			var y = mxEvent.getClientY(evt);
 			var elt = document.elementFromPoint(x, y);
-			
+
 			for (var i = 0; i < graphs.length; i++)
 			{
 				if (mxUtils.isAncestorNode(graphs[i].container, elt))
@@ -589,10 +589,10 @@ sim.end()
 					return graphs[i];
 				}
 			}
-			
+
 			return null;
 		};
-		
+
 		// Inserts a cell at the given location
 		var funct = function(graph, evt, target, x, y)
 		{
@@ -615,7 +615,7 @@ sim.end()
 				evt.returnValue = false;
 			});
 		}
-		
+
 		// Detect creation of edge (Projections)
 		// mxEvent.addListener(mxEvent.CONNECT, function(sender, evt){
 		// 	alert("connect");
@@ -625,7 +625,7 @@ sim.end()
 		dragElt.style.border = 'dashed black 1px';
 		dragElt.style.width = '80px';
 		dragElt.style.height = '30px';
-		
+
 		// Drag source is configured to use dragElt for preview and as drag icon
 		// if scalePreview (last) argument is true. Dx and dy are null to force
 		// the use of the defaults. Note that dx and dy are only used for the
@@ -639,7 +639,7 @@ sim.end()
 		{
 			return graph.graphHandler.guidesEnabled;
 		};
-		
+
 		// Restores original drag icon while outside of graph
 		ds.createDragElement = mxDragSource.prototype.createDragElement;
 
@@ -715,7 +715,7 @@ sim.end()
 								synaptic_delay: json_data.synaptic_delay,
 								TsodyksMarkram_U: json_data.TsodyksMarkram_U,
 								TsodyksMarkram_tau_rec: json_data.TsodyksMarkram_tau_rec,
-								TsodyksMarkram_tau_facil: json_data.TsodyksMarkram_tau_facil,				
+								TsodyksMarkram_tau_facil: json_data.TsodyksMarkram_tau_facil,
 								AllToAll_allow_self_connections: json_data.AllToAll_allow_self_connections,
 								FixedProbability_p_connect: json_data.FixedProbability_p_connect,
 								FixedProbability_allow_self_connections: json_data.FixedProbability_allow_self_connections,
@@ -914,16 +914,16 @@ sim.end()
 	}
 });
 
-graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title', 'close', 'name_value', 'size', 'celltype', 
-'param_v_rest', 'param_cm', 'param_tau_m', 'param_tau_m', 'param_tau_m', 'param_tau_refrac', 'param_tau_syn_E', 'param_tau_syn_I', 
-'param_i_offset', 'param_v_reset', 'param_v_thresh', 'param_e_rev_E', 'param_e_rev_I', 'param_gbar_Na', 'param_gbar_K', 'param_g_leak', 
-'param_v_offset', 'param_e_rev_Na', 'param_e_rev_K', 'param_e_rev_leak', 'param_tau_cm', 'param_v_spike', 'param_a', 'param_b', 
+graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title', 'close', 'name_value', 'size', 'celltype',
+'param_v_rest', 'param_cm', 'param_tau_m', 'param_tau_m', 'param_tau_m', 'param_tau_refrac', 'param_tau_syn_E', 'param_tau_syn_I',
+'param_i_offset', 'param_v_reset', 'param_v_thresh', 'param_e_rev_E', 'param_e_rev_I', 'param_gbar_Na', 'param_gbar_K', 'param_g_leak',
+'param_v_offset', 'param_e_rev_Na', 'param_e_rev_K', 'param_e_rev_leak', 'param_tau_cm', 'param_v_spike', 'param_a', 'param_b',
 'param_delta_T', 'param_tau_w', 'init_isyn_exc', 'init_isyn_inh', 'init_gsyn_exc', 'init_gsyn_inh', 'init_v', 'init_w',
 'Recording_spikes', 'Recording_v', 'Simulation_time', 'Simulation_name', 'param_rate', 'param_start', 'param_duration',
 	function($scope, $element, title, close, name_value, size, celltype,
-		param_v_rest, param_cm, param_tau_m, param_tau_m, param_tau_m, param_tau_refrac, param_tau_syn_E, param_tau_syn_I, 
-		param_i_offset, param_v_reset, param_v_thresh, param_e_rev_E, param_e_rev_I, param_gbar_Na, param_gbar_K, param_g_leak, 
-		param_v_offset, param_e_rev_Na, param_e_rev_K, param_e_rev_leak, param_tau_cm, param_v_spike, param_a, param_b, 
+		param_v_rest, param_cm, param_tau_m, param_tau_m, param_tau_m, param_tau_refrac, param_tau_syn_E, param_tau_syn_I,
+		param_i_offset, param_v_reset, param_v_thresh, param_e_rev_E, param_e_rev_I, param_gbar_Na, param_gbar_K, param_g_leak,
+		param_v_offset, param_e_rev_Na, param_e_rev_K, param_e_rev_leak, param_tau_cm, param_v_spike, param_a, param_b,
 		param_delta_T, param_tau_w, init_isyn_exc, init_isyn_inh, init_gsyn_exc, init_gsyn_inh, init_v, init_w,
 		Recording_spikes, Recording_v, Simulation_time, Simulation_name, param_rate, param_start, param_duration) {
 		$scope.title = title;
@@ -968,7 +968,7 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 		$scope.param_rate = param_rate;
 		$scope.param_start = param_start;
 		$scope.param_duration = param_duration;
-		
+
 		if($scope.celltype == "empty_no_edge"){
 			$scope.celltype = "IF_curr_alpha";
 		}
@@ -1033,7 +1033,7 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 				if(($scope.param_b == "") || ($scope.param_b == null)){ $scope.param_b = 0,0805; }
 				if(($scope.param_delta_T == "") || ($scope.param_delta_T == null)){ $scope.param_delta_T = 2,0; }
 				if(($scope.param_tau_w == "") || ($scope.param_tau_w == null)){ $scope.param_tau_w = 144,0; }
-				if(($scope.param_v_thresh == "") || ($scope.param_v_thresh == null)){ $scope.param_v_thresh = -50,4; } 
+				if(($scope.param_v_thresh == "") || ($scope.param_v_thresh == null)){ $scope.param_v_thresh = -50,4; }
 				if(($scope.param_e_rev_E == "") || ($scope.param_e_rev_E == null)){ $scope.param_e_rev_E = 0,0; }
 				if(($scope.param_tau_syn_E == "") || ($scope.param_tau_syn_E == null)){ $scope.param_tau_syn_E = 5,0; }
 				if(($scope.param_e_rev_I == "") || ($scope.param_e_rev_I == null)){ $scope.param_e_rev_I = -80,0; }
@@ -1171,19 +1171,19 @@ graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 't
 'synapse_type','receptor_type', 'connectors_type',
 'synaptic_weight', 'synaptic_delay',
 'TsodyksMarkram_U', 'TsodyksMarkram_tau_rec', 'TsodyksMarkram_tau_facil',
-'FixedProbability_p_connect', 'AllToAll_allow_self_connections', 
-'FixedProbability_allow_self_connections', 'FromFile_file', 'FromFile_distributed', 'FromFile_safe', 'FromFile_callback', 
-'FixedNumberPre_n', 'FixedNumberPre_with_replacement', 'FixedNumberPre_allow_self_connections', 'FixedNumberPost_n', 
-'FixedNumberPost_with_replacement', 'FixedNumberPost_allow_self_connections', 'FixedTotalNumber_n', 'FixedTotalNumber_with_replacement', 
+'FixedProbability_p_connect', 'AllToAll_allow_self_connections',
+'FixedProbability_allow_self_connections', 'FromFile_file', 'FromFile_distributed', 'FromFile_safe', 'FromFile_callback',
+'FixedNumberPre_n', 'FixedNumberPre_with_replacement', 'FixedNumberPre_allow_self_connections', 'FixedNumberPost_n',
+'FixedNumberPost_with_replacement', 'FixedNumberPost_allow_self_connections', 'FixedTotalNumber_n', 'FixedTotalNumber_with_replacement',
 'FixedTotalNumber_allow_self_connections', 'DistanceDependent_d_expression', 'DistanceDependent_allow_self_connections',
-	function($scope, $element, title, close, name_value, 
+	function($scope, $element, title, close, name_value,
 		synapse_type, receptor_type, connectors_type,
-		synaptic_weight, synaptic_delay, 
+		synaptic_weight, synaptic_delay,
 		TsodyksMarkram_U, TsodyksMarkram_tau_rec, TsodyksMarkram_tau_facil,
-		FixedProbability_p_connect, AllToAll_allow_self_connections, 
-		FixedProbability_allow_self_connections, FromFile_file, FromFile_distributed, FromFile_safe, FromFile_callback, 
-		FixedNumberPre_n, FixedNumberPre_with_replacement, FixedNumberPre_allow_self_connections, FixedNumberPost_n, 
-		FixedNumberPost_with_replacement, FixedNumberPost_allow_self_connections, FixedTotalNumber_n, FixedTotalNumber_with_replacement, 
+		FixedProbability_p_connect, AllToAll_allow_self_connections,
+		FixedProbability_allow_self_connections, FromFile_file, FromFile_distributed, FromFile_safe, FromFile_callback,
+		FixedNumberPre_n, FixedNumberPre_with_replacement, FixedNumberPre_allow_self_connections, FixedNumberPost_n,
+		FixedNumberPost_with_replacement, FixedNumberPost_allow_self_connections, FixedTotalNumber_n, FixedTotalNumber_with_replacement,
 		FixedTotalNumber_allow_self_connections, DistanceDependent_d_expression, DistanceDependent_allow_self_connections) {
 		$scope.title = title;
 		$scope.name_value = name_value;
@@ -1247,7 +1247,7 @@ graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 't
 			}
 			else if(($scope.synaptic_weight == null) || ($scope.synaptic_weight.toString() == "")){
 				$scope.msgAlert = "Synaptic weight is required.";
-			} 
+			}
 			else if(($scope.synaptic_delay == null) || ($scope.synaptic_delay.toString() == "")){
 				$scope.msgAlert = "Synaptic delay is required.";
 			}
@@ -1344,8 +1344,19 @@ graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 't
 	}
 ]);
 
-graphSchemaApp.controller('Dlg_submit_job', ['$scope', '$element', '$http', 'title', 'scriptText', 'close', 'hardware_platform', 'jobService', 'Simulation_time', 'Simulation_name',
-	function($scope, $element, $http, title, scriptText, close, hardware_platform, jobService, Simulation_time, Simulation_name) {
+graphSchemaApp.controller('Dlg_submit_job', ['$scope', '$element', '$http', 'title', 'scriptText', 'close', 'hardware_platform',
+                                             'jobService', 'Simulation_time', 'Simulation_name', 'bbpOidcSession', 'clbUser', '$location', 'clbContext',
+	function($scope, $element, $http, title, scriptText, close, hardware_platform,
+		     jobService, Simulation_time, Simulation_name, bbpOidcSession, clbUser, $location, clbContext) {
+
+		clbUser.getCurrentUserOnly().then(
+			function(response) {
+				console.log(response);
+			},
+			function(err) {
+				bbpOidcSession.login();
+			});
+
 		$scope.title = title;
 		$scope.scriptText = scriptText;
 		$scope.base_url = "";
@@ -1353,26 +1364,37 @@ graphSchemaApp.controller('Dlg_submit_job', ['$scope', '$element', '$http', 'tit
 		var curdate = new Date();
 		$scope.job = {};
 
-		$scope.job.id = 304621;  //default value
 		$scope.job.collab_id = 4293;  //default value
 		$scope.job.log = " ";
         $scope.job.status = "submitted";
         $scope.job.timestamp_submission = curdate.toUTCString();
-        $scope.job.timestamp_completion = curdate.toUTCString(); 
+        $scope.job.timestamp_completion = curdate.toUTCString();
         $scope.job.code = $scope.scriptText;
         $scope.job.command = "";
         $scope.job.hardware_config = {};
 		$scope.hardware_platform = hardware_platform;
         $scope.job.tags = [];
         $scope.job.input_data = [];
-        $scope.job.output_data = []; 
-        $scope.job.resource_uri = ""; 
+        $scope.job.output_data = [];
+        $scope.job.resource_uri = "";
 		$scope.inputs = [];
 		$scope.Simulation_time = Simulation_time;
-		
+
 		if(($scope.hardware_platform == "") || ($scope.hardware_platform == null)){
 			$scope.hardware_platform = "BrainScaleS";
 		}
+
+		var ctx = null;
+		if( $location.search().ctx ) {
+			ctx = $location.search().ctx;
+			clbContext.get(ctx).then(
+				function(context) {
+					console.log(context);
+					$scope.job.collab_id = context.collab.id;
+				}
+			);
+		}
+		console.log("Context is " + ctx);
 
 		$scope.submitJob = function(job, jobService){
 			job_p = JSON.stringify(job);
