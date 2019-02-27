@@ -1383,8 +1383,10 @@ graphSchemaApp.controller('Dlg_submit_job', ['$scope', '$element', '$http', 'tit
 		};
 
 		$scope.beforeClose = function(){
-			if(($scope.Simulation_time == "") || ($scope.Simulation_time == null)){
+			if(($scope.Simulation_time == null) || ($scope.Simulation_time.toString() == "")){
 				$scope.msgAlert = "Simulation time value is required."
+			} else if(($scope.Simulation_name == "") || ($scope.Simulation_name == null)){
+				$scope.msgAlert = "Simulation name value is required.";
 			} else {
 				$scope.close()
 			}
@@ -1418,10 +1420,12 @@ graphSchemaApp.controller('Dlg_script_python', ['$scope', '$element', 'title', '
 		$scope.Simulation_name = Simulation_name;
 
 		$scope.beforeClose = function(){
-			if(($scope.Simulation_time == "") || ($scope.Simulation_time == null)){
-				$scope.msgAlert = "Simulation time value is required."
+			if(($scope.Simulation_time == null) || ($scope.Simulation_time.toString() == "")){
+				$scope.msgAlert = "Simulation time value is required.";
+			} else if(($scope.Simulation_name == "") || ($scope.Simulation_name == null)){
+				$scope.msgAlert = "Simulation name value is required.";
 			} else {
-				$scope.close()
+				$scope.close();
 			}
 		};
 		$scope.close = function() {
