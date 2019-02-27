@@ -465,7 +465,7 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 								// if((json_pop_param.Simulation_time != null) && (json_pop_param.Simulation_time != "")){
 								// 	str_rwd += "sim.run(" + json_pop_param.Simulation_time + ")\n";
 								// }
-								if((json_pop_param.Simulation_name != null) && (json_pop_param.Simulation_name != "")){
+								if((Simulation_name != null) && (Simulation_name != "")){
 									str_rwd += "pop_" + val.id + ".write_data(\"" + Simulation_name + "_pop_" + val.id + ".h5\")\n";
 								}
 							}
@@ -1338,8 +1338,8 @@ graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 't
 	}
 ]);
 
-graphSchemaApp.controller('Dlg_submit_job', ['$scope', '$element', '$http', 'title', 'scriptText', 'close', 'hardware_platform', 'jobService', 'Simulation_time',
-	function($scope, $element, $http, title, scriptText, close, hardware_platform, jobService, Simulation_time) {
+graphSchemaApp.controller('Dlg_submit_job', ['$scope', '$element', '$http', 'title', 'scriptText', 'close', 'hardware_platform', 'jobService', 'Simulation_time', 'Simulation_name',
+	function($scope, $element, $http, title, scriptText, close, hardware_platform, jobService, Simulation_time, Simulation_name) {
 		$scope.title = title;
 		$scope.scriptText = scriptText;
 		$scope.base_url = "";
@@ -1370,7 +1370,7 @@ graphSchemaApp.controller('Dlg_submit_job', ['$scope', '$element', '$http', 'tit
 
 		$scope.submitJob = function(job, jobService){
 			job_p = JSON.stringify(job);
-			try {			
+			try {
 				jobService.post(job_p, function(data, status){
 					console.log("succes : +" + data + "/" + status );
 				})
@@ -1393,6 +1393,7 @@ graphSchemaApp.controller('Dlg_submit_job', ['$scope', '$element', '$http', 'tit
 			close({
 				hardware_platform: $scope.hardware_platform,
 				Simulation_time: $scope.Simulation_time,
+				Simulation_name: $scope.Simulation_name,
 			}, 100);
 			$scope.submitJob($scope.job, jobService);
 			$('.modal-backdrop').remove();
@@ -1401,18 +1402,20 @@ graphSchemaApp.controller('Dlg_submit_job', ['$scope', '$element', '$http', 'tit
 			close({
 				hardware_platform: $scope.hardware_platform,
 				Simulation_time: $scope.Simulation_time,
+				Simulation_name: $scope.Simulation_name,
 			}, 100);
 			$('.modal-backdrop').remove();
 		};
 	}
 ]);
 
-graphSchemaApp.controller('Dlg_script_python', ['$scope', '$element', 'title', 'close', 'filename', 'hardware_platform', 'Simulation_time',
-	function($scope, $element, title, close, filename, hardware_platform, Simulation_time){
+graphSchemaApp.controller('Dlg_script_python', ['$scope', '$element', 'title', 'close', 'filename', 'hardware_platform', 'Simulation_time', 'Simulation_name',
+	function($scope, $element, title, close, filename, hardware_platform, Simulation_time, Simulation_name){
 		$scope.title = title;
 		$scope.filename = filename;
 		$scope.hardware_platform = hardware_platform;
 		$scope.Simulation_time = Simulation_time;
+		$scope.Simulation_name = Simulation_name;
 
 		$scope.beforeClose = function(){
 			if(($scope.Simulation_time == "") || ($scope.Simulation_time == null)){
@@ -1426,6 +1429,7 @@ graphSchemaApp.controller('Dlg_script_python', ['$scope', '$element', 'title', '
 				filename: $scope.filename,
 				hardware_platform: $scope.hardware_platform,
 				Simulation_time: $scope.Simulation_time,
+				Simulation_name: $scope.Simulation_name,
 			}, 100);
 			//$scope.submitJob($scope.job, jobService);
 			$('.modal-backdrop').remove();
@@ -1435,6 +1439,7 @@ graphSchemaApp.controller('Dlg_script_python', ['$scope', '$element', 'title', '
 				filename: $scope.filename,
 				hardware_platform: $scope.hardware_platform,
 				Simulation_time: $scope.Simulation_time,
+				Simulation_name: $scope.Simulation_name,
 			}, 100);
 			$('.modal-backdrop').remove();
 		};
