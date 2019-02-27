@@ -250,136 +250,142 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 							if(json_pop_param.celltype == "IF_curr_alpha"){
 								str_inst += "pop_"+ val.id +" = " +
 								"sim.Population(" + json_pop_param.size + ", sim.IF_curr_alpha(v_rest="+json_pop_param.param_v_rest +
-								" , cm="+json_pop_param.param_cm +
-								" , tau_m="+json_pop_param.param_tau_m +
-								" , tau_refrac="+json_pop_param.param_tau_refrac +
-								" , tau_syn_E="+json_pop_param.param_tau_syn_E +
-								" , tau_syn_I="+json_pop_param.param_tau_syn_I +
-								" , i_offset="+json_pop_param.param_i_offset +
-								" , v_reset="+json_pop_param.param_v_reset +
-								" , v_thresh="+json_pop_param.param_v_thresh +
-								" ))\n"+ 
+								", cm="+json_pop_param.param_cm +
+								", tau_m="+json_pop_param.param_tau_m +
+								", tau_refrac="+json_pop_param.param_tau_refrac +
+								", tau_syn_E="+json_pop_param.param_tau_syn_E +
+								", tau_syn_I="+json_pop_param.param_tau_syn_I +
+								", i_offset="+json_pop_param.param_i_offset +
+								", v_reset="+json_pop_param.param_v_reset +
+								", v_thresh="+json_pop_param.param_v_thresh +
+								" ), label='"+json_pop_param.name_value +
+								"')\n"+ 
 								"pop_"+ val.id +".initialize(v="+json_pop_param.init_v +
-								" , isyn_exc="+json_pop_param.init_isyn_exc +
-								" , isyn_inh="+json_pop_param.init_isyn_inh +
-								" , label=\""+json_pop_param.name_value +
-								"\" )\n";
+								// ", isyn_exc="+json_pop_param.init_isyn_exc +
+								// ", isyn_inh="+json_pop_param.init_isyn_inh +
+								// ", label='"+json_pop_param.name_value +
+								")\n";
 							}
 							if(json_pop_param.celltype == "IF_curr_exp"){
 								str_inst += "pop_"+ val.id +" = sim.Population(" + json_pop_param.size + ", sim.IF_curr_exp(v_rest="+json_pop_param.param_v_rest +
-								" , cm="+json_pop_param.param_cm +
-								" , tau_m="+json_pop_param.param_tau_m +
-								" , tau_refrac="+json_pop_param.param_tau_refrac +
-								" , tau_syn_E="+json_pop_param.param_tau_syn_E +
-								" , tau_syn_I="+json_pop_param.param_tau_syn_I +
-								" , i_offset="+json_pop_param.param_i_offset +
-								" , v_reset="+json_pop_param.param_v_reset +
-								" , v_thresh="+json_pop_param.param_v_thresh +
-								" ))\n"+
+								", cm="+json_pop_param.param_cm +
+								", tau_m="+json_pop_param.param_tau_m +
+								", tau_refrac="+json_pop_param.param_tau_refrac +
+								", tau_syn_E="+json_pop_param.param_tau_syn_E +
+								", tau_syn_I="+json_pop_param.param_tau_syn_I +
+								", i_offset="+json_pop_param.param_i_offset +
+								", v_reset="+json_pop_param.param_v_reset +
+								", v_thresh="+json_pop_param.param_v_thresh +
+								" ), label='"+json_pop_param.name_value +
+								"')\n"+
 								"pop_"+ val.id +".initialize(v="+json_pop_param.init_v +
-								" , isyn_exc="+json_pop_param.init_isyn_exc +
-								" , isyn_inh="+json_pop_param.init_isyn_inh +
-								" , label=\""+json_pop_param.name_value +
-								"\" )\n";
+								// ", isyn_exc="+json_pop_param.init_isyn_exc +
+								// ", isyn_inh="+json_pop_param.init_isyn_inh +
+								// ", label='"+json_pop_param.name_value +
+								")\n";
 							}
 							if(json_pop_param.celltype == "IF_cond_alpha"){
 								str_inst += "pop_"+ val.id +" = sim.Population(" + json_pop_param.size + ", sim.IF_cond_alpha(v_rest="+json_pop_param.param_v_rest +
-								" , cm="+json_pop_param.param_cm +
-								" , tau_m="+json_pop_param.param_tau_m +
-								" , tau_refrac="+json_pop_param.param_tau_refrac +
-								" , tau_syn_E="+json_pop_param.param_tau_syn_E +
-								" , tau_syn_I="+json_pop_param.param_tau_syn_I +
-								" , e_rev_E="+json_pop_param.param_e_rev_E +
-								" , e_rev_I="+json_pop_param.param_e_rev_I +
-								" , v_thresh="+json_pop_param.param_v_thresh +
-								" , v_reset="+json_pop_param.param_v_reset +
-								" , i_offset="+json_pop_param.param_i_offset +
-								" ))\n"+
+								", cm="+json_pop_param.param_cm +
+								", tau_m="+json_pop_param.param_tau_m +
+								", tau_refrac="+json_pop_param.param_tau_refrac +
+								", tau_syn_E="+json_pop_param.param_tau_syn_E +
+								", tau_syn_I="+json_pop_param.param_tau_syn_I +
+								", e_rev_E="+json_pop_param.param_e_rev_E +
+								", e_rev_I="+json_pop_param.param_e_rev_I +
+								", v_thresh="+json_pop_param.param_v_thresh +
+								", v_reset="+json_pop_param.param_v_reset +
+								", i_offset="+json_pop_param.param_i_offset +
+								" ), label='"+json_pop_param.name_value +
+								")\n"+
 								"pop_"+ val.id +".initialize(v="+json_pop_param.init_v +
-								" , gsyn_exc="+json_pop_param.init_gsyn_exc +
-								" , gsyn_inh="+json_pop_param.init_gsyn_inh +
-								" , label=\""+json_pop_param.name_value +
-								"\" )\n";
+								// ", gsyn_exc="+json_pop_param.init_gsyn_exc +
+								// ", gsyn_inh="+json_pop_param.init_gsyn_inh +
+								// ", label='"+json_pop_param.name_value +
+								")\n";
 							}
 							if(json_pop_param.celltype == "IF_cond_exp"){
 								str_inst += "pop_"+ val.id +" = sim.Population(" + json_pop_param.size + ", sim.IF_cond_exp(v_rest="+json_pop_param.param_v_rest +
-								" , cm="+json_pop_param.param_cm +
-								" , tau_m="+json_pop_param.param_tau_m +
-								" , tau_refrac="+json_pop_param.param_tau_refrac +
-								" , tau_syn_E="+json_pop_param.param_tau_syn_E +
-								" , tau_syn_I="+json_pop_param.param_tau_syn_I +
-								" , e_rev_E="+json_pop_param.param_e_rev_E +
-								" , e_rev_I="+json_pop_param.param_e_rev_I +
-								" , v_thresh="+json_pop_param.param_v_thresh +
-								" , v_reset="+json_pop_param.param_v_reset +
-								" , i_offset="+json_pop_param.param_i_offset +
-								" ))\n"+
+								", cm="+json_pop_param.param_cm +
+								", tau_m="+json_pop_param.param_tau_m +
+								", tau_refrac="+json_pop_param.param_tau_refrac +
+								", tau_syn_E="+json_pop_param.param_tau_syn_E +
+								", tau_syn_I="+json_pop_param.param_tau_syn_I +
+								", e_rev_E="+json_pop_param.param_e_rev_E +
+								", e_rev_I="+json_pop_param.param_e_rev_I +
+								", v_thresh="+json_pop_param.param_v_thresh +
+								", v_reset="+json_pop_param.param_v_reset +
+								", i_offset="+json_pop_param.param_i_offset +
+								" ), label='"+json_pop_param.name_value +
+								"')\n"+
 								"pop_"+ val.id +".initialize(v="+json_pop_param.init_v +
-								" , gsyn_exc="+json_pop_param.init_gsyn_exc +
-								" , gsyn_inh="+json_pop_param.init_gsyn_inh +
-								" , label=\""+json_pop_param.name_value +
-								"\" )\n";
+								// ", gsyn_exc="+json_pop_param.init_gsyn_exc +
+								// ", gsyn_inh="+json_pop_param.init_gsyn_inh +
+								// ", label='"+json_pop_param.name_value +
+								")\n";
 							}
 							if(json_pop_param.celltype == "HH_cond_exp"){
 								str_inst += "pop_"+ val.id +" = sim.Population(" + json_pop_param.size + ", sim.HH_cond_exp(gbar_Na="+json_pop_param.param_gbar_Na +
-								" , gbar_K="+json_pop_param.param_gbar_K +
-								" , g_leak="+json_pop_param.param_g_leak +
-								" , cm="+json_pop_param.param_cm +
-								" , v_offset="+json_pop_param.param_v_offset +
-								" , e_rev_Na="+json_pop_param.param_e_rev_Na +
-								" , e_rev_K="+json_pop_param.param_e_rev_K +
-								" , e_rev_leak="+json_pop_param.param_e_rev_leak +
-								" , e_rev_E="+json_pop_param.param_e_rev_E +
-								" , e_rev_I="+json_pop_param.param_e_rev_I +
-								" , tau_syn_E="+json_pop_param.param_tau_syn_E +
-								" , tau_syn_I="+json_pop_param.param_tau_syn_I +
-								" , i_offset="+json_pop_param.param_i_offset +
-								" ))\n"+
+								", gbar_K="+json_pop_param.param_gbar_K +
+								", g_leak="+json_pop_param.param_g_leak +
+								", cm="+json_pop_param.param_cm +
+								", v_offset="+json_pop_param.param_v_offset +
+								", e_rev_Na="+json_pop_param.param_e_rev_Na +
+								", e_rev_K="+json_pop_param.param_e_rev_K +
+								", e_rev_leak="+json_pop_param.param_e_rev_leak +
+								", e_rev_E="+json_pop_param.param_e_rev_E +
+								", e_rev_I="+json_pop_param.param_e_rev_I +
+								", tau_syn_E="+json_pop_param.param_tau_syn_E +
+								", tau_syn_I="+json_pop_param.param_tau_syn_I +
+								", i_offset="+json_pop_param.param_i_offset +
+								" ), label='"+json_pop_param.name_value +
+								"')\n"+
 								"pop_"+ val.id +".initialize(v="+json_pop_param.init_v +
-								" , gsyn_exc="+json_pop_param.init_gsyn_exc +
-								" , gsyn_inh="+json_pop_param.init_gsyn_inh +
-								" , label=\""+json_pop_param.name_value +
-								"\" )\n";
+								// ", gsyn_exc="+json_pop_param.init_gsyn_exc +
+								// ", gsyn_inh="+json_pop_param.init_gsyn_inh +
+								// ", label='"+json_pop_param.name_value +
+								")\n";
 							}
 							if(json_pop_param.celltype == "EIF_cond_alpha_isfa_ista"){
 								str_inst += "pop_"+ val.id +" = sim.Population(" + json_pop_param.size + ", sim.EIF_cond_alpha_isfa_ista(cm="+json_pop_param.param_cm +
-								" , tau_refrac="+json_pop_param.param_tau_refrac +
-								" , v_spike="+json_pop_param.param_v_spike +
-								" , v_reset="+json_pop_param.param_v_reset +
-								" , v_rest="+json_pop_param.param_v_rest +
-								" , tau_m="+json_pop_param.param_tau_m +
-								" , i_offset="+json_pop_param.param_i_offset +
-								" , a="+json_pop_param.param_a +
-								" , b="+json_pop_param.param_b +
-								" , delta_T="+json_pop_param.param_delta_T +
-								" , tau_w="+json_pop_param.param_tau_w +
-								" , v_thresh="+json_pop_param.param_v_thresh +
-								" , e_rev_E="+json_pop_param.param_e_rev_E +
-								" , tau_syn_E="+json_pop_param.param_tau_syn_E +
-								" , e_rev_I="+json_pop_param.param_e_rev_I +
-								" , tau_syn_I="+json_pop_param.param_tau_syn_I +
-								" ))\n"+
+								", tau_refrac="+json_pop_param.param_tau_refrac +
+								", v_spike="+json_pop_param.param_v_spike +
+								", v_reset="+json_pop_param.param_v_reset +
+								", v_rest="+json_pop_param.param_v_rest +
+								", tau_m="+json_pop_param.param_tau_m +
+								", i_offset="+json_pop_param.param_i_offset +
+								", a="+json_pop_param.param_a +
+								", b="+json_pop_param.param_b +
+								", delta_T="+json_pop_param.param_delta_T +
+								", tau_w="+json_pop_param.param_tau_w +
+								", v_thresh="+json_pop_param.param_v_thresh +
+								", e_rev_E="+json_pop_param.param_e_rev_E +
+								", tau_syn_E="+json_pop_param.param_tau_syn_E +
+								", e_rev_I="+json_pop_param.param_e_rev_I +
+								", tau_syn_I="+json_pop_param.param_tau_syn_I +
+								" ), label='"+json_pop_param.name_value +
+								")\n"+
 								"pop_"+ val.id +".initialize(v="+json_pop_param.init_v +
-								" , w="+json_pop_param.init_w +
-								" , gsyn_exc="+json_pop_param.init_gsyn_exc +
-								" , gsyn_inh="+json_pop_param.init_gsyn_inh +
-								" , label=\""+json_pop_param.name_value +
-								"\" )\n";
+								", w="+json_pop_param.init_w +
+								// ", gsyn_exc="+json_pop_param.init_gsyn_exc +
+								// ", gsyn_inh="+json_pop_param.init_gsyn_inh +
+								// ", label='"+json_pop_param.name_value +
+								"')\n";
 							}
 							if(json_pop_param.celltype == "empty_edge"){
 								str_inst += "sim.Projection(pop_2, pop_2, sim.AllToAllConnector(), sim.StaticSynapse())\n";
-								str_inst += "pop_3.initialize(v=-65 , isyn_exc=3 , isyn_inh=0 , label=\"Pop3\" )\n";
+								str_inst += "pop_3.initialize(v=-65 , isyn_exc=3 , isyn_inh=0 , label=Pop3)\n";
 							}
 							if(json_pop_param.celltype == "empty_no_edge"){
 								str_inst += "pop_"+ val.id + " = sim.Population(" +
 								"1, sim.IF_curr_alpha(v_rest=-65 , cm=1 , tau_m=20 , tau_refrac=0 , tau_syn_E=5 , tau_syn_I=5 , i_offset=0 , v_reset=-65 , v_thresh=-50 " +
-								")\n";
+								"')\n";
 							}
 							if(json_pop_param.celltype == "SpikeSourcePoisson"){
 								str_inst += "sim.Population(" + json_pop_param.size + ", sim.SpikeSourcePoisson(" +
-								"duration=" + json_pop_param.param_rate +
-								", rate=" + json_pop_param.param_start +
-								", start=" + json_pop_param.param_duration +
+								"rate=" + json_pop_param.param_rate +
+								", start=" + json_pop_param.param_start +
+								", duration=" + json_pop_param.param_duration +
 								"))\n";
 							}
 							if(json_pop_param.celltype == "SpikeSourceArray"){
@@ -394,7 +400,7 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 									}
 									// } else if(synapse_type == 'receptor_type'){
 									// 	str_inst += "" +
-									// 	" )\n";
+									// )\n";
 									// }
 								}
 								if(json_pop_param.connectors_type == "OneToOne"){
@@ -461,10 +467,10 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 									str_inst += "pop_" + val.id + ".record('v')\n";
 								}
 								// if((json_pop_param.Simulation_time != null) && (json_pop_param.Simulation_time != "")){
-								// 	str_rwd += "sim.run(" + json_pop_param.Simulation_time + ")\n";
+								// 	str_rwd += "sim.run(" + json_pop_param.Simulation_time + "')\n";
 								// }
 								if((json_pop_param.Simulation_name != null) && (json_pop_param.Simulation_name != "")){
-									str_rwd += "pop_" + val.id + ".write_data(\"" + json_pop_param.Simulation_name + "_pop_" + val.id + ".h5\")\n";
+									str_rwd += "'pop_" + val.id + ".write_data(" + json_pop_param.Simulation_name + "_pop_" + val.id + ".h5')\n";
 								}
 							}
 						} catch(error) {
