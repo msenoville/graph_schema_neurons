@@ -1095,9 +1095,12 @@ graphSchemaApp.controller('Dlg_submit_job', ['$scope', '$element', '$http', 'tit
 		}
 
 		var ctx = null;
+		console.log($location);
+		console.log($location.search());
+		console.log(window.location);
 		if( $location.search().ctx ) {
 			ctx = $location.search().ctx;
-			console.log(context);
+			console.log(ctx);
 			clbContext.get(ctx).then(
 				function(context) {
 					console.log("Collab id = " + context.collab.id);
