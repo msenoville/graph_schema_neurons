@@ -1097,10 +1097,14 @@ graphSchemaApp.controller('Dlg_submit_job', ['$scope', '$element', '$http', 'tit
 		var ctx = null;
 		if( $location.search().ctx ) {
 			ctx = $location.search().ctx;
+			console.log(context);
 			clbContext.get(ctx).then(
 				function(context) {
-					console.log(context);
+					console.log("Collab id = " + context.collab.id);
 					$scope.job.collab_id = context.collab.id;
+				},
+				function(err) {
+					 console.log(err);
 				}
 			);
 		}
