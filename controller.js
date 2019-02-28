@@ -504,9 +504,11 @@ import numpy
 sim.setup()
 
 `+ str_inst +`
-`+ str_rwd +`
 
 sim.run(` + Simulation_time + `)
+
+`+ str_rwd +`
+
 sim.end()
 			`;
 			return scriptText;
