@@ -164,7 +164,7 @@ graphSchemaApp.value('python_script_string', function(cells, hardware_platform, 
                         "')\n";
                     }
                     if(json_pop_param.celltype == "SpikeSourcePoisson"){
-                        str_inst += "sim.Population(" + json_pop_param.size + ", sim.SpikeSourcePoisson(" +
+                        str_inst += "pop_"+ val.id +" = " + "sim.Population(" + json_pop_param.size + ", sim.SpikeSourcePoisson(" +
                         "rate=" + json_pop_param.param_rate +
                         ", start=" + json_pop_param.param_start +
                         ", duration=" + json_pop_param.param_duration +
@@ -252,7 +252,8 @@ graphSchemaApp.value('python_script_string', function(cells, hardware_platform, 
                         // 	str_rwd += "sim.run(" + json_pop_param.Simulation_time + "')\n";
                         // }
                         if((Simulation_name != null) && (Simulation_name != "")){
-                            str_rwd += "pop_" + val.id + ".write_data(\"" + Simulation_name + "_pop_" + val.id + ".h5\")\n";
+                            // str_rwd += "pop_" + val.id + ".write_data(\"" + Simulation_name + "_pop_" + val.id + ".h5\")\n";
+                            str_rwd += "pop_" + val.id + ".write_data(\"" + Simulation_name + "_pop_" + val.id + ".pkl\")\n";
                         }
                     }
                 } catch(error) {
