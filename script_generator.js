@@ -161,7 +161,7 @@ graphSchemaApp.value('python_script_string', function(cells, hardware_platform, 
                     if(json_pop_param.celltype == "empty_no_edge"){
                         str_inst += "pop_"+ val.id + " = sim.Population(" +
                         "1, sim.IF_curr_alpha(v_rest=-65 , cm=1 , tau_m=20 , tau_refrac=0 , tau_syn_E=5 , tau_syn_I=5 , i_offset=0 , v_reset=-65 , v_thresh=-50 " +
-                        "')\n";
+                        ")\n";
                     }
                     if(json_pop_param.celltype == "SpikeSourcePoisson"){
                         str_inst += "sim.Population(" + json_pop_param.size + ", sim.SpikeSourcePoisson(" +
