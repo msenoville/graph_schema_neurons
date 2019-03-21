@@ -86,6 +86,11 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 		img.class = 'img_utils';
 		img.style.width = '48px';
 		img.style.height = '48px';
+		sp_tool_img = document.createElement('span');
+		sp_tool_img.textContent = "drag and drop to create Population";
+		sp_tool_img.className='tooltiptext2';
+
+
 		// var img2 = mxUtils.createImage('img/gearRed.png');
 		// img2.style.width = '48px';
 		// img2.style.height = '48px';
@@ -118,6 +123,10 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 		button_zoom_out.style.border = 'none';
 		button_zoom_out.style.background = 'url(\'img/zoom-out.png\') no-repeat';
 		button_zoom_out.style.backgroundSize = '100%';
+		sp_tool_zoom_out = document.createElement('span');
+		sp_tool_zoom_out.textContent = "Zoom Out";
+		sp_tool_zoom_out.className='tooltiptext2';
+
 
 		var button_save = mxUtils.button('', function(){
 			// var FileSaver = require('file-saver');
@@ -141,6 +150,9 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 		button_save.style.border = 'none';
 		button_save.style.background = 'url(\'img/save.png\') no-repeat';
 		button_save.style.backgroundSize = '100%';
+		sp_tool_button_save = document.createElement('span');
+		sp_tool_button_save.textContent = "Zoom Out";
+		sp_tool_button_save.className='tooltiptext2';
 
 		//create button to open and load file
 		var button_load = mxUtils.button('', function(){
@@ -176,6 +188,9 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 		button_load.style.border = 'none';
 		button_load.style.background = 'url(\'img/open.png\') no-repeat';
 		button_load.style.backgroundSize = '100%';
+		sp_tool_button_load = document.createElement('span');
+		sp_tool_button_load.textContent = "Open";
+		sp_tool_button_load.className='tooltiptext2';
 
 		//create a button to clear schema
 		var button_clear = mxUtils.button('', function(){
@@ -194,6 +209,10 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 		button_clear.style.border = 'none';
 		button_clear.style.background = 'url(\'img/delete_clear.png\') no-repeat';
 		button_clear.style.backgroundSize = '100%';
+		sp_tool_button_clear = document.createElement('span');
+		sp_tool_button_clear.textContent = "Clear";
+		sp_tool_button_clear.className='tooltiptext2';
+
 
 		// create a button to export to python script
 		var button_exp_python = mxUtils.button('', function(){
@@ -231,6 +250,10 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 		button_exp_python.style.border = 'none';
 		button_exp_python.style.background = 'url(\'img/python.png\') no-repeat';
 		button_exp_python.style.backgroundSize = '100%';
+		sp_tool_button_exp_python = document.createElement('span');
+		sp_tool_button_exp_python.textContent = "Export to Python";
+		sp_tool_button_exp_python.className='tooltiptext2';
+
 
 		//create a button to submit job
 		var button_submit = mxUtils.button('', function() {
@@ -262,6 +285,9 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 		button_submit.style.border = 'none';
 		button_submit.style.background = 'url(\'img/submit.png\') no-repeat';
 		button_submit.style.backgroundSize = '100%';
+		sp_tool_button_submit = document.createElement('span');
+		sp_tool_button_submit.textContent = "Submit job";
+		sp_tool_button_submit.className='tooltiptext2';
 
 		//create toolbar
 		var div_toolbar = document.createElement('div');
@@ -271,17 +297,24 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 		// document.body.appendChild(div_toolbar);
 		document.getElementById("id_graph_editor").appendChild(div_toolbar);
 		div_toolbar.appendChild(img);
+		img.appendChild(sp_tool_img);
 		div_toolbar.appendChild(sp_tb);//blanck space between 2 button in toolbar
 		// div_toolbar.appendChild(img2);
 		// div_toolbar.appendChild(img3);
 		div_toolbar.appendChild(button_zoom_in);
-		div_toolbar.appendChild(sp_tool_zoom_in);
+		button_zoom_in.appendChild(sp_tool_zoom_in);
 		div_toolbar.appendChild(button_zoom_out);
+		button_zoom_out.appendChild(sp_tool_zoom_out);
 		div_toolbar.appendChild(button_save);
+		button_save.appendChild(sp_tool_button_save);
 		div_toolbar.appendChild(button_load);
+		button_load.appendChild(sp_tool_button_load);
 		div_toolbar.appendChild(button_clear);
+		button_clear.appendChild(sp_tool_button_clear);
 		div_toolbar.appendChild(button_exp_python);
+		button_exp_python.appendChild(sp_tool_button_exp_python);
 		div_toolbar.appendChild(button_submit);
+		button_submit.appendChild(sp_tool_button_submit);
 
 		var container = document.createElement('div');
 		container.id = 'svg_container';
