@@ -104,6 +104,10 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 		button_zoom_in.style.border = 'none';
 		button_zoom_in.style.background = 'url(\'img/zoom-in.png\') no-repeat';
 		button_zoom_in.style.backgroundSize = '100%';
+		button_zoom_in.className = "tooltip2";
+		sp_tool_zoom_in = document.createElement('span');
+		sp_tool_zoom_in.textContent = "Zoom In";
+		sp_tool_zoom_in.className='tooltiptext2';
 
 		var button_zoom_out = mxUtils.button('', function()
 		{
@@ -271,6 +275,7 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 		// div_toolbar.appendChild(img2);
 		// div_toolbar.appendChild(img3);
 		div_toolbar.appendChild(button_zoom_in);
+		div_toolbar.appendChild(sp_tool_zoom_in);
 		div_toolbar.appendChild(button_zoom_out);
 		div_toolbar.appendChild(button_save);
 		div_toolbar.appendChild(button_load);
