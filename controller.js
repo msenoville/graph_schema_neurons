@@ -86,6 +86,7 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 		img.class = 'img_utils';
 		img.style.width = '48px';
 		img.style.height = '48px';
+		img.className = "tooltip2";
 		sp_tool_img = document.createElement('span');
 		sp_tool_img.textContent = "drag and drop to create Population";
 		sp_tool_img.className='tooltiptext2';
@@ -123,6 +124,7 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 		button_zoom_out.style.border = 'none';
 		button_zoom_out.style.background = 'url(\'img/zoom-out.png\') no-repeat';
 		button_zoom_out.style.backgroundSize = '100%';
+		button_zoom_out.className = "tooltip2";
 		sp_tool_zoom_out = document.createElement('span');
 		sp_tool_zoom_out.textContent = "Zoom Out";
 		sp_tool_zoom_out.className='tooltiptext2';
@@ -150,8 +152,9 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 		button_save.style.border = 'none';
 		button_save.style.background = 'url(\'img/save.png\') no-repeat';
 		button_save.style.backgroundSize = '100%';
+		button_save.className = "tooltip2";
 		sp_tool_button_save = document.createElement('span');
-		sp_tool_button_save.textContent = "Zoom Out";
+		sp_tool_button_save.textContent = "Save graph in xml file";
 		sp_tool_button_save.className='tooltiptext2';
 
 		//create button to open and load file
@@ -188,8 +191,9 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 		button_load.style.border = 'none';
 		button_load.style.background = 'url(\'img/open.png\') no-repeat';
 		button_load.style.backgroundSize = '100%';
+		button_load.className = "tooltip2";
 		sp_tool_button_load = document.createElement('span');
-		sp_tool_button_load.textContent = "Open";
+		sp_tool_button_load.textContent = "Open xml graph file";
 		sp_tool_button_load.className='tooltiptext2';
 
 		//create a button to clear schema
@@ -209,8 +213,9 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 		button_clear.style.border = 'none';
 		button_clear.style.background = 'url(\'img/delete_clear.png\') no-repeat';
 		button_clear.style.backgroundSize = '100%';
+		button_clear.className = "tooltip2";
 		sp_tool_button_clear = document.createElement('span');
-		sp_tool_button_clear.textContent = "Clear";
+		sp_tool_button_clear.textContent = "Clear graph";
 		sp_tool_button_clear.className='tooltiptext2';
 
 
@@ -250,6 +255,7 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 		button_exp_python.style.border = 'none';
 		button_exp_python.style.background = 'url(\'img/python.png\') no-repeat';
 		button_exp_python.style.backgroundSize = '100%';
+		button_exp_python.className = "tooltip2";
 		sp_tool_button_exp_python = document.createElement('span');
 		sp_tool_button_exp_python.textContent = "Export to Python";
 		sp_tool_button_exp_python.className='tooltiptext2';
@@ -285,6 +291,7 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 		button_submit.style.border = 'none';
 		button_submit.style.background = 'url(\'img/submit.png\') no-repeat';
 		button_submit.style.backgroundSize = '100%';
+		button_submit.className = "tooltip2";
 		sp_tool_button_submit = document.createElement('span');
 		sp_tool_button_submit.textContent = "Submit job";
 		sp_tool_button_submit.className='tooltiptext2';

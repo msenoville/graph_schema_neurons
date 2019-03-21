@@ -93,7 +93,7 @@ table.mxPopupMenu tr {
     min-width: 100%!important;
 }
 
-/* Tooltips */
+/* Tooltips css */
 .tooltip2 {
     position: relative;
     display: inline-block;
@@ -132,5 +132,5 @@ table.mxPopupMenu tr {
     visibility: visible;
     opacity: 1;
 }
-
-  
+/* End of Tooltips css */
+ 
