@@ -713,11 +713,13 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 					cell2.geometry.x = x;
 					cell2.geometry.y = y;
 
+					graph.getModel().beginUpdate();
+					
 					graph.addCells(cell2);
 
 					// Adds cells to the model in a single step
 					mxEvent.consume(evt);
-
+					graph.getModel().endUpdate();
 					console.log("ee");
 				});
 			}
