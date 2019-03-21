@@ -701,6 +701,25 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 					graph.getModel().cells[cell.id].setStyle("fontColor=white;fillColor=#9900ff");
 					graph.refresh();
 				}, submenu_color);
+				menu.addItem('Duplicate Population', null, function(){
+					//var clone = graph.cloneCells(cell);
+					var cell2 = cell;
+					var x = cell2.geometry.x;
+					var y = cell2.geometry.y;
+
+					x = x + 20;
+					y = y + 20;
+
+					cell2.geometry.x = x;
+					cell2.geometry.y = y;
+
+					graph.addCells(cell2);
+
+					// Adds cells to the model in a single step
+					mxEvent.consume(evt);
+
+					console.log("ee");
+				});
 			}
 		};
 	}
