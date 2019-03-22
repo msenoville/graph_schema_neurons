@@ -715,7 +715,6 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 					graph.addCells(graph.cloneCells(tabcell));
 					// Adds cells to the model in a single step
 					graph.getModel().endUpdate();
-					console.log("ee");
 				});
 			}
 		};
