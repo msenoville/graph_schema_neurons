@@ -713,9 +713,7 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 					var tabcell = new Array(cell2);
 					graph.getModel().beginUpdate();
 					graph.addCells(graph.cloneCells(tabcell));
-
 					// Adds cells to the model in a single step
-					mxEvent.consume(evt);
 					graph.getModel().endUpdate();
 					console.log("ee");
 				});
