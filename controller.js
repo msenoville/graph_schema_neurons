@@ -702,20 +702,17 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 					graph.refresh();
 				}, submenu_color);
 				menu.addItem('Duplicate Population', null, function(){
-					//var clone = graph.cloneCells(cell);
+					//shift position of duplicated cell on the graph
 					var cell2 = cell;
 					var x = cell2.geometry.x;
 					var y = cell2.geometry.y;
-
 					x = x + 20;
 					y = y + 20;
-
 					cell2.geometry.x = x;
 					cell2.geometry.y = y;
-
+					var tabcell = new Array(cell2);
 					graph.getModel().beginUpdate();
-					
-					graph.addCells(cell2);
+					graph.addCells(graph.cloneCells(tabcell));
 
 					// Adds cells to the model in a single step
 					mxEvent.consume(evt);
