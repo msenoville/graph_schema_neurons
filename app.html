@@ -1,6 +1,6 @@
 <!--
   Copyright (c) 2006-2018, JGraph Ltd
-  
+
   Hello, World! example for mxGraph. This example demonstrates using
   a DOM node to create a graph and adding vertices and edges.
   to execute:
@@ -24,6 +24,7 @@
 	<!-- Loads and initializes the library -->
 	<script type="text/javascript" src="javascript/src/js/mxClient.js"></script>
 	<script type="text/javascript" src="javascript/jquery-3.3.1.min.js"></script>
+	<!-- <script type="text/javascript" src="javascript/popper.js"></script> -->
 	<script type="text/javascript" src="javascript/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="javascript/angular.js"></script>
 	<script type="text/javascript" src="javascript/angular-ui-router.js"></script>
@@ -38,10 +39,19 @@
 	<script type="text/javascript" src="javascript/ui-bootstrap-tpls-2.5.0.js"></script>
 	<script type="text/javascript" src="javascript/angular-modal-service.js"></script>
 	<script type="text/javascript" src="javascript/ng-load.js"></script>
-	
+
+	<!-- authentication/authorization -->
+	<script type="text/javascript" src="lib/angular-bbp-config/angular-bbp-config.js"></script>
+	<script type="text/javascript" src="lib/bbp-oidc-client/angular-bbp-oidc-client.js"></script>
+	<script type="text/javascript" src="javascript/lodash.min.js"></script>
+	<script type="text/javascript" src="javascript/hello.min.js"></script>
+	<script type="text/javascript" src="javascript/angular-uuid4.min.js"></script>
+	<script type="text/javascript" src="lib/angular-hbp-collaboratory/angular-hbp-collaboratory.js"></script>
+
 	<script type="text/javascript" src="app.js"></script>
 	<script type="text/javascript" src="model.js"></script>
 	<script type="text/javascript" src="controller.js"></script>
+	<script type="text/javascript" src="script_generator.js"></script>
 </head>
 <!-- Page passes the container for the graph to the program -->
 <!-- <body onload="main();">
@@ -66,7 +76,7 @@
 			<p class="browse"><strong>Formats supportés :</strong> avi, flv, mp4, m4v, mkv, mov, mpg, mpeg, ogg, ogv, wmv, 3gp, 3g2.</p>
 		</div>
 		<div id="file-content"></div>
-		
+
 		<div ui-view></div>
 	</div>
 </body>

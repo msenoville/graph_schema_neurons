@@ -23,7 +23,26 @@
                             </select>
                         </div>
                     </div>
+                    <div class="form-group col-sm-12">
+                        <div class="form-group col-sm-12">
+                            <div class="control-label col-sm-2"><b>Simulation :</b></div>
+                            <label class="control-label col-sm-2" for="Simulation_time">Simulation time : </label>
+                            <div class="col-sm-3">
+                                <input id="Simulation_time" name="Simulation_time" type="number" step="0.1" placeholder="Simulation time..." class="form-control input-md" ng-model="Simulation_time">
+                            </div>
+                            <div class="control-label col-sm-2">ms</div>
+                        </div>
+                        <div class="form-group col-sm-12">
+                            <div class="control-label col-sm-2">&nbsp;</div>
+                            <label class="control-label col-sm-2" for="Simulation_name">Simulation name : </label>
+                            <div class="col-sm-3">
+                                <input id="Simulation_name" name="Simulation_name" type="text" placeholder="Simulation name..." class="form-control input-md" ng-model="Simulation_name">
+                            </div>
+                            <div class="control-label col-sm-2">&nbsp;</div>
+                        </div>
+                    </div>
                 </form>
+                <span style="color:red;">{{msgAlert}}</span>
             </div>
             <div class="modal-footer">
                 <button type="button" ng-click="beforeClose()" class="btn btn-primary">OK</button>

@@ -2,7 +2,7 @@ var graphSchemaApp = angular.module('graphSchemaApp');
 
 graphSchemaApp.controller('scotchController', function($scope) {
     $scope.message = 'test';
-   
+
     $scope.scotches = [
         {
             name: 'Macallan 12',
@@ -16,10 +16,10 @@ graphSchemaApp.controller('scotchController', function($scope) {
             name: 'Glenfiddich 1937',
             price: 20000
         }
-    ];    
+    ];
 });
 
-graphSchemaApp.controller('graphController', function($scope, $rootScope, $state, FileSaver, $sce, ModalService, jobService) {
+graphSchemaApp.controller('graphController', function($scope, $rootScope, $state, FileSaver, $sce, ModalService, jobService, python_script_string) {
 	// $state.reload();
 	if (!mxClient.isBrowserSupported())
 	{
@@ -37,9 +37,47 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 		{
 			return !mxEvent.isAltDown(evt);
 		};
-		
+
 		// Enables snapping waypoints to terminals
 		mxEdgeHandler.prototype.snapToTerminals = true;
+
+		// Overridden to define per-shape connection points
+		mxGraph.prototype.getAllConnectionConstraints = function(terminal, source)
+		{
+			if (terminal != null && terminal.shape != null)
+			{
+				if (terminal.shape.stencil != null)
+				{
+					if (terminal.shape.stencil != null)
+					{
+						return terminal.shape.stencil.constraints;
+					}
+				}
+				else if (terminal.shape.constraints != null)
+				{
+					return terminal.shape.constraints;
+				}
+			}
+	
+			return null;
+		};
+	
+		// Defines the default constraints for all shapes
+		mxShape.prototype.constraints = [new mxConnectionConstraint(new mxPoint(0.25, 0), true),
+										 new mxConnectionConstraint(new mxPoint(0.5, 0), true),
+										 new mxConnectionConstraint(new mxPoint(0.75, 0), true),
+										new mxConnectionConstraint(new mxPoint(0, 0.25), true),
+										new mxConnectionConstraint(new mxPoint(0, 0.5), true),
+										new mxConnectionConstraint(new mxPoint(0, 0.75), true),
+										new mxConnectionConstraint(new mxPoint(1, 0.25), true),
+										new mxConnectionConstraint(new mxPoint(1, 0.5), true),
+										new mxConnectionConstraint(new mxPoint(1, 0.75), true),
+										new mxConnectionConstraint(new mxPoint(0.25, 1), true),
+										new mxConnectionConstraint(new mxPoint(0.5, 1), true),
+										new mxConnectionConstraint(new mxPoint(0.75, 1), true)];
+		
+		// Edges have no connection points
+		mxPolyline.prototype.constraints = null;
 		
 		var graphs = [];
 		// Detect existings elements in the DOM
@@ -48,6 +86,12 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 		img.class = 'img_utils';
 		img.style.width = '48px';
 		img.style.height = '48px';
+		img.className = "tooltip2";
+		sp_tool_img = document.createElement('span');
+		sp_tool_img.textContent = "drag and drop to create Population";
+		sp_tool_img.className='tooltiptext2';
+
+
 		// var img2 = mxUtils.createImage('img/gearRed.png');
 		// img2.style.width = '48px';
 		// img2.style.height = '48px';
@@ -66,7 +110,11 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 		button_zoom_in.style.border = 'none';
 		button_zoom_in.style.background = 'url(\'img/zoom-in.png\') no-repeat';
 		button_zoom_in.style.backgroundSize = '100%';
-		
+		button_zoom_in.className = "tooltip2";
+		sp_tool_zoom_in = document.createElement('span');
+		sp_tool_zoom_in.textContent = "Zoom In";
+		sp_tool_zoom_in.className='tooltiptext2';
+
 		var button_zoom_out = mxUtils.button('', function()
 		{
 			graph.zoomOut();
@@ -76,6 +124,11 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 		button_zoom_out.style.border = 'none';
 		button_zoom_out.style.background = 'url(\'img/zoom-out.png\') no-repeat';
 		button_zoom_out.style.backgroundSize = '100%';
+		button_zoom_out.className = "tooltip2";
+		sp_tool_zoom_out = document.createElement('span');
+		sp_tool_zoom_out.textContent = "Zoom Out";
+		sp_tool_zoom_out.className='tooltiptext2';
+
 
 		var button_save = mxUtils.button('', function(){
 			// var FileSaver = require('file-saver');
@@ -99,13 +152,17 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 		button_save.style.border = 'none';
 		button_save.style.background = 'url(\'img/save.png\') no-repeat';
 		button_save.style.backgroundSize = '100%';
+		button_save.className = "tooltip2";
+		sp_tool_button_save = document.createElement('span');
+		sp_tool_button_save.textContent = "Save graph in xml file";
+		sp_tool_button_save.className='tooltiptext2';
 
 		//create button to open and load file
 		var button_load = mxUtils.button('', function(){
 			$('#xml_graph_file').click();
 
 			$('input').on('change', function(evt){
-				var f = evt.target.files[0]; 
+				var f = evt.target.files[0];
 				if (f){
 					var r = new FileReader();
 					r.onload = function(e){
@@ -134,13 +191,17 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 		button_load.style.border = 'none';
 		button_load.style.background = 'url(\'img/open.png\') no-repeat';
 		button_load.style.backgroundSize = '100%';
+		button_load.className = "tooltip2";
+		sp_tool_button_load = document.createElement('span');
+		sp_tool_button_load.textContent = "Open xml graph file";
+		sp_tool_button_load.className='tooltiptext2';
 
 		//create a button to clear schema
 		var button_clear = mxUtils.button('', function(){
-			bootbox.confirm({ 
+			bootbox.confirm({
 				size: "small",
-				message: "Are you sure to clear the graph ?", 
-				callback: function(result){ /* result is a boolean; true = OK, false = Cancel*/ 
+				message: "Are you sure to clear the graph ?",
+				callback: function(result){ /* result is a boolean; true = OK, false = Cancel*/
 					if(result == true){
 						graph.getModel().clear();
 					}
@@ -152,6 +213,11 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 		button_clear.style.border = 'none';
 		button_clear.style.background = 'url(\'img/delete_clear.png\') no-repeat';
 		button_clear.style.backgroundSize = '100%';
+		button_clear.className = "tooltip2";
+		sp_tool_button_clear = document.createElement('span');
+		sp_tool_button_clear.textContent = "Clear graph";
+		sp_tool_button_clear.className='tooltiptext2';
+
 
 		// create a button to export to python script
 		var button_exp_python = mxUtils.button('', function(){
@@ -163,6 +229,8 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 					title : "Python Script Generator",
 					filename : "",
 					hardware_platform : "NEST",
+					Simulation_time : 10,
+					Simulation_name :  "",
 				}
 			}).then(function(modal) {
 				modal.element.modal();
@@ -170,7 +238,7 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 					var encoder = new mxCodec();
 					var node = encoder.encode(graph.getModel());
 					var cells = graph.getModel().cells;
-					var scriptText = $scope.python_script_string(cells, result.hardware_platform);
+					var scriptText = python_script_string(cells, result.hardware_platform, result.Simulation_time, result.Simulation_name);
 					console.log((scriptText));
 					var blob = new Blob([scriptText], {type: "text/plain;charset=utf-8"});
 
@@ -186,10 +254,15 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 		button_exp_python.style.height = '48px';
 		button_exp_python.style.border = 'none';
 		button_exp_python.style.background = 'url(\'img/python.png\') no-repeat';
-		button_exp_python.style.backgroundSize = '100%';		
+		button_exp_python.style.backgroundSize = '100%';
+		button_exp_python.className = "tooltip2";
+		sp_tool_button_exp_python = document.createElement('span');
+		sp_tool_button_exp_python.textContent = "Export to Python";
+		sp_tool_button_exp_python.className='tooltiptext2';
+
 
 		//create a button to submit job
-		var button_submit = mxUtils.button('', function(){
+		var button_submit = mxUtils.button('', function() {
 			var scriptText = "";
 			ModalService.showModal({
 				templateUrl: "modal_submit_job.html",
@@ -197,15 +270,18 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 				inputs: {
 					title : "Job Submission",
 					hardware_platform : "",
+					Simulation_time : 10,
+					Simulation_name :  "",
 					scriptText : scriptText,
 					jobService : jobService,
+					cells: graph.getModel().cells
 				}
 			}).then(function(modal) {
 				modal.element.modal();
 				modal.close.then(function(result) {
 					var cells = graph.getModel().cells;
 					console.log(cells);
-					scriptText = $scope.python_script_string(cells, result.hardware_platform);
+					scriptText = python_script_string(cells, result.hardware_platform, result.Simulation_time, result.Simulation_name);
 					console.log((scriptText));
 				});
 			});
@@ -215,280 +291,10 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 		button_submit.style.border = 'none';
 		button_submit.style.background = 'url(\'img/submit.png\') no-repeat';
 		button_submit.style.backgroundSize = '100%';
-
-		// function to generate string of python script
-		$scope.python_script_string = function(cells, hardware_platform){
-			var str_inst = "";
-			angular.forEach(cells, function(val, key){
-				console.log("data cell : " + val.data_cell);
-				if((val.data_cell == undefined) | (val.data_cell == null)) {
-					if(val.edge == true){ // Is user doesn't set his own value, generate default line
-						val.data_cell = '{' +
-							'"celltype": "empty_edge"' +
-						'}';
-					} else {
-						val.data_cell = '{' +
-							'"celltype": "empty_no_edge"' +
-						'}';
-					}
-				}
-				if((val.value == null) && (val.edge == true)){
-					val.value = "default_edge";
-				}
-
-				if(val.value != undefined){
-					try {
-						var json_pop_param = JSON.parse(val.data_cell);
-					} catch(error) {
-						var json_pop_param = {celltype: "error"};
-					}
-					if(json_pop_param.celltype != "error"){
-						try {
-							if(json_pop_param.celltype == "IF_curr_alpha"){
-								str_inst += "pop_"+ val.id +" = " +
-								"sim.Population(" + json_pop_param.size + ", sim.IF_curr_alpha(v_rest="+json_pop_param.param_v_rest +
-								" , cm="+json_pop_param.param_cm +
-								" , tau_m="+json_pop_param.param_tau_m +
-								" , tau_refrac="+json_pop_param.param_tau_refrac +
-								" , tau_syn_E="+json_pop_param.param_tau_syn_E +
-								" , tau_syn_I="+json_pop_param.param_tau_syn_I +
-								" , i_offset="+json_pop_param.param_i_offset +
-								" , v_reset="+json_pop_param.param_v_reset +
-								" , v_thresh="+json_pop_param.param_v_thresh +
-								" ))\n"+ 
-								"pop_"+ val.id +".initialize(v="+json_pop_param.init_v +
-								" , isyn_exc="+json_pop_param.init_isyn_exc +
-								" , isyn_inh="+json_pop_param.init_isyn_inh +
-								" , label="+json_pop_param.name_value +
-								" )\n";
-							}
-							if(json_pop_param.celltype == "IF_curr_exp"){
-								str_inst += "pop_"+ val.id +" = sim.Population(" + json_pop_param.size + ", sim.IF_curr_exp(v_rest="+json_pop_param.param_v_rest +
-								" , cm="+json_pop_param.param_cm +
-								" , tau_m="+json_pop_param.param_tau_m +
-								" , tau_refrac="+json_pop_param.param_tau_refrac +
-								" , tau_syn_E="+json_pop_param.param_tau_syn_E +
-								" , tau_syn_I="+json_pop_param.param_tau_syn_I +
-								" , i_offset="+json_pop_param.param_i_offset +
-								" , v_reset="+json_pop_param.param_v_reset +
-								" , v_thresh="+json_pop_param.param_v_thresh +
-								" ))\n"+
-								"pop_"+ val.id +".initialize(v="+json_pop_param.init_v +
-								" , isyn_exc="+json_pop_param.init_isyn_exc +
-								" , isyn_inh="+json_pop_param.init_isyn_inh +
-								" , label="+json_pop_param.name_value +
-								" )\n";
-							}
-							if(json_pop_param.celltype == "IF_cond_alpha"){
-								str_inst += "pop_"+ val.id +" = sim.Population(" + json_pop_param.size + ", sim.IF_cond_alpha(v_rest="+json_pop_param.param_v_rest +
-								" , cm="+json_pop_param.param_cm +
-								" , tau_m="+json_pop_param.param_tau_m +
-								" , tau_refrac="+json_pop_param.param_tau_refrac +
-								" , tau_syn_E="+json_pop_param.param_tau_syn_E +
-								" , tau_syn_I="+json_pop_param.param_tau_syn_I +
-								" , e_rev_E="+json_pop_param.param_e_rev_E +
-								" , e_rev_I="+json_pop_param.param_e_rev_I +
-								" , v_thresh="+json_pop_param.param_v_thresh +
-								" , v_reset="+json_pop_param.param_v_reset +
-								" , i_offset="+json_pop_param.param_i_offset +
-								" ))\n"+
-								"pop_"+ val.id +".initialize(v="+json_pop_param.init_v +
-								" , gsyn_exc="+json_pop_param.init_gsyn_exc +
-								" , gsyn_inh="+json_pop_param.init_gsyn_inh +
-								" , label="+json_pop_param.name_value +
-								" )\n";
-							}
-							if(json_pop_param.celltype == "IF_cond_exp"){
-								str_inst += "pop_"+ val.id +" = sim.Population(" + json_pop_param.size + ", sim.IF_cond_exp(v_rest="+json_pop_param.param_v_rest +
-								" , cm="+json_pop_param.param_cm +
-								" , tau_m="+json_pop_param.param_tau_m +
-								" , tau_refrac="+json_pop_param.param_tau_refrac +
-								" , tau_syn_E="+json_pop_param.param_tau_syn_E +
-								" , tau_syn_I="+json_pop_param.param_tau_syn_I +
-								" , e_rev_E="+json_pop_param.param_e_rev_E +
-								" , e_rev_I="+json_pop_param.param_e_rev_I +
-								" , v_thresh="+json_pop_param.param_v_thresh +
-								" , v_reset="+json_pop_param.param_v_reset +
-								" , i_offset="+json_pop_param.param_i_offset +
-								" ))\n"+
-								"pop_"+ val.id +".initialize(v="+json_pop_param.init_v +
-								" , gsyn_exc="+json_pop_param.init_gsyn_exc +
-								" , gsyn_inh="+json_pop_param.init_gsyn_inh +
-								" , label="+json_pop_param.name_value +
-								" )\n";
-							}
-							if(json_pop_param.celltype == "HH_cond_exp"){
-								str_inst += "pop_"+ val.id +" = sim.Population(" + json_pop_param.size + ", sim.HH_cond_exp(gbar_Na="+json_pop_param.param_gbar_Na +
-								" , gbar_K="+json_pop_param.param_gbar_K +
-								" , g_leak="+json_pop_param.param_g_leak +
-								" , cm="+json_pop_param.param_cm +
-								" , v_offset="+json_pop_param.param_v_offset +
-								" , e_rev_Na="+json_pop_param.param_e_rev_Na +
-								" , e_rev_K="+json_pop_param.param_e_rev_K +
-								" , e_rev_leak="+json_pop_param.param_e_rev_leak +
-								" , e_rev_E="+json_pop_param.param_e_rev_E +
-								" , e_rev_I="+json_pop_param.param_e_rev_I +
-								" , tau_syn_E="+json_pop_param.param_tau_syn_E +
-								" , tau_syn_I="+json_pop_param.param_tau_syn_I +
-								" , i_offset="+json_pop_param.param_i_offset +
-								" ))\n"+
-								"pop_"+ val.id +".initialize(v="+json_pop_param.init_v +
-								" , gsyn_exc="+json_pop_param.init_gsyn_exc +
-								" , gsyn_inh="+json_pop_param.init_gsyn_inh +
-								" , label="+json_pop_param.name_value +
-								" )\n";
-							}
-							if(json_pop_param.celltype == "EIF_cond_alpha_isfa_ista"){
-								str_inst += "pop_"+ val.id +" = sim.Population(" + json_pop_param.size + ", sim.EIF_cond_alpha_isfa_ista(cm="+json_pop_param.param_cm +
-								" , tau_refrac="+json_pop_param.param_tau_refrac +
-								" , v_spike="+json_pop_param.param_v_spike +
-								" , v_reset="+json_pop_param.param_v_reset +
-								" , v_rest="+json_pop_param.param_v_rest +
-								" , tau_m="+json_pop_param.param_tau_m +
-								" , i_offset="+json_pop_param.param_i_offset +
-								" , a="+json_pop_param.param_a +
-								" , b="+json_pop_param.param_b +
-								" , delta_T="+json_pop_param.param_delta_T +
-								" , tau_w="+json_pop_param.param_tau_w +
-								" , v_thresh="+json_pop_param.param_v_thresh +
-								" , e_rev_E="+json_pop_param.param_e_rev_E +
-								" , tau_syn_E="+json_pop_param.param_tau_syn_E +
-								" , e_rev_I="+json_pop_param.param_e_rev_I +
-								" , tau_syn_I="+json_pop_param.param_tau_syn_I +
-								" ))\n"+
-								"pop_"+ val.id +".initialize(v="+json_pop_param.init_v +
-								" , w="+json_pop_param.init_w +
-								" , gsyn_exc="+json_pop_param.init_gsyn_exc +
-								" , gsyn_inh="+json_pop_param.init_gsyn_inh +
-								" , label="+json_pop_param.name_value +
-								" )\n";
-							}
-							if(json_pop_param.celltype == "empty_edge"){
-								str_inst += "sim.Projection(pop_2, pop_2, sim.AllToAllConnector(), sim.StaticSynapse())\n";
-								str_inst += "pop_3.initialize(v=-65 , isyn_exc=3 , isyn_inh=0 , label=Pop3 )\n";
-							}
-							if(json_pop_param.celltype == "empty_no_edge"){
-								str_inst += "pop_"+ val.id + " = sim.Population(" +
-								"1, sim.IF_curr_alpha(v_rest=-65 , cm=1 , tau_m=20 , tau_refrac=0 , tau_syn_E=5 , tau_syn_I=5 , i_offset=0 , v_reset=-65 , v_thresh=-50 " +
-								")\n";
-							}
-							if(json_pop_param.celltype == "SpikeSourcePoisson"){
-								str_inst += "";
-							}
-							if(json_pop_param.celltype == "SpikeSourceArray"){
-								str_inst += "";
-							}
-							if(json_pop_param.celltype == "projection"){
-								var synapse_type = json_pop_param.synapse_type
-								if(json_pop_param.connectors_type == "AllToAll"){
-									if(synapse_type == 'static'){
-										str_inst += "prj_"+ val.id +" = sim.Projection(pop_"+val.source.id+", pop_"+val.target.id+", sim.AllToAllConnector(), " +
-										"sim.StaticSynapse())\n";
-									}
-								}
-								if(json_pop_param.connectors_type == "OneToOne"){
-									if(synapse_type == 'static'){
-										str_inst += "prj_"+ val.id +" = sim.Projection(pop_"+val.source.id+", pop_"+val.target.id+", sim.OneToOneConnector()," +
-										"sim.StaticSynapse())\n";
-									}
-								}
-								if(json_pop_param.connectors_type == "FixedProbability"){
-									if(synapse_type == 'static'){
-										str_inst += "prj_"+ val.id +" = sim.Projection(pop_"+val.source.id+", pop_"+val.target.id+
-										", sim.FixedProbabilityConnector(" + 
-										json_pop_param.FixedProbability_p_connect + ", " + 
-										json_pop_param.FixedProbability_allow_self_connections +
-										")," +
-										"sim.StaticSynapse())\n";
-									}
-								}
-								if(json_pop_param.connectors_type == "FromFile"){
-									if(synapse_type == 'static'){
-										str_inst += "prj_"+ val.id +" = sim.Projection(pop_"+val.source.id + ", pop_"+val.target.id + 
-										", sim.FromFileConnector(" +
-										json_pop_param.FromFile_file + ", " + 
-										json_pop_param.FromFile_distributed + ", " + 
-										json_pop_param.FromFile_safe + ", " + 
-										json_pop_param.FromFile_callback + 
-										")," +
-										"sim.StaticSynapse())\n";
-									}
-								}
-								if(json_pop_param.connectors_type == "FixedNumberPre"){
-									if(synapse_type == 'static'){
-										str_inst += "prj_"+ val.id +" = sim.Projection(pop_"+val.source.id+", pop_"+val.target.id + 
-										", sim.FixedNumberPreConnector(" + 
-										json_pop_param.FixedNumberPre_n + ", " +
-										json_pop_param.FixedNumberPre_with_replacement + ", " +
-										json_pop_param.FixedNumberPre_allow_self_connections +
-										")," +
-										"sim.StaticSynapse())\n";
-									}
-								}
-								if(json_pop_param.connectors_type == "FixedNumberPost"){
-									if(synapse_type == 'static'){
-										str_inst += "prj_"+ val.id +" = sim.Projection(pop_"+val.source.id+", pop_"+val.target.id + 
-										", sim.FixedNumberPostConnector(" + 
-										json_pop_param.FixedNumberPost_n + ", " +
-										json_pop_param.FixedNumberPost_with_replacement + ", " +
-										json_pop_param.FixedNumberPost_allow_self_connections +
-										")," +
-										"sim.StaticSynapse())\n";
-									}
-								}
-								if(json_pop_param.connectors_type == "FixedTotalNumber"){
-									if(synapse_type == 'static'){
-										str_inst += "prj_"+ val.id +" = sim.Projection(pop_"+val.source.id+", pop_"+val.target.id+", sim.FixedTotalNumberConnector()," +
-										"sim.StaticSynapse())\n";
-									}
-								}
-							} else { // For all populations 
-								if(json_pop_param.Recording_spikes == true){
-									str_inst += "pop_" + val.id + ".record('spikes')\n";
-								}
-								if(json_pop_param.Recording_v == true){
-									str_inst += "pop_" + val.id + ".record('v')\n";
-								}
-								if((json_pop_param.Simulation_time != null) && (json_pop_param.Simulation_time != "")){
-									str_inst += "sim.run(" + json_pop_param.Simulation_time + ")\n";
-								}
-								if((json_pop_param.Simulation_name != null) && (json_pop_param.Simulation_name != "")){
-									str_inst += "pop_" + val.id + ".write_data(" + json_pop_param.Simulation_name + ")\n";
-								}
-							}
-						} catch(error) {
-							str_inst += "";
-						}
-					}
-				}
-			});
-
-			var import_platform = "";
-			if(hardware_platform == "NEST"){
-				import_platform = "import pyNN.nest as sim";
-			} else if(hardware_platform == "BrainScaleS"){
-				import_platform = "import pyNN.brainscales as sim";
-			} else if(hardware_platform == "SpiNNaker"){
-				import_platform = "import pyNN.spiNNaker as sim";
-			} else{
-				import_platform = "import pyNN.nest as sim";
-			}
-
-			var scriptText = `
-# coding: utf-8
-#!python
-
-import numpy
-`+ import_platform +`
-
-sim.setup()
-
-`+ str_inst +`
-
-sim.end()
-			`;
-			return scriptText;
-		};
+		button_submit.className = "tooltip2";
+		sp_tool_button_submit = document.createElement('span');
+		sp_tool_button_submit.textContent = "Submit job";
+		sp_tool_button_submit.className='tooltiptext2';
 
 		//create toolbar
 		var div_toolbar = document.createElement('div');
@@ -498,17 +304,25 @@ sim.end()
 		// document.body.appendChild(div_toolbar);
 		document.getElementById("id_graph_editor").appendChild(div_toolbar);
 		div_toolbar.appendChild(img);
+		img.appendChild(sp_tool_img);
 		div_toolbar.appendChild(sp_tb);//blanck space between 2 button in toolbar
 		// div_toolbar.appendChild(img2);
 		// div_toolbar.appendChild(img3);
 		div_toolbar.appendChild(button_zoom_in);
+		button_zoom_in.appendChild(sp_tool_zoom_in);
 		div_toolbar.appendChild(button_zoom_out);
+		button_zoom_out.appendChild(sp_tool_zoom_out);
 		div_toolbar.appendChild(button_save);
+		button_save.appendChild(sp_tool_button_save);
 		div_toolbar.appendChild(button_load);
+		button_load.appendChild(sp_tool_button_load);
 		div_toolbar.appendChild(button_clear);
+		button_clear.appendChild(sp_tool_button_clear);
 		div_toolbar.appendChild(button_exp_python);
+		button_exp_python.appendChild(sp_tool_button_exp_python);
 		div_toolbar.appendChild(button_submit);
-		
+		button_submit.appendChild(sp_tool_button_submit);
+
 		var container = document.createElement('div');
 		container.id = 'svg_container';
 		container.style.overflow = 'scroll';
@@ -521,7 +335,7 @@ sim.end()
 		container.style.cursor = 'default';
 		// document.body.appendChild(container);
 		document.getElementById("id_graph_editor").appendChild(container);
-		
+
 		// Creates the graph inside the given container
 		var graph = new mxGraph(container);
 		graph.setTooltips(true);
@@ -540,14 +354,14 @@ sim.end()
 		// Uncomment the following if you want the container
 		// to fit the size of the graph
 		//graph.setResizeContainer(true);
-		
+
 		// Enables rubberband selection
 		new mxRubberband(graph);
-		
+
 		// Gets the default parent for inserting new cells. This
 		// is normally the first child of the root (ie. layer 0).
 		var parent = graph.getDefaultParent();
-						
+
 		// Adds cells to the model in a single step
 		graph.getModel().beginUpdate();
 		graph.getModel().endUpdate();
@@ -559,7 +373,7 @@ sim.end()
 			var x = mxEvent.getClientX(evt);
 			var y = mxEvent.getClientY(evt);
 			var elt = document.elementFromPoint(x, y);
-			
+
 			for (var i = 0; i < graphs.length; i++)
 			{
 				if (mxUtils.isAncestorNode(graphs[i].container, elt))
@@ -567,10 +381,10 @@ sim.end()
 					return graphs[i];
 				}
 			}
-			
+
 			return null;
 		};
-		
+
 		// Inserts a cell at the given location
 		var funct = function(graph, evt, target, x, y)
 		{
@@ -593,7 +407,7 @@ sim.end()
 				evt.returnValue = false;
 			});
 		}
-		
+
 		// Detect creation of edge (Projections)
 		// mxEvent.addListener(mxEvent.CONNECT, function(sender, evt){
 		// 	alert("connect");
@@ -603,7 +417,7 @@ sim.end()
 		dragElt.style.border = 'dashed black 1px';
 		dragElt.style.width = '80px';
 		dragElt.style.height = '30px';
-		
+
 		// Drag source is configured to use dragElt for preview and as drag icon
 		// if scalePreview (last) argument is true. Dx and dy are null to force
 		// the use of the defaults. Note that dx and dy are only used for the
@@ -617,7 +431,7 @@ sim.end()
 		{
 			return graph.graphHandler.guidesEnabled;
 		};
-		
+
 		// Restores original drag icon while outside of graph
 		ds.createDragElement = mxDragSource.prototype.createDragElement;
 
@@ -651,10 +465,11 @@ sim.end()
 							var json_data = {
 								"name_value": "",
 								// "level": "",
-								"size": "",
 								"synapse_type": "",
 								"receptor_type": "",
 								"connectors_type": "",
+								"synaptic_weight": "",
+								"synaptic_delay": "",
 								"TsodyksMarkram_U": "",
 								"TsodyksMarkram_tau_rec": "",
 								"TsodyksMarkram_tau_facil": "",
@@ -685,13 +500,14 @@ sim.end()
 								title : "Projection Form Editor",
 								name_value: cell.value,
 								// level: json_data.level,
-								size: json_data.size,
 								synapse_type: json_data.synapse_type,
 								receptor_type: json_data.receptor_type,
 								connectors_type: json_data.connectors_type,
+								synaptic_weight: json_data.synaptic_weight,
+								synaptic_delay: json_data.synaptic_delay,
 								TsodyksMarkram_U: json_data.TsodyksMarkram_U,
 								TsodyksMarkram_tau_rec: json_data.TsodyksMarkram_tau_rec,
-								TsodyksMarkram_tau_facil: json_data.TsodyksMarkram_tau_facil,				
+								TsodyksMarkram_tau_facil: json_data.TsodyksMarkram_tau_facil,
 								AllToAll_allow_self_connections: json_data.AllToAll_allow_self_connections,
 								FixedProbability_p_connect: json_data.FixedProbability_p_connect,
 								FixedProbability_allow_self_connections: json_data.FixedProbability_allow_self_connections,
@@ -740,15 +556,15 @@ sim.end()
 							// "level": "",
 							"size": "",
 							"celltype": "",
-							"param_v_rest": "",
-							"param_cm": "",
-							"param_tau_m": "",
-							"param_tau_refrac": "",
-							"param_tau_syn_E": "",
-							"param_tau_syn_I": "",
-							"param_i_offset": "",
-							"param_v_reset": "",
-							"param_v_thresh": "",
+							"param_v_rest": -65,
+							"param_cm": 1,
+							"param_tau_m": 20,
+							"param_tau_refrac": 0,
+							"param_tau_syn_E": 5,
+							"param_tau_syn_I": 5,
+							"param_i_offset": 0,
+							"param_v_reset": -65,
+							"param_v_thresh": -50,
 							"param_e_rev_E": "",
 							"param_e_rev_I": "",
 							"param_gbar_Na": "",
@@ -764,16 +580,19 @@ sim.end()
 							"param_b": "",
 							"param_delta_T": "",
 							"param_tau_w": "",
-							"init_isyn_exc": "",
-							"init_isyn_inh": "",
+							"init_isyn_exc": 0,
+							"init_isyn_inh": 0,
 							"init_gsyn_exc": "",
 							"init_gsyn_inh": "",
-							"init_v": "",
+							"init_v": -65,
 							"init_w": "",
 							"Recording_spikes": "",
 							"Recording_v": "",
 							"Simulation_time": "",
-							"Simulation_name": ""
+							"Simulation_name": "",
+							"param_rate": "",
+							"param_start": "",
+							"param_duration": "",
 						};
 					}
 					ModalService.showModal({
@@ -818,7 +637,10 @@ sim.end()
 							Recording_spikes: json_data.Recording_spikes,
 							Recording_v: json_data.Recording_v,
 							Simulation_time: json_data.Simulation_time,
-							Simulation_name: json_data.Simulation_name
+							Simulation_name: json_data.Simulation_name,
+							param_rate: json_data.param_rate,
+							param_start: json_data.param_start,
+							param_duration: json_data.param_duration,
 						}
 					}).then(function(modal) {
 						modal.element.modal();
@@ -879,23 +701,38 @@ sim.end()
 					graph.getModel().cells[cell.id].setStyle("fontColor=white;fillColor=#9900ff");
 					graph.refresh();
 				}, submenu_color);
+				menu.addItem('Duplicate Population', null, function(){
+					//shift position of duplicated cell on the graph
+					var cell2 = cell;
+					var x = cell2.geometry.x;
+					var y = cell2.geometry.y;
+					x = x + 20;
+					y = y + 20;
+					cell2.geometry.x = x;
+					cell2.geometry.y = y;
+					var tabcell = new Array(cell2);
+					graph.getModel().beginUpdate();
+					graph.addCells(graph.cloneCells(tabcell));
+					// Adds cells to the model in a single step
+					graph.getModel().endUpdate();
+				});
 			}
 		};
 	}
 });
 
-graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title', 'close', 'name_value', 'size', 'celltype', 
-'param_v_rest', 'param_cm', 'param_tau_m', 'param_tau_m', 'param_tau_m', 'param_tau_refrac', 'param_tau_syn_E', 'param_tau_syn_I', 
-'param_i_offset', 'param_v_reset', 'param_v_thresh', 'param_e_rev_E', 'param_e_rev_I', 'param_gbar_Na', 'param_gbar_K', 'param_g_leak', 
-'param_v_offset', 'param_e_rev_Na', 'param_e_rev_K', 'param_e_rev_leak', 'param_tau_cm', 'param_v_spike', 'param_a', 'param_b', 
+graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title', 'close', 'name_value', 'size', 'celltype',
+'param_v_rest', 'param_cm', 'param_tau_m', 'param_tau_m', 'param_tau_m', 'param_tau_refrac', 'param_tau_syn_E', 'param_tau_syn_I',
+'param_i_offset', 'param_v_reset', 'param_v_thresh', 'param_e_rev_E', 'param_e_rev_I', 'param_gbar_Na', 'param_gbar_K', 'param_g_leak',
+'param_v_offset', 'param_e_rev_Na', 'param_e_rev_K', 'param_e_rev_leak', 'param_tau_cm', 'param_v_spike', 'param_a', 'param_b',
 'param_delta_T', 'param_tau_w', 'init_isyn_exc', 'init_isyn_inh', 'init_gsyn_exc', 'init_gsyn_inh', 'init_v', 'init_w',
-'Recording_spikes', 'Recording_v', 'Simulation_time', 'Simulation_name',
+'Recording_spikes', 'Recording_v', 'Simulation_time', 'Simulation_name', 'param_rate', 'param_start', 'param_duration',
 	function($scope, $element, title, close, name_value, size, celltype,
-		param_v_rest, param_cm, param_tau_m, param_tau_m, param_tau_m, param_tau_refrac, param_tau_syn_E, param_tau_syn_I, 
-		param_i_offset, param_v_reset, param_v_thresh, param_e_rev_E, param_e_rev_I, param_gbar_Na, param_gbar_K, param_g_leak, 
-		param_v_offset, param_e_rev_Na, param_e_rev_K, param_e_rev_leak, param_tau_cm, param_v_spike, param_a, param_b, 
+		param_v_rest, param_cm, param_tau_m, param_tau_m, param_tau_m, param_tau_refrac, param_tau_syn_E, param_tau_syn_I,
+		param_i_offset, param_v_reset, param_v_thresh, param_e_rev_E, param_e_rev_I, param_gbar_Na, param_gbar_K, param_g_leak,
+		param_v_offset, param_e_rev_Na, param_e_rev_K, param_e_rev_leak, param_tau_cm, param_v_spike, param_a, param_b,
 		param_delta_T, param_tau_w, init_isyn_exc, init_isyn_inh, init_gsyn_exc, init_gsyn_inh, init_v, init_w,
-		Recording_spikes, Recording_v, Simulation_time, Simulation_name) {
+		Recording_spikes, Recording_v, Simulation_time, Simulation_name, param_rate, param_start, param_duration) {
 		$scope.title = title;
 		$scope.name_value = name_value;
 		// $scope.level = level;
@@ -935,7 +772,10 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 		$scope.Recording_v = Recording_v;
 		$scope.Simulation_time = Simulation_time;
 		$scope.Simulation_name = Simulation_name;
-		
+		$scope.param_rate = param_rate;
+		$scope.param_start = param_start;
+		$scope.param_duration = param_duration;
+
 		if($scope.celltype == "empty_no_edge"){
 			$scope.celltype = "IF_curr_alpha";
 		}
@@ -1000,7 +840,7 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 				if(($scope.param_b == "") || ($scope.param_b == null)){ $scope.param_b = 0,0805; }
 				if(($scope.param_delta_T == "") || ($scope.param_delta_T == null)){ $scope.param_delta_T = 2,0; }
 				if(($scope.param_tau_w == "") || ($scope.param_tau_w == null)){ $scope.param_tau_w = 144,0; }
-				if(($scope.param_v_thresh == "") || ($scope.param_v_thresh == null)){ $scope.param_v_thresh = -50,4; } 
+				if(($scope.param_v_thresh == "") || ($scope.param_v_thresh == null)){ $scope.param_v_thresh = -50,4; }
 				if(($scope.param_e_rev_E == "") || ($scope.param_e_rev_E == null)){ $scope.param_e_rev_E = 0,0; }
 				if(($scope.param_tau_syn_E == "") || ($scope.param_tau_syn_E == null)){ $scope.param_tau_syn_E = 5,0; }
 				if(($scope.param_e_rev_I == "") || ($scope.param_e_rev_I == null)){ $scope.param_e_rev_I = -80,0; }
@@ -1027,7 +867,7 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 			if(($scope.name_value == "") || ($scope.name_value == null)){
 				$scope.msgAlert = "Name is required."
 			}
-			else if(($scope.size == "") || ($scope.size == null)){
+			else if(($scope.size == null) || ($scope.size.toString() == "")){
 				$scope.msgAlert = "Size value is required."
 			} else{
 				$scope.close()
@@ -1073,6 +913,9 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 				Recording_v: $scope.Recording_v,
 				Simulation_time: $scope.Simulation_time,
 				Simulation_name: $scope.Simulation_name,
+				param_rate: $scope.param_rate,
+				param_start: $scope.param_start,
+				param_duration: $scope.param_duration,
 			}, 100);
 			$('.modal-backdrop').remove();
 		};
@@ -1121,6 +964,9 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 				Recording_v: $scope.Recording_v,
 				Simulation_time: $scope.Simulation_time,
 				Simulation_name: $scope.Simulation_name,
+				param_rate: $scope.param_rate,
+				param_start: $scope.param_start,
+				param_duration: $scope.param_duration,
 			}, 100); // close, but give 100ms for bootstrap to animate
 			$('.modal-backdrop').remove();
 		};
@@ -1128,29 +974,32 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 ]);
 
 
-graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 'title', 'close', 'name_value', 'size', 
-'synapse_type','receptor_type', 'connectors_type', 
+graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 'title', 'close', 'name_value',
+'synapse_type','receptor_type', 'connectors_type',
+'synaptic_weight', 'synaptic_delay',
 'TsodyksMarkram_U', 'TsodyksMarkram_tau_rec', 'TsodyksMarkram_tau_facil',
-'FixedProbability_p_connect', 'AllToAll_allow_self_connections', 
-'FixedProbability_allow_self_connections', 'FromFile_file', 'FromFile_distributed', 'FromFile_safe', 'FromFile_callback', 
-'FixedNumberPre_n', 'FixedNumberPre_with_replacement', 'FixedNumberPre_allow_self_connections', 'FixedNumberPost_n', 
-'FixedNumberPost_with_replacement', 'FixedNumberPost_allow_self_connections', 'FixedTotalNumber_n', 'FixedTotalNumber_with_replacement', 
+'FixedProbability_p_connect', 'AllToAll_allow_self_connections',
+'FixedProbability_allow_self_connections', 'FromFile_file', 'FromFile_distributed', 'FromFile_safe', 'FromFile_callback',
+'FixedNumberPre_n', 'FixedNumberPre_with_replacement', 'FixedNumberPre_allow_self_connections', 'FixedNumberPost_n',
+'FixedNumberPost_with_replacement', 'FixedNumberPost_allow_self_connections', 'FixedTotalNumber_n', 'FixedTotalNumber_with_replacement',
 'FixedTotalNumber_allow_self_connections', 'DistanceDependent_d_expression', 'DistanceDependent_allow_self_connections',
-	function($scope, $element, title, close, name_value, size, 
-		synapse_type, receptor_type, connectors_type, 
+	function($scope, $element, title, close, name_value,
+		synapse_type, receptor_type, connectors_type,
+		synaptic_weight, synaptic_delay,
 		TsodyksMarkram_U, TsodyksMarkram_tau_rec, TsodyksMarkram_tau_facil,
-		FixedProbability_p_connect, AllToAll_allow_self_connections, 
-		FixedProbability_allow_self_connections, FromFile_file, FromFile_distributed, FromFile_safe, FromFile_callback, 
-		FixedNumberPre_n, FixedNumberPre_with_replacement, FixedNumberPre_allow_self_connections, FixedNumberPost_n, 
-		FixedNumberPost_with_replacement, FixedNumberPost_allow_self_connections, FixedTotalNumber_n, FixedTotalNumber_with_replacement, 
+		FixedProbability_p_connect, AllToAll_allow_self_connections,
+		FixedProbability_allow_self_connections, FromFile_file, FromFile_distributed, FromFile_safe, FromFile_callback,
+		FixedNumberPre_n, FixedNumberPre_with_replacement, FixedNumberPre_allow_self_connections, FixedNumberPost_n,
+		FixedNumberPost_with_replacement, FixedNumberPost_allow_self_connections, FixedTotalNumber_n, FixedTotalNumber_with_replacement,
 		FixedTotalNumber_allow_self_connections, DistanceDependent_d_expression, DistanceDependent_allow_self_connections) {
 		$scope.title = title;
 		$scope.name_value = name_value;
 		// $scope.level = level;
-		$scope.size = size;
 		$scope.synapse_type = synapse_type;
 		$scope.receptor_type = receptor_type;
 		$scope.connectors_type = connectors_type;
+		$scope.synaptic_weight = synaptic_weight;
+		$scope.synaptic_delay = synaptic_delay;
 		$scope.TsodyksMarkram_U = TsodyksMarkram_U;
 		$scope.TsodyksMarkram_tau_rec = TsodyksMarkram_tau_rec;
 		$scope.TsodyksMarkram_tau_facil = TsodyksMarkram_tau_facil;
@@ -1181,6 +1030,20 @@ graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 't
 			$scope.synapse_type = "static";
 		}
 
+		// $scope.updateForm = function() {
+		// 	if(($scope.synaptic_weight == "") || ($scope.synaptic_weight == null)){ $scope.synaptic_weight = 0,0; }
+		// 	if(($scope.synaptic_delay == "") || ($scope.synaptic_delay == null)){ $scope.synaptic_delay = 0,0; }
+		// 	if(($scope.synapse_type == "TsodyksMarkram")){
+		// 		if(($scope.TsodyksMarkram_U == "") || ($scope.TsodyksMarkram_U == null)){ $scope.TsodyksMarkram_U = 0,5; }
+		// 		if(($scope.TsodyksMarkram_tau_rec == "") || ($scope.TsodyksMarkram_tau_rec == null)){ $scope.TsodyksMarkram_tau_rec = 100,0; }
+		// 		if(($scope.TsodyksMarkram_tau_facil == "") || ($scope.TsodyksMarkram_tau_facil == null)){ $scope.param_tau_m = 0,0; }
+		// 	}
+		// };
+
+		if(($scope.receptor_type == "") || ($scope.receptor_type == null)){
+			$scope.receptor_type = "excitatory";
+		}
+
 		if(($scope.connectors_type == "") || ($scope.connectors_type == null)){
 			$scope.connectors_type = "AllToAll";
 		}
@@ -1188,9 +1051,23 @@ graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 't
 		$scope.beforeClose = function(){
 			if(($scope.name_value == "") || ($scope.name_value == null)){
 				$scope.msgAlert = "Name is required.";
-			// } else if(($scope.size == "") || ($scope.size == null)){
-			// 	$scope.msgAlert = "Size value is required as integer.";
-			} else if(($scope.receptor_type == "") || ($scope.receptor_type == null)){
+			}
+			else if(($scope.synaptic_weight == null) || ($scope.synaptic_weight.toString() == "")){
+				$scope.msgAlert = "Synaptic weight is required.";
+			}
+			else if(($scope.synaptic_delay == null) || ($scope.synaptic_delay.toString() == "")){
+				$scope.msgAlert = "Synaptic delay is required.";
+			}
+			else if(($scope.synapse_type == 'TsodyksMarkram') && (($scope.TsodyksMarkram_U == "") || ($scope.TsodyksMarkram_U == null))){
+				$scope.msgAlert = "U is required.";
+			}
+			else if(($scope.synapse_type == 'TsodyksMarkram') && (($scope.TsodyksMarkram_tau_facil == "") || ($scope.TsodyksMarkram_tau_facil == null))){
+				$scope.msgAlert = "tau_rec is required.";
+			}
+			else if(($scope.synapse_type == 'TsodyksMarkram') && (($scope.TsodyksMarkram_tau_rec == "") || ($scope.TsodyksMarkram_tau_rec == null))){
+				$scope.msgAlert = "tau_facil is required.";
+			}
+			else if(($scope.receptor_type == "") || ($scope.receptor_type == null)){
 				$scope.msgAlert = "Receptor type value is required.";
 			}
 			else {
@@ -1202,10 +1079,11 @@ graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 't
 			close({
 				name_value: $scope.name_value,
 				// level: $scope.level,
-				size: $scope.size,
 				synapse_type: $scope.synapse_type,
 				receptor_type: $scope.receptor_type,
 				connectors_type: $scope.connectors_type,
+				synaptic_weight: $scope.synaptic_weight,
+				synaptic_delay: $scope.synaptic_delay,
 				TsodyksMarkram_U: $scope.TsodyksMarkram_U,
 				TsodyksMarkram_tau_rec: $scope.TsodyksMarkram_tau_rec,
 				TsodyksMarkram_tau_facil: $scope.TsodyksMarkram_tau_facil,
@@ -1240,10 +1118,11 @@ graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 't
 			close({
 				name_value: name_value,
 				// level: level,
-				size: size,
 				synapse_type: $scope.synapse_type,
 				receptor_type: $scope.receptor_type,
 				connectors_type: $scope.connectors_type,
+				synaptic_weight: $scope.synaptic_weight,
+				synaptic_delay: $scope.synaptic_delay,
 				TsodyksMarkram_U: $scope.TsodyksMarkram_U,
 				TsodyksMarkram_tau_rec: $scope.TsodyksMarkram_tau_rec,
 				TsodyksMarkram_tau_facil: $scope.TsodyksMarkram_tau_facil,
@@ -1272,8 +1151,21 @@ graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 't
 	}
 ]);
 
-graphSchemaApp.controller('Dlg_submit_job', ['$scope', '$element', '$http', 'title', 'scriptText', 'close', 'hardware_platform', 'jobService',
-	function($scope, $element, $http, title, scriptText, close, hardware_platform, jobService) {
+graphSchemaApp.controller('Dlg_submit_job', ['$scope', '$element', '$http', 'title', 'scriptText', 'cells', 'close', 'hardware_platform',
+											 'jobService', 'Simulation_time', 'Simulation_name', 'bbpOidcSession', 'clbUser', '$location', 'clbContext',
+											 'python_script_string',
+	function($scope, $element, $http, title, scriptText, cells, close, hardware_platform,
+			 jobService, Simulation_time, Simulation_name, bbpOidcSession, clbUser, $location, clbContext,
+			 python_script_string) {
+
+		clbUser.getCurrentUserOnly().then(
+			function(response) {
+				console.log(response);
+			},
+			function(err) {
+				bbpOidcSession.login();
+			});
+
 		$scope.title = title;
 		$scope.scriptText = scriptText;
 		$scope.base_url = "";
@@ -1281,33 +1173,54 @@ graphSchemaApp.controller('Dlg_submit_job', ['$scope', '$element', '$http', 'tit
 		var curdate = new Date();
 		$scope.job = {};
 
-		$scope.job.id = 304621;  //default value
 		$scope.job.collab_id = 4293;  //default value
-		$scope.job.log = " ";
+		//$scope.job.log = " ";
         $scope.job.status = "submitted";
-        $scope.job.timestamp_submission = curdate.toUTCString();
-        $scope.job.timestamp_completion = curdate.toUTCString(); 
+        //$scope.job.timestamp_completion = curdate.toUTCString();
         $scope.job.code = $scope.scriptText;
         $scope.job.command = "";
         $scope.job.hardware_config = {};
 		$scope.hardware_platform = hardware_platform;
-        $scope.job.tags = [];
+        $scope.job.tags = ["gui"];
         $scope.job.input_data = [];
-        $scope.job.output_data = []; 
-        $scope.job.resource_uri = ""; 
+        //$scope.job.output_data = [];
+        //$scope.job.resource_uri = "";
 		$scope.inputs = [];
-		
+		$scope.Simulation_time = Simulation_time;
+
 		if(($scope.hardware_platform == "") || ($scope.hardware_platform == null)){
 			$scope.hardware_platform = "BrainScaleS";
 		}
 
+		var ctx = null;
+		console.log($location);
+		console.log($location.search());
+		console.log(window.location);
+		if( $location.search().ctx ) {
+			ctx = $location.search().ctx;
+			console.log(ctx);
+			clbContext.get(ctx).then(
+				function(context) {
+					console.log("Collab id = " + context.collab.id);
+					$scope.job.collab_id = context.collab.id;
+				},
+				function(err) {
+					 console.log(err);
+				}
+			);
+		}
+		console.log("Context is " + ctx);
+
 		$scope.submitJob = function(job, jobService){
 			job_p = JSON.stringify(job);
-			try {			
+			console.log("Submitting job:");
+			console.log(job);
+			console.log(job_p);
+			try {
 				jobService.post(job_p, function(data, status){
-					console.log("succes : +" + data + "/" + status );
+					console.log("success : +" + data + "/" + status );
 				})
-			} catch(error){
+			} catch(error) {
 				console.log("error : " + error);
 			}
 			// .error(function(data, status){
@@ -1316,37 +1229,61 @@ graphSchemaApp.controller('Dlg_submit_job', ['$scope', '$element', '$http', 'tit
 		};
 
 		$scope.beforeClose = function(){
-			$scope.close();
+			if(($scope.Simulation_time == null) || ($scope.Simulation_time.toString() == "")){
+				$scope.msgAlert = "Simulation time value is required."
+			} else if(($scope.Simulation_name == "") || ($scope.Simulation_name == null)){
+				$scope.msgAlert = "Simulation name value is required.";
+			} else {
+				$scope.close()
+			}
 		};
 		$scope.close = function() {
+			$scope.scriptText = python_script_string(cells, $scope.hardware_platform, $scope.Simulation_time, $scope.Simulation_name);
+			$scope.job.code = $scope.scriptText;
+			$scope.job.hardware_platform = $scope.hardware_platform;
+			$scope.job.timestamp_submission = curdate.toUTCString();
 			close({
-				hardware_platform: $scope.hardware_platform
+				hardware_platform: $scope.hardware_platform,
+				Simulation_time: $scope.Simulation_time,
+				Simulation_name: $scope.Simulation_name,
 			}, 100);
 			$scope.submitJob($scope.job, jobService);
 			$('.modal-backdrop').remove();
 		};
 		$scope.cancel = function() {
 			close({
-				hardware_platform: $scope.hardware_platform
+				hardware_platform: $scope.hardware_platform,
+				Simulation_time: $scope.Simulation_time,
+				Simulation_name: $scope.Simulation_name,
 			}, 100);
 			$('.modal-backdrop').remove();
 		};
 	}
 ]);
 
-graphSchemaApp.controller('Dlg_script_python', ['$scope', '$element', 'title', 'close', 'filename', 'hardware_platform',
-	function($scope, $element, title, close, filename, hardware_platform){
+graphSchemaApp.controller('Dlg_script_python', ['$scope', '$element', 'title', 'close', 'filename', 'hardware_platform', 'Simulation_time', 'Simulation_name',
+	function($scope, $element, title, close, filename, hardware_platform, Simulation_time, Simulation_name){
 		$scope.title = title;
 		$scope.filename = filename;
 		$scope.hardware_platform = hardware_platform;
+		$scope.Simulation_time = Simulation_time;
+		$scope.Simulation_name = Simulation_name;
 
 		$scope.beforeClose = function(){
-			$scope.close();
+			if(($scope.Simulation_time == null) || ($scope.Simulation_time.toString() == "")){
+				$scope.msgAlert = "Simulation time value is required.";
+			} else if(($scope.Simulation_name == "") || ($scope.Simulation_name == null)){
+				$scope.msgAlert = "Simulation name value is required.";
+			} else {
+				$scope.close();
+			}
 		};
 		$scope.close = function() {
 			close({
 				filename: $scope.filename,
 				hardware_platform: $scope.hardware_platform,
+				Simulation_time: $scope.Simulation_time,
+				Simulation_name: $scope.Simulation_name,
 			}, 100);
 			//$scope.submitJob($scope.job, jobService);
 			$('.modal-backdrop').remove();
@@ -1355,6 +1292,8 @@ graphSchemaApp.controller('Dlg_script_python', ['$scope', '$element', 'title', '
 			close({
 				filename: $scope.filename,
 				hardware_platform: $scope.hardware_platform,
+				Simulation_time: $scope.Simulation_time,
+				Simulation_name: $scope.Simulation_name,
 			}, 100);
 			$('.modal-backdrop').remove();
 		};

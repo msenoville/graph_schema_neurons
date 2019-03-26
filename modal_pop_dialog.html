@@ -1,4 +1,4 @@
-    
+
 <div class="modal fade">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -37,7 +37,8 @@
                         <label class="control-label col-sm-2" for="celltype">Cell Type : </label>
                         <div class="col-sm-10">
                             <!-- <select id="celltype" name="celltype" class="form-control" ng-model="celltype"> -->
-                            <select id="celltype" name="celltype" class="form-control" ng-model="celltype" ng-change="updateForm()" ng-show="updateForm()">
+                            <!-- <select id="celltype" name="celltype" class="form-control" ng-model="celltype" ng-change="updateForm()" ng-show="updateForm()"> -->
+                            <select id="celltype" name="celltype" class="form-control" ng-model="celltype" ng-change="updateForm()">
                                 <option value="IF_curr_alpha">IF_curr_alpha</option>
                                 <option value="IF_curr_exp">IF_curr_exp</option>
                                 <option value="IF_cond_alpha">IF_cond_alpha</option>
@@ -104,7 +105,7 @@
                             <div class="col-sm-3">
                                 <input id="param_i_offset" name="param_i_offset" type="number" step="0.1" placeholder="i_offset..." class="form-control input-md" ng-model="param_i_offset">
                             </div>
-                            <div class="control-label col-sm-2">mA</div>
+                            <div class="control-label col-sm-2">nA</div>
                         </div>
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"></div>
@@ -131,7 +132,7 @@
                             </div>
                             <div class="control-label col-sm-2">mV</div>
                         </div>
-                        <div class="form-group col-sm-12">
+                        <!-- <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"></div>
                             <label class="control-label col-sm-2" for="init_isyn_exc">isyn_exc : </label>
                             <div class="col-sm-3">
@@ -146,7 +147,7 @@
                                 <input id="init_isyn_inh" name="init_isyn_inh" type="number" step="0.1" placeholder="isyn_inh..." class="form-control input-md" ng-model="init_isyn_inh">
                             </div>
                             <div class="control-label col-sm-2">nA</div>
-                        </div>
+                        </div> -->
                     </div>
                     <div ng-show="celltype == 'IF_cond_alpha' || celltype == 'IF_cond_exp'">
                         <div class="form-group col-sm-12">
@@ -155,7 +156,7 @@
                             <div class="col-sm-3">
                                 <input id="param_v_rest" name="param_v_rest" type="number" step="0.1" placeholder="v_rest..." class="form-control input-md" ng-model="param_v_rest">
                             </div>
-                            <div class="control-label col-sm-2">mF</div>
+                            <div class="control-label col-sm-2">mV</div>
                         </div>
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"></div>
@@ -235,7 +236,7 @@
                             <div class="col-sm-3">
                                 <input id="param_i_offset" name="param_i_offset" type="number" step="0.1" placeholder="i_offset..." class="form-control input-md" ng-model="param_i_offset">
                             </div>
-                            <div class="control-label col-sm-2">mF</div>
+                            <div class="control-label col-sm-2">nA</div>
                         </div>
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"><b>Initial Value :</b></div>
@@ -245,7 +246,7 @@
                             </div>
                             <div class="control-label col-sm-2">mV</div>
                         </div>
-                        <div class="form-group col-sm-12">
+                        <!-- <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"></div>
                             <label class="control-label col-sm-2" for="init_gsyn_exc">gsyn_exc : </label>
                             <div class="col-sm-3">
@@ -260,7 +261,7 @@
                                 <input id="init_gsyn_inh" name="init_gsyn_inh" type="number" step="0.1" placeholder="gsyn_inh..." class="form-control input-md" ng-model="init_gsyn_inh">
                             </div>
                             <div class="control-label col-sm-2">nA</div>
-                        </div>
+                        </div> -->
                     </div>
                     <div ng-show="celltype == 'HH_cond_exp'">
                         <div class="form-group col-sm-12">
@@ -365,7 +366,7 @@
                             <div class="col-sm-3">
                                 <input id="param_i_offset" name="param_i_offset" type="number" step="0.1" placeholder="i_offset..." class="form-control input-md" ng-model="param_i_offset">
                             </div>
-                            <div class="control-label col-sm-2">mF</div>
+                            <div class="control-label col-sm-2">nA</div>
                         </div>
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"><b>Initial Value :</b></div>
@@ -375,7 +376,7 @@
                             </div>
                             <div class="control-label col-sm-2">mV</div>
                         </div>
-                        <div class="form-group col-sm-12">
+                        <!-- <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"></div>
                             <label class="control-label col-sm-2" for="init_gsyn_exc">gsyn_exc : </label>
                             <div class="col-sm-3">
@@ -390,7 +391,7 @@
                                 <input id="init_gsyn_inh" name="init_gsyn_inh" type="number" step="0.1" placeholder="isyn_inh..." class="form-control input-md" ng-model="init_gsyn_inh">
                             </div>
                             <div class="control-label col-sm-2">uS</div>
-                        </div>
+                        </div> -->
                     </div>
                     <div ng-show="celltype == 'EIF_cond_alpha_isfa_ista'">
                         <div class="form-group col-sm-12">
@@ -447,7 +448,7 @@
                             <div class="col-sm-3">
                                 <input id="param_i_offset" name="param_i_offset" type="number" step="0.1" placeholder="i_offset..." class="form-control input-md" ng-model="param_i_offset">
                             </div>
-                            <div class="control-label col-sm-2">mA</div>
+                            <div class="control-label col-sm-2">nA</div>
                         </div>
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"></div>
@@ -538,7 +539,7 @@
                             </div>
                             <div class="control-label col-sm-2">nA</div>
                         </div>
-                        <div class="form-group col-sm-12">
+                        <!-- <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"></div>
                             <label class="control-label col-sm-2" for="init_gsyn_exc">gsyn_exc : </label>
                             <div class="col-sm-3">
@@ -553,7 +554,7 @@
                                 <input id="init_gsyn_inh" name="init_gsyn_inh" type="number" step="0.1" placeholder="isyn_inh..." class="form-control input-md" ng-model="init_gsyn_inh">
                             </div>
                             <div class="control-label col-sm-2">uS</div>
-                        </div>
+                        </div> -->
                     </div>
 
                     <div class="form-group col-sm-12" ng-show="celltype == 'SpikeSourcePoisson'">
@@ -608,7 +609,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group col-sm-12">
+                    <!-- <div class="form-group col-sm-12">
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"><b>Simulation :</b></div>
                             <label class="control-label col-sm-2" for="Simulation_time">Simulation time : </label>
@@ -625,7 +626,7 @@
                             </div>
                             <div class="control-label col-sm-2">&nbsp;</div>
                         </div>
-                    </div>
+                    </div> -->
                 </form>
                 <span style="color:red;">{{msgAlert}}</span>
             </div>
