@@ -365,6 +365,9 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 		// Adds cells to the model in a single step
 		graph.getModel().beginUpdate();
 		graph.getModel().endUpdate();
+
+		graph.setAllowDanglingEdges(false);
+
 		graphs.push(graph);
 
 		// Returns the graph under the mouse
