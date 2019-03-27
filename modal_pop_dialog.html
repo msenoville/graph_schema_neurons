@@ -60,22 +60,22 @@
                             <div class="control-label col-sm-1">mV</div>
                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                 <label class="btn btn-default fab fa-neos active">
-                                  <input type="radio" name="distribution" id="fixed" ng-model="fixed" autocomplete="off" checked>
+                                  <input type="radio" name="distribution" ng-model="distribution" ng-value="fixed" ng-model="distribution"  autocomplete="off" checked>
                                 </label>
                                 <label class="btn btn-default fas fa-signal">
-                                  <input type="radio" name="distribution" id="random_distribution" ng-model="random_distribution" autocomplete="off">
+                                  <input type="radio" name="distribution" ng-model="distribution" ng-value="random_distribution" autocomplete="off">
                                 </label>
                                 <label class="btn btn-default fas fa-square-root-alt">
-                                  <input type="radio" name="distribution" id="math_function" ng-model="math_function" autocomplete="off">
+                                  <input type="radio" name="distribution" ng-model="distribution" ng-value="math_function" autocomplete="off">
                                 </label>
                                 <label class="btn btn-default fas fa-th">
-                                  <input type="radio" name="distribution" id="matrix" ng-model="matrix" autocomplete="off">
+                                  <input type="radio" name="distribution" ng-model="distribution" ng-value="matrix" autocomplete="off">
                                 </label>
                             </div>
                         </div>
-                        <div ng-show="random_distribution">random distribution</div>
-                        <div ng-show="math_function">mathematical function</div>
-                        <div ng-show="matrix">matrix</div>
+                        <div ng-show="distribution == 'random_distribution'">random distribution</div>
+                        <div ng-show="distribution == 'math_function'">mathematical function</div>
+                        <div ng-show="distribution == 'matrix'">matrix</div>
 
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"></div>
