@@ -58,24 +58,49 @@
                                 <input id="param_v_rest" name="param_v_rest" type="number" step="0.1" placeholder="v_rest..." class="form-control input-md" ng-model="param_v_rest">
                             </div>
                             <div class="control-label col-sm-1">mV</div>
-                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                <label class="btn btn-default fab fa-neos active">
-                                  <input type="radio" name="distribution" ng-model="distribution" ng-value="fixed" ng-model="distribution"  autocomplete="off" checked>
-                                </label>
-                                <label class="btn btn-default fas fa-signal">
-                                  <input type="radio" name="distribution" ng-model="distribution" ng-value="random_distribution" autocomplete="off">
-                                </label>
-                                <label class="btn btn-default fas fa-square-root-alt">
-                                  <input type="radio" name="distribution" ng-model="distribution" ng-value="math_function" autocomplete="off">
-                                </label>
-                                <label class="btn btn-default fas fa-th">
-                                  <input type="radio" name="distribution" ng-model="distribution" ng-value="matrix" autocomplete="off">
-                                </label>
-                            </div>
+                            <!-- <div class="btn-group btn-group-toggle" data-toggle="buttons"> -->
+                                <form>
+                                    <label class="btn btn-default fab fa-neos active">
+                                        <input type="radio" ng-model="v_dist" value="0" checked>
+                                    </label>
+                                    <label class="btn btn-default fas fa-signal">
+                                        <input type="radio" ng-model="v_dist" value="1">
+                                    </label>
+                                    <label class="btn btn-default fas fa-square-root-alt">
+                                        <input type="radio" ng-model="v_dist" value="2">
+                                    </label>
+                                    <label class="btn btn-default fas fa-th">
+                                        <input type="radio" ng-model="v_dist" value="3">
+                                    </label>
+                                </form>
+                                <div>v_dist : {{v_dist}}</div>
+                            <!-- </div> -->
                         </div>
-                        <div ng-show="distribution == 'random_distribution'">random distribution</div>
-                        <div ng-show="distribution == 'math_function'">mathematical function</div>
-                        <div ng-show="distribution == 'matrix'">matrix</div>
+                        
+                        <div ng-show="v_dist == '1'">random distribution</div>
+                        <div ng-show="v_dist == '2'">mathematical function</div>
+                        <div ng-show="v_dist == '3'">matrix</div>
+
+                        <div class="form-group col-sm-12">
+                                <form>
+                                    Pick a topic:
+                                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                        <label class="btn btn-default fab fa-neos active">
+                                            <input type="radio" ng-model="myVar" value="dogs" checked>
+                                        </label>
+                                        <label class="btn btn-default fas fa-signal">
+                                            <input type="radio" ng-model="myVar" value="tuts">
+                                        </label>
+                                        <label class="btn btn-default fas fa-square-root-alt">
+                                            <input type="radio" ng-model="myVar" value="cars">
+                                        </label>
+                                        <label class="btn btn-default fas fa-th">
+                                            <input type="radio" ng-model="myVar" value="CarsEEEEE">
+                                        </label>
+                                    </div>
+                                </form>      
+                                <div>My Var : {{myVar}}</div>
+                        </div>
 
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"></div>

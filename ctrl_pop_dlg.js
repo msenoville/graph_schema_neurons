@@ -12,6 +12,9 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 		param_v_offset, param_e_rev_Na, param_e_rev_K, param_e_rev_leak, param_tau_cm, param_v_spike, param_a, param_b,
 		param_delta_T, param_tau_w, init_isyn_exc, init_isyn_inh, init_gsyn_exc, init_gsyn_inh, init_v, init_w,
 		Recording_spikes, Recording_v, Simulation_time, Simulation_name, param_rate, param_start, param_duration) {
+		
+		// $scope.v_dist = 0;
+		
 		$scope.title = title;
 		$scope.name_value = name_value;
 		// $scope.level = level;
