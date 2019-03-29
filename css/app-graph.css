@@ -134,3 +134,6 @@ table.mxPopupMenu tr {
 }
 /* End of Tooltips css */
  
+input[type=checkbox], input[type=radio]{
+    display:none;
+}

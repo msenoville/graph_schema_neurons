@@ -13,7 +13,7 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 		param_delta_T, param_tau_w, init_isyn_exc, init_isyn_inh, init_gsyn_exc, init_gsyn_inh, init_v, init_w,
 		Recording_spikes, Recording_v, Simulation_time, Simulation_name, param_rate, param_start, param_duration) {
 		
-		// $scope.v_dist = 0;
+		$scope.v_dist = 0;
 		
 		$scope.title = title;
 		$scope.name_value = name_value;
@@ -140,6 +140,10 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 			if($scope.celltype == "SpikeSourceArray"){
 				if(($scope.param_duration == "") || ($scope.param_duration == null)){ $scope.param_duration = 10000000000; }
 			}
+		};
+
+		$scope.updateDist = function(dist){
+			$scope.v_dist = dist;
 		};
 
 		if(($scope.celltype == "") || ($scope.celltype == null)){
