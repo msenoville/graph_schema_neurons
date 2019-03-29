@@ -61,20 +61,20 @@
                             <!-- <div class="btn-group btn-group-toggle" data-toggle="buttons"> -->
                             <div class="btn-group">
                                 <form>
-                                    <label class="btn btn-default fab fa-neos active">
-                                        <input type="radio" ng-model="v_dist" value="0" checked>
+                                    <label class="btn btn-default fab fa-neos active" id="v_dist_0">
+                                        <input type="radio" ng-model="v_dist" ng-change="updateDist(0)" value="0" checked>
                                     </label>
-                                    <label class="btn btn-default fas fa-signal">
-                                        <input type="radio" ng-model="v_dist" value="1">
+                                    <label class="btn btn-default fas fa-signal" id="v_dist_1">
+                                        <input type="radio" ng-model="v_dist" ng-change="updateDist(1)" value="1">
                                     </label>
-                                    <label class="btn btn-default fas fa-square-root-alt">
-                                        <input type="radio" ng-model="v_dist" value="2">
+                                    <label class="btn btn-default fas fa-square-root-alt" id="v_dist_2">
+                                        <input type="radio" ng-model="v_dist" ng-change="updateDist(2)" value="2">
                                     </label>
-                                    <label class="btn btn-default fas fa-th">
-                                        <input type="radio" ng-model="v_dist" value="3">
+                                    <label class="btn btn-default fas fa-th" id="v_dist_3">
+                                        <input type="radio" ng-model="v_dist" ng-change="updateDist(3)" value="3">
                                     </label>
                                 </form>
-                                <div>v_dist : {{v_dist}}</div>
+                                <!-- <div>v_dist : {{v_dist}}</div> -->
                             </div>
                         </div>
                         

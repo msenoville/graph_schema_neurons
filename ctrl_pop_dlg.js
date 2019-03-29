@@ -143,7 +143,31 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 		};
 
 		$scope.updateDist = function(dist){
-			$scope.v_dist = dist;
+			console.log("updateDist" + dist);
+			if(dist == 0){
+				document.getElementById("v_dist_0").classList.add("active");
+				document.getElementById("v_dist_1").classList.remove("active");
+				document.getElementById("v_dist_2").classList.remove("active");
+				document.getElementById("v_dist_3").classList.remove("active");
+			}
+			if(dist == 1){
+				document.getElementById("v_dist_0").classList.remove("active");
+				document.getElementById("v_dist_1").classList.add("active");
+				document.getElementById("v_dist_2").classList.remove("active");
+				document.getElementById("v_dist_3").classList.remove("active");
+			}
+			if(dist == 2){
+				document.getElementById("v_dist_0").classList.remove("active");
+				document.getElementById("v_dist_1").classList.remove("active");
+				document.getElementById("v_dist_2").classList.add("active");
+				document.getElementById("v_dist_3").classList.remove("active");
+			}
+			if(dist == 3){
+				document.getElementById("v_dist_0").classList.remove("active");
+				document.getElementById("v_dist_1").classList.remove("active");
+				document.getElementById("v_dist_2").classList.remove("active");
+				document.getElementById("v_dist_3").classList.add("active");
+			}
 		};
 
 		if(($scope.celltype == "") || ($scope.celltype == null)){
