@@ -77,11 +77,37 @@
                                 <!-- <div>v_dist : {{v_dist}}</div> -->
                             </div>
                         </div>
-                        
-                        <div ng-show="v_dist == '1'">random distribution</div>
-                        <div ng-show="v_dist == '2'">mathematical function</div>
-                        <div ng-show="v_dist == '3'">matrix</div>
-
+                        <div class="form-group col-sm-12">
+                            <div class="btn-group" ng-show="v_dist == '1'">
+                                <div class="control-label col-sm-2"></div>
+                                <label class="control-label col-sm-2" for="param_v_rest">v_rest : </label>
+                                <div class="control-label col-sm-2">
+                                    <select class="form-control ng-pristine ng-untouched ng-valid ng-not-empty">
+                                        <option value="binomial" selected="selected">binomial</option>
+                                        <option value="gamma">gamma</option>
+                                        <option value="exponential">exponential</option>
+                                        <option value="lognormal">lognormal</option>
+                                        <option value="normal">normal</option>
+                                        <option value="normal_clipped">normal_clipped</option>
+                                        <option value="normal_clipped_to_boundary">normal_clipped_to_boundary</option>
+                                        <option value="poisson">poisson</option>
+                                        <option value="uniform">uniform</option>
+                                        <option value="uniform_int">uniform_int</option>
+                                        <option value="vonmises">vonmises</option>
+                                    </select>
+                                </div>
+                                <label class="control-label col-sm-1">p1 : </label>
+                                <div class="col-sm-2">
+                                    <input id="" name="" type="number" step="0.1" placeholder="v_rest..." class="form-control input-md" ng-model="">
+                                </div>
+                                <label class="control-label col-sm-1">p2 : </label>
+                                <div class="col-sm-2">
+                                    <input id="" name="" type="number" step="0.1" placeholder="v_rest..." class="form-control input-md" ng-model="">
+                                </div>
+                            </div>
+                            <div ng-show="v_dist == '2'">mathematical function</div>
+                            <div ng-show="v_dist == '3'">matrix</div>
+                        </div>
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"></div>
                             <label class="control-label col-sm-2" for="param_cm">cm : </label>
