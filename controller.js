@@ -296,6 +296,29 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 		sp_tool_button_submit.textContent = "Submit job";
 		sp_tool_button_submit.className='tooltiptext2';
 
+		// create a button to test matrix & cie
+		var button_test_matrix = mxUtils.button('', function(){
+
+			ModalService.showModal({
+				templateUrl: "modal_test_matrix.html",
+				controller: "Dlg_test_matrix",
+				inputs: {
+					title : "Test Matrix, correlations, etc...",
+				}
+			}).then(function(modal) {
+				modal.element.modal();
+			});
+		});
+		button_test_matrix.style.width = '48px';
+		button_test_matrix.style.height = '48px';
+		button_test_matrix.style.border = 'none';
+		button_test_matrix.style.background = 'url(\'img/python.png\') no-repeat';
+		button_test_matrix.style.backgroundSize = '100%';
+		button_test_matrix.className = "tooltip2";
+		sp_tool_button_test_matrix = document.createElement('span');
+		sp_tool_button_test_matrix.textContent = "test for matrix etc...";
+		sp_tool_button_test_matrix.className='tooltiptext2';
+
 		//create toolbar
 		var div_toolbar = document.createElement('div');
 		div_toolbar.id = 'div_toolbar';
@@ -322,6 +345,8 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 		button_exp_python.appendChild(sp_tool_button_exp_python);
 		div_toolbar.appendChild(button_submit);
 		button_submit.appendChild(sp_tool_button_submit);
+		div_toolbar.appendChild(button_test_matrix);
+		button_test_matrix.appendChild(sp_tool_button_test_matrix);
 
 		var container = document.createElement('div');
 		container.id = 'svg_container';
@@ -1300,5 +1325,11 @@ graphSchemaApp.controller('Dlg_script_python', ['$scope', '$element', 'title', '
 			}, 100);
 			$('.modal-backdrop').remove();
 		};
+	}
+]);
+
+graphSchemaApp.controller('Dlg_test_matrix', ['$scope', '$element', 'title', 'close',
+	function($scope, $element, title, close){
+		$scope.title = title;
 	}
 ]);
