@@ -13,7 +13,8 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 		param_delta_T, param_tau_w, init_isyn_exc, init_isyn_inh, init_gsyn_exc, init_gsyn_inh, init_v, init_w,
 		Recording_spikes, Recording_v, Simulation_time, Simulation_name, param_rate, param_start, param_duration) {
 		
-		$scope.v_dist = 0;
+		$scope.v_rest_dist = 0;
+		$scope.param_cm_dist = 0;
 		
 		$scope.title = title;
 		$scope.name_value = name_value;
@@ -142,31 +143,31 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 			}
 		};
 
-		$scope.updateDist = function(dist){
+		$scope.updateDist = function(class_param, dist){
 			console.log("updateDist" + dist);
 			if(dist == 0){
-				document.getElementById("v_dist_0").classList.add("active");
-				document.getElementById("v_dist_1").classList.remove("active");
-				document.getElementById("v_dist_2").classList.remove("active");
-				document.getElementById("v_dist_3").classList.remove("active");
+				document.getElementById(class_param + "_dist_0").classList.add("active");
+				document.getElementById(class_param + "_dist_1").classList.remove("active");
+				document.getElementById(class_param + "_dist_2").classList.remove("active");
+				document.getElementById(class_param + "_dist_3").classList.remove("active");
 			}
 			if(dist == 1){
-				document.getElementById("v_dist_0").classList.remove("active");
-				document.getElementById("v_dist_1").classList.add("active");
-				document.getElementById("v_dist_2").classList.remove("active");
-				document.getElementById("v_dist_3").classList.remove("active");
+				document.getElementById(class_param + "_dist_0").classList.remove("active");
+				document.getElementById(class_param + "_dist_1").classList.add("active");
+				document.getElementById(class_param + "_dist_2").classList.remove("active");
+				document.getElementById(class_param + "_dist_3").classList.remove("active");
 			}
 			if(dist == 2){
-				document.getElementById("v_dist_0").classList.remove("active");
-				document.getElementById("v_dist_1").classList.remove("active");
-				document.getElementById("v_dist_2").classList.add("active");
-				document.getElementById("v_dist_3").classList.remove("active");
+				document.getElementById(class_param + "_dist_0").classList.remove("active");
+				document.getElementById(class_param + "_dist_1").classList.remove("active");
+				document.getElementById(class_param + "_dist_2").classList.add("active");
+				document.getElementById(class_param + "_dist_3").classList.remove("active");
 			}
 			if(dist == 3){
-				document.getElementById("v_dist_0").classList.remove("active");
-				document.getElementById("v_dist_1").classList.remove("active");
-				document.getElementById("v_dist_2").classList.remove("active");
-				document.getElementById("v_dist_3").classList.add("active");
+				document.getElementById(class_param + "_dist_0").classList.remove("active");
+				document.getElementById(class_param + "_dist_1").classList.remove("active");
+				document.getElementById(class_param + "_dist_2").classList.remove("active");
+				document.getElementById(class_param + "_dist_3").classList.add("active");
 			}
 		};
 
