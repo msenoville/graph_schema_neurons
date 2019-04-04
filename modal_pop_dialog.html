@@ -51,17 +51,22 @@
                         </div>
                     </div>
                     <div ng-show="celltype == 'IF_curr_alpha' || celltype == 'IF_curr_exp'">
-                        <div class="form-group col-sm-12">
-                            <div class="control-label col-sm-2"><b>Parameters :</b></div>
+                        <!-- <div class="form-group col-sm-12"> -->
+                            <!-- <div class="control-label col-sm-2"><b>Parameters :</b></div> -->
+
                             <!-- <label class="control-label col-sm-2" for="param_v_rest">v_rest : </label>
                             <div class="col-sm-2">
                                 <input id="param_v_rest" name="param_v_rest" type="number" step="0.1" placeholder="v_rest..." class="form-control input-md" ng-model="param_v_rest">
                             </div>
                             <div class="control-label col-sm-1">mV</div> -->
                             <!-- <div class="btn-group btn-group-toggle" data-toggle="buttons"> -->
-                            <label class="control-label col-sm-2" for="param_v_rest">v_rest : </label>
+
+                            <!-- <label class="control-label col-sm-2" for="param_v_rest">v_rest : </label>
                             <div class="col-sm-2">&nbsp;</div>
-                            <div class="control-label col-sm-1">&nbsp;</div>
+                            <div class="control-label col-sm-1">&nbsp;</div> -->
+
+                        <!-- </div> -->
+                        <div class="form-group col-sm-12">
                             <div class="btn-group">
                                 <form>
                                     <label class="btn btn-default fab fa-neos active" id="v_dist_0">
@@ -78,18 +83,16 @@
                                     </label>
                                 </form>
                             </div>
-                        </div>
-                        <div class="form-group col-sm-12">
-                            <div class="" ng-show="v_dist == '0'">
-                                <div class="control-label col-sm-2">&nbsp;</div>
+                            <span ng-show="v_dist == '0'">
+                                <!-- <div class="control-label col-sm-2">&nbsp;</div> -->
                                 <label class="control-label col-sm-2" for="param_v_rest">v_rest : </label>
                                 <div class="col-sm-2">
                                     <input id="param_v_rest" name="param_v_rest" type="number" step="0.1" placeholder="v_rest..." class="form-control input-md" ng-model="param_v_rest">
                                 </div>
                                 <div class="control-label col-sm-1">mV</div>
-                            </div>
-                            <div class="btn-group" ng-show="v_dist == '1'">
-                                <div class="control-label col-sm-2"></div>
+                            </span>
+                            <span ng-show="v_dist == '1'">
+                                <!-- <div class="control-label col-sm-2"></div> -->
                                 <label class="control-label col-sm-2" for="param_v_rest_distribution">v_rest : </label>
                                 <div class="control-label col-sm-2">
                                     <select id="param_v_rest_distribution" name="param_v_rest_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty">
@@ -114,16 +117,16 @@
                                 <div class="col-sm-2">
                                     <input id="param_v_rest_p2" name="param_v_rest_p2" type="number" step="0.1" placeholder="v_rest..." class="form-control input-md" ng-model="param_v_rest_p2">
                                 </div>
-                            </div>
-                            <div ng-show="v_dist == '2'">
+                            </span>
+                            <span ng-show="v_dist == '2'">
                                 <div class="control-label col-sm-2"></div>
                                 <label class="control-label col-sm-2" for="param_v_rest_fx">v_rest : </label>
                                 <div class="col-sm-5">
                                     <input id="param_v_rest_fx" name="param_v_rest_fx" type="text" placeholder="f(x)..." class="form-control input-md" ng-model="param_v_rest_fx">
                                 </div>
                                 <div class="control-label col-sm-1">mV</div>    
-                            </div>
-                            <div ng-show="v_dist == '3'">matrix</div>
+                            </span>
+                            <span ng-show="v_dist == '3'">matrix</span>
                         </div>
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"></div>
