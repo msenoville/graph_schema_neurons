@@ -55,16 +55,16 @@
                             <div class="btn-group btn-group-sm pull-right">
                                 <form>
                                     <label class="btn btn-default fab fa-neos active" id="v_rest_dist_0">
-                                        <input type="radio" ng-model="v_rest_dist" ng-change="updateDist('v_rest', 0)" value="0" checked>
+                                        <input class="hide_radio" type="radio" ng-model="v_rest_dist" ng-change="updateDist('v_rest', 0)" value="0" checked>
                                     </label>
                                     <label class="btn btn-default fas fa-signal" id="v_rest_dist_1">
-                                        <input type="radio" ng-model="v_rest_dist" ng-change="updateDist('v_rest', 1)" value="1">
+                                        <input class="hide_radio" type="radio" ng-model="v_rest_dist" ng-change="updateDist('v_rest', 1)" value="1">
                                     </label>
                                     <label class="btn btn-default fas fa-square-root-alt" id="v_rest_dist_2">
-                                        <input type="radio" ng-model="v_rest_dist" ng-change="updateDist('v_rest', 2)" value="2">
+                                        <input class="hide_radio" type="radio" ng-model="v_rest_dist" ng-change="updateDist('v_rest', 2)" value="2">
                                     </label>
                                     <label class="btn btn-default fas fa-th" id="v_rest_dist_3">
-                                        <input type="radio" ng-model="v_rest_dist" ng-change="updateDist('v_rest', 3)" value="3">
+                                        <input class="hide_radio" type="radio" ng-model="v_rest_dist" ng-change="updateDist('v_rest', 3)" value="3">
                                     </label>
                                 </form>
                             </div>
@@ -108,7 +108,9 @@
                                 </div>
                                 <div class="control-label col-sm-1">mV</div>
                             </span>
-                            <span ng-show="v_rest_dist == '3'"><div class="control-label col-sm-2"><b>Matrix</b></div></span>
+                            <span ng-show="v_rest_dist == '3'">
+                                <div class="control-label col-sm-2"><b>Matrix</b></div>
+                            </span>
                         </div>
                         <div class="form-group col-sm-12">
                             <span ng-show="param_cm_dist == '0'">
@@ -142,38 +144,91 @@
                                 <div class="col-sm-2">
                                     <input id="param_cm_p2" name="param_cm_p2" type="number" step="0.1" placeholder="p2" class="form-control input-md" ng-model="param_cm_p2">
                                 </div>
-                                <div class="control-label col-sm-1">mV</div>
+                                <div class="control-label col-sm-1">nF</div>
                             </span>
                             <span ng-show="param_cm_dist == '2'">
-                                <label class="control-label col-sm-2" for="param_v_rest_fx">v_rest : </label>
+                                <label class="control-label col-sm-2" for="param_cm_fx">cm : </label>
                                 <div class="col-sm-6">
-                                    <input id="param_v_rest_fx" name="param_v_rest_fx" type="text" placeholder="f(x)..." class="form-control input-md" ng-model="param_v_rest_fx">
+                                    <input id="param_cm_fx" name="param_cm_fx" type="text" placeholder="f(x)..." class="form-control input-md" ng-model="param_cm_fx">
                                 </div>
-                                <div class="control-label col-sm-1">mV</div>
+                                <div class="control-label col-sm-1">nF</div>
                             </span>
-                            <span ng-show="param_cm_dist == '3'"><div class="control-label col-sm-2"><b>Matrix</b></div></span>
+                            <span ng-show="param_cm_dist == '3'">
+                                <div class="control-label col-sm-2"><b>Matrix</b></div>
+                            </span>
                             <div class="btn-group btn-group-sm pull-right">
                                 <label class="btn btn-default fab fa-neos active" id="param_cm_dist_0">
-                                  <input type="radio" ng-model="param_cm_dist" ng-change="updateDist('param_cm', 0)" value="0" checked>
+                                  <input class="hide_radio" type="radio" ng-model="param_cm_dist" ng-change="updateDist('param_cm', 0)" value="0" checked>
                                 </label>
                                 <label class="btn btn-default fas fa-signal" id="param_cm_dist_1">
-                                  <input type="radio" ng-model="param_cm_dist" ng-change="updateDist('param_cm', 1)" value="1">
+                                  <input class="hide_radio" type="radio" ng-model="param_cm_dist" ng-change="updateDist('param_cm', 1)" value="1">
                                 </label>
                                 <label class="btn btn-default fas fa-square-root-alt" id="param_cm_dist_2">
-                                    <input type="radio" ng-model="param_cm_dist" ng-change="updateDist('param_cm', 2)" value="2">
+                                    <input class="hide_radio" type="radio" ng-model="param_cm_dist" ng-change="updateDist('param_cm', 2)" value="2">
                                 </label>
                                 <label class="btn btn-default fas fa-th" id="param_cm_dist_3">
-                                    <input type="radio" ng-model="param_cm_dist" ng-change="updateDist('param_cm', 3)" value="3">
+                                    <input class="hide_radio" type="radio" ng-model="param_cm_dist" ng-change="updateDist('param_cm', 3)" value="3">
                                 </label>
                             </div>
                         </div>
                         <div class="form-group col-sm-12">
-                            <div class="control-label col-sm-2"></div>
-                            <label class="control-label col-sm-2" for="param_tau_m">tau_m : </label>
-                            <div class="col-sm-3">
-                                <input id="param_tau_m" name="param_tau_m" type="number" step="0.1" placeholder="tau_m..." class="form-control input-md" ng-model="param_tau_m">
+                            <span ng-show="param_tau_m_dist == '0'">
+                                <div class="control-label col-sm-2"></div>
+                                <label class="control-label col-sm-2" for="param_tau_m">tau_m : </label>
+                                <div class="col-sm-3">
+                                    <input id="param_tau_m" name="param_tau_m" type="number" step="0.1" placeholder="tau_m..." class="form-control input-md" ng-model="param_tau_m">
+                                </div>
+                                <div class="control-label col-sm-1">ms</div>
+                            </span>
+                            <span ng-show="param_tau_m_dist == '1'">
+                                <label class="control-label col-sm-2" for="param_tau_m_distribution">tau_m : </label>
+                                <div class="control-label col-sm-2">
+                                    <select id="param_tau_m_distribution" name="param_tau_m_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty">
+                                        <option value="binomial" selected="selected">binomial</option>
+                                        <option value="gamma">gamma</option>
+                                        <option value="exponential">exponential</option>
+                                        <option value="lognormal">lognormal</option>
+                                        <option value="normal">normal</option>
+                                        <option value="normal_clipped">normal_clipped</option>
+                                        <option value="normal_clipped_to_boundary">normal_clipped_to_boundary</option>
+                                        <option value="poisson">poisson</option>
+                                        <option value="uniform">uniform</option>
+                                        <option value="uniform_int">uniform_int</option>
+                                        <option value="vonmises">vonmises</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-2">
+                                    <input id="param_tau_m_p1" name="param_tau_m_p1" type="number" step="0.1" placeholder="p1" class="form-control input-md" ng-model="param_tau_m_p1">
+                                </div>
+                                <div class="col-sm-2">
+                                    <input id="param_tau_m_p2" name="param_tau_m_p2" type="number" step="0.1" placeholder="p2" class="form-control input-md" ng-model="param_tau_m_p2">
+                                </div>
+                                <div class="control-label col-sm-1">ms</div>
+                            </span>
+                            <span ng-show="param_tau_m_dist == '2'">
+                                <label class="control-label col-sm-2" for="param_tau_m_fx">tau_m : </label>
+                                <div class="col-sm-6">
+                                    <input id="param_tau_m_fx" name="param_tau_m_fx" type="text" placeholder="f(x)..." class="form-control input-md" ng-model="param_tau_m_fx">
+                                </div>
+                                <div class="control-label col-sm-1">nF</div>    
+                            </span>
+                            <span ng-show="param_tau_m_dist == '3'">
+                                <div class="control-label col-sm-2"><b>Matrix</b></div>
+                            </span>
+                            <div class="btn-group btn-group-sm pull-right">
+                                <label class="btn btn-default fab fa-neos active" id="param_tau_m_dist_0">
+                                    <input class="hide_radio" type="radio" ng-model="param_tau_m_dist" ng-change="updateDist('param_tau_m', 0)" value="0" checked>
+                                </label>
+                                <label class="btn btn-default fas fa-signal" id="param_tau_m_dist_1">
+                                    <input class="hide_radio" type="radio" ng-model="param_tau_m_dist" ng-change="updateDist('param_tau_m', 1)" value="1">
+                                </label>
+                                <label class="btn btn-default fas fa-square-root-alt" id="param_tau_m_dist_2">
+                                    <input class="hide_radio" type="radio" ng-model="param_tau_m_dist" ng-change="updateDist('param_tau_m', 2)" value="2">
+                                </label>
+                                <label class="btn btn-default fas fa-th" id="param_tau_m_dist_3">
+                                    <input class="hide_radio" type="radio" ng-model="param_tau_m_dist" ng-change="updateDist('param_tau_m', 3)" value="3">
+                                </label>
                             </div>
-                            <div class="control-label col-sm-2">ms</div>
                         </div>
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"></div>
@@ -181,7 +236,7 @@
                             <div class="col-sm-3">
                                 <input id="param_tau_refrac" name="param_tau_refrac" type="number" step="0.1" placeholder="tau_refrac..." class="form-control input-md" ng-model="param_tau_refrac">
                             </div>
-                            <div class="control-label col-sm-2">ms</div>
+                            <div class="control-label col-sm-1">ms</div>
                         </div>
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"></div>
@@ -189,7 +244,7 @@
                             <div class="col-sm-3">
                                 <input id="param_tau_syn_E" name="param_tau_syn_E" type="number" step="0.1" placeholder="tau_syn_E..." class="form-control input-md" ng-model="param_tau_syn_E">
                             </div>
-                            <div class="control-label col-sm-2">ms</div>
+                            <div class="control-label col-sm-1">ms</div>
                         </div>
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"></div>
@@ -197,7 +252,7 @@
                             <div class="col-sm-3">
                                 <input id="param_tau_syn_I" name="param_tau_syn_I" type="number" step="0.1" placeholder="tau_syn_I..." class="form-control input-md" ng-model="param_tau_syn_I">
                             </div>
-                            <div class="control-label col-sm-2">ms</div>
+                            <div class="control-label col-sm-1">ms</div>
                         </div>
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"></div>
@@ -205,7 +260,7 @@
                             <div class="col-sm-3">
                                 <input id="param_i_offset" name="param_i_offset" type="number" step="0.1" placeholder="i_offset..." class="form-control input-md" ng-model="param_i_offset">
                             </div>
-                            <div class="control-label col-sm-2">nA</div>
+                            <div class="control-label col-sm-1">nA</div>
                         </div>
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"></div>
@@ -213,7 +268,7 @@
                             <div class="col-sm-3">
                                 <input id="param_v_reset" name="param_v_reset" type="number" step="0.1" placeholder="v_reset..." class="form-control input-md" ng-model="param_v_reset">
                             </div>
-                            <div class="control-label col-sm-2">mV</div>
+                            <div class="control-label col-sm-1">mV</div>
                         </div>
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"></div>
@@ -221,7 +276,7 @@
                             <div class="col-sm-3">
                                 <input id="param_v_thresh" name="param_v_thresh" type="number" step="0.1" placeholder="v_thresh..." class="form-control input-md" ng-model="param_v_thresh">
                             </div>
-                            <div class="control-label col-sm-2">mV</div>
+                            <div class="control-label col-sm-1">mV</div>
                         </div>
 
                         <div class="form-group col-sm-12">
@@ -230,24 +285,8 @@
                             <div class="col-sm-3">
                                 <input id="init_v" name="init_v" type="number" step="0.1" placeholder="v..." class="form-control input-md" ng-model="init_v">
                             </div>
-                            <div class="control-label col-sm-2">mV</div>
+                            <div class="control-label col-sm-1">mV</div>
                         </div>
-                        <!-- <div class="form-group col-sm-12">
-                            <div class="control-label col-sm-2"></div>
-                            <label class="control-label col-sm-2" for="init_isyn_exc">isyn_exc : </label>
-                            <div class="col-sm-3">
-                                <input id="init_isyn_exc" name="init_isyn_exc" type="number" step="0.1" placeholder="isyn_exc..." class="form-control input-md" ng-model="init_isyn_exc">
-                            </div>
-                            <div class="control-label col-sm-2">nA</div>
-                        </div>
-                        <div class="form-group col-sm-12">
-                            <div class="control-label col-sm-2"></div>
-                            <label class="control-label col-sm-2" for="init_isyn_inh">isyn_inh : </label>
-                            <div class="col-sm-3">
-                                <input id="init_isyn_inh" name="init_isyn_inh" type="number" step="0.1" placeholder="isyn_inh..." class="form-control input-md" ng-model="init_isyn_inh">
-                            </div>
-                            <div class="control-label col-sm-2">nA</div>
-                        </div> -->
                     </div>
                     <div ng-show="celltype == 'IF_cond_alpha' || celltype == 'IF_cond_exp'">
                         <div class="form-group col-sm-12">
@@ -264,7 +303,7 @@
                             <div class="col-sm-3">
                                 <input id="param_cm" name="param_cm" type="number" step="0.1" placeholder="cm..." class="form-control input-md" ng-model="param_cm">
                             </div>
-                            <div class="control-label col-sm-2">nF</div>
+                            <div class="control-label col-sm-1">nF</div>
                         </div>
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"></div>
@@ -272,7 +311,7 @@
                             <div class="col-sm-3">
                                 <input id="param_tau_m" name="param_tau_m" type="number" step="0.1" placeholder="tau_m..." class="form-control input-md" ng-model="param_tau_m">
                             </div>
-                            <div class="control-label col-sm-2">ms</div>
+                            <div class="control-label col-sm-1">ms</div>
                         </div>
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"></div>
@@ -280,7 +319,7 @@
                             <div class="col-sm-3">
                                 <input id="param_tau_refrac" name="param_tau_refrac" type="number" step="0.1" placeholder="tau_refrac..." class="form-control input-md" ng-model="param_tau_refrac">
                             </div>
-                            <div class="control-label col-sm-2">ms</div>
+                            <div class="control-label col-sm-1">ms</div>
                         </div>
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"></div>
@@ -288,7 +327,7 @@
                             <div class="col-sm-3">
                                 <input id="param_tau_syn_E" name="param_tau_syn_E" type="number" step="0.1" placeholder="tau_syn_E..." class="form-control input-md" ng-model="param_tau_syn_E">
                             </div>
-                            <div class="control-label col-sm-2">ms</div>
+                            <div class="control-label col-sm-1">ms</div>
                         </div>
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"></div>
@@ -296,7 +335,7 @@
                             <div class="col-sm-3">
                                 <input id="param_tau_syn_I" name="param_tau_syn_I" type="number" step="0.1" placeholder="tau_syn_I..." class="form-control input-md" ng-model="param_tau_syn_I">
                             </div>
-                            <div class="control-label col-sm-2">ms</div>
+                            <div class="control-label col-sm-1">ms</div>
                         </div>
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"></div>
@@ -304,7 +343,7 @@
                             <div class="col-sm-3">
                                 <input id="param_e_rev_E" name="param_e_rev_E" type="number" step="0.1" placeholder="e_rev_E..." class="form-control input-md" ng-model="param_e_rev_E">
                             </div>
-                            <div class="control-label col-sm-2">mV</div>
+                            <div class="control-label col-sm-1">mV</div>
                         </div>
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"></div>
@@ -312,7 +351,7 @@
                             <div class="col-sm-3">
                                 <input id="param_e_rev_I" name="param_e_rev_I" type="number" step="0.1" placeholder="e_rev_I..." class="form-control input-md" ng-model="param_e_rev_I">
                             </div>
-                            <div class="control-label col-sm-2">mV</div>
+                            <div class="control-label col-sm-1">mV</div>
                         </div>
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"></div>
@@ -320,7 +359,7 @@
                             <div class="col-sm-3">
                                 <input id="param_v_thresh" name="param_v_thresh" type="number" step="0.1" placeholder="v_thresh..." class="form-control input-md" ng-model="param_v_thresh">
                             </div>
-                            <div class="control-label col-sm-2">mV</div>
+                            <div class="control-label col-sm-1">mV</div>
                         </div>
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"></div>
@@ -328,7 +367,7 @@
                             <div class="col-sm-3">
                                 <input id="param_v_reset" name="param_v_reset" type="number" step="0.1" placeholder="v_reset..." class="form-control input-md" ng-model="param_v_reset">
                             </div>
-                            <div class="control-label col-sm-2">mV</div>
+                            <div class="control-label col-sm-1">mV</div>
                         </div>
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"></div>
@@ -336,7 +375,7 @@
                             <div class="col-sm-3">
                                 <input id="param_i_offset" name="param_i_offset" type="number" step="0.1" placeholder="i_offset..." class="form-control input-md" ng-model="param_i_offset">
                             </div>
-                            <div class="control-label col-sm-2">nA</div>
+                            <div class="control-label col-sm-1">nA</div>
                         </div>
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"><b>Initial Value :</b></div>
@@ -344,24 +383,8 @@
                             <div class="col-sm-3">
                                 <input id="init_v" name="init_v" type="number" step="0.1" placeholder="v..." class="form-control input-md" ng-model="init_v">
                             </div>
-                            <div class="control-label col-sm-2">mV</div>
+                            <div class="control-label col-sm-1">mV</div>
                         </div>
-                        <!-- <div class="form-group col-sm-12">
-                            <div class="control-label col-sm-2"></div>
-                            <label class="control-label col-sm-2" for="init_gsyn_exc">gsyn_exc : </label>
-                            <div class="col-sm-3">
-                                <input id="init_gsyn_exc" name="init_gsyn_exc" type="number" step="0.1" placeholder="gsyn_exc..." class="form-control input-md" ng-model="init_gsyn_exc">
-                            </div>
-                            <div class="control-label col-sm-2">nA</div>
-                        </div>
-                        <div class="form-group col-sm-12">
-                            <div class="control-label col-sm-2"></div>
-                            <label class="control-label col-sm-2" for="init_gsyn_inh">gsyn_inh : </label>
-                            <div class="col-sm-3">
-                                <input id="init_gsyn_inh" name="init_gsyn_inh" type="number" step="0.1" placeholder="gsyn_inh..." class="form-control input-md" ng-model="init_gsyn_inh">
-                            </div>
-                            <div class="control-label col-sm-2">nA</div>
-                        </div> -->
                     </div>
                     <div ng-show="celltype == 'HH_cond_exp'">
                         <div class="form-group col-sm-12">
@@ -370,7 +393,7 @@
                             <div class="col-sm-3">
                                 <input id="param_gbar_Na" name="param_gbar_Na" type="number" step="0.1" placeholder="gbar_Na..." class="form-control input-md" ng-model="param_gbar_Na">
                             </div>
-                            <div class="control-label col-sm-2">uS</div>
+                            <div class="control-label col-sm-1">uS</div>
                         </div>
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"></div>
@@ -378,7 +401,7 @@
                             <div class="col-sm-3">
                                 <input id="param_gbar_K" name="param_gbar_K" type="number" step="0.1" placeholder="gbar_K..." class="form-control input-md" ng-model="param_gbar_K">
                             </div>
-                            <div class="control-label col-sm-2">uS</div>
+                            <div class="control-label col-sm-1">uS</div>
                         </div>
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"></div>
@@ -394,7 +417,7 @@
                             <div class="col-sm-3">
                                 <input id="param_cm" name="param_cm" type="number" step="0.1" placeholder="cm..." class="form-control input-md" ng-model="param_cm">
                             </div>
-                            <div class="control-label col-sm-2">nF</div>
+                            <div class="control-label col-sm-1">nF</div>
                         </div>
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"></div>
@@ -402,7 +425,7 @@
                             <div class="col-sm-3">
                                 <input id="param_v_offset" name="param_v_offset" type="number" step="0.1" placeholder="v_offset..." class="form-control input-md" ng-model="param_v_offset">
                             </div>
-                            <div class="control-label col-sm-2">mV</div>
+                            <div class="control-label col-sm-1">mV</div>
                         </div>
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"></div>
@@ -410,7 +433,7 @@
                             <div class="col-sm-3">
                                 <input id="param_e_rev_Na" name="param_e_rev_Na" type="number" step="0.1" placeholder="e_rev_Na..." class="form-control input-md" ng-model="param_e_rev_Na">
                             </div>
-                            <div class="control-label col-sm-2">mV</div>
+                            <div class="control-label col-sm-1">mV</div>
                         </div>
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"></div>
@@ -418,7 +441,7 @@
                             <div class="col-sm-3">
                                 <input id="param_e_rev_K" name="param_e_rev_K" type="number" step="0.1" placeholder="e_rev_K..." class="form-control input-md" ng-model="param_e_rev_K">
                             </div>
-                            <div class="control-label col-sm-2">mV</div>
+                            <div class="control-label col-sm-1">mV</div>
                         </div>
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"></div>
@@ -426,7 +449,7 @@
                             <div class="col-sm-3">
                                 <input id="param_e_rev_leak" name="param_e_rev_leak" type="number" step="0.1" placeholder="e_rev_leak..." class="form-control input-md" ng-model="param_e_rev_leak">
                             </div>
-                            <div class="control-label col-sm-2">mV</div>
+                            <div class="control-label col-sm-1">mV</div>
                         </div>
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"></div>
@@ -434,7 +457,7 @@
                             <div class="col-sm-3">
                                 <input id="param_e_rev_E" name="param_e_rev_E" type="number" step="0.1" placeholder="e_rev_E..." class="form-control input-md" ng-model="param_e_rev_E">
                             </div>
-                            <div class="control-label col-sm-2">mV</div>
+                            <div class="control-label col-sm-1">mV</div>
                         </div>
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"></div>
@@ -442,7 +465,7 @@
                             <div class="col-sm-3">
                                 <input id="param_e_rev_I" name="param_e_rev_I" type="number" step="0.1" placeholder="e_rev_I..." class="form-control input-md" ng-model="param_e_rev_I">
                             </div>
-                            <div class="control-label col-sm-2">mV</div>
+                            <div class="control-label col-sm-1">mV</div>
                         </div>
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"></div>
@@ -450,7 +473,7 @@
                             <div class="col-sm-3">
                                 <input id="param_tau_syn_E" name="param_tau_syn_E" type="number" step="0.1" placeholder="tau_syn_E..." class="form-control input-md" ng-model="param_tau_syn_E">
                             </div>
-                            <div class="control-label col-sm-2">ms</div>
+                            <div class="control-label col-sm-1">ms</div>
                         </div>
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"></div>
@@ -458,7 +481,7 @@
                             <div class="col-sm-3">
                                 <input id="param_tau_syn_I" name="param_tau_syn_I" type="number" step="0.1" placeholder="tau_syn_I..." class="form-control input-md" ng-model="param_tau_syn_I">
                             </div>
-                            <div class="control-label col-sm-2">ms</div>
+                            <div class="control-label col-sm-1">ms</div>
                         </div>
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"></div>
@@ -466,7 +489,7 @@
                             <div class="col-sm-3">
                                 <input id="param_i_offset" name="param_i_offset" type="number" step="0.1" placeholder="i_offset..." class="form-control input-md" ng-model="param_i_offset">
                             </div>
-                            <div class="control-label col-sm-2">nA</div>
+                            <div class="control-label col-sm-1">nA</div>
                         </div>
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"><b>Initial Value :</b></div>
@@ -474,24 +497,8 @@
                             <div class="col-sm-3">
                                 <input id="init_v" name="init_v" type="number" step="0.1" placeholder="v..." class="form-control input-md" ng-model="init_v">
                             </div>
-                            <div class="control-label col-sm-2">mV</div>
+                            <div class="control-label col-sm-1">mV</div>
                         </div>
-                        <!-- <div class="form-group col-sm-12">
-                            <div class="control-label col-sm-2"></div>
-                            <label class="control-label col-sm-2" for="init_gsyn_exc">gsyn_exc : </label>
-                            <div class="col-sm-3">
-                                <input id="init_gsyn_exc" name="init_gsyn_exc" type="number" step="0.1" placeholder="isyn_exc..." class="form-control input-md" ng-model="init_gsyn_exc">
-                            </div>
-                            <div class="control-label col-sm-2">uS</div>
-                        </div>
-                        <div class="form-group col-sm-12">
-                            <div class="control-label col-sm-2"></div>
-                            <label class="control-label col-sm-2" for="init_gsyn_inh">gsyn_inh : </label>
-                            <div class="col-sm-3">
-                                <input id="init_gsyn_inh" name="init_gsyn_inh" type="number" step="0.1" placeholder="isyn_inh..." class="form-control input-md" ng-model="init_gsyn_inh">
-                            </div>
-                            <div class="control-label col-sm-2">uS</div>
-                        </div> -->
                     </div>
                     <div ng-show="celltype == 'EIF_cond_alpha_isfa_ista'">
                         <div class="form-group col-sm-12">
@@ -500,7 +507,7 @@
                             <div class="col-sm-3">
                                 <input id="param_cm" name="param_cm" type="number" step="0.1" placeholder="cm..." class="form-control input-md" ng-model="param_cm">
                             </div>
-                            <div class="control-label col-sm-2">nF</div>
+                            <div class="control-label col-sm-1">nF</div>
                         </div>
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"></div>
@@ -508,7 +515,7 @@
                             <div class="col-sm-3">
                                 <input id="param_tau_refrac" name="param_tau_refrac" type="number" step="0.1" placeholder="tau_refrac..." class="form-control input-md" ng-model="param_tau_refrac">
                             </div>
-                            <div class="control-label col-sm-2">ms</div>
+                            <div class="control-label col-sm-1">ms</div>
                         </div>
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"></div>
@@ -516,7 +523,7 @@
                             <div class="col-sm-3">
                                 <input id="param_v_spike" name="param_v_spike" type="number" step="0.1" placeholder="v_spike..." class="form-control input-md" ng-model="param_v_spike">
                             </div>
-                            <div class="control-label col-sm-2">mV</div>
+                            <div class="control-label col-sm-1">mV</div>
                         </div>
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"></div>
@@ -524,7 +531,7 @@
                             <div class="col-sm-3">
                                 <input id="param_v_reset" name="param_v_reset" type="number" step="0.1" placeholder="v_reset..." class="form-control input-md" ng-model="param_v_reset">
                             </div>
-                            <div class="control-label col-sm-2">mV</div>
+                            <div class="control-label col-sm-1">mV</div>
                         </div>
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"></div>
@@ -532,7 +539,7 @@
                             <div class="col-sm-3">
                                 <input id="param_v_rest" name="param_v_rest" type="number" step="0.1" placeholder="v_rest..." class="form-control input-md" ng-model="param_v_rest">
                             </div>
-                            <div class="control-label col-sm-2">mV</div>
+                            <div class="control-label col-sm-1">mV</div>
                         </div>
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"></div>
@@ -540,7 +547,7 @@
                             <div class="col-sm-3">
                                 <input id="param_tau_m" name="param_tau_m" type="number" step="0.1" placeholder="tau_m..." class="form-control input-md" ng-model="param_tau_m">
                             </div>
-                            <div class="control-label col-sm-2">ms</div>
+                            <div class="control-label col-sm-1">ms</div>
                         </div>
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"></div>
@@ -548,7 +555,7 @@
                             <div class="col-sm-3">
                                 <input id="param_i_offset" name="param_i_offset" type="number" step="0.1" placeholder="i_offset..." class="form-control input-md" ng-model="param_i_offset">
                             </div>
-                            <div class="control-label col-sm-2">nA</div>
+                            <div class="control-label col-sm-1">nA</div>
                         </div>
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"></div>
@@ -556,7 +563,7 @@
                             <div class="col-sm-3">
                                 <input id="param_a" name="param_a" type="number" step="0.1" placeholder="a..." class="form-control input-md" ng-model="param_a">
                             </div>
-                            <div class="control-label col-sm-2">nS</div>
+                            <div class="control-label col-sm-1">nS</div>
                         </div>
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"></div>
@@ -564,7 +571,7 @@
                             <div class="col-sm-3">
                                 <input id="param_b" name="param_b" type="number" step="0.1" placeholder="b..." class="form-control input-md" ng-model="param_b">
                             </div>
-                            <div class="control-label col-sm-2">nA</div>
+                            <div class="control-label col-sm-1">nA</div>
                         </div>
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"></div>
@@ -572,7 +579,7 @@
                             <div class="col-sm-3">
                                 <input id="param_delta_T" name="param_delta_T" type="number" step="0.1" placeholder="delta_T..." class="form-control input-md" ng-model="param_delta_T">
                             </div>
-                            <div class="control-label col-sm-2">mV</div>
+                            <div class="control-label col-sm-1">mV</div>
                         </div>
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"></div>
@@ -580,7 +587,7 @@
                             <div class="col-sm-3">
                                 <input id="param_tau_w" name="param_tau_w" type="number" step="0.1" placeholder="tau_w..." class="form-control input-md" ng-model="param_tau_w">
                             </div>
-                            <div class="control-label col-sm-2">ms</div>
+                            <div class="control-label col-sm-1">ms</div>
                         </div>
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"></div>
@@ -588,7 +595,7 @@
                             <div class="col-sm-3">
                                 <input id="param_v_thresh" name="param_v_thresh" type="number" step="0.1" placeholder="v_thresh..." class="form-control input-md" ng-model="param_v_thresh">
                             </div>
-                            <div class="control-label col-sm-2">mV</div>
+                            <div class="control-label col-sm-1">mV</div>
                         </div>
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"></div>
@@ -596,7 +603,7 @@
                             <div class="col-sm-3">
                                 <input id="param_e_rev_E" name="param_e_rev_E" type="number" step="0.1" placeholder="e_rev_E..." class="form-control input-md" ng-model="param_e_rev_E">
                             </div>
-                            <div class="control-label col-sm-2">mV</div>
+                            <div class="control-label col-sm-1">mV</div>
                         </div>
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"></div>
@@ -604,7 +611,7 @@
                             <div class="col-sm-3">
                                 <input id="param_tau_syn_E" name="param_tau_syn_E" type="number" step="0.1" placeholder="tau_syn_E..." class="form-control input-md" ng-model="param_tau_syn_E">
                             </div>
-                            <div class="control-label col-sm-2">ms</div>
+                            <div class="control-label col-sm-1">ms</div>
                         </div>
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"></div>
@@ -612,7 +619,7 @@
                             <div class="col-sm-3">
                                 <input id="param_e_rev_I" name="param_e_rev_I" type="number" step="0.1" placeholder="e_rev_I..." class="form-control input-md" ng-model="param_e_rev_I">
                             </div>
-                            <div class="control-label col-sm-2">mV</div>
+                            <div class="control-label col-sm-1">mV</div>
                         </div>
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"></div>
@@ -620,7 +627,7 @@
                             <div class="col-sm-3">
                                 <input id="param_tau_syn_I" name="param_tau_syn_I" type="number" step="0.1" placeholder="tau_syn_I..." class="form-control input-md" ng-model="param_tau_syn_I">
                             </div>
-                            <div class="control-label col-sm-2">ms</div>
+                            <div class="control-label col-sm-1">ms</div>
                         </div>
 
                         <div class="form-group col-sm-12">
@@ -629,7 +636,7 @@
                             <div class="col-sm-3">
                                 <input id="init_v" name="init_v" type="number" step="0.1" placeholder="v..." class="form-control input-md" ng-model="init_v">
                             </div>
-                            <div class="control-label col-sm-2">mV</div>
+                            <div class="control-label col-sm-1">mV</div>
                         </div>
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"></div>
@@ -637,24 +644,8 @@
                             <div class="col-sm-3">
                                 <input id="init_w" name="init_w" type="number" step="0.1" placeholder="v..." class="form-control input-md" ng-model="init_w">
                             </div>
-                            <div class="control-label col-sm-2">nA</div>
+                            <div class="control-label col-sm-1">nA</div>
                         </div>
-                        <!-- <div class="form-group col-sm-12">
-                            <div class="control-label col-sm-2"></div>
-                            <label class="control-label col-sm-2" for="init_gsyn_exc">gsyn_exc : </label>
-                            <div class="col-sm-3">
-                                <input id="init_gsyn_exc" name="init_gsyn_exc" type="number" step="0.1" placeholder="isyn_exc..." class="form-control input-md" ng-model="init_gsyn_exc">
-                            </div>
-                            <div class="control-label col-sm-2">uS</div>
-                        </div>
-                        <div class="form-group col-sm-12">
-                            <div class="control-label col-sm-2"></div>
-                            <label class="control-label col-sm-2" for="init_gsyn_inh">gsyn_inh : </label>
-                            <div class="col-sm-3">
-                                <input id="init_gsyn_inh" name="init_gsyn_inh" type="number" step="0.1" placeholder="isyn_inh..." class="form-control input-md" ng-model="init_gsyn_inh">
-                            </div>
-                            <div class="control-label col-sm-2">uS</div>
-                        </div> -->
                     </div>
 
                     <div class="form-group col-sm-12" ng-show="celltype == 'SpikeSourcePoisson'">
@@ -664,7 +655,7 @@
                             <div class="col-sm-3">
                                 <input id="param_rate" name="param_rate" type="number" step="0.1" placeholder="rate..." class="form-control input-md" ng-model="param_rate">
                             </div>
-                            <div class="control-label col-sm-2">Hz</div>
+                            <div class="control-label col-sm-1">Hz</div>
                         </div>
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"></div>
@@ -672,7 +663,7 @@
                             <div class="col-sm-3">
                                 <input id="param_start" name="param_start" type="number" step="0.1" placeholder="start..." class="form-control input-md" ng-model="param_start">
                             </div>
-                            <div class="control-label col-sm-2">ms</div>
+                            <div class="control-label col-sm-1">ms</div>
                         </div>
                         <div class="form-group col-sm-12">
                             <div class="control-label col-sm-2"></div>
@@ -680,7 +671,7 @@
                             <div class="col-sm-3">
                                 <input id="param_duration" name="param_duration" type="number" step="0.1" placeholder="duration..." class="form-control input-md" ng-model="param_duration">
                             </div>
-                            <div class="control-label col-sm-2">ms</div>
+                            <div class="control-label col-sm-1">ms</div>
                         </div>
                     </div>
                     <div class="form-group col-sm-12" ng-show="celltype == 'SpikeSourceArray'">
@@ -690,7 +681,7 @@
                             <div class="col-sm-3">
                                 <input id="param_spike_times" name="param_spike_times" type="number" step="0.1" placeholder="spike_times..." class="form-control input-md" ng-model="param_spike_times">
                             </div>
-                            <div class="control-label col-sm-2">mS</div>
+                            <div class="control-label col-sm-1">mS</div>
                         </div>
                     </div>
                     <div class="form-group col-sm-12">
@@ -709,24 +700,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- <div class="form-group col-sm-12">
-                        <div class="form-group col-sm-12">
-                            <div class="control-label col-sm-2"><b>Simulation :</b></div>
-                            <label class="control-label col-sm-2" for="Simulation_time">Simulation time : </label>
-                            <div class="col-sm-3">
-                                <input id="Simulation_time" name="Simulation_time" type="number" step="0.1" placeholder="Simulation time..." class="form-control input-md" ng-model="Simulation_time">
-                            </div>
-                            <div class="control-label col-sm-2">ms</div>
-                        </div>
-                        <div class="form-group col-sm-12">
-                            <div class="control-label col-sm-2">&nbsp;</div>
-                            <label class="control-label col-sm-2" for="Simulation_name">Simulation name : </label>
-                            <div class="col-sm-3">
-                                <input id="Simulation_name" name="Simulation_name" type="text" placeholder="Simulation name..." class="form-control input-md" ng-model="Simulation_name">
-                            </div>
-                            <div class="control-label col-sm-2">&nbsp;</div>
-                        </div>
-                    </div> -->
                 </form>
                 <span style="color:red;">{{msgAlert}}</span>
             </div>

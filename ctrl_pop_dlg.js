@@ -15,6 +15,7 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 		
 		$scope.v_rest_dist = 0;
 		$scope.param_cm_dist = 0;
+		$scope.param_tau_m_dist = 0;
 		
 		$scope.title = title;
 		$scope.name_value = name_value;
