@@ -1392,9 +1392,9 @@
                                 <div class="control-label col-sm-1">uS</div>
                             </span>
                             <span ng-show="param_gbar_Na_dist == '2'">
-                                <label class="control-label col-sm-2" for="init_v_fx">gbar_Na : </label>
+                                <label class="control-label col-sm-2" for="param_gbar_Na_fx">gbar_Na : </label>
                                 <div class="col-sm-6">
-                                    <input id="init_v_fx" name="init_v_fx" type="text" placeholder="f(x)..." class="form-control input-md" ng-model="init_v_fx">
+                                    <input id="param_gbar_Na_fx" name="param_gbar_Na_fx" type="text" placeholder="f(x)..." class="form-control input-md" ng-model="param_gbar_Na_fx">
                                 </div>
                                 <div class="control-label col-sm-1">uS</div>
                             </span>
@@ -1417,14 +1417,8 @@
                             </div>
                         </div>
                         <div class="form-group col-sm-12">
-                            <!-- <div class="control-label col-sm-2"></div>
-                            <label class="control-label col-sm-2" for="param_gbar_K">gbar_K : </label>
-                            <div class="col-sm-3">
-                                <input id="param_gbar_K" name="param_gbar_K" type="number" step="0.1" placeholder="gbar_K..." class="form-control input-md" ng-model="param_gbar_K">
-                            </div>
-                            <div class="control-label col-sm-1">uS</div> -->
                             <span ng-show="param_gbar_K_dist == '0'">
-                                <div class="control-label col-sm-2"><b>Parameters :</b></div>
+                                <div class="control-label col-sm-2"></div>
                                 <label class="control-label col-sm-2" for="param_gbar_K">gbar_K : </label>
                                 <div class="col-sm-3">
                                     <input id="param_gbar_K" name="param_gbar_K" type="number" step="0.1" placeholder="gbar_K..." class="form-control input-md" ng-model="param_gbar_K">
@@ -1449,17 +1443,17 @@
                                     </select>
                                 </div>
                                 <div class="col-sm-2">
-                                    <input id="param_gbar_K_p1" name="param_gbar_K_p1" type="number" step="0.1" placeholder="p1" class="form-control input-md" ng-model="init_v_p1">
+                                    <input id="param_gbar_K_p1" name="param_gbar_K_p1" type="number" step="0.1" placeholder="p1" class="form-control input-md" ng-model="param_gbar_K_p1">
                                 </div>
                                 <div class="col-sm-2">
-                                    <input id="param_gbar_K_p2" name="param_gbar_K_p2" type="number" step="0.1" placeholder="p2" class="form-control input-md" ng-model="init_v_p2">
+                                    <input id="param_gbar_K_p2" name="param_gbar_K_p2" type="number" step="0.1" placeholder="p2" class="form-control input-md" ng-model="param_gbar_K_p2">
                                 </div>
                                 <div class="control-label col-sm-1">uS</div>
                             </span>
                             <span ng-show="param_gbar_K_dist == '2'">
-                                <label class="control-label col-sm-2" for="init_v_fx">gbar_K : </label>
+                                <label class="control-label col-sm-2" for="param_gbar_K_fx">gbar_K : </label>
                                 <div class="col-sm-6">
-                                    <input id="init_v_fx" name="init_v_fx" type="text" placeholder="f(x)..." class="form-control input-md" ng-model="init_v_fx">
+                                    <input id="param_gbar_K_fx" name="param_gbar_K_fx" type="text" placeholder="f(x)..." class="form-control input-md" ng-model="param_gbar_K_fx">
                                 </div>
                                 <div class="control-label col-sm-1">uS</div>
                             </span>
@@ -1482,12 +1476,63 @@
                             </div>
                         </div>
                         <div class="form-group col-sm-12">
-                            <div class="control-label col-sm-2"></div>
-                            <label class="control-label col-sm-2" for="param_g_leak">g_leak : </label>
-                            <div class="col-sm-3">
-                                <input id="param_g_leak" name="param_g_leak" type="number" step="0.1" placeholder="g_leak..." class="form-control input-md" ng-model="param_g_leak">
+                            <span ng-show="param_g_leak_dist == '0'">
+                                <div class="control-label col-sm-2"></div>
+                                <label class="control-label col-sm-2" for="param_g_leak">g_leak : </label>
+                                <div class="col-sm-3">
+                                    <input id="param_g_leak" name="param_g_leak" type="number" step="0.1" placeholder="g_leak..." class="form-control input-md" ng-model="param_g_leak">
+                                </div>
+                                <div class="control-label col-sm-1">uS</div>
+                            </span>
+                            <span ng-show="param_g_leak_dist == '1'">
+                                <label class="control-label col-sm-2" for="param_g_leak_distribution">g_leak : </label>
+                                <div class="control-label col-sm-2">
+                                    <select id="param_g_leak_distribution" name="param_g_leak_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty">
+                                        <option value="binomial" selected="selected">binomial</option>
+                                        <option value="gamma">gamma</option>
+                                        <option value="exponential">exponential</option>
+                                        <option value="lognormal">lognormal</option>
+                                        <option value="normal">normal</option>
+                                        <option value="normal_clipped">normal_clipped</option>
+                                        <option value="normal_clipped_to_boundary">normal_clipped_to_boundary</option>
+                                        <option value="poisson">poisson</option>
+                                        <option value="uniform">uniform</option>
+                                        <option value="uniform_int">uniform_int</option>
+                                        <option value="vonmises">vonmises</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-2">
+                                    <input id="param_g_leak_p1" name="param_g_leak_p1" type="number" step="0.1" placeholder="p1" class="form-control input-md" ng-model="param_g_leak_p1">
+                                </div>
+                                <div class="col-sm-2">
+                                    <input id="param_g_leak_p2" name="param_g_leak_p2" type="number" step="0.1" placeholder="p2" class="form-control input-md" ng-model="param_g_leak_p2">
+                                </div>
+                                <div class="control-label col-sm-1">uS</div>
+                            </span>
+                            <span ng-show="param_g_leak_dist == '2'">
+                                <label class="control-label col-sm-2" for="param_g_leak_fx">g_leak : </label>
+                                <div class="col-sm-6">
+                                    <input id="param_g_leak_fx" name="param_g_leak_fx" type="text" placeholder="f(x)..." class="form-control input-md" ng-model="param_g_leak_fx">
+                                </div>
+                                <div class="control-label col-sm-1">uS</div>
+                            </span>
+                            <span ng-show="param_g_leak_dist == '3'">
+                                <div class="control-label col-sm-2"><b>Matrix</b></div>
+                            </span>
+                            <div class="btn-group btn-group-sm pull-right">
+                                <label class="btn btn-default fab fa-neos active" id="param_g_leak_dist_0">
+                                    <input class="hide_radio" type="radio" ng-model="param_g_leak_dist" ng-change="updateDist('param_g_leak', 0)" value="0" checked>
+                                </label>
+                                <label class="btn btn-default fas fa-signal" id="param_g_leak_dist_1">
+                                    <input class="hide_radio" type="radio" ng-model="param_g_leak_dist" ng-change="updateDist('param_g_leak', 1)" value="1">
+                                </label>
+                                <label class="btn btn-default fas fa-square-root-alt" id="param_g_leak_dist_2">
+                                    <input class="hide_radio" type="radio" ng-model="param_g_leak_dist" ng-change="updateDist('param_g_leak', 2)" value="2">
+                                </label>
+                                <label class="btn btn-default fas fa-th" id="param_g_leak_dist_3">
+                                    <input class="hide_radio" type="radio" ng-model="param_g_leak_dist" ng-change="updateDist('param_g_leak', 3)" value="3">
+                                </label>
                             </div>
-                            <div class="control-label col-sm-2">uS</div>
                         </div>
                         <div class="form-group col-sm-12">
                             <span ng-show="param_cm_dist == '0'">
@@ -1549,36 +1594,240 @@
                             </div>
                         </div>
                         <div class="form-group col-sm-12">
-                            <div class="control-label col-sm-2"></div>
-                            <label class="control-label col-sm-2" for="param_v_offset">v_offset : </label>
-                            <div class="col-sm-3">
-                                <input id="param_v_offset" name="param_v_offset" type="number" step="0.1" placeholder="v_offset..." class="form-control input-md" ng-model="param_v_offset">
+                            <span ng-show="param_v_offset_dist == '0'">
+                                <div class="control-label col-sm-2"></div>
+                                <label class="control-label col-sm-2" for="param_v_offset">v_offset : </label>
+                                <div class="col-sm-3">
+                                    <input id="param_v_offset" name="param_v_offset" type="number" step="0.1" placeholder="v_offset..." class="form-control input-md" ng-model="param_v_offset">
+                                </div>
+                                <div class="control-label col-sm-1">mV</div>
+                            </span>
+                            <span ng-show="param_v_offset_dist == '1'">
+                                <label class="control-label col-sm-2" for="param_v_offset_distribution">v_offset : </label>
+                                <div class="control-label col-sm-2">
+                                    <select id="param_v_offset_distribution" name="param_v_offset_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty">
+                                        <option value="binomial" selected="selected">binomial</option>
+                                        <option value="gamma">gamma</option>
+                                        <option value="exponential">exponential</option>
+                                        <option value="lognormal">lognormal</option>
+                                        <option value="normal">normal</option>
+                                        <option value="normal_clipped">normal_clipped</option>
+                                        <option value="normal_clipped_to_boundary">normal_clipped_to_boundary</option>
+                                        <option value="poisson">poisson</option>
+                                        <option value="uniform">uniform</option>
+                                        <option value="uniform_int">uniform_int</option>
+                                        <option value="vonmises">vonmises</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-2">
+                                    <input id="param_v_offset_p1" name="param_v_offset_p1" type="number" step="0.1" placeholder="p1" class="form-control input-md" ng-model="param_v_offset_p1">
+                                </div>
+                                <div class="col-sm-2">
+                                    <input id="param_v_offset_p2" name="param_v_offset_p2" type="number" step="0.1" placeholder="p2" class="form-control input-md" ng-model="param_v_offset_p2">
+                                </div>
+                                <div class="control-label col-sm-1">mV</div>
+                            </span>
+                            <span ng-show="param_v_offset_dist == '2'">
+                                <label class="control-label col-sm-2" for="param_v_offset_fx">v_offset : </label>
+                                <div class="col-sm-6">
+                                    <input id="param_v_offset_fx" name="param_v_offset_fx" type="text" placeholder="f(x)..." class="form-control input-md" ng-model="param_v_offset_fx">
+                                </div>
+                                <div class="control-label col-sm-1">mV</div>
+                            </span>
+                            <span ng-show="param_v_offset_dist == '3'">
+                                <div class="control-label col-sm-2"><b>Matrix</b></div>
+                            </span>
+                            <div class="btn-group btn-group-sm pull-right">
+                                <label class="btn btn-default fab fa-neos active" id="param_v_offset_dist_0">
+                                    <input class="hide_radio" type="radio" ng-model="param_v_offset_dist" ng-change="updateDist('param_v_offset', 0)" value="0" checked>
+                                </label>
+                                <label class="btn btn-default fas fa-signal" id="param_v_offset_dist_1">
+                                    <input class="hide_radio" type="radio" ng-model="param_v_offset_dist" ng-change="updateDist('param_v_offset', 1)" value="1">
+                                </label>
+                                <label class="btn btn-default fas fa-square-root-alt" id="param_v_offset_dist_2">
+                                    <input class="hide_radio" type="radio" ng-model="param_v_offset_dist" ng-change="updateDist('param_v_offset', 2)" value="2">
+                                </label>
+                                <label class="btn btn-default fas fa-th" id="param_v_offset_dist_3">
+                                    <input class="hide_radio" type="radio" ng-model="param_v_offset_dist" ng-change="updateDist('param_v_offset', 3)" value="3">
+                                </label>
                             </div>
-                            <div class="control-label col-sm-1">mV</div>
                         </div>
                         <div class="form-group col-sm-12">
-                            <div class="control-label col-sm-2"></div>
-                            <label class="control-label col-sm-2" for="param_e_rev_Na">e_rev_Na : </label>
-                            <div class="col-sm-3">
-                                <input id="param_e_rev_Na" name="param_e_rev_Na" type="number" step="0.1" placeholder="e_rev_Na..." class="form-control input-md" ng-model="param_e_rev_Na">
+                            <span ng-show="param_e_rev_Na_dist == '0'">
+                                <div class="control-label col-sm-2"></div>
+                                <label class="control-label col-sm-2" for="param_e_rev_Na">e_rev_Na : </label>
+                                <div class="col-sm-3">
+                                    <input id="param_e_rev_Na" name="param_e_rev_Na" type="number" step="0.1" placeholder="e_rev_Na..." class="form-control input-md" ng-model="param_e_rev_Na">
+                                </div>
+                                <div class="control-label col-sm-1">mV</div>
+                            </span>
+                            <span ng-show="param_e_rev_Na_dist == '1'">
+                                <label class="control-label col-sm-2" for="param_e_rev_Na_distribution">e_rev_Na : </label>
+                                <div class="control-label col-sm-2">
+                                    <select id="param_e_rev_Na_distribution" name="param_e_rev_Na_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty">
+                                        <option value="binomial" selected="selected">binomial</option>
+                                        <option value="gamma">gamma</option>
+                                        <option value="exponential">exponential</option>
+                                        <option value="lognormal">lognormal</option>
+                                        <option value="normal">normal</option>
+                                        <option value="normal_clipped">normal_clipped</option>
+                                        <option value="normal_clipped_to_boundary">normal_clipped_to_boundary</option>
+                                        <option value="poisson">poisson</option>
+                                        <option value="uniform">uniform</option>
+                                        <option value="uniform_int">uniform_int</option>
+                                        <option value="vonmises">vonmises</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-2">
+                                    <input id="param_e_rev_Na_p1" name="param_e_rev_Na_p1" type="number" step="0.1" placeholder="p1" class="form-control input-md" ng-model="param_e_rev_Na_p1">
+                                </div>
+                                <div class="col-sm-2">
+                                    <input id="param_e_rev_Na_p2" name="param_e_rev_Na_p2" type="number" step="0.1" placeholder="p2" class="form-control input-md" ng-model="param_e_rev_Na_p2">
+                                </div>
+                                <div class="control-label col-sm-1">mV</div>
+                            </span>
+                            <span ng-show="param_e_rev_Na_dist == '2'">
+                                <label class="control-label col-sm-2" for="param_e_rev_Na_fx">e_rev_Na : </label>
+                                <div class="col-sm-6">
+                                    <input id="param_e_rev_Na_fx" name="param_e_rev_Na_fx" type="text" placeholder="f(x)..." class="form-control input-md" ng-model="param_e_rev_Na_fx">
+                                </div>
+                                <div class="control-label col-sm-1">mV</div>
+                            </span>
+                            <span ng-show="param_e_rev_Na_dist == '3'">
+                                <div class="control-label col-sm-2"><b>Matrix</b></div>
+                            </span>
+                            <div class="btn-group btn-group-sm pull-right">
+                                <label class="btn btn-default fab fa-neos active" id="param_e_rev_Na_dist_0">
+                                    <input class="hide_radio" type="radio" ng-model="param_e_rev_Na_dist" ng-change="updateDist('param_e_rev_Na', 0)" value="0" checked>
+                                </label>
+                                <label class="btn btn-default fas fa-signal" id="param_e_rev_Na_dist_1">
+                                    <input class="hide_radio" type="radio" ng-model="param_e_rev_Na_dist" ng-change="updateDist('param_e_rev_Na', 1)" value="1">
+                                </label>
+                                <label class="btn btn-default fas fa-square-root-alt" id="param_e_rev_Na_dist_2">
+                                    <input class="hide_radio" type="radio" ng-model="param_e_rev_Na_dist" ng-change="updateDist('param_e_rev_Na', 2)" value="2">
+                                </label>
+                                <label class="btn btn-default fas fa-th" id="param_e_rev_Na_dist_3">
+                                    <input class="hide_radio" type="radio" ng-model="param_e_rev_Na_dist" ng-change="updateDist('param_e_rev_Na', 3)" value="3">
+                                </label>
                             </div>
-                            <div class="control-label col-sm-1">mV</div>
                         </div>
                         <div class="form-group col-sm-12">
-                            <div class="control-label col-sm-2"></div>
-                            <label class="control-label col-sm-2" for="param_e_rev_K">e_rev_K : </label>
-                            <div class="col-sm-3">
-                                <input id="param_e_rev_K" name="param_e_rev_K" type="number" step="0.1" placeholder="e_rev_K..." class="form-control input-md" ng-model="param_e_rev_K">
+                            <span ng-show="param_e_rev_K_dist == '0'">
+                                <div class="control-label col-sm-2"></div>
+                                <label class="control-label col-sm-2" for="param_e_rev_K">e_rev_K : </label>
+                                <div class="col-sm-3">
+                                    <input id="param_e_rev_K" name="param_e_rev_K" type="number" step="0.1" placeholder="e_rev_K..." class="form-control input-md" ng-model="param_e_rev_K">
+                                </div>
+                                <div class="control-label col-sm-1">mV</div>
+                            </span>
+                            <span ng-show="param_e_rev_K_dist == '1'">
+                                <label class="control-label col-sm-2" for="param_e_rev_K_distribution">e_rev_K : </label>
+                                <div class="control-label col-sm-2">
+                                    <select id="param_e_rev_K_distribution" name="param_e_rev_K_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty">
+                                        <option value="binomial" selected="selected">binomial</option>
+                                        <option value="gamma">gamma</option>
+                                        <option value="exponential">exponential</option>
+                                        <option value="lognormal">lognormal</option>
+                                        <option value="normal">normal</option>
+                                        <option value="normal_clipped">normal_clipped</option>
+                                        <option value="normal_clipped_to_boundary">normal_clipped_to_boundary</option>
+                                        <option value="poisson">poisson</option>
+                                        <option value="uniform">uniform</option>
+                                        <option value="uniform_int">uniform_int</option>
+                                        <option value="vonmises">vonmises</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-2">
+                                    <input id="param_e_rev_K_p1" name="param_e_rev_K_p1" type="number" step="0.1" placeholder="p1" class="form-control input-md" ng-model="param_e_rev_K_p1">
+                                </div>
+                                <div class="col-sm-2">
+                                    <input id="param_e_rev_K_p2" name="param_e_rev_K_p2" type="number" step="0.1" placeholder="p2" class="form-control input-md" ng-model="param_e_rev_K_p2">
+                                </div>
+                                <div class="control-label col-sm-1">mV</div>
+                            </span>
+                            <span ng-show="param_e_rev_K_dist == '2'">
+                                <label class="control-label col-sm-2" for="param_e_rev_K_fx">e_rev_K : </label>
+                                <div class="col-sm-6">
+                                    <input id="param_e_rev_K_fx" name="param_e_rev_K_fx" type="text" placeholder="f(x)..." class="form-control input-md" ng-model="param_e_rev_K_fx">
+                                </div>
+                                <div class="control-label col-sm-1">mV</div>
+                            </span>
+                            <span ng-show="param_e_rev_K_dist == '3'">
+                                <div class="control-label col-sm-2"><b>Matrix</b></div>
+                            </span>
+                            <div class="btn-group btn-group-sm pull-right">
+                                <label class="btn btn-default fab fa-neos active" id="param_e_rev_K_dist_0">
+                                    <input class="hide_radio" type="radio" ng-model="param_e_rev_K_dist" ng-change="updateDist('param_e_rev_K', 0)" value="0" checked>
+                                </label>
+                                <label class="btn btn-default fas fa-signal" id="param_e_rev_K_dist_1">
+                                    <input class="hide_radio" type="radio" ng-model="param_e_rev_K_dist" ng-change="updateDist('param_e_rev_K', 1)" value="1">
+                                </label>
+                                <label class="btn btn-default fas fa-square-root-alt" id="param_e_rev_K_dist_2">
+                                    <input class="hide_radio" type="radio" ng-model="param_e_rev_K_dist" ng-change="updateDist('param_e_rev_K', 2)" value="2">
+                                </label>
+                                <label class="btn btn-default fas fa-th" id="param_e_rev_K_dist_3">
+                                    <input class="hide_radio" type="radio" ng-model="param_e_rev_K_dist" ng-change="updateDist('param_e_rev_K', 3)" value="3">
+                                </label>
                             </div>
-                            <div class="control-label col-sm-1">mV</div>
                         </div>
                         <div class="form-group col-sm-12">
-                            <div class="control-label col-sm-2"></div>
-                            <label class="control-label col-sm-2" for="param_e_rev_leak">e_rev_leak : </label>
-                            <div class="col-sm-3">
-                                <input id="param_e_rev_leak" name="param_e_rev_leak" type="number" step="0.1" placeholder="e_rev_leak..." class="form-control input-md" ng-model="param_e_rev_leak">
+                            <span ng-show="param_e_rev_leak_dist == '0'">
+                                <div class="control-label col-sm-2"></div>
+                                <label class="control-label col-sm-2" for="param_e_rev_leak">e_rev_leak : </label>
+                                <div class="col-sm-3">
+                                    <input id="param_e_rev_leak" name="param_e_rev_leak" type="number" step="0.1" placeholder="e_rev_leak..." class="form-control input-md" ng-model="param_e_rev_leak">
+                                </div>
+                                <div class="control-label col-sm-1">mV</div>
+                            </span>
+                            <span ng-show="param_e_rev_leak_dist == '1'">
+                                <label class="control-label col-sm-2" for="param_e_rev_K_distribution">e_rev_K : </label>
+                                <div class="control-label col-sm-2">
+                                    <select id="param_e_rev_K_distribution" name="param_e_rev_K_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty">
+                                        <option value="binomial" selected="selected">binomial</option>
+                                        <option value="gamma">gamma</option>
+                                        <option value="exponential">exponential</option>
+                                        <option value="lognormal">lognormal</option>
+                                        <option value="normal">normal</option>
+                                        <option value="normal_clipped">normal_clipped</option>
+                                        <option value="normal_clipped_to_boundary">normal_clipped_to_boundary</option>
+                                        <option value="poisson">poisson</option>
+                                        <option value="uniform">uniform</option>
+                                        <option value="uniform_int">uniform_int</option>
+                                        <option value="vonmises">vonmises</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-2">
+                                    <input id="param_e_rev_leak_p1" name="param_e_rev_leak_p1" type="number" step="0.1" placeholder="p1" class="form-control input-md" ng-model="param_e_rev_leak_p1">
+                                </div>
+                                <div class="col-sm-2">
+                                    <input id="param_e_rev_leak_p2" name="param_e_rev_leak_p2" type="number" step="0.1" placeholder="p2" class="form-control input-md" ng-model="param_e_rev_leak_p2">
+                                </div>
+                                <div class="control-label col-sm-1">mV</div>
+                            </span>
+                            <span ng-show="param_e_rev_leak_dist == '2'">
+                                <label class="control-label col-sm-2" for="param_e_rev_leak_fx">e_rev_leak : </label>
+                                <div class="col-sm-6">
+                                    <input id="param_e_rev_leak_fx" name="param_e_rev_leak_fx" type="text" placeholder="f(x)..." class="form-control input-md" ng-model="param_e_rev_leak_fx">
+                                </div>
+                                <div class="control-label col-sm-1">mV</div>
+                            </span>
+                            <span ng-show="param_e_rev_leak_dist == '3'">
+                                <div class="control-label col-sm-2"><b>Matrix</b></div>
+                            </span>
+                            <div class="btn-group btn-group-sm pull-right">
+                                <label class="btn btn-default fab fa-neos active" id="param_e_rev_leak_dist_0">
+                                    <input class="hide_radio" type="radio" ng-model="param_e_rev_leak_dist" ng-change="updateDist('param_e_rev_leak', 0)" value="0" checked>
+                                </label>
+                                <label class="btn btn-default fas fa-signal" id="param_e_rev_leak_dist_1">
+                                    <input class="hide_radio" type="radio" ng-model="param_e_rev_leak_dist" ng-change="updateDist('param_e_rev_leak', 1)" value="1">
+                                </label>
+                                <label class="btn btn-default fas fa-square-root-alt" id="param_e_rev_leak_dist_2">
+                                    <input class="hide_radio" type="radio" ng-model="param_e_rev_leak_dist" ng-change="updateDist('param_e_rev_leak', 2)" value="2">
+                                </label>
+                                <label class="btn btn-default fas fa-th" id="param_e_rev_leak_dist_3">
+                                    <input class="hide_radio" type="radio" ng-model="param_e_rev_leak_dist" ng-change="updateDist('param_e_rev_leak', 3)" value="3">
+                                </label>
                             </div>
-                            <div class="control-label col-sm-1">mV</div>
                         </div>
                         <div class="form-group col-sm-12">
                             <span ng-show="param_e_rev_E_dist == '0'">
