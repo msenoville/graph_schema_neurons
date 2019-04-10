@@ -1,4 +1,260 @@
-<div class="modal fade">
+<div class="modal fade" id="my_dataviz" role="dialog">
+    <div class="modal-dialog">   
+        <!-- Modal content-->
+        <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Chart within Bootstrap Modal</h4>
+        </div>
+        <!-- <div class="modal-body"> -->
+                <div id="canvas"></div>
+        <!-- </div> -->
+        </div>
+    </div>
+</div>
+
+<script>
+        // var myData = [
+        //     {day : 'Mon', value: 10},
+        //     {day : 'Tue', value: 40},
+        //     {day : 'Wed', value: 30},
+        //     {day : 'Thu', value: 60},
+        //     {day : 'Fri', value: 30}
+        // ];
+        
+        // var bandScale = d3.scaleBand()
+        //     .domain(['Mon', 'Tue', 'Wed', 'Thu', 'Fri'])
+        //     .range([0, 500])
+        //     .paddingInner(0.05);
+        
+        // d3.select('#wrapper')
+        //     .selectAll('rect')
+        //     .data(myData)
+        //     .enter()
+        //     .append('svg')
+        //     .attr('y', function(d) {
+        //         return bandScale(d.day);
+        //     })
+        //     .attr('height', bandScale.bandwidth())
+        //     .attr('width', function(d) {
+        //         return d.value;
+        //     });
+
+    var myCircle = d3.select("#dataviz_buttonTriger")
+        .append("svg")
+        .append("circle")
+        .attr("cx", 100)
+        .attr("cy", 70)
+        .attr("r", 50)
+        .attr("stroke", "black")
+
+    var margin = 50;
+    var maxNum = 1;
+    var n = 20;
+    var squareSize = 15;
+    var mode = null;
+    var modeSwitchBtnSpace = 50;
+    var modeBtnSize = 50;
+    var boardAnnotationSpace = 20;
+    var topAnnotationBoxH = maxNum * 5, topAnnotationBoxW = 5;
+    var leftAnnotationBoxH = topAnnotationBoxW, leftAnnotationBoxW = topAnnotationBoxH;
+
+    var width = n * squareSize + leftAnnotationBoxW  + margin + 50, height = 1000;
+    var svg = d3.select("#canvas").append("svg").attr("width", width).attr("height", height);
+    for (var i = 0; i < n; i++) {
+        for (var j = 0; j < n; j++) {
+            var x = j * squareSize + leftAnnotationBoxW + boardAnnotationSpace + margin;
+            var y = i * squareSize + topAnnotationBoxH + boardAnnotationSpace + margin;
+            svg.append("rect").attr("x", x)
+                              .attr("y", y)
+                              .attr("width", squareSize)
+                              .attr("height", squareSize)
+                              .attr('fill', 'white')
+                              .attr("stroke-width", 2)
+                              .attr("stroke", "gray")
+                              .attr("id", i+ "_"+j)
+                              .attr("class", "cell");
+        }
+    }
+    for (var i = 0; i < n; i++) {
+        var x = i * squareSize + leftAnnotationBoxW + squareSize / 2 - topAnnotationBoxW / 2 + boardAnnotationSpace + margin;
+        var y = 0 + margin;
+        svg.append("rect").attr("x", x)
+                          .attr("y", y)
+                          .attr("rx", 3)
+                          .attr("ry", 3)
+                          .attr("width", topAnnotationBoxW)
+                          .attr("height", topAnnotationBoxH)
+                          .attr('fill', 'white')
+                          .attr("stroke-width", 2)
+                          .attr("stroke", "gray")
+                          .attr("id", "top_a_"+i);
+    }
+
+    for (var i = 0; i < n; i++) {
+        var x = 0 + margin;
+        var y = i * squareSize + topAnnotationBoxH + squareSize / 2 - leftAnnotationBoxH / 2 + boardAnnotationSpace + margin;
+        svg.append("rect").attr("x", x)
+                          .attr("y", y)
+                          .attr("rx", 3)
+                          .attr("ry", 3)
+                          .attr("width", leftAnnotationBoxW)
+                          .attr("height", leftAnnotationBoxH)
+                          .attr('fill', 'white')
+                          .attr("stroke-width", 2)
+                          .attr("stroke", "gray")
+                          .attr("id", "left_a_"+i);
+    }
+
+    var yesy = topAnnotationBoxH + 2 * boardAnnotationSpace + n * squareSize;
+    var yesx = leftAnnotationBoxW + boardAnnotationSpace + n * squareSize / 2 - modeBtnSize - modeSwitchBtnSpace / 2;
+
+    // d3.selectAll("rect[class='cell']").on("mouseover", gridOver); 
+	
+	// function gridOver(d) {
+	// 	d3.selectAll("rect[class='cell']").style("stroke-width", function(p) { return p.x == d.x || p.y == d.y ? "6px" : "1px"});
+    // };
+    
+    d3.selectAll("rect.cell").on('mouseover', function() {
+        var cellX = d3.select(this).attr("x");
+        var cellY = d3.select(this).attr("y");
+        d3.selectAll("rect[class='cell']").style("stroke-width", function() { return  d3.select(this).attr("x") == cellX || d3.select(this).attr("y") == cellY ? "3px" : "1px"});
+    });
+
+    svg.append("rect").attr('fill', 'black')
+                      .attr("stroke-width", 4)
+                      .attr("class", "yes_btn")
+                      .attr("stroke", "gray");
+
+    d3.selectAll(".yes_btn").on('click', function() {
+        mode = "yes";
+    });
+    mode = "yes";
+
+    d3.select(".yes_btn").on("click")();
+
+    d3.selectAll("rect[class='cell']").on('click', function() {
+        if (mode == "yes") {
+            var cellId = d3.select(this).attr("id");
+            var posn = cellId.split("_");
+            var clickedRow = parseInt(posn[0]), clickedCol = parseInt(posn[1]);
+
+            var fill = d3.select(this).attr('fill');
+            if (fill == "black") {
+                d3.select(this).attr('fill', 'white');
+                soln[clickedRow][clickedCol] = 0;
+            } else if (fill == "white") {
+                d3.select(this).attr('fill', 'black');
+                soln[clickedRow][clickedCol] = 1;
+            }
+
+            // Checking row
+            // var rowCheck = [];
+            // for (var i = 0; i < n; i++) {
+            //     var checkId = clickedRow + "_" + i;
+            //     var color = d3.select("rect[id='" + checkId + "']").attr("fill");
+            //     if (color == "white") {
+            //         rowCheck.push(0);
+            //     } else if (color == "black") {
+            //         rowCheck.push(1);
+            //     }
+            // }
+            // rowCheck.push(0);
+            // var anno = getAnnotation(rowCheck);
+            // if (anno.toString() == leftAnnotations[clickedRow].toString()) {
+            //     var annoBoxId = "left_a_" + clickedRow;
+            //     d3.select("#"+annoBoxId).transition().attr("fill", annoBoxColor);
+            // } else {
+            //     var annoBoxId = "left_a_" + clickedRow;
+            //     d3.select("#"+annoBoxId).transition().attr("fill", "white");
+            // }
+            // Done checking row
+            // Checking column
+            // var colCheck = [];
+            // for (var i = 0; i < n; i++) {
+            //     var checkId = i + "_" + clickedCol;
+            //     var color = d3.select("rect[id='" + checkId + "']").attr("fill");
+            //     if (color == "white") {
+            //         colCheck.push(0);
+            //     } else if (color == "black") {
+            //         colCheck.push(1);
+            //     }
+            // }
+            // colCheck.push(0);
+            // var anno = getAnnotation(colCheck);
+            // anno.reverse();
+            // if (anno.toString() == topAnnotations[clickedCol].toString()) {
+            //     var annoBoxId = "top_a_" + clickedCol;
+            //     d3.select("#"+annoBoxId).transition().attr("fill", annoBoxColor);
+            // } else {
+            //     var annoBoxId = "top_a_" + clickedCol;
+            //     d3.select("#"+annoBoxId).transition().attr("fill", "white");
+            // }
+            // Done checking column
+
+            // var leftSolnAnnotations = [];
+            // for (var i = 0; i < soln.length; i++) {
+            //     var ls = getAnnotation(soln[i].concat([0]));
+            //     leftSolnAnnotations.push(ls);
+            // }
+
+            // var topSolnAnnotations = [];
+            // for (var i = 0; i < n; i++) {
+            //     var col = [];
+            //     for (var j = 0; j < n; j++) {
+            //         col.push(soln[j][i]);
+            //     }
+            //     var ls = getAnnotation(col.concat([0]));
+            //     topSolnAnnotations.push(ls);
+            // }
+            // var solved = true;
+            // for (var i = 0; i < n; i ++) {
+            //     topSolnAnnotations[i].reverse();
+            //     if (topSolnAnnotations[i].join(",") != topAnnotations[i].join(",")){
+            //         return;
+            //     }
+            // }
+            // for (var i = 0; i < n; i ++) {
+            //     if (leftSolnAnnotations[i].join(",") != leftAnnotations[i].join(",")){
+            //         return;
+            //     }
+            // }
+
+            // setTimeout(function() {
+            //     alert("Congrats! You win!");
+            // }, 1100);
+        }
+        // } else if (mode == "no") {
+        //     if (d3.select(this).attr('fill') == "black") {
+        //         return;
+        //     }
+        //     var id = d3.select(this).attr('id');
+        //     var crossId = 'cross_' + id;
+        //     var cross = d3.select("path[id='" + crossId + "']");
+        //     if (cross.size() == 1) {
+        //         cross.remove();
+        //     } else if (cross.size() == 0) {
+        //         var x = parseInt(d3.select(this).attr("x")) + squareSize / 2;
+        //         var y = parseInt(d3.select(this).attr("y")) + squareSize / 2;
+        //         svg.append('path').attr("d", d3.svg.symbol().size(350).type(function(d) { return 'cross'}))
+        //                           .attr("id", crossId)
+        //                           .attr("class", "cross")
+        //                           .attr('transform', 'translate(' + x + ',' + y + ') rotate(45)')
+        //                           .attr('fill', 'red')
+        //                           .on("click", function() {
+        //                               if (mode == "no") {
+        //                                   d3.select(this).remove();
+        //                               }
+        //                           });
+        //     }
+        // }
+    });
+
+</script>
+
+
+
+<!-- <div class="modal fade">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -17,4 +273,4 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
