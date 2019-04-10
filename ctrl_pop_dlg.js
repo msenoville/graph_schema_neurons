@@ -14,6 +14,7 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 		Recording_spikes, Recording_v, Simulation_time, Simulation_name, param_rate, param_start, param_duration) {
 		
 		$scope.v_rest_dist = 0;
+		$scope.param_v_rest_dist = 0;
 		$scope.param_cm_dist = 0;
 		$scope.param_tau_m_dist = 0;
 		$scope.param_tau_refrac_dist = 0;
@@ -32,6 +33,11 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 		$scope.param_e_rev_Na_dist = 0;
 		$scope.param_e_rev_K_dist = 0;
 		$scope.param_e_rev_leak_dist = 0;
+		$scope.param_v_spike_dist = 0;
+		$scope.param_a_dist = 0;
+		$scope.param_b_dist = 0;
+		$scope.param_delta_T_dist = 0;
+		$scope.param_tau_w_dist = 0;
 		
 		$scope.title = title;
 		$scope.name_value = name_value;
