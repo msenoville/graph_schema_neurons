@@ -41,6 +41,8 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 		$scope.param_tau_w_dist = 0;
 		$scope.param_rate_dist = 0;
 		$scope.param_start_dist = 0;
+		$scope.param_duration_dist = 0;
+		$scope.param_spike_times_dist = 0;
 		
 		$scope.title = title;
 		$scope.name_value = name_value;

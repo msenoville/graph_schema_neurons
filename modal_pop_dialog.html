@@ -3387,22 +3387,128 @@
                             </div>
                         </div>
                         <div class="form-group col-sm-12">
-                            <div class="control-label col-sm-2"></div>
-                            <label class="control-label col-sm-2" for="param_duration">Duration : </label>
-                            <div class="col-sm-3">
-                                <input id="param_duration" name="param_duration" type="number" step="0.1" placeholder="duration..." class="form-control input-md" ng-model="param_duration">
+                            <span ng-show="param_duration_dist == '0'">
+                                <div class="control-label col-sm-2"></div>
+                                <label class="control-label col-sm-2" for="param_duration">Duration : </label>
+                                <div class="col-sm-3">
+                                    <input id="param_duration" name="param_duration" type="number" step="0.1" placeholder="duration..." class="form-control input-md" ng-model="param_duration">
+                                </div>
+                                <div class="control-label col-sm-1">ms</div>
+                            </span>
+                            <span ng-show="param_duration_dist == '1'">
+                                <label class="control-label col-sm-2" for="param_duration_distribution">start : </label>
+                                <div class="control-label col-sm-2">
+                                    <select id="param_duration_distribution" name="param_duration_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty">
+                                        <option value="binomial" selected="selected">binomial</option>
+                                        <option value="gamma">gamma</option>
+                                        <option value="exponential">exponential</option>
+                                        <option value="lognormal">lognormal</option>
+                                        <option value="normal">normal</option>
+                                        <option value="normal_clipped">normal_clipped</option>
+                                        <option value="normal_clipped_to_boundary">normal_clipped_to_boundary</option>
+                                        <option value="poisson">poisson</option>
+                                        <option value="uniform">uniform</option>
+                                        <option value="uniform_int">uniform_int</option>
+                                        <option value="vonmises">vonmises</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-2">
+                                    <input id="param_duration_p1" name="param_duration_p1" type="number" step="0.1" placeholder="p1" class="form-control input-md" ng-model="param_duration_p1">
+                                </div>
+                                <div class="col-sm-2">
+                                    <input id="param_duration_p2" name="param_duration_p2" type="number" step="0.1" placeholder="p2" class="form-control input-md" ng-model="param_duration_p2">
+                                </div>
+                                <div class="control-label col-sm-1">ms</div>
+                            </span>
+                            <span ng-show="param_duration_dist == '2'">
+                                <label class="control-label col-sm-2" for="param_duration_fx">start : </label>
+                                <div class="col-sm-6">
+                                    <input id="param_duration_fx" name="param_duration_fx" type="text" placeholder="f(x)..." class="form-control input-md" ng-model="param_duration_fx">
+                                </div>
+                                <div class="control-label col-sm-1">ms</div>
+                            </span>
+                            <span ng-show="param_duration_dist == '3'">
+                                <div class="control-label col-sm-2">
+                                    <b>Matrix</b>
+                                </div>
+                            </span>
+                            <div class="btn-group btn-group-sm pull-right">
+                                <label class="btn btn-default fab fa-neos active" id="param_duration_dist_0">
+                                    <input class="hide_radio" type="radio" ng-model="param_duration_dist" ng-change="updateDist('param_duration', 0)" value="0" checked>
+                                </label>
+                                <label class="btn btn-default fas fa-signal" id="param_duration_dist_1">
+                                    <input class="hide_radio" type="radio" ng-model="param_duration_dist" ng-change="updateDist('param_duration', 1)" value="1">
+                                </label>
+                                <label class="btn btn-default fas fa-square-root-alt" id="param_duration_dist_2">
+                                    <input class="hide_radio" type="radio" ng-model="param_duration_dist" ng-change="updateDist('param_duration', 2)" value="2">
+                                </label>
+                                <label class="btn btn-default fas fa-th" id="param_duration_dist_3">
+                                    <input class="hide_radio" type="radio" ng-model="param_duration_dist" ng-change="updateDist('param_duration', 3)" value="3">
+                                </label>
                             </div>
-                            <div class="control-label col-sm-1">ms</div>
                         </div>
                     </div>
                     <div class="form-group col-sm-12" ng-show="celltype == 'SpikeSourceArray'">
                         <div class="form-group col-sm-12">
-                            <div class="control-label col-sm-2"><b>Parameters :</b></div>
-                            <label class="control-label col-sm-2" for="param_spike_times">spike_times : </label>
-                            <div class="col-sm-3">
-                                <input id="param_spike_times" name="param_spike_times" type="number" step="0.1" placeholder="spike_times..." class="form-control input-md" ng-model="param_spike_times">
+                            <span ng-show="param_spike_times_dist == '0'">
+                                <div class="control-label col-sm-2"><b>Parameters :</b></div>
+                                <label class="control-label col-sm-2" for="param_spike_times">spike_times : </label>
+                                <div class="col-sm-3">
+                                    <input id="param_spike_times" name="param_spike_times" type="number" step="0.1" placeholder="spike_times..." class="form-control input-md" ng-model="param_spike_times">
+                                </div>
+                                <div class="control-label col-sm-1">mS</div>
+                            </span>
+                            <span ng-show="param_spike_times_dist == '1'">
+                                <label class="control-label col-sm-2" for="param_spike_times_distribution">spike_times : </label>
+                                <div class="control-label col-sm-2">
+                                    <select id="param_spike_times_distribution" name="param_spike_times_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty">
+                                        <option value="binomial" selected="selected">binomial</option>
+                                        <option value="gamma">gamma</option>
+                                        <option value="exponential">exponential</option>
+                                        <option value="lognormal">lognormal</option>
+                                        <option value="normal">normal</option>
+                                        <option value="normal_clipped">normal_clipped</option>
+                                        <option value="normal_clipped_to_boundary">normal_clipped_to_boundary</option>
+                                        <option value="poisson">poisson</option>
+                                        <option value="uniform">uniform</option>
+                                        <option value="uniform_int">uniform_int</option>
+                                        <option value="vonmises">vonmises</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-2">
+                                    <input id="param_spike_times_p1" name="param_spike_times_p1" type="number" step="0.1" placeholder="p1" class="form-control input-md" ng-model="init_v_p1">
+                                </div>
+                                <div class="col-sm-2">
+                                    <input id="param_spike_times_p2" name="param_spike_times_p2" type="number" step="0.1" placeholder="p2" class="form-control input-md" ng-model="init_v_p2">
+                                </div>
+                                <div class="control-label col-sm-1">mS</div>
+                            </span>
+                            <span ng-show="param_spike_times_dist == '2'">
+                                <label class="control-label col-sm-2" for="param_spike_times_fx">spike_times : </label>
+                                <div class="col-sm-6">
+                                    <input id="param_spike_times_fx" name="param_spike_times_fx" type="text" placeholder="f(x)..." class="form-control input-md" ng-model="param_spike_times_fx">
+                                </div>
+                                <div class="control-label col-sm-1">mS</div>
+                            </span>
+                            <span ng-show="param_spike_times_dist == '3'">
+                                <div class="control-label col-sm-2">
+                                    <b>Matrix</b>
+                                </div>
+                            </span>
+                            <div class="btn-group btn-group-sm pull-right">
+                                <label class="btn btn-default fab fa-neos active" id="param_spike_times_dist_0">
+                                    <input class="hide_radio" type="radio" ng-model="param_spike_times_dist" ng-change="updateDist('param_spike_times', 0)" value="0" checked>
+                                </label>
+                                <label class="btn btn-default fas fa-signal" id="param_spike_times_dist_1">
+                                    <input class="hide_radio" type="radio" ng-model="param_spike_times_dist" ng-change="updateDist('param_spike_times', 1)" value="1">
+                                </label>
+                                <label class="btn btn-default fas fa-square-root-alt" id="param_spike_times_dist_2">
+                                    <input class="hide_radio" type="radio" ng-model="param_spike_times_dist" ng-change="updateDist('param_spike_times', 2)" value="2">
+                                </label>
+                                <label class="btn btn-default fas fa-th" id="param_spike_times_dist_3">
+                                    <input class="hide_radio" type="radio" ng-model="param_spike_times_dist" ng-change="updateDist('param_spike_times', 3)" value="3">
+                                </label>
                             </div>
-                            <div class="control-label col-sm-1">mS</div>
                         </div>
                     </div>
                     <div class="form-group col-sm-12">
