@@ -18,6 +18,13 @@ graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 't
 		FixedNumberPre_n, FixedNumberPre_with_replacement, FixedNumberPre_allow_self_connections, FixedNumberPost_n,
 		FixedNumberPost_with_replacement, FixedNumberPost_allow_self_connections, FixedTotalNumber_n, FixedTotalNumber_with_replacement,
 		FixedTotalNumber_allow_self_connections, DistanceDependent_d_expression, DistanceDependent_allow_self_connections) {
+		
+		$scope.param_synaptic_weight_dist = 0;
+		$scope.param_synaptic_delay_dist = 0;
+		$scope.TsodyksMarkram_U_dist = 0;
+		$scope.TsodyksMarkram_tau_rec_dist = 0;
+		$scope.TsodyksMarkram_tau_facil_dist = 0;
+
 		$scope.title = title;
 		$scope.name_value = name_value;
 		// $scope.level = level;
