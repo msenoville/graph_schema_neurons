@@ -109,30 +109,77 @@ graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 't
 		};
 
 		$scope.updateDist = function(class_param, dist){
-			console.log("updateDist" + dist);
 			if(dist == 0){
-				document.getElementById(class_param + "_dist_0").classList.add("active");
-				document.getElementById(class_param + "_dist_1").classList.remove("active");
-				document.getElementById(class_param + "_dist_2").classList.remove("active");
-				document.getElementById(class_param + "_dist_3").classList.remove("active");
+				var elm = document.getElementsByClassName(class_param + "_dist_0");
+				for (var i = 0; i < elm.length; i++) {
+					elm[i].classList.add("active");
+				}
+				var elm = document.getElementsByClassName(class_param + "_dist_1");
+				for (var i = 0; i < elm.length; i++) {
+					elm[i].classList.remove("active");
+				}
+				var elm = document.getElementsByClassName(class_param + "_dist_2");
+				for (var i = 0; i < elm.length; i++) {
+					elm[i].classList.remove("active");
+				}
+				var elm = document.getElementsByClassName(class_param + "_dist_3");
+				for (var i = 0; i < elm.length; i++) {
+					elm[i].classList.remove("active");
+				}
 			}
 			if(dist == 1){
-				document.getElementById(class_param + "_dist_0").classList.remove("active");
-				document.getElementById(class_param + "_dist_1").classList.add("active");
-				document.getElementById(class_param + "_dist_2").classList.remove("active");
-				document.getElementById(class_param + "_dist_3").classList.remove("active");
+				var elm = document.getElementsByClassName(class_param + "_dist_0");
+				for (var i = 0; i < elm.length; i++) {
+					elm[i].classList.remove("active");
+				}
+				var elm = document.getElementsByClassName(class_param + "_dist_1");
+				for (var i = 0; i < elm.length; i++) {
+					elm[i].classList.add("active");
+				}
+				var elm = document.getElementsByClassName(class_param + "_dist_2");
+				for (var i = 0; i < elm.length; i++) {
+					elm[i].classList.remove("active");
+				}
+				var elm = document.getElementsByClassName(class_param + "_dist_3");
+				for (var i = 0; i < elm.length; i++) {
+					elm[i].classList.remove("active");
+				}
 			}
 			if(dist == 2){
-				document.getElementById(class_param + "_dist_0").classList.remove("active");
-				document.getElementById(class_param + "_dist_1").classList.remove("active");
-				document.getElementById(class_param + "_dist_2").classList.add("active");
-				document.getElementById(class_param + "_dist_3").classList.remove("active");
+				var elm = document.getElementsByClassName(class_param + "_dist_0");
+				for (var i = 0; i < elm.length; i++) {
+					elm[i].classList.remove("active");
+				}
+				var elm = document.getElementsByClassName(class_param + "_dist_1");
+				for (var i = 0; i < elm.length; i++) {
+					elm[i].classList.remove("active");
+				}
+				var elm = document.getElementsByClassName(class_param + "_dist_2");
+				for (var i = 0; i < elm.length; i++) {
+					elm[i].classList.add("active");
+				}
+				var elm = document.getElementsByClassName(class_param + "_dist_3");
+				for (var i = 0; i < elm.length; i++) {
+					elm[i].classList.remove("active");
+				}
 			}
 			if(dist == 3){
-				document.getElementById(class_param + "_dist_0").classList.remove("active");
-				document.getElementById(class_param + "_dist_1").classList.remove("active");
-				document.getElementById(class_param + "_dist_2").classList.remove("active");
-				document.getElementById(class_param + "_dist_3").classList.add("active");
+				var elm = document.getElementsByClassName(class_param + "_dist_0");
+				for (var i = 0; i < elm.length; i++) {
+					elm[i].classList.remove("active");
+				}
+				var elm = document.getElementsByClassName(class_param + "_dist_1");
+				for (var i = 0; i < elm.length; i++) {
+					elm[i].classList.remove("active");
+				}
+				var elm = document.getElementsByClassName(class_param + "_dist_2");
+				for (var i = 0; i < elm.length; i++) {
+					elm[i].classList.remove("active");
+				}
+				var elm = document.getElementsByClassName(class_param + "_dist_3");
+				for (var i = 0; i < elm.length; i++) {
+					elm[i].classList.add("active");
+				}
 			}
 		};
 
