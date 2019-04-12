@@ -32,15 +32,15 @@
         for (var j = 0; j < n; j++) {
             var x = j * squareSize + leftAnnotationBoxW + boardAnnotationSpace + margin;
             var y = i * squareSize + topAnnotationBoxH + boardAnnotationSpace + margin;
-            // svg.append("rect").attr("x", x)
-            //                   .attr("y", y)
-            //                   .attr("width", squareSize)
-            //                   .attr("height", squareSize)
-            //                   .attr('fill', 'white')
-            //                   .attr("stroke-width", 2)
-            //                   .attr("stroke", "gray")
-            //                   .attr("id", i+ "_"+j)
-            //                   .attr("class", "cell");
+            svg.append("rect").attr("x", x)
+                              .attr("y", y)
+                              .attr("width", squareSize)
+                              .attr("height", squareSize)
+                              .attr('fill', 'white')
+                              .attr("stroke-width", 2)
+                              .attr("stroke", "gray")
+                              .attr("id", i+ "_"+j)
+                              .attr("class", "cell");
         }
     }
     for (var i = 0; i < n; i++) {
@@ -64,7 +64,7 @@
                             .attr("text-anchor", "middle") // set anchor y justification 
                             .style("font-size","10px")
                             .text(i)                            
-                            .attr("transform", "translate(120,200) rotate(90)");
+                            // .attr("transform", "translate(120,200) rotate(90)");
     }
 
     for (var i = 0; i < n; i++) {

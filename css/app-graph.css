@@ -133,13 +133,10 @@ table.mxPopupMenu tr {
     opacity: 1;
 }
 /* End of Tooltips css */
-
-/* body {
-    font-family: "Helvetica Neue", Helvetica, sans-serif;
-    font-size: 14px;
-    color: #333;
-  }
-rect {
-    fill: orange;
-} */
  
+/* input[type=checkbox], input[type=radio]{
+    display:none;
+} */
+.hide_radio {
+    display: none;
+}
