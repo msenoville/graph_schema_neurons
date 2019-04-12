@@ -18,6 +18,13 @@ graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 't
 		FixedNumberPre_n, FixedNumberPre_with_replacement, FixedNumberPre_allow_self_connections, FixedNumberPost_n,
 		FixedNumberPost_with_replacement, FixedNumberPost_allow_self_connections, FixedTotalNumber_n, FixedTotalNumber_with_replacement,
 		FixedTotalNumber_allow_self_connections, DistanceDependent_d_expression, DistanceDependent_allow_self_connections) {
+		
+		$scope.param_synaptic_weight_dist = 0;
+		$scope.param_synaptic_delay_dist = 0;
+		$scope.TsodyksMarkram_U_dist = 0;
+		$scope.TsodyksMarkram_tau_rec_dist = 0;
+		$scope.TsodyksMarkram_tau_facil_dist = 0;
+
 		$scope.title = title;
 		$scope.name_value = name_value;
 		// $scope.level = level;
@@ -98,6 +105,81 @@ graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 't
 			}
 			else {
 				$scope.close();
+			}
+		};
+
+		$scope.updateDist = function(class_param, dist){
+			if(dist == 0){
+				var elm = document.getElementsByClassName(class_param + "_dist_0");
+				for (var i = 0; i < elm.length; i++) {
+					elm[i].classList.add("active");
+				}
+				var elm = document.getElementsByClassName(class_param + "_dist_1");
+				for (var i = 0; i < elm.length; i++) {
+					elm[i].classList.remove("active");
+				}
+				var elm = document.getElementsByClassName(class_param + "_dist_2");
+				for (var i = 0; i < elm.length; i++) {
+					elm[i].classList.remove("active");
+				}
+				var elm = document.getElementsByClassName(class_param + "_dist_3");
+				for (var i = 0; i < elm.length; i++) {
+					elm[i].classList.remove("active");
+				}
+			}
+			if(dist == 1){
+				var elm = document.getElementsByClassName(class_param + "_dist_0");
+				for (var i = 0; i < elm.length; i++) {
+					elm[i].classList.remove("active");
+				}
+				var elm = document.getElementsByClassName(class_param + "_dist_1");
+				for (var i = 0; i < elm.length; i++) {
+					elm[i].classList.add("active");
+				}
+				var elm = document.getElementsByClassName(class_param + "_dist_2");
+				for (var i = 0; i < elm.length; i++) {
+					elm[i].classList.remove("active");
+				}
+				var elm = document.getElementsByClassName(class_param + "_dist_3");
+				for (var i = 0; i < elm.length; i++) {
+					elm[i].classList.remove("active");
+				}
+			}
+			if(dist == 2){
+				var elm = document.getElementsByClassName(class_param + "_dist_0");
+				for (var i = 0; i < elm.length; i++) {
+					elm[i].classList.remove("active");
+				}
+				var elm = document.getElementsByClassName(class_param + "_dist_1");
+				for (var i = 0; i < elm.length; i++) {
+					elm[i].classList.remove("active");
+				}
+				var elm = document.getElementsByClassName(class_param + "_dist_2");
+				for (var i = 0; i < elm.length; i++) {
+					elm[i].classList.add("active");
+				}
+				var elm = document.getElementsByClassName(class_param + "_dist_3");
+				for (var i = 0; i < elm.length; i++) {
+					elm[i].classList.remove("active");
+				}
+			}
+			if(dist == 3){
+				var elm = document.getElementsByClassName(class_param + "_dist_0");
+				for (var i = 0; i < elm.length; i++) {
+					elm[i].classList.remove("active");
+				}
+				var elm = document.getElementsByClassName(class_param + "_dist_1");
+				for (var i = 0; i < elm.length; i++) {
+					elm[i].classList.remove("active");
+				}
+				var elm = document.getElementsByClassName(class_param + "_dist_2");
+				for (var i = 0; i < elm.length; i++) {
+					elm[i].classList.remove("active");
+				}
+				var elm = document.getElementsByClassName(class_param + "_dist_3");
+				for (var i = 0; i < elm.length; i++) {
+					elm[i].classList.add("active");
+				}
 			}
 		};
 

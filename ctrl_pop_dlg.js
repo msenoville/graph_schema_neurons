@@ -12,6 +12,38 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 		param_v_offset, param_e_rev_Na, param_e_rev_K, param_e_rev_leak, param_tau_cm, param_v_spike, param_a, param_b,
 		param_delta_T, param_tau_w, init_isyn_exc, init_isyn_inh, init_gsyn_exc, init_gsyn_inh, init_v, init_w,
 		Recording_spikes, Recording_v, Simulation_time, Simulation_name, param_rate, param_start, param_duration) {
+		
+		$scope.v_rest_dist = 0;
+		$scope.param_v_rest_dist = 0;
+		$scope.param_cm_dist = 0;
+		$scope.param_tau_m_dist = 0;
+		$scope.param_tau_refrac_dist = 0;
+		$scope.param_tau_syn_E_dist = 0;
+		$scope.param_tau_syn_I_dist = 0;
+		$scope.param_i_offset_dist = 0;
+		$scope.param_v_reset_dist = 0;
+		$scope.param_v_thresh_dist = 0;
+		$scope.init_v_dist = 0;
+		$scope.init_w_dist = 0;
+		$scope.param_e_rev_E_dist = 0;
+		$scope.param_e_rev_I_dist = 0;
+		$scope.param_gbar_Na_dist = 0;
+		$scope.param_gbar_K_dist = 0;
+		$scope.param_g_leak_dist = 0;
+		$scope.param_v_offset_dist = 0;
+		$scope.param_e_rev_Na_dist = 0;
+		$scope.param_e_rev_K_dist = 0;
+		$scope.param_e_rev_leak_dist = 0;
+		$scope.param_v_spike_dist = 0;
+		$scope.param_a_dist = 0;
+		$scope.param_b_dist = 0;
+		$scope.param_delta_T_dist = 0;
+		$scope.param_tau_w_dist = 0;
+		$scope.param_rate_dist = 0;
+		$scope.param_start_dist = 0;
+		$scope.param_duration_dist = 0;
+		$scope.param_spike_times_dist = 0;
+		
 		$scope.title = title;
 		$scope.name_value = name_value;
 		// $scope.level = level;
@@ -136,6 +168,81 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 			}
 			if($scope.celltype == "SpikeSourceArray"){
 				if(($scope.param_duration == "") || ($scope.param_duration == null)){ $scope.param_duration = 10000000000; }
+			}
+		};
+
+		$scope.updateDist = function(class_param, dist){
+			if(dist == 0){
+				var elm = document.getElementsByClassName(class_param + "_dist_0");
+				for (var i = 0; i < elm.length; i++) {
+					elm[i].classList.add("active");
+				}
+				var elm = document.getElementsByClassName(class_param + "_dist_1");
+				for (var i = 0; i < elm.length; i++) {
+					elm[i].classList.remove("active");
+				}
+				var elm = document.getElementsByClassName(class_param + "_dist_2");
+				for (var i = 0; i < elm.length; i++) {
+					elm[i].classList.remove("active");
+				}
+				var elm = document.getElementsByClassName(class_param + "_dist_3");
+				for (var i = 0; i < elm.length; i++) {
+					elm[i].classList.remove("active");
+				}
+			}
+			if(dist == 1){
+				var elm = document.getElementsByClassName(class_param + "_dist_0");
+				for (var i = 0; i < elm.length; i++) {
+					elm[i].classList.remove("active");
+				}
+				var elm = document.getElementsByClassName(class_param + "_dist_1");
+				for (var i = 0; i < elm.length; i++) {
+					elm[i].classList.add("active");
+				}
+				var elm = document.getElementsByClassName(class_param + "_dist_2");
+				for (var i = 0; i < elm.length; i++) {
+					elm[i].classList.remove("active");
+				}
+				var elm = document.getElementsByClassName(class_param + "_dist_3");
+				for (var i = 0; i < elm.length; i++) {
+					elm[i].classList.remove("active");
+				}
+			}
+			if(dist == 2){
+				var elm = document.getElementsByClassName(class_param + "_dist_0");
+				for (var i = 0; i < elm.length; i++) {
+					elm[i].classList.remove("active");
+				}
+				var elm = document.getElementsByClassName(class_param + "_dist_1");
+				for (var i = 0; i < elm.length; i++) {
+					elm[i].classList.remove("active");
+				}
+				var elm = document.getElementsByClassName(class_param + "_dist_2");
+				for (var i = 0; i < elm.length; i++) {
+					elm[i].classList.add("active");
+				}
+				var elm = document.getElementsByClassName(class_param + "_dist_3");
+				for (var i = 0; i < elm.length; i++) {
+					elm[i].classList.remove("active");
+				}
+			}
+			if(dist == 3){
+				var elm = document.getElementsByClassName(class_param + "_dist_0");
+				for (var i = 0; i < elm.length; i++) {
+					elm[i].classList.remove("active");
+				}
+				var elm = document.getElementsByClassName(class_param + "_dist_1");
+				for (var i = 0; i < elm.length; i++) {
+					elm[i].classList.remove("active");
+				}
+				var elm = document.getElementsByClassName(class_param + "_dist_2");
+				for (var i = 0; i < elm.length; i++) {
+					elm[i].classList.remove("active");
+				}
+				var elm = document.getElementsByClassName(class_param + "_dist_3");
+				for (var i = 0; i < elm.length; i++) {
+					elm[i].classList.add("active");
+				}
 			}
 		};
 
