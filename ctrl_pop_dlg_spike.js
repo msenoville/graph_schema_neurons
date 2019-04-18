@@ -2,8 +2,11 @@ var graphSchemaApp = angular.module('graphSchemaApp');
 
 graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 'title', 'close', 'name_value',
 'synapse_type','receptor_type', 'connectors_type',
-'synaptic_weight', 'synaptic_delay',
-'TsodyksMarkram_U', 'TsodyksMarkram_tau_rec', 'TsodyksMarkram_tau_facil',
+'synaptic_weight', 'param_synaptic_weight_distribution', 'param_synaptic_weight_p1', 'param_synaptic_weight_p2', 'param_synaptic_weight_fx', 
+'synaptic_delay', 'param_synaptic_delay_distribution', 'param_synaptic_delay_p1', 'param_synaptic_delay_p2', 'param_synaptic_delay_fx',
+'TsodyksMarkram_U', 'TsodyksMarkram_U_distribution', 'TsodyksMarkram_U_p1', 'TsodyksMarkram_U_p2', 'TsodyksMarkram_U_fx',
+'TsodyksMarkram_tau_rec', 'TsodyksMarkram_tau_rec_distribution', 'TsodyksMarkram_tau_rec_p1', 'TsodyksMarkram_tau_rec_p2', 'TsodyksMarkram_tau_rec_fx',
+'TsodyksMarkram_tau_facil', 'TsodyksMarkram_tau_facil_distribution', 'TsodyksMarkram_tau_facil_p1', 'TsodyksMarkram_tau_facil_p2', 'TsodyksMarkram_tau_facil_fx',
 'FixedProbability_p_connect', 'AllToAll_allow_self_connections',
 'FixedProbability_allow_self_connections', 'FromFile_file', 'FromFile_distributed', 'FromFile_safe', 'FromFile_callback',
 'FixedNumberPre_n', 'FixedNumberPre_with_replacement', 'FixedNumberPre_allow_self_connections', 'FixedNumberPost_n',
@@ -11,8 +14,11 @@ graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 't
 'FixedTotalNumber_allow_self_connections', 'DistanceDependent_d_expression', 'DistanceDependent_allow_self_connections',
 	function($scope, $element, title, close, name_value,
 		synapse_type, receptor_type, connectors_type,
-		synaptic_weight, synaptic_delay,
-		TsodyksMarkram_U, TsodyksMarkram_tau_rec, TsodyksMarkram_tau_facil,
+		synaptic_weight, param_synaptic_weight_dist, param_synaptic_weight_distribution, param_synaptic_weight_p1, param_synaptic_weight_p2, param_synaptic_weight_fx, 
+		synaptic_delay, param_synaptic_delay_distribution, param_synaptic_delay_p1, param_synaptic_delay_p2, param_synaptic_delay_fx,
+		TsodyksMarkram_U, TsodyksMarkram_U_distribution, TsodyksMarkram_U_p1, TsodyksMarkram_U_p2, TsodyksMarkram_U_fx,
+		TsodyksMarkram_tau_rec, TsodyksMarkram_tau_rec_distribution, TsodyksMarkram_tau_rec_p1, TsodyksMarkram_tau_rec_p2, TsodyksMarkram_tau_rec_fx,
+		TsodyksMarkram_tau_facil, TsodyksMarkram_tau_facil_distribution, TsodyksMarkram_tau_facil_p1, TsodyksMarkram_tau_facil_p2, TsodyksMarkram_tau_facil_fx,
 		FixedProbability_p_connect, AllToAll_allow_self_connections,
 		FixedProbability_allow_self_connections, FromFile_file, FromFile_distributed, FromFile_safe, FromFile_callback,
 		FixedNumberPre_n, FixedNumberPre_with_replacement, FixedNumberPre_allow_self_connections, FixedNumberPost_n,
@@ -31,11 +37,36 @@ graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 't
 		$scope.synapse_type = synapse_type;
 		$scope.receptor_type = receptor_type;
 		$scope.connectors_type = connectors_type;
+		$scope.param_synaptic_weight_dist = param_synaptic_weight_dist;
 		$scope.synaptic_weight = synaptic_weight;
+		$scope.param_synaptic_weight_distribution = param_synaptic_weight_distribution;
+		$scope.param_synaptic_weight_p1 = param_synaptic_weight_p1;
+		$scope.param_synaptic_weight_p2 = param_synaptic_weight_p2;
+		$scope.param_synaptic_weight_fx = param_synaptic_weight_fx;
+		$scope.param_synaptic_delay_dist = param_synaptic_weight_dist;//
 		$scope.synaptic_delay = synaptic_delay;
+		$scope.param_synaptic_delay_distribution = param_synaptic_delay_distribution;
+		$scope.param_synaptic_delay_p1 = param_synaptic_delay_p1;
+		$scope.param_synaptic_delay_p2 = param_synaptic_delay_p2;
+		$scope.param_synaptic_delay_fx = param_synaptic_delay_fx;
+		$scope.TsodyksMarkram_U_dist = TsodyksMarkram_U_dist;//
 		$scope.TsodyksMarkram_U = TsodyksMarkram_U;
+		$scope.TsodyksMarkram_U_distribution = TsodyksMarkram_U_distribution;
+		$scope.TsodyksMarkram_U_p1 = TsodyksMarkram_U_p1;
+		$scope.TsodyksMarkram_U_p2 = TsodyksMarkram_U_p2;
+		$scope.TsodyksMarkram_U_fx = TsodyksMarkram_U_fx;
+		$scope.TsodyksMarkram_tau_rec_dist = TsodyksMarkram_tau_rec_dist;//
 		$scope.TsodyksMarkram_tau_rec = TsodyksMarkram_tau_rec;
+		$scope.TsodyksMarkram_tau_rec_distribution = TsodyksMarkram_tau_rec_distribution;
+		$scope.TsodyksMarkram_tau_rec_p1 = TsodyksMarkram_tau_rec_p1;
+		$scope.TsodyksMarkram_tau_rec_p2 = TsodyksMarkram_tau_rec_p2;
+		$scope.TsodyksMarkram_tau_rec_fx = TsodyksMarkram_tau_rec_fx;
+		//TsodyksMarkram_tau_facil_dist
 		$scope.TsodyksMarkram_tau_facil = TsodyksMarkram_tau_facil;
+		$scope.TsodyksMarkram_tau_facil_distribution = TsodyksMarkram_tau_facil_distribution;
+		$scope.TsodyksMarkram_tau_facil_p1 = TsodyksMarkram_tau_facil_p1;
+		$scope.TsodyksMarkram_tau_facil_p2 = TsodyksMarkram_tau_facil_p2;
+		$scope.TsodyksMarkram_tau_facil_fx = TsodyksMarkram_tau_facil_fx;
 		$scope.FixedProbability_p_connect = FixedProbability_p_connect;
 		$scope.AllToAll_allow_self_connections = AllToAll_allow_self_connections;
 		$scope.FixedProbability_allow_self_connections = FixedProbability_allow_self_connections;
@@ -191,10 +222,30 @@ graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 't
 				receptor_type: $scope.receptor_type,
 				connectors_type: $scope.connectors_type,
 				synaptic_weight: $scope.synaptic_weight,
+				param_synaptic_weight_distribution: $scope.param_synaptic_weight_distribution,
+				param_synaptic_weight_p1: $scope.param_synaptic_weight_p1,
+				param_synaptic_weight_p2: $scope.param_synaptic_weight_p2,
+				param_synaptic_weight_fx: $scope.param_synaptic_weight_fx,
 				synaptic_delay: $scope.synaptic_delay,
+				param_synaptic_delay_distribution: $scope.param_synaptic_delay_distribution,
+				param_synaptic_delay_p1: $scope.param_synaptic_delay_p1,
+				param_synaptic_delay_p2: $scope.param_synaptic_delay_p2,
+				param_synaptic_delay_fx: $scope.param_synaptic_delay_fx,
 				TsodyksMarkram_U: $scope.TsodyksMarkram_U,
+				TsodyksMarkram_U_distribution: $scope.TsodyksMarkram_U_distribution,
+				TsodyksMarkram_U_p1: $scope.TsodyksMarkram_U_p1,
+				TsodyksMarkram_U_p2: scope.TsodyksMarkram_U_p2,
+				TsodyksMarkram_U_fx: $scope.TsodyksMarkram_U_fx,
 				TsodyksMarkram_tau_rec: $scope.TsodyksMarkram_tau_rec,
+				TsodyksMarkram_tau_rec_distribution: $scope.TsodyksMarkram_tau_rec_distribution,
+				TsodyksMarkram_tau_rec_p1: $scope.TsodyksMarkram_tau_rec_p1,
+				TsodyksMarkram_tau_rec_p2: $scope.TsodyksMarkram_tau_rec_p2,
+				TsodyksMarkram_tau_rec_fx: $scope.TsodyksMarkram_tau_rec_fx,
 				TsodyksMarkram_tau_facil: $scope.TsodyksMarkram_tau_facil,
+				TsodyksMarkram_tau_facil_distribution: $scope.TsodyksMarkram_tau_facil_distribution,
+				TsodyksMarkram_tau_facil_p1: $scope.TsodyksMarkram_tau_facil_p1,
+				TsodyksMarkram_tau_facil_p2: $scope.TsodyksMarkram_tau_facil_p2,
+				TsodyksMarkram_tau_facil_fx: $scope.TsodyksMarkram_tau_facil_fx,
 				AllToAll_allow_self_connections: $scope.AllToAll_allow_self_connections,
 				FixedProbability_p_connect: $scope.FixedProbability_p_connect,
 				FixedProbability_allow_self_connections: $scope.FixedProbability_allow_self_connections,
