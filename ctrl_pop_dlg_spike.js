@@ -129,17 +129,17 @@ graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 't
 			else if(($scope.param_synaptic_weight_dist == 0) && (($scope.synaptic_weight == null) || ($scope.synaptic_weight.toString() == ""))){ //param_synaptic_weight_dist
 				$scope.msgAlert = "Synaptic weight is required.";
 			}
-			else if(($scope.synaptic_delay == null) || ($scope.synaptic_delay.toString() == "")){
+			else if(($scope.param_synaptic_delay_dist == 0) && (($scope.synaptic_delay == null) || ($scope.synaptic_delay.toString() == ""))){
 				$scope.msgAlert = "Synaptic delay is required.";
 			}
-			else if(($scope.synapse_type == 'TsodyksMarkram') && (($scope.TsodyksMarkram_U == "") || ($scope.TsodyksMarkram_U == null))){
+			else if(($scope.TsodyksMarkram_U_dist == 0) && ($scope.synapse_type == 'TsodyksMarkram') && (($scope.TsodyksMarkram_U == "") || ($scope.TsodyksMarkram_U == null))){
 				$scope.msgAlert = "U is required.";
 			}
-			else if(($scope.synapse_type == 'TsodyksMarkram') && (($scope.TsodyksMarkram_tau_facil == "") || ($scope.TsodyksMarkram_tau_facil == null))){
-				$scope.msgAlert = "tau_rec is required.";
+			else if(($scope.TsodyksMarkram_tau_rec_dist == 0) && ($scope.synapse_type == 'TsodyksMarkram') && (($scope.TsodyksMarkram_tau_facil == "") || ($scope.TsodyksMarkram_tau_facil == null))){
+				$scope.msgAlert = "tau_faucil is required.";
 			}
-			else if(($scope.synapse_type == 'TsodyksMarkram') && (($scope.TsodyksMarkram_tau_rec == "") || ($scope.TsodyksMarkram_tau_rec == null))){
-				$scope.msgAlert = "tau_facil is required.";
+			else if(($scope.TsodyksMarkram_tau_facil_dist == 0) && ($scope.synapse_type == 'TsodyksMarkram') && (($scope.TsodyksMarkram_tau_rec == "") || ($scope.TsodyksMarkram_tau_rec == null))){
+				$scope.msgAlert = "tau_rec is required.";
 			}
 			else if(($scope.receptor_type == "") || ($scope.receptor_type == null)){
 				$scope.msgAlert = "Receptor type value is required.";
@@ -222,6 +222,21 @@ graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 't
 					elm[i].classList.add("active");
 				}
 			}
+			// if(class_param == "param_synaptic_weight"){
+			// 	$scope.param_synaptic_weight_dist = dist;
+			// }
+			// if(class_param == "param_synaptic_delay"){
+			// 	$scope.param_synaptic_delay_dist = dist;
+			// }
+			// if(class_param == "TsodyksMarkram_U"){
+			// 	$scope.TsodyksMarkram_U_dist = dist;
+			// }
+			// if(class_param == "TsodyksMarkram_tau_rec"){
+			// 	$scope.TsodyksMarkram_tau_rec_dist = dist;
+			// }
+			// if(class_param == "TsodyksMarkram_tau_facil"){
+			// 	$scope.TsodyksMarkram_tau_facil_dist = dist;
+			// }
 		};
 
 		$scope.close = function() {
