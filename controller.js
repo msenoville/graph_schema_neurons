@@ -489,7 +489,7 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 								"TsodyksMarkram_U_p1": "",
 								"TsodyksMarkram_U_p2": "",
 								"TsodyksMarkram_U_fx": "",
-								"TsodyksMarkram_tau_rec_dist" "",
+								"TsodyksMarkram_tau_rec_dist": "",
 								"TsodyksMarkram_tau_rec": "",
 								"TsodyksMarkram_tau_rec_distribution": "",
 								"TsodyksMarkram_tau_rec_p1": "",
