@@ -126,7 +126,7 @@ graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 't
 			if(($scope.name_value == "") || ($scope.name_value == null)){
 				$scope.msgAlert = "Name is required.";
 			}
-			else if(($scope.synaptic_weight == null) || ($scope.synaptic_weight.toString() == "")){ //param_synaptic_weight_dist
+			else if(($scope.param_synaptic_weight_dist == 0) && (($scope.synaptic_weight == null) || ($scope.synaptic_weight.toString() == ""))){ //param_synaptic_weight_dist
 				$scope.msgAlert = "Synaptic weight is required.";
 			}
 			else if(($scope.synaptic_delay == null) || ($scope.synaptic_delay.toString() == "")){
@@ -247,7 +247,7 @@ graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 't
 				TsodyksMarkram_U: $scope.TsodyksMarkram_U,
 				TsodyksMarkram_U_distribution: $scope.TsodyksMarkram_U_distribution,
 				TsodyksMarkram_U_p1: $scope.TsodyksMarkram_U_p1,
-				TsodyksMarkram_U_p2: scope.TsodyksMarkram_U_p2,
+				TsodyksMarkram_U_p2: $scope.TsodyksMarkram_U_p2,
 				TsodyksMarkram_U_fx: $scope.TsodyksMarkram_U_fx,
 				TsodyksMarkram_tau_rec_dist: $scope.TsodyksMarkram_tau_rec_dist,
 				TsodyksMarkram_tau_rec: $scope.TsodyksMarkram_tau_rec,
@@ -311,7 +311,7 @@ graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 't
 				TsodyksMarkram_U: $scope.TsodyksMarkram_U,
 				TsodyksMarkram_U_distribution: $scope.TsodyksMarkram_U_distribution,
 				TsodyksMarkram_U_p1: $scope.TsodyksMarkram_U_p1,
-				TsodyksMarkram_U_p2: scope.TsodyksMarkram_U_p2,
+				TsodyksMarkram_U_p2: $scope.TsodyksMarkram_U_p2,
 				TsodyksMarkram_U_fx: $scope.TsodyksMarkram_U_fx,
 				TsodyksMarkram_tau_rec_dist: $scope.TsodyksMarkram_tau_rec_dist,
 				TsodyksMarkram_tau_rec: $scope.TsodyksMarkram_tau_rec,
