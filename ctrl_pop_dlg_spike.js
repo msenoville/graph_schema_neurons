@@ -14,7 +14,7 @@ graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 't
 'FixedTotalNumber_allow_self_connections', 'DistanceDependent_d_expression', 'DistanceDependent_allow_self_connections',
 	function($scope, $element, title, close, name_value,
 		synapse_type, receptor_type, connectors_type,
-		param_synaptic_weight_dist, synaptic_weight, param_synaptic_weight_dist, param_synaptic_weight_distribution, param_synaptic_weight_p1, param_synaptic_weight_p2, param_synaptic_weight_fx, 
+		param_synaptic_weight_dist, synaptic_weight, param_synaptic_weight_distribution, param_synaptic_weight_p1, param_synaptic_weight_p2, param_synaptic_weight_fx, 
 		param_synaptic_delay_dist, synaptic_delay, param_synaptic_delay_distribution, param_synaptic_delay_p1, param_synaptic_delay_p2, param_synaptic_delay_fx,
 		TsodyksMarkram_U_dist, TsodyksMarkram_U, TsodyksMarkram_U_distribution, TsodyksMarkram_U_p1, TsodyksMarkram_U_p2, TsodyksMarkram_U_fx,
 		TsodyksMarkram_tau_rec_dist, TsodyksMarkram_tau_rec, TsodyksMarkram_tau_rec_distribution, TsodyksMarkram_tau_rec_p1, TsodyksMarkram_tau_rec_p2, TsodyksMarkram_tau_rec_fx,
@@ -37,7 +37,7 @@ graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 't
 		$scope.param_synaptic_weight_p1 = param_synaptic_weight_p1;
 		$scope.param_synaptic_weight_p2 = param_synaptic_weight_p2;
 		$scope.param_synaptic_weight_fx = param_synaptic_weight_fx;
-		$scope.param_synaptic_delay_dist = param_synaptic_weight_dist;//
+		$scope.param_synaptic_delay_dist = param_synaptic_delay_dist;//
 		$scope.synaptic_delay = synaptic_delay;
 		$scope.param_synaptic_delay_distribution = param_synaptic_delay_distribution;
 		$scope.param_synaptic_delay_p1 = param_synaptic_delay_p1;

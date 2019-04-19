@@ -477,7 +477,7 @@ graphSchemaApp.controller('graphController', function($scope, $rootScope, $state
 								"param_synaptic_weight_p1": "",
 								"param_synaptic_weight_p2": "",
 								"param_synaptic_weight_fx": "",
-								"param_synaptic_weight_dist": "",
+								//"param_synaptic_weight_dist": "",
 								"synaptic_delay": "",
 								"param_synaptic_delay_distribution": "",
 								"param_synaptic_delay_p1": "",
