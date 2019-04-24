@@ -222,21 +222,6 @@ graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 't
 					elm[i].classList.add("active");
 				}
 			}
-			// if(class_param == "param_synaptic_weight"){
-			// 	$scope.param_synaptic_weight_dist = dist;
-			// }
-			// if(class_param == "param_synaptic_delay"){
-			// 	$scope.param_synaptic_delay_dist = dist;
-			// }
-			// if(class_param == "TsodyksMarkram_U"){
-			// 	$scope.TsodyksMarkram_U_dist = dist;
-			// }
-			// if(class_param == "TsodyksMarkram_tau_rec"){
-			// 	$scope.TsodyksMarkram_tau_rec_dist = dist;
-			// }
-			// if(class_param == "TsodyksMarkram_tau_facil"){
-			// 	$scope.TsodyksMarkram_tau_facil_dist = dist;
-			// }
 		};
 
 		$scope.close = function() {
