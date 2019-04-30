@@ -83,18 +83,23 @@ graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 't
 		if(($scope.param_synaptic_weight_dist == "") || ($scope.param_synaptic_weight_dist == null)){
 			$scope.param_synaptic_weight_dist = 0;
 		}
+		// $scope.updateDist("param_synaptic_weight", $scope.param_synaptic_weight_dist);
 		if(($scope.param_synaptic_delay_dist == "") || ($scope.param_synaptic_delay_dist == null)){
 			$scope.param_synaptic_delay_dist = 0;
 		}
+		// $scope.updateDist("param_synaptic_delay", $scope.param_synaptic_delay_dist);
 		if(($scope.TsodyksMarkram_U_dist == "") || ($scope.TsodyksMarkram_U_dist == null)){
 			$scope.TsodyksMarkram_U_dist = 0;
 		}
+		// $scope.updateDist("TsodyksMarkram_U", $scope.TsodyksMarkram_U_dist);
 		if(($scope.TsodyksMarkram_tau_rec_dist == "") || ($scope.TsodyksMarkram_tau_rec_dist == null)){
 			$scope.TsodyksMarkram_tau_rec_dist = 0;
 		}
+		// $scope.updateDist("TsodyksMarkram_tau_rec", $scope.TsodyksMarkram_tau_rec_dist);
 		if(($scope.TsodyksMarkram_tau_facil_dist == "") || ($scope.TsodyksMarkram_tau_facil_dist == null)){
 			$scope.TsodyksMarkram_tau_facil_dist = 0;
 		}
+		// $scope.updateDist("TsodyksMarkram_tau_facil", $scope.TsodyksMarkram_tau_facil_dist);
 
 		if($scope.celltype == "empty_edge"){
 			$scope.celltype = "projection";
@@ -222,22 +227,8 @@ graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 't
 					elm[i].classList.add("active");
 				}
 			}
-			// if(class_param == "param_synaptic_weight"){
-			// 	$scope.param_synaptic_weight_dist = dist;
-			// }
-			// if(class_param == "param_synaptic_delay"){
-			// 	$scope.param_synaptic_delay_dist = dist;
-			// }
-			// if(class_param == "TsodyksMarkram_U"){
-			// 	$scope.TsodyksMarkram_U_dist = dist;
-			// }
-			// if(class_param == "TsodyksMarkram_tau_rec"){
-			// 	$scope.TsodyksMarkram_tau_rec_dist = dist;
-			// }
-			// if(class_param == "TsodyksMarkram_tau_facil"){
-			// 	$scope.TsodyksMarkram_tau_facil_dist = dist;
-			// }
 		};
+
 
 		$scope.close = function() {
 			close({
