@@ -76,38 +76,7 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 		param_rate_dist, param_rate, param_rate_p1, param_rate_p2, param_rate_fx,
 		param_start_dist, param_start, param_start_p1, param_start_p2, param_start_fx,
 		param_duration_dist, param_duration, param_duration_p1, param_duration_p2, param_duration_fx) {
-		
-		$scope.v_rest_dist = 0;
-		$scope.param_v_rest_dist = 0;
-		$scope.param_cm_dist = 0;
-		$scope.param_tau_m_dist = 0;
-		$scope.param_tau_refrac_dist = 0;
-		$scope.param_tau_syn_E_dist = 0;
-		$scope.param_tau_syn_I_dist = 0;
-		$scope.param_i_offset_dist = 0;
-		$scope.param_v_reset_dist = 0;
-		$scope.param_v_thresh_dist = 0;
-		$scope.init_v_dist = 0;
-		$scope.init_w_dist = 0;
-		$scope.param_e_rev_E_dist = 0;
-		$scope.param_e_rev_I_dist = 0;
-		$scope.param_gbar_Na_dist = 0;
-		$scope.param_gbar_K_dist = 0;
-		$scope.param_g_leak_dist = 0;
-		$scope.param_v_offset_dist = 0;
-		$scope.param_e_rev_Na_dist = 0;
-		$scope.param_e_rev_K_dist = 0;
-		$scope.param_e_rev_leak_dist = 0;
-		$scope.param_v_spike_dist = 0;
-		$scope.param_a_dist = 0;
-		$scope.param_b_dist = 0;
-		$scope.param_delta_T_dist = 0;
-		$scope.param_tau_w_dist = 0;
-		$scope.param_rate_dist = 0;
-		$scope.param_start_dist = 0;
-		$scope.param_duration_dist = 0;
-		$scope.param_spike_times_dist = 0;
-		
+				
 		$scope.title = title;
 		$scope.name_value = name_value;
 		// $scope.level = level;
@@ -266,7 +235,96 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 		$scope.param_duration_p2 = param_duration_p2;
 		$scope.param_duration_fx = param_duration_fx;
 
-
+		if(($scope.v_rest_dist == "") || ($scope.v_rest_dist == null)){
+			$scope.v_rest_dist = 0;
+		}
+		if(($scope.param_v_rest_dist == "") || ($scope.param_v_rest_dist == null)){
+			$scope.param_v_rest_dist = 0;
+		}
+		if(($scope.param_cm_dist == "") || ($scope.param_cm_dist == null)){
+			$scope.param_cm_dist = 0;
+		}
+		if(($scope.param_tau_m_dist == "") || ($scope.param_tau_m_dist == null)){
+			$scope.param_tau_m_dist = 0;
+		}
+		if(($scope.param_tau_refrac_dist == "") || ($scope.param_tau_refrac_dist == null)){
+			$scope.param_tau_refrac_dist = 0;
+		}
+		if(($scope.param_tau_syn_E_dist == "") || ($scope.param_tau_syn_E_dist == null)){
+			$scope.param_tau_syn_E_dist = 0;
+		}
+		if(($scope.param_tau_syn_I_dist == "") || ($scope.param_tau_syn_I_dist == null)){
+			$scope.param_tau_syn_I_dist = 0;
+		}
+		if(($scope.param_i_offset_dist == "") || ($scope.param_i_offset_dist == null)){
+			$scope.param_i_offset_dist = 0;
+		}
+		if(($scope.param_v_reset_dist == "") || ($scope.param_v_reset_dist == null)){
+			$scope.param_v_reset_dist = 0;
+		}
+		if(($scope.param_cm_param_v_thresh_distdist == "") || ($scope.param_v_thresh_dist == null)){
+			$scope.param_v_thresh_dist = 0;
+		}
+		if(($scope.init_v_dist == "") || ($scope.init_v_dist == null)){
+			$scope.init_v_dist = 0;
+		}
+		if(($scope.init_w_dist == "") || ($scope.init_w_dist == null)){
+			$scope.init_w_dist = 0;
+		}
+		if(($scope.param_e_rev_E_dist == "") || ($scope.param_e_rev_E_dist == null)){
+			$scope.param_e_rev_E_dist = 0;
+		}
+		if(($scope.param_e_rev_I_dist == "") || ($scope.param_e_rev_I_dist == null)){
+			$scope.param_e_rev_I_dist = 0;
+		}
+		if(($scope.param_gbar_Na_dist == "") || ($scope.param_gbar_Na_dist == null)){
+			$scope.param_gbar_Na_dist = 0;
+		}
+		if(($scope.param_gbar_K_dist == "") || ($scope.param_gbar_K_dist == null)){
+			$scope.param_gbar_K_dist = 0;
+		}
+		if(($scope.param_g_leak_dist == "") || ($scope.param_g_leak_dist == null)){
+			$scope.param_g_leak_dist = 0;
+		}
+		if(($scope.param_v_offset_dist == "") || ($scope.param_v_offset_dist == null)){
+			$scope.param_v_offset_dist = 0;
+		}
+		if(($scope.param_e_rev_Na_dist == "") || ($scope.param_e_rev_Na_dist == null)){
+			$scope.param_e_rev_Na_dist = 0;
+		}
+		if(($scope.param_e_rev_K_dist == "") || ($scope.param_e_rev_K_dist == null)){
+			$scope.param_e_rev_K_dist = 0;
+		}
+		if(($scope.param_e_rev_leak_dist == "") || ($scope.param_e_rev_leak_dist == null)){
+			$scope.param_e_rev_leak_dist = 0;
+		}
+		if(($scope.param_v_spike_dist == "") || ($scope.param_v_spike_dist == null)){
+			$scope.param_v_spike_dist = 0;
+		}
+		if(($scope.param_a_dist == "") || ($scope.param_a_dist == null)){
+			$scope.param_a_dist = 0;
+		}
+		if(($scope.param_b_dist == "") || ($scope.param_b_dist == null)){
+			$scope.param_b_dist = 0;
+		}
+		if(($scope.param_delta_T_dist == "") || ($scope.param_delta_T_dist == null)){
+			$scope.param_delta_T_dist = 0;
+		}
+		if(($scope.param_tau_w_dist == "") || ($scope.param_tau_w_dist == null)){
+			$scope.param_tau_w_dist = 0;
+		}
+		if(($scope.param_rate_dist == "") || ($scope.param_rate_dist == null)){
+			$scope.param_rate_dist = 0;
+		}
+		if(($scope.param_start_dist == "") || ($scope.param_start_dist == null)){
+			$scope.param_start_dist = 0;
+		}
+		if(($scope.param_duration_dist == "") || ($scope.param_duration_dist == null)){
+			$scope.param_duration_dist = 0;
+		}
+		if(($scope.param_spike_times_dist == "") || ($scope.param_spike_times_dist == null)){
+			$scope.param_spike_times_dist = 0;
+		}
 		if($scope.celltype == "empty_no_edge"){
 			$scope.celltype = "IF_curr_alpha";
 		}
