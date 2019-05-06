@@ -508,12 +508,31 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 		}
 		$scope.beforeClose = function(){
 			if(($scope.name_value == "") || ($scope.name_value == null)){
-				$scope.msgAlert = "Name is required."
+				$scope.msgAlert = "Name is required.";
 			}
 			else if(($scope.size == null) || ($scope.size.toString() == "")){
-				$scope.msgAlert = "Size value is required."
-			} else{
-				$scope.close()
+				$scope.msgAlert = "Size value is required.";
+			}
+			else if(($scope.v_rest_dist == "1") && ((param_cm_distribution == "") || (param_cm_distribution == null))){
+				$scope.msgAlert = "Distribution value is required.";	
+			}
+			else if(($scope.param_cm_dist == "1") && ((param_v_rest_distribution == "") || (param_v_rest_distribution == null))){
+				$scope.msgAlert = "Distribution value is required.";	
+			}
+			else if(($scope.param_tau_m_dist == "1") && ((param_tau_m_distribution == "") || (param_tau_m_distribution == null))){
+				$scope.msgAlert = "Distribution value is required.";	
+			}
+			else if(($scope.param_tau_refrac_dist == "1") && ((param_tau_refrac_distribution == "") || (param_tau_refrac_distribution == null))){
+				$scope.msgAlert = "Distribution value is required.";	
+			}
+			else if(($scope.param_tau_syn_E_dist == "1") && ((param_tau_syn_E_distribution == "") || (param_tau_syn_E_distribution == null))){
+				$scope.msgAlert = "Distribution value is required.";	
+			}
+			else if(($scope.param_tau_syn_I_dist == "1") && ((param_tau_syn_I_distribution == "") || (param_tau_syn_I_distribution == null))){
+				$scope.msgAlert = "Distribution value is required.";	
+			}
+			else {
+				$scope.close();
 			}
 		};
 		$scope.close = function() {
