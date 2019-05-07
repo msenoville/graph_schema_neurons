@@ -527,8 +527,18 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 			}
 
 			else if(($scope.param_cm_dist == "1") && (($scope.param_cm_distribution == "") || ($scope.param_cm_distribution == null))){
-				$scope.msgAlert = "param_cm Distribution value is required.";	
+				$scope.msgAlert = "cm Distribution value is required.";	
 			}
+			else if(($scope.param_cm_dist == "1") && (($scope.param_cm_p1 == "") || ($scope.param_cm_p1 == null))){
+				$scope.msgAlert = "cm p1 value is required.";
+			}
+			else if(($scope.param_cm_dist == "1") && (($scope.param_cm_p2 == "") || ($scope.param_cm_p2 == null))){
+				$scope.msgAlert = "cm p2 value is required.";
+			}
+			else if(($scope.param_cm_dist == "2") && (($scope.param_cm_fx == "") || ($scope.param_cm_fx == null))){
+				$scope.msgAlert = "cm f(x) value is required.";	
+			}
+
 			else if(($scope.param_tau_m_dist == "1") && (($scope.param_tau_m_distribution == "") || ($scope.param_tau_m_distribution == null))){
 				$scope.msgAlert = "tau_m Distribution value is required.";	
 			}
