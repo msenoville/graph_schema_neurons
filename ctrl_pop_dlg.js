@@ -513,13 +513,23 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 			else if(($scope.size == null) || ($scope.size.toString() == "")){
 				$scope.msgAlert = "Size value is required.";
 			}
-			else if(($scope.v_rest_dist == "1") && ((param_cm_distribution == "") || (param_cm_distribution == null))){
-				$scope.msgAlert = "v_rest Distrisubution value is required.";	
+			else if(($scope.v_rest_dist == "1") && (($scope.param_v_rest_distribution == "") || ($scope.param_v_rest_distribution == null))){
+				$scope.msgAlert = "v_rest Distrisubution value is required.";
 			}
-			else if(($scope.param_cm_dist == "1") && ((param_v_rest_distribution == "") || (param_v_rest_distribution == null))){
+			else if(($scope.v_rest_dist == "1") && (($scope.param_v_rest_p1 == "") || ($scope.param_v_rest_p1 == null))){
+				$scope.msgAlert = "v_rest p1 value is required.";
+			}
+			else if(($scope.v_rest_dist == "1") && (($scope.param_v_rest_p2 == "") || ($scope.param_v_rest_p2 == null))){
+				$scope.msgAlert = "v_rest p2 value is required.";
+			}
+			else if(($scope.v_rest_dist == "2") && (($scope.param_v_rest_fx == "") || ($scope.param_v_rest_fx == null))){
+				$scope.msgAlert = "v_rest f(x) value is required.";	
+			}
+
+			else if(($scope.param_cm_dist == "1") && (($scope.param_cm_distribution == "") || ($scope.param_cm_distribution == null))){
 				$scope.msgAlert = "param_cm Distribution value is required.";	
 			}
-			else if(($scope.param_tau_m_dist == "1") && ((param_tau_m_distribution == "") || (param_tau_m_distribution == null))){
+			else if(($scope.param_tau_m_dist == "1") && (($scope.param_tau_m_distribution == "") || ($scope.param_tau_m_distribution == null))){
 				$scope.msgAlert = "tau_m Distribution value is required.";	
 			}
 			else if(($scope.param_tau_refrac_dist == "1") && ((param_tau_refrac_distribution == "") || (param_tau_refrac_distribution == null))){
