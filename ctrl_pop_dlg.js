@@ -514,22 +514,79 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 				$scope.msgAlert = "Size value is required.";
 			}
 			else if(($scope.v_rest_dist == "1") && ((param_cm_distribution == "") || (param_cm_distribution == null))){
-				$scope.msgAlert = "Distribution value is required.";	
+				$scope.msgAlert = "v_rest Distrisubution value is required.";	
 			}
 			else if(($scope.param_cm_dist == "1") && ((param_v_rest_distribution == "") || (param_v_rest_distribution == null))){
-				$scope.msgAlert = "Distribution value is required.";	
+				$scope.msgAlert = "param_cm Distribution value is required.";	
 			}
 			else if(($scope.param_tau_m_dist == "1") && ((param_tau_m_distribution == "") || (param_tau_m_distribution == null))){
-				$scope.msgAlert = "Distribution value is required.";	
+				$scope.msgAlert = "tau_m Distribution value is required.";	
 			}
 			else if(($scope.param_tau_refrac_dist == "1") && ((param_tau_refrac_distribution == "") || (param_tau_refrac_distribution == null))){
-				$scope.msgAlert = "Distribution value is required.";	
+				$scope.msgAlert = "tau_refrac Distribution value is required.";	
 			}
 			else if(($scope.param_tau_syn_E_dist == "1") && ((param_tau_syn_E_distribution == "") || (param_tau_syn_E_distribution == null))){
-				$scope.msgAlert = "Distribution value is required.";	
+				$scope.msgAlert = "tau_syn_E Distribution value is required.";	
 			}
 			else if(($scope.param_tau_syn_I_dist == "1") && ((param_tau_syn_I_distribution == "") || (param_tau_syn_I_distribution == null))){
-				$scope.msgAlert = "Distribution value is required.";	
+				$scope.msgAlert = "tau_syn_I Distribution value is required.";	
+			}
+			else if(($scope.param_i_offset_dist == "1") && ((param_i_offset_distribution == "") || (param_i_offset_distribution == null))){
+				$scope.msgAlert = "i_offset Distribution value is required.";	
+			}
+			else if(($scope.param_v_reset_dist == "1") && ((param_v_reset_distribution == "") || (param_v_reset_distribution == null))){
+				$scope.msgAlert = "v_reset Distribution value is required.";	
+			}
+			else if(($scope.param_v_thresh_dist == "1") && ((param_v_thresh_distribution == "") || (param_v_thresh_distribution == null))){
+				$scope.msgAlert = "v_thresh Distribution value is required.";	
+			}
+			else if(($scope.param_e_rev_E_dist == "1") && ((param_e_rev_E_distribution == "") || (param_e_rev_E_distribution == null))){
+				$scope.msgAlert = "e_rev_E Distribution value is required.";	
+			}
+			else if(($scope.param_e_rev_I_dist == "1") && ((param_e_rev_I_distribution == "") || (param_e_rev_I_distribution == null))){
+				$scope.msgAlert = "e-rev-I Distribution value is required.";	
+			}
+			else if(($scope.param_gbar_Na_dist == "1") && ((param_gbar_Na_distribution == "") || (param_gbar_Na_distribution == null))){
+				$scope.msgAlert = "gbar_Na Distribution value is required.";	
+			}
+			else if(($scope.param_gbar_K_dist == "1") && ((param_gbar_K_distribution == "") || (param_gbar_K_distribution == null))){
+				$scope.msgAlert = "gbar_K Distribution value is required.";	
+			}
+			else if(($scope.param_g_leak_dist == "1") && ((param_v_offset_distribution == "") || (param_v_offset_distribution == null))){
+				$scope.msgAlert = "g_leak Distribution value is required.";	
+			}
+			else if(($scope.param_v_offset_dist == "1") && ((param_e_rev_Na_distribution == "") || (param_e_rev_Na_distribution == null))){
+				$scope.msgAlert = "v_offset Distribution value is required.";	
+			}
+			else if(($scope.param_e_rev_Na_dist == "1") && ((param_e_rev_I_distribution == "") || (param_e_rev_I_distribution == null))){
+				$scope.msgAlert = " e_rev_Na Distribution value is required.";	
+			}
+			else if(($scope.param_e_rev_K_dist == "1") && ((param_e_rev_K_distribution == "") || (param_e_rev_K_distribution == null))){
+				$scope.msgAlert = "e_rev_K Distribution value is required.";	
+			}
+			else if(($scope.param_e_rev_leak_dist == "1") && ((param_e_rev_leak_distribution == "") || (param_e_rev_leak_distribution == null))){
+				$scope.msgAlert = "e_rev_leak Distribution value is required.";	
+			}
+			else if(($scope.param_v_spike_dist == "1") && ((param_v_spike_distribution == "") || (param_v_spike_distribution == null))){
+				$scope.msgAlert = "v_spike_ Distribution value is required.";	
+			}
+			else if(($scope.param_a_dist == "1") && ((param_a_distribution == "") || (param_a_distribution == null))){
+				$scope.msgAlert = "a Distribution value is required.";	
+			}
+			else if(($scope.param_b_dist == "1") && ((param_b_distribution == "") || (param_b_distribution == null))){
+				$scope.msgAlert = "b Distribution value is required.";	
+			}
+			else if(($scope.param_delta_T_dist == "1") && ((param_delta_T_distribution == "") || (param_delta_T_distribution == null))){
+				$scope.msgAlert = "delta_T Distribution value is required.";	
+			}
+			else if(($scope.param_tau_w_dist == "1") && ((param_tau_w_distribution == "") || (param_tau_w_distribution == null))){
+				$scope.msgAlert = "tau_w Distribution value is required.";	
+			}
+			else if(($scope.init_v_dist == "1") && ((init_v_distribution == "") || (init_v_distribution == null))){
+				$scope.msgAlert = "init_v Distribution value is required.";	
+			}
+			else if(($scope.init_w_dist == "1") && ((init_w_distribution == "") || (init_w_distribution == null))){
+				$scope.msgAlert = "init_w_dist Distribution value is required.";	
 			}
 			else {
 				$scope.close();
