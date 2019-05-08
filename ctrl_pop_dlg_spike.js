@@ -134,18 +134,83 @@ graphSchemaApp.controller('PopDialogController_spike', ['$scope', '$element', 't
 			else if(($scope.param_synaptic_weight_dist == 0) && (($scope.synaptic_weight == null) || ($scope.synaptic_weight.toString() == ""))){ //param_synaptic_weight_dist
 				$scope.msgAlert = "Synaptic weight is required.";
 			}
+			else if(($scope.param_synaptic_weight_dist == "1") && (($scope.param_synaptic_weight_distribution == "") || ($scope.param_synaptic_weight_distribution == null))){
+				$scope.msgAlert = "Synaptic weight Distrisubution value is required.";
+			}
+			else if(($scope.param_synaptic_weight_dist == "1") && (($scope.param_synaptic_weight_p1 == "") || ($scope.param_synaptic_weight_p1 == null))){
+				$scope.msgAlert = "Synaptic weight p1 value is required.";
+			}
+			else if(($scope.param_synaptic_weight_dist == "1") && (($scope.param_synaptic_weight_p2 == "") || ($scope.param_synaptic_weight_p2 == null))){
+				$scope.msgAlert = "Synaptic weight p2 value is required.";
+			}
+			else if(($scope.param_synaptic_weight_dist == "2") && (($scope.param_synaptic_weight_fx == "") || ($scope.param_synaptic_weight_fx == null))){
+				$scope.msgAlert = "Synaptic weight f(x) value is required.";	
+			}
+
 			else if(($scope.param_synaptic_delay_dist == 0) && (($scope.synaptic_delay == null) || ($scope.synaptic_delay.toString() == ""))){
 				$scope.msgAlert = "Synaptic delay is required.";
 			}
+			else if(($scope.param_synaptic_delay_dist == "1") && (($scope.param_synaptic_delay_distribution == "") || ($scope.param_synaptic_delay_distribution == null))){
+				$scope.msgAlert = "Synaptic delay Distrisubution value is required.";
+			}
+			else if(($scope.param_synaptic_delay_dist == "1") && (($scope.param_synaptic_delay_p1 == "") || ($scope.param_synaptic_delay_p1 == null))){
+				$scope.msgAlert = "Synaptic delay p1 value is required.";
+			}
+			else if(($scope.param_synaptic_delay_dist == "1") && (($scope.param_synaptic_delay_p2 == "") || ($scope.param_synaptic_delay_p2 == null))){
+				$scope.msgAlert = "Synaptic delay p2 value is required.";
+			}
+			else if(($scope.param_synaptic_delay_dist == "2") && (($scope.param_synaptic_delay_fx == "") || ($scope.param_synaptic_delay_fx == null))){
+				$scope.msgAlert = "Synaptic delay f(x) value is required.";	
+			}
+
 			else if(($scope.TsodyksMarkram_U_dist == 0) && ($scope.synapse_type == 'TsodyksMarkram') && (($scope.TsodyksMarkram_U == "") || ($scope.TsodyksMarkram_U == null))){
 				$scope.msgAlert = "U is required.";
 			}
-			else if(($scope.TsodyksMarkram_tau_rec_dist == 0) && ($scope.synapse_type == 'TsodyksMarkram') && (($scope.TsodyksMarkram_tau_facil == "") || ($scope.TsodyksMarkram_tau_facil == null))){
-				$scope.msgAlert = "tau_faucil is required.";
+			else if(($scope.TsodyksMarkram_U_dist == "1") && ($scope.synapse_type == 'TsodyksMarkram') && (($scope.TsodyksMarkram_U_distribution == "") || ($scope.TsodyksMarkram_U_distribution == null))){
+				$scope.msgAlert = "U Distrisubution value is required.";
 			}
-			else if(($scope.TsodyksMarkram_tau_facil_dist == 0) && ($scope.synapse_type == 'TsodyksMarkram') && (($scope.TsodyksMarkram_tau_rec == "") || ($scope.TsodyksMarkram_tau_rec == null))){
+			else if(($scope.TsodyksMarkram_U_dist == "1") && ($scope.synapse_type == 'TsodyksMarkram') && (($scope.TsodyksMarkram_U_p1 == "") || ($scope.TsodyksMarkram_U_p1 == null))){
+				$scope.msgAlert = "U p1 value is required.";
+			}
+			else if(($scope.TsodyksMarkram_U_dist == "1") && ($scope.synapse_type == 'TsodyksMarkram') && (($scope.TsodyksMarkram_U_p2 == "") || ($scope.TsodyksMarkram_U_p2 == null))){
+				$scope.msgAlert = "U p2 value is required.";
+			}
+			else if(($scope.TsodyksMarkram_U_dist == "2") && ($scope.synapse_type == 'TsodyksMarkram') && (($scope.TsodyksMarkram_U_fx == "") || ($scope.TsodyksMarkram_U_fx == null))){
+				$scope.msgAlert = "U f(x) value is required.";	
+			}
+
+			else if(($scope.TsodyksMarkram_tau_rec_dist == 0) && ($scope.synapse_type == 'TsodyksMarkram') && (($scope.TsodyksMarkram_tau_rec == "") || ($scope.TsodyksMarkram_tau_rec == null))){
 				$scope.msgAlert = "tau_rec is required.";
 			}
+			else if(($scope.TsodyksMarkram_tau_rec_dist == "1") && ($scope.synapse_type == 'TsodyksMarkram') && (($scope.TsodyksMarkram_tau_rec_distribution == "") || ($scope.TsodyksMarkram_tau_rec_distribution == null))){
+				$scope.msgAlert = "tau_rec Distrisubution value is required.";
+			}
+			else if(($scope.TsodyksMarkram_tau_rec_dist == "1") && ($scope.synapse_type == 'TsodyksMarkram') && (($scope.TsodyksMarkram_tau_rec_p1 == "") || ($scope.TsodyksMarkram_tau_rec_p1 == null))){
+				$scope.msgAlert = "tau_rec p1 value is required.";
+			}
+			else if(($scope.TsodyksMarkram_tau_rec_dist == "1") && ($scope.synapse_type == 'TsodyksMarkram') && (($scope.TsodyksMarkram_tau_rec_p2 == "") || ($scope.TsodyksMarkram_tau_rec_p2 == null))){
+				$scope.msgAlert = "tau_rec p2 value is required.";
+			}
+			else if(($scope.TsodyksMarkram_tau_rec_dist == "2") && ($scope.synapse_type == 'TsodyksMarkram') && (($scope.TsodyksMarkram_tau_rec_fx == "") || ($scope.TsodyksMarkram_tau_rec_fx == null))){
+				$scope.msgAlert = "tau_rec f(x) value is required.";	
+			}
+			
+			else if(($scope.TsodyksMarkram_tau_facil_dist == 0) && ($scope.synapse_type == 'TsodyksMarkram') && (($scope.TsodyksMarkram_tau_facil == "") || ($scope.TsodyksMarkram_tau_facil == null))){
+				$scope.msgAlert = "tau_faucil is required.";
+			}
+			else if(($scope.TsodyksMarkram_tau_facil_dist == "1") && ($scope.synapse_type == 'TsodyksMarkram') && (($scope.TsodyksMarkram_tau_rec_distribution == "") || ($scope.TsodyksMarkram_tau_rec_distribution == null))){
+				$scope.msgAlert = "tau_faucil Distrisubution value is required.";
+			}
+			else if(($scope.TsodyksMarkram_tau_facil_dist == "1") && ($scope.synapse_type == 'TsodyksMarkram') && (($scope.TsodyksMarkram_tau_rec_p1 == "") || ($scope.TsodyksMarkram_tau_rec_p1 == null))){
+				$scope.msgAlert = "tau_faucil p1 value is required.";
+			}
+			else if(($scope.TsodyksMarkram_tau_facil_dist == "1") && ($scope.synapse_type == 'TsodyksMarkram') && (($scope.TsodyksMarkram_tau_rec_p2 == "") || ($scope.TsodyksMarkram_tau_rec_p2 == null))){
+				$scope.msgAlert = "tau_faucil p2 value is required.";
+			}
+			else if(($scope.TsodyksMarkram_tau_facil_dist == "2") && ($scope.synapse_type == 'TsodyksMarkram') && (($scope.TsodyksMarkram_tau_rec_fx == "") || ($scope.TsodyksMarkram_tau_rec_fx == null))){
+				$scope.msgAlert = "tau_faucil f(x) value is required.";	
+			}
+			
 			else if(($scope.receptor_type == "") || ($scope.receptor_type == null)){
 				$scope.msgAlert = "Receptor type value is required.";
 			}
