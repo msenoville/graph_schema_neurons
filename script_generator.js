@@ -29,12 +29,58 @@ graphSchemaApp.value('python_script_string', function(cells, hardware_platform, 
             }
             if(json_pop_param.celltype != "error"){
                 try {
+                    if(json_pop_param.v_rest_dist == 0){
+                        param_v_rest = json_pop_param.param_v_rest;
+                    } else if(json_pop_param.v_rest_dist == 1){
+                        param_v_rest = "RandomDistribution('" +
+                            json_pop_param.param_v_rest_distribution+"', (" + 
+                            json_pop_param.param_v_rest_p1 + ", " + 
+                            json_pop_param.param_v_rest_p2 + 
+                        "))";
+                    } else if(json_pop_param.v_rest_dist == 2){
+                        param_v_rest = json_pop_param.param_v_rest_fx;
+                    }
+                    if(json_pop_param.param_cm_dist == 0){
+                        param_cm = json_pop_param.param_cm;
+                    } else if(json_pop_param.param_cm_dist == 1){
+                        param_cm = "RandomDistribution('" +
+                            json_pop_param.param_cm_distribution+"', (" + 
+                            json_pop_param.param_cm_p1 + ", " + 
+                            json_pop_param.param_cm_p2 + 
+                        "))";
+                    } else if(json_pop_param.param_cm_dist == 2){
+                        param_cm = json_pop_param.param_cm_rest_fx;
+                    }
+                    if(json_pop_param.param_tau_m_dist == 0){
+                        param_tau_m = json_pop_param.param_tau_m;
+                    } else if(json_pop_param.param_tau_m_dist == 1){
+                        param_cm = "RandomDistribution('" +
+                            json_pop_param.param_tau_m_distribution+"', (" + 
+                            json_pop_param.param_tau_m_p1 + ", " + 
+                            json_pop_param.param_tau_m_p2 + 
+                        "))";
+                    } else if(json_pop_param.param_tau_m_dist == 2){
+                        param_cm = json_pop_param.param_tau_m_fx;
+                    }
+
+                    if(json_pop_param.param_tau_refrac_dist == 0){
+                        param_tau_refrac = json_pop_param.param_tau_refrac;
+                    } else if(json_pop_param.param_tau_refrac_dist == 1){
+                        param_cm = "RandomDistribution('" +
+                            json_pop_param.param_tau_refrac_distribution+"', (" + 
+                            json_pop_param.param_tau_refrac_p1 + ", " + 
+                            json_pop_param.param_tau_refrac_p2 + 
+                        "))";
+                    } else if(json_pop_param.param_tau_refrac_dist == 2){
+                        param_cm = json_pop_param.param_tau_refrac_fx;
+                    }
+
                     if(json_pop_param.celltype == "IF_curr_alpha"){
                         str_inst += "pop_"+ val.id +" = " +
-                        "sim.Population(" + json_pop_param.size + ", sim.IF_curr_alpha(v_rest="+json_pop_param.param_v_rest +
-                        ", cm="+json_pop_param.param_cm +
-                        ", tau_m="+json_pop_param.param_tau_m +
-                        ", tau_refrac="+json_pop_param.param_tau_refrac +
+                        "sim.Population(" + json_pop_param.size + ", sim.IF_curr_alpha(v_rest="+param_v_rest +
+                        ", cm="+param_cm +
+                        ", tau_m="+param_tau_m +
+                        ", tau_refrac="+param_tau_refrac +
                         ", tau_syn_E="+json_pop_param.param_tau_syn_E +
                         ", tau_syn_I="+json_pop_param.param_tau_syn_I +
                         ", i_offset="+json_pop_param.param_i_offset +
@@ -49,8 +95,8 @@ graphSchemaApp.value('python_script_string', function(cells, hardware_platform, 
                         ")\n";
                     }
                     if(json_pop_param.celltype == "IF_curr_exp"){
-                        str_inst += "pop_"+ val.id +" = sim.Population(" + json_pop_param.size + ", sim.IF_curr_exp(v_rest="+json_pop_param.param_v_rest +
-                        ", cm="+json_pop_param.param_cm +
+                        str_inst += "pop_"+ val.id +" = sim.Population(" + json_pop_param.size + ", sim.IF_curr_exp(v_rest="+param_v_rest +
+                        ", cm="+param_cm +
                         ", tau_m="+json_pop_param.param_tau_m +
                         ", tau_refrac="+json_pop_param.param_tau_refrac +
                         ", tau_syn_E="+json_pop_param.param_tau_syn_E +
@@ -280,6 +326,7 @@ graphSchemaApp.value('python_script_string', function(cells, hardware_platform, 
 
 import numpy
 `+ import_platform +`
+from pyNN.random import RandomDistribution
 
 sim.setup()
 
