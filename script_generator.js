@@ -40,6 +40,7 @@ graphSchemaApp.value('python_script_string', function(cells, hardware_platform, 
                     } else if(json_pop_param.v_rest_dist == 2){
                         param_v_rest = json_pop_param.param_v_rest_fx;
                     }
+
                     if(json_pop_param.param_cm_dist == 0){
                         param_cm = json_pop_param.param_cm;
                     } else if(json_pop_param.param_cm_dist == 1){
@@ -51,28 +52,161 @@ graphSchemaApp.value('python_script_string', function(cells, hardware_platform, 
                     } else if(json_pop_param.param_cm_dist == 2){
                         param_cm = json_pop_param.param_cm_rest_fx;
                     }
+
                     if(json_pop_param.param_tau_m_dist == 0){
                         param_tau_m = json_pop_param.param_tau_m;
                     } else if(json_pop_param.param_tau_m_dist == 1){
-                        param_cm = "RandomDistribution('" +
+                        param_tau_m = "RandomDistribution('" +
                             json_pop_param.param_tau_m_distribution+"', (" + 
                             json_pop_param.param_tau_m_p1 + ", " + 
                             json_pop_param.param_tau_m_p2 + 
                         "))";
                     } else if(json_pop_param.param_tau_m_dist == 2){
-                        param_cm = json_pop_param.param_tau_m_fx;
+                        param_tau_m = json_pop_param.param_tau_m_fx;
                     }
 
                     if(json_pop_param.param_tau_refrac_dist == 0){
                         param_tau_refrac = json_pop_param.param_tau_refrac;
                     } else if(json_pop_param.param_tau_refrac_dist == 1){
-                        param_cm = "RandomDistribution('" +
+                        param_tau_refrac = "RandomDistribution('" +
                             json_pop_param.param_tau_refrac_distribution+"', (" + 
                             json_pop_param.param_tau_refrac_p1 + ", " + 
                             json_pop_param.param_tau_refrac_p2 + 
                         "))";
                     } else if(json_pop_param.param_tau_refrac_dist == 2){
-                        param_cm = json_pop_param.param_tau_refrac_fx;
+                        param_tau_refrac = json_pop_param.param_tau_refrac_fx;
+                    }
+
+                    if(json_pop_param.param_tau_syn_E_dist == 0){
+                        param_tau_syn_E = json_pop_param.param_tau_syn_E;
+                    } else if(json_pop_param.param_tau_syn_E_dist == 1){
+                        param_tau_syn_E = "RandomDistribution('" +
+                            json_pop_param.param_tau_syn_E_distribution+"', (" + 
+                            json_pop_param.param_tau_syn_E_p1 + ", " + 
+                            json_pop_param.param_tau_syn_E_p2 + 
+                        "))";
+                    } else if(json_pop_param.param_tau_syn_E_dist == 2){
+                        param_tau_syn_E = json_pop_param.param_tau_syn_E_fx;
+                    }
+
+                    if(json_pop_param.param_tau_syn_I_dist == 0){
+                        param_tau_syn_I = json_pop_param.param_tau_syn_I;
+                    } else if(json_pop_param.param_tau_syn_I_dist == 1){
+                        param_tau_syn_I = "RandomDistribution('" +
+                            json_pop_param.param_tau_syn_I_distribution+"', (" + 
+                            json_pop_param.param_tau_syn_I_p1 + ", " + 
+                            json_pop_param.param_tau_syn_I_p2 + 
+                        "))";
+                    } else if(json_pop_param.param_tau_syn_I_dist == 2){
+                        param_tau_syn_I = json_pop_param.param_tau_syn_I_fx;
+                    }
+
+                    if(json_pop_param.param_i_offset_dist == 0){
+                        param_i_offset = json_pop_param.param_i_offset;
+                    } else if(json_pop_param.param_i_offset_dist == 1){
+                        param_i_offset = "RandomDistribution('" +
+                            json_pop_param.param_i_offset_distribution+"', (" + 
+                            json_pop_param.param_i_offset_p1 + ", " + 
+                            json_pop_param.param_i_offset_p2 + 
+                        "))";
+                    } else if(json_pop_param.param_i_offset_dist == 2){
+                        param_i_offset = json_pop_param.param_i_offset_fx;
+                    }
+
+                    if(json_pop_param.param_v_reset_dist == 0){
+                        param_v_reset = json_pop_param.param_v_reset;
+                    } else if(json_pop_param.param_v_reset_dist == 1){
+                        param_v_reset = "RandomDistribution('" +
+                            json_pop_param.param_v_reset_distribution+"', (" + 
+                            json_pop_param.param_v_reset_p1 + ", " + 
+                            json_pop_param.param_v_reset_p2 + 
+                        "))";
+                    } else if(json_pop_param.param_v_reset_dist == 2){
+                        param_v_reset = json_pop_param.param_v_reset_fx;
+                    }
+
+                    if(json_pop_param.param_v_thresh_dist == 0){
+                        param_v_thresh = json_pop_param.param_v_thresh;
+                    } else if(json_pop_param.param_v_thresh_dist == 1){
+                        param_v_thresh = "RandomDistribution('" +
+                            json_pop_param.param_v_thresh_distribution+"', (" + 
+                            json_pop_param.param_v_thresh_p1 + ", " + 
+                            json_pop_param.param_v_thresh_p2 + 
+                        "))";
+                    } else if(json_pop_param.param_v_thresh_dist == 2){
+                        param_v_thresh = json_pop_param.param_v_thresh_fx;
+                    }
+
+                    if(json_pop_param.param_e_rev_E_dist == 0){
+                        param_e_rev_E = json_pop_param.param_e_rev_E;
+                    } else if(json_pop_param.param_e_rev_E_dist == 1){
+                        param_e_rev_E = "RandomDistribution('" +
+                            json_pop_param.param_e_rev_E_distribution+"', (" + 
+                            json_pop_param.param_e_rev_E_p1 + ", " + 
+                            json_pop_param.param_e_rev_E_p2 + 
+                        "))";
+                    } else if(json_pop_param.param_e_rev_E_dist == 2){
+                        param_e_rev_E = json_pop_param.param_e_rev_E_fx;
+                    }
+
+                    if(json_pop_param.param_e_rev_I_dist == 0){
+                        param_e_rev_I = json_pop_param.param_e_rev_I;
+                    } else if(json_pop_param.param_e_rev_I_dist == 1){
+                        param_e_rev_I = "RandomDistribution('" +
+                            json_pop_param.param_e_rev_I_distribution+"', (" + 
+                            json_pop_param.param_e_rev_I_p1 + ", " + 
+                            json_pop_param.param_e_rev_I_p2 + 
+                        "))";
+                    } else if(json_pop_param.param_e_rev_I_dist == 2){
+                        param_e_rev_I = json_pop_param.param_e_rev_I_fx;
+                    }
+
+                    if(json_pop_param.param_gbar_Na_dist == 0){
+                        param_gbar_Na = json_pop_param.param_gbar_Na;
+                    } else if(json_pop_param.param_gbar_Na_dist == 1){
+                        param_gbar_Na = "RandomDistribution('" +
+                            json_pop_param.param_gbar_Na_distribution+"', (" + 
+                            json_pop_param.param_gbar_Na_p1 + ", " + 
+                            json_pop_param.param_gbar_Na_p2 + 
+                        "))";
+                    } else if(json_pop_param.param_gbar_Na_dist == 2){
+                        param_gbar_Na = json_pop_param.param_gbar_Na_fx;
+                    }
+
+                    if(json_pop_param.param_gbar_K_dist == 0){
+                        param_gbar_K = json_pop_param.param_gbar_K;
+                    } else if(json_pop_param.param_gbar_K_dist == 1){
+                        param_gbar_K = "RandomDistribution('" +
+                            json_pop_param.param_gbar_K_distribution+"', (" + 
+                            json_pop_param.param_gbar_K_p1 + ", " + 
+                            json_pop_param.param_gbar_K_p2 + 
+                        "))";
+                    } else if(json_pop_param.param_gbar_K_dist == 2){
+                        param_gbar_K = json_pop_param.param_gbar_K_fx;
+                    }
+
+                    if(json_pop_param.param_g_leak_dist == 0){
+                        param_g_leak = json_pop_param.param_g_leak;
+                    } else if(json_pop_param.param_g_leak_dist == 1){
+                        param_g_leak = "RandomDistribution('" +
+                            json_pop_param.param_g_leak_distribution+"', (" + 
+                            json_pop_param.param_g_leak_p1 + ", " + 
+                            json_pop_param.param_g_leak_p2 + 
+                        "))";
+                    } else if(json_pop_param.param_g_leak_dist == 2){
+                        param_g_leak = json_pop_param.param_g_leak_fx;
+                    }
+
+                    if(json_pop_param.param_v_offset_dist == 0){
+                        param_v_offset = json_pop_param.param_v_offset;
+                    } else if(json_pop_param.param_v_offset_dist == 1){
+                        param_v_offset = "RandomDistribution('" +
+                            json_pop_param.param_v_offset_distribution+"', (" + 
+                            json_pop_param.param_v_offset_p1 + ", " + 
+                            json_pop_param.param_v_offset_p2 + 
+                        "))";
+                    } else if(json_pop_param.param_v_offset_dist == 2){
+                        param_v_offset = json_pop_param.param_v_offset_fx;
                     }
 
                     if(json_pop_param.celltype == "IF_curr_alpha"){
