@@ -365,6 +365,34 @@ graphSchemaApp.value('python_script_string', function(cells, hardware_platform, 
                         param_duration = json_pop_param.param_duration_fx;
                     }
 
+                    if(json_pop_param.param_synaptic_weight_dist == 0){
+                        synaptic_weight = json_pop_param.synaptic_weight;
+                    }
+                    else if(json_pop_param.param_synaptic_weight_dist == 1){
+                        synaptic_weight = "RandomDistribution('" +
+                            json_pop_param.param_synaptic_weight_distribution+"', (" + 
+                            json_pop_param.param_synaptic_weight_p1 + ", " + 
+                            json_pop_param.param_synaptic_weight_p2 + 
+                        "))";
+                    }
+                    else if(json_pop_param.param_synaptic_weight_dist == 2){
+                        synaptic_weight = param_synaptic_weight_fx;
+                    }
+
+                    if(json_pop_param.param_synaptic_delay_dist == 0){
+                        synaptic_delay = json_pop_param.synaptic_delay;
+                    }
+                    else if(json_pop_param.param_synaptic_delay_dist == 1){
+                        synaptic_delay = "RandomDistribution('" +
+                            json_pop_param.param_synaptic_delay_distribution+"', (" + 
+                            json_pop_param.param_synaptic_delay_p1 + ", " + 
+                            json_pop_param.param_synaptic_delay_p2 + 
+                        "))";
+                    }
+                    else if(json_pop_param.param_synaptic_delay_dist == 2){
+                        synaptic_delay = param_synaptic_delay_fx;
+                    }
+
                     if(json_pop_param.celltype == "IF_curr_alpha"){
                         str_inst += "pop_"+ val.id +" = " +
                         "sim.Population(" + json_pop_param.size + ", sim.IF_curr_alpha(v_rest="+param_v_rest +
@@ -376,7 +404,7 @@ graphSchemaApp.value('python_script_string', function(cells, hardware_platform, 
                         ", i_offset="+param_i_offset +
                         ", v_reset="+param_v_reset +
                         ", v_thresh="+param_v_thresh +
-                        " ), label='"+name_value +
+                        " ), label='"+json_pop_param.name_value +
                         "')\n"+
                         "pop_"+ val.id +".initialize(v="+init_v +
                         // ", isyn_exc="+json_pop_param.init_isyn_exc +
@@ -394,7 +422,7 @@ graphSchemaApp.value('python_script_string', function(cells, hardware_platform, 
                         ", i_offset="+param_i_offset +
                         ", v_reset="+param_v_reset +
                         ", v_thresh="+param_v_thresh +
-                        " ), label='"+name_value +
+                        " ), label='"+json_pop_param.name_value +
                         "')\n"+
                         "pop_"+ val.id +".initialize(v="+init_v +
                         // ", isyn_exc="+json_pop_param.init_isyn_exc +
@@ -414,7 +442,7 @@ graphSchemaApp.value('python_script_string', function(cells, hardware_platform, 
                         ", v_thresh="+param_v_thresh +
                         ", v_reset="+param_v_reset +
                         ", i_offset="+param_i_offset +
-                        " ), label='"+name_value +
+                        " ), label='"+json_pop_param.name_value +
                         ")\n"+
                         "pop_"+ val.id +".initialize(v="+init_v +
                         // ", gsyn_exc="+json_pop_param.init_gsyn_exc +
@@ -434,7 +462,7 @@ graphSchemaApp.value('python_script_string', function(cells, hardware_platform, 
                         ", v_thresh="+param_v_thresh +
                         ", v_reset="+param_v_reset +
                         ", i_offset="+param_i_offset +
-                        " ), label='"+name_value +
+                        " ), label='"+json_pop_param.name_value +
                         "')\n"+
                         "pop_"+ val.id +".initialize(v="+init_v +
                         // ", gsyn_exc="+json_pop_param.init_gsyn_exc +
@@ -456,7 +484,7 @@ graphSchemaApp.value('python_script_string', function(cells, hardware_platform, 
                         ", tau_syn_E="+param_tau_syn_E +
                         ", tau_syn_I="+param_tau_syn_I +
                         ", i_offset="+param_i_offset +
-                        " ), label='"+name_value +
+                        " ), label='"+json_pop_param.name_value +
                         "')\n"+
                         "pop_"+ val.id +".initialize(v="+init_v +
                         // ", gsyn_exc="+json_pop_param.init_gsyn_exc +
@@ -481,7 +509,7 @@ graphSchemaApp.value('python_script_string', function(cells, hardware_platform, 
                         ", tau_syn_E="+param_tau_syn_E +
                         ", e_rev_I="+param_e_rev_I +
                         ", tau_syn_I="+param_tau_syn_I +
-                        " ), label='"+name_value +
+                        " ), label='"+json_pop_param.name_value +
                         ")\n"+
                         "pop_"+ val.id +".initialize(v="+init_v +
                         ", w="+init_w +
@@ -514,7 +542,7 @@ graphSchemaApp.value('python_script_string', function(cells, hardware_platform, 
                         if(json_pop_param.connectors_type == "AllToAll"){
                             if(synapse_type == 'static'){
                                 str_inst += "prj_"+ val.id +" = sim.Projection(pop_"+val.source.id+", pop_"+val.target.id+", sim.AllToAllConnector(), " +
-                                "sim.StaticSynapse(weight=" + json_pop_param.synaptic_weight + ", delay=" + json_pop_param.synaptic_delay + "), receptor_type='" + json_pop_param.receptor_type+"')\n";
+                                "sim.StaticSynapse(weight=" + synaptic_weight + ", delay=" + synaptic_delay + "), receptor_type='" + json_pop_param.receptor_type+"')\n";
                             }
                             // } else if(synapse_type == 'receptor_type'){
                             // 	str_inst += "" +
@@ -524,7 +552,7 @@ graphSchemaApp.value('python_script_string', function(cells, hardware_platform, 
                         if(json_pop_param.connectors_type == "OneToOne"){
                             if(synapse_type == 'static'){
                                 str_inst += "prj_"+ val.id +" = sim.Projection(pop_"+val.source.id+", pop_"+val.target.id+", sim.OneToOneConnector()," +
-                                "sim.StaticSynapse(weight=" + json_pop_param.synaptic_weight + ", delay=" + json_pop_param.synaptic_delay + "), receptor_type='" + json_pop_param.receptor_type+"')\n";
+                                "sim.StaticSynapse(weight=" + synaptic_weight + ", delay=" + synaptic_delay + "), receptor_type='" + json_pop_param.receptor_type+"')\n";
                             }
                         }
                         if(json_pop_param.connectors_type == "FixedProbability"){
@@ -534,7 +562,7 @@ graphSchemaApp.value('python_script_string', function(cells, hardware_platform, 
                                 json_pop_param.FixedProbability_p_connect + ", " +
                                 " allow_self_connections=" + json_pop_param.FixedProbability_allow_self_connections +
                                 ")," +
-                                "sim.StaticSynapse(weight=" + json_pop_param.synaptic_weight + ", delay=" + json_pop_param.synaptic_delay + "), receptor_type='" + json_pop_param.receptor_type+"')\n";
+                                "sim.StaticSynapse(weight=" + synaptic_weight + ", delay=" + synaptic_delay + "), receptor_type='" + json_pop_param.receptor_type+"')\n";
                             }
                         }
                         if(json_pop_param.connectors_type == "FromFile"){
@@ -546,7 +574,7 @@ graphSchemaApp.value('python_script_string', function(cells, hardware_platform, 
                                 json_pop_param.FromFile_safe + ", " +
                                 json_pop_param.FromFile_callback +
                                 ")," +
-                                "sim.StaticSynapse(weight=" + json_pop_param.synaptic_weight + ", delay=" + json_pop_param.synaptic_delay + "), receptor_type='" + json_pop_param.receptor_type+"')\n";
+                                "sim.StaticSynapse(weight=" + synaptic_weight + ", delay=" + synaptic_delay + "), receptor_type='" + json_pop_param.receptor_type+"')\n";
                             }
                         }
                         if(json_pop_param.connectors_type == "FixedNumberPre"){
@@ -557,7 +585,7 @@ graphSchemaApp.value('python_script_string', function(cells, hardware_platform, 
                                 json_pop_param.FixedNumberPre_with_replacement + ", " +
                                 json_pop_param.FixedNumberPre_allow_self_connections +
                                 ")," +
-                                "sim.StaticSynapse(weight=" + json_pop_param.synaptic_weight + ", delay=" + json_pop_param.synaptic_delay + "), receptor_type='" + json_pop_param.receptor_type+"')\n";
+                                "sim.StaticSynapse(weight=" + synaptic_weight + ", delay=" + synaptic_delay + "), receptor_type='" + json_pop_param.receptor_type+"')\n";
                             }
                         }
                         if(json_pop_param.connectors_type == "FixedNumberPost"){
@@ -568,13 +596,13 @@ graphSchemaApp.value('python_script_string', function(cells, hardware_platform, 
                                 json_pop_param.FixedNumberPost_with_replacement + ", " +
                                 json_pop_param.FixedNumberPost_allow_self_connections +
                                 ")," +
-                                "sim.StaticSynapse(weight=" + json_pop_param.synaptic_weight + ", delay=" + json_pop_param.synaptic_delay + "), receptor_type='" + json_pop_param.receptor_type+"')\n";
+                                "sim.StaticSynapse(weight=" + synaptic_weight + ", delay=" + synaptic_delay + "), receptor_type='" + json_pop_param.receptor_type+"')\n";
                             }
                         }
                         if(json_pop_param.connectors_type == "FixedTotalNumber"){
                             if(synapse_type == 'static'){
                                 str_inst += "prj_"+ val.id +" = sim.Projection(pop_"+val.source.id+", pop_"+val.target.id+", sim.FixedTotalNumberConnector()," +
-                                "sim.StaticSynapse(weight=" + json_pop_param.synaptic_weight + ", delay=" + json_pop_param.synaptic_delay + "), receptor_type='" + json_pop_param.receptor_type+"')\n";
+                                "sim.StaticSynapse(weight=" + synaptic_weight + ", delay=" + synaptic_delay + "), receptor_type='" + json_pop_param.receptor_type+"')\n";
                             }
                         }
                     } else { // For all populations
