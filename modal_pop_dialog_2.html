@@ -36,7 +36,7 @@
                             <span ng-show="param_synaptic_weight_dist == '1'">
                                 <label class="control-label col-sm-2" for="param_synaptic_weight_distribution">weight : </label>
                                 <div class="control-label col-sm-2">
-                                    <select id="param_synaptic_weight_distribution" name="param_synaptic_weight_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty">
+                                    <select id="param_synaptic_weight_distribution" name="param_synaptic_weight_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="param_synaptic_weight_distribution">
                                         <option value="binomial" selected="selected">binomial</option>
                                         <option value="gamma">gamma</option>
                                         <option value="exponential">exponential</option>
@@ -51,10 +51,10 @@
                                     </select>
                                 </div>
                                 <div class="col-sm-2">
-                                    <input id="param_synaptic_weight_p1" name="param_synaptic_weight_p1" type="number" step="0.1" placeholder="p1" class="form-control input-md" ng-model="init_v_p1">
+                                    <input id="param_synaptic_weight_p1" name="param_synaptic_weight_p1" type="number" step="0.1" placeholder="p1" class="form-control input-md" ng-model="param_synaptic_weight_p1">
                                 </div>
                                 <div class="col-sm-2">
-                                    <input id="param_synaptic_weight_p2" name="param_synaptic_weight_p2" type="number" step="0.1" placeholder="p2" class="form-control input-md" ng-model="init_v_p2">
+                                    <input id="param_synaptic_weight_p2" name="param_synaptic_weight_p2" type="number" step="0.1" placeholder="p2" class="form-control input-md" ng-model="param_synaptic_weight_p2">
                                 </div>
                                 <div class="control-label col-sm-1"></div>
                             </span>
@@ -97,7 +97,7 @@
                             <span ng-show="param_synaptic_delay_dist == '1'">
                                 <label class="control-label col-sm-2" for="param_synaptic_delay_distribution">delay : </label>
                                 <div class="control-label col-sm-2">
-                                    <select id="param_synaptic_delay_distribution" name="param_synaptic_delay_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty">
+                                    <select id="param_synaptic_delay_distribution" name="param_synaptic_delay_distribution" ng-model="param_synaptic_delay_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="param_synaptic_delay_distribution">
                                         <option value="binomial" selected="selected">binomial</option>
                                         <option value="gamma">gamma</option>
                                         <option value="exponential">exponential</option>
@@ -112,10 +112,10 @@
                                     </select>
                                 </div>
                                 <div class="col-sm-2">
-                                    <input id="param_synaptic_delay_p1" name="param_synaptic_delay_p1" type="number" step="0.1" placeholder="p1" class="form-control input-md" ng-model="init_v_p1">
+                                    <input id="param_synaptic_delay_p1" name="param_synaptic_delay_p1" type="number" step="0.1" placeholder="p1" class="form-control input-md" ng-model="param_synaptic_delay_p1">
                                 </div>
                                 <div class="col-sm-2">
-                                    <input id="param_synaptic_delay_p2" name="param_synaptic_delay_p2" type="number" step="0.1" placeholder="p2" class="form-control input-md" ng-model="init_v_p2">
+                                    <input id="param_synaptic_delay_p2" name="param_synaptic_delay_p2" type="number" step="0.1" placeholder="p2" class="form-control input-md" ng-model="param_synaptic_delay_p2">
                                 </div>
                                 <div class="control-label col-sm-1"></div>
                             </span>
@@ -160,7 +160,7 @@
                             <span ng-show="TsodyksMarkram_U_dist == '1'">
                                 <label class="control-label col-sm-2" for="TsodyksMarkram_U_distribution">U : </label>
                                 <div class="control-label col-sm-2">
-                                    <select id="TsodyksMarkram_U_distribution" name="TsodyksMarkram_U_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty">
+                                    <select id="TsodyksMarkram_U_distribution" name="TsodyksMarkram_U_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="TsodyksMarkram_U_distribution">
                                         <option value="binomial" selected="selected">binomial</option>
                                         <option value="gamma">gamma</option>
                                         <option value="exponential">exponential</option>
@@ -175,10 +175,10 @@
                                     </select>
                                 </div>
                                 <div class="col-sm-2">
-                                    <input id="TsodyksMarkram_U_p1" name="TsodyksMarkram_U_p1" type="number" step="0.1" placeholder="p1" class="form-control input-md" ng-model="init_v_p1">
+                                    <input id="TsodyksMarkram_U_p1" name="TsodyksMarkram_U_p1" type="number" step="0.1" placeholder="p1" class="form-control input-md" ng-model="TsodyksMarkram_U_p1">
                                 </div>
                                 <div class="col-sm-2">
-                                    <input id="TsodyksMarkram_U_p2" name="TsodyksMarkram_U_p2" type="number" step="0.1" placeholder="p2" class="form-control input-md" ng-model="init_v_p2">
+                                    <input id="TsodyksMarkram_U_p2" name="TsodyksMarkram_U_p2" type="number" step="0.1" placeholder="p2" class="form-control input-md" ng-model="TsodyksMarkram_U_p2">
                                 </div>
                             </span>
                             <span ng-show="TsodyksMarkram_U_dist == '2'">
@@ -220,7 +220,7 @@
                             <span ng-show="TsodyksMarkram_tau_rec_dist == '1'">
                                 <label class="control-label col-sm-2" for="TsodyksMarkram_tau_rec_distribution">tau_rec : </label>
                                 <div class="control-label col-sm-2">
-                                    <select id="TsodyksMarkram_tau_rec_distribution" name="TsodyksMarkram_tau_rec_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty">
+                                    <select id="TsodyksMarkram_tau_rec_distribution" name="TsodyksMarkram_tau_rec_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="TsodyksMarkram_tau_rec_distribution">
                                         <option value="binomial" selected="selected">binomial</option>
                                         <option value="gamma">gamma</option>
                                         <option value="exponential">exponential</option>
@@ -281,7 +281,7 @@
                             <span ng-show="TsodyksMarkram_tau_facil_dist == '1'">
                             <label class="control-label col-sm-2" for="TsodyksMarkram_tau_facil_distribution">tau_facil : </label>
                                 <div class="control-label col-sm-2">
-                                    <select id="TsodyksMarkram_tau_facil_distribution" name="TsodyksMarkram_tau_facil_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty">
+                                    <select id="TsodyksMarkram_tau_facil_distribution" name="TsodyksMarkram_tau_facil_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="TsodyksMarkram_tau_facil_distribution">
                                         <option value="binomial" selected="selected">binomial</option>
                                         <option value="gamma">gamma</option>
                                         <option value="exponential">exponential</option>
