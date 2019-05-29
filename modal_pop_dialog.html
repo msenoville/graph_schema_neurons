@@ -79,7 +79,7 @@
                             <span ng-show="v_rest_dist == '1'">
                                 <label class="control-label col-sm-2" for="param_v_rest_distribution">v_rest : </label>
                                 <div class="control-label col-sm-2">
-                                    <select id="param_v_rest_distribution" name="param_v_rest_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty">
+                                    <select id="param_v_rest_distribution" name="param_v_rest_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="param_v_rest_distribution">
                                         <option value="binomial" selected="selected">binomial</option>
                                         <option value="gamma">gamma</option>
                                         <option value="exponential">exponential</option>
@@ -124,7 +124,7 @@
                             <span ng-show="param_cm_dist == '1'">
                                 <label class="control-label col-sm-2" for="param_cm_distribution">cm : </label>
                                 <div class="control-label col-sm-2">
-                                    <select id="param_cm_distribution" name="param_cm_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty">
+                                    <select id="param_cm_distribution" name="param_cm_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="param_cm_distribution">
                                         <option value="binomial" selected="selected">binomial</option>
                                         <option value="gamma">gamma</option>
                                         <option value="exponential">exponential</option>
@@ -183,7 +183,7 @@
                             <span ng-show="param_tau_m_dist == '1'">
                                 <label class="control-label col-sm-2" for="param_tau_m_distribution">tau_m : </label>
                                 <div class="control-label col-sm-2">
-                                    <select id="param_tau_m_distribution" name="param_tau_m_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty">
+                                    <select id="param_tau_m_distribution" name="param_tau_m_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="param_tau_m_distribution">
                                         <option value="binomial" selected="selected">binomial</option>
                                         <option value="gamma">gamma</option>
                                         <option value="exponential">exponential</option>
@@ -242,7 +242,7 @@
                             <span ng-show="param_tau_refrac_dist == '1'">
                                 <label class="control-label col-sm-2" for="param_tau_refrac_distribution">tau_refrac : </label>
                                 <div class="control-label col-sm-2">
-                                    <select id="param_tau_refrac_distribution" name="param_tau_refrac_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty">
+                                    <select id="param_tau_refrac_distribution" name="param_tau_refrac_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="param_tau_refrac_distribution">
                                         <option value="binomial" selected="selected">binomial</option>
                                         <option value="gamma">gamma</option>
                                         <option value="exponential">exponential</option>
@@ -301,7 +301,7 @@
                             <span ng-show="param_tau_syn_E_dist == '1'">
                                 <label class="control-label col-sm-2" for="param_tau_syn_E_distribution">tau_syn_E : </label>
                                 <div class="control-label col-sm-2">
-                                    <select id="param_tau_syn_E_distribution" name="param_tau_syn_E_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty">
+                                    <select id="param_tau_syn_E_distribution" name="param_tau_syn_E_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="param_tau_syn_E_distribution">
                                         <option value="binomial" selected="selected">binomial</option>
                                         <option value="gamma">gamma</option>
                                         <option value="exponential">exponential</option>
@@ -360,7 +360,7 @@
                             <span ng-show="param_tau_syn_I_dist == '1'">
                                 <label class="control-label col-sm-2" for="param_tau_syn_I_distribution">tau_syn_I : </label>
                                 <div class="control-label col-sm-2">
-                                    <select id="param_tau_syn_I_distribution" name="param_tau_syn_I_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty">
+                                    <select id="param_tau_syn_I_distribution" name="param_tau_syn_I_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="param_tau_syn_I_distribution">
                                         <option value="binomial" selected="selected">binomial</option>
                                         <option value="gamma">gamma</option>
                                         <option value="exponential">exponential</option>
@@ -419,7 +419,7 @@
                             <span ng-show="param_i_offset_dist == '1'">
                                 <label class="control-label col-sm-2" for="param_i_offset_distribution">i_offset : </label>
                                 <div class="control-label col-sm-2">
-                                    <select id="param_i_offset_distribution" name="param_i_offset_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty">
+                                    <select id="param_i_offset_distribution" name="param_i_offset_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="param_i_offset_distribution">
                                         <option value="binomial" selected="selected">binomial</option>
                                         <option value="gamma">gamma</option>
                                         <option value="exponential">exponential</option>
@@ -478,7 +478,7 @@
                             <span ng-show="param_v_reset_dist == '1'">
                                 <label class="control-label col-sm-2" for="param_v_reset_distribution">v_reset : </label>
                                 <div class="control-label col-sm-2">
-                                    <select id="param_v_reset_distribution" name="param_v_reset_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty">
+                                    <select id="param_v_reset_distribution" name="param_v_reset_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="param_v_reset_distribution">
                                         <option value="binomial" selected="selected">binomial</option>
                                         <option value="gamma">gamma</option>
                                         <option value="exponential">exponential</option>
@@ -537,7 +537,7 @@
                             <span ng-show="param_v_thresh_dist == '1'">
                                 <label class="control-label col-sm-2" for="param_v_thresh_distribution">v_thresh : </label>
                                 <div class="control-label col-sm-2">
-                                    <select id="param_v_thresh_distribution" name="param_v_thresh_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty">
+                                    <select id="param_v_thresh_distribution" name="param_v_thresh_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="param_v_thresh_distribution">
                                         <option value="binomial" selected="selected">binomial</option>
                                         <option value="gamma">gamma</option>
                                         <option value="exponential">exponential</option>
@@ -596,7 +596,7 @@
                             <span ng-show="init_v_dist == '1'">
                                 <label class="control-label col-sm-2" for="init_v_distribution">init_v : </label>
                                 <div class="control-label col-sm-2">
-                                    <select id="init_v_distribution" name="init_v_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty">
+                                    <select id="init_v_distribution" name="init_v_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="init_v_distribution">
                                         <option value="binomial" selected="selected">binomial</option>
                                         <option value="gamma">gamma</option>
                                         <option value="exponential">exponential</option>
@@ -673,7 +673,7 @@
                             <span ng-show="v_rest_dist == '1'">
                                 <label class="control-label col-sm-2" for="param_v_rest_distribution">v_rest : </label>
                                 <div class="control-label col-sm-2">
-                                    <select id="param_v_rest_distribution" name="param_v_rest_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty">
+                                    <select id="param_v_rest_distribution" name="param_v_rest_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="param_v_rest_distribution">
                                         <option value="binomial" selected="selected">binomial</option>
                                         <option value="gamma">gamma</option>
                                         <option value="exponential">exponential</option>
@@ -718,7 +718,7 @@
                             <span ng-show="param_cm_dist == '1'">
                                 <label class="control-label col-sm-2" for="param_cm_distribution">cm : </label>
                                 <div class="control-label col-sm-2">
-                                    <select id="param_cm_distribution" name="param_cm_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty">
+                                    <select id="param_cm_distribution" name="param_cm_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="param_cm_distribution">
                                         <option value="binomial" selected="selected">binomial</option>
                                         <option value="gamma">gamma</option>
                                         <option value="exponential">exponential</option>
@@ -777,7 +777,7 @@
                             <span ng-show="param_tau_m_dist == '1'">
                                 <label class="control-label col-sm-2" for="param_tau_m_distribution">tau_m : </label>
                                 <div class="control-label col-sm-2">
-                                    <select id="param_tau_m_distribution" name="param_tau_m_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty">
+                                    <select id="param_tau_m_distribution" name="param_tau_m_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="param_tau_m_distribution">
                                         <option value="binomial" selected="selected">binomial</option>
                                         <option value="gamma">gamma</option>
                                         <option value="exponential">exponential</option>
@@ -836,7 +836,7 @@
                             <span ng-show="param_tau_refrac_dist == '1'">
                                 <label class="control-label col-sm-2" for="param_tau_refrac_distribution">tau_refrac : </label>
                                 <div class="control-label col-sm-2">
-                                    <select id="param_tau_refrac_distribution" name="param_tau_refrac_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty">
+                                    <select id="param_tau_refrac_distribution" name="param_tau_refrac_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="param_tau_refrac_distribution">
                                         <option value="binomial" selected="selected">binomial</option>
                                         <option value="gamma">gamma</option>
                                         <option value="exponential">exponential</option>
@@ -895,7 +895,7 @@
                             <span ng-show="param_tau_syn_E_dist == '1'">
                                 <label class="control-label col-sm-2" for="param_tau_syn_E_distribution">tau_syn_E : </label>
                                 <div class="control-label col-sm-2">
-                                    <select id="param_tau_syn_E_distribution" name="param_tau_syn_E_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty">
+                                    <select id="param_tau_syn_E_distribution" name="param_tau_syn_E_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="param_tau_syn_E_distribution">
                                         <option value="binomial" selected="selected">binomial</option>
                                         <option value="gamma">gamma</option>
                                         <option value="exponential">exponential</option>
@@ -954,7 +954,7 @@
                             <span ng-show="param_tau_syn_I_dist == '1'">
                                 <label class="control-label col-sm-2" for="param_tau_syn_I_distribution">tau_syn_I : </label>
                                 <div class="control-label col-sm-2">
-                                    <select id="param_tau_syn_I_distribution" name="param_tau_syn_I_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty">
+                                    <select id="param_tau_syn_I_distribution" name="param_tau_syn_I_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="param_tau_syn_I_distribution">
                                         <option value="binomial" selected="selected">binomial</option>
                                         <option value="gamma">gamma</option>
                                         <option value="exponential">exponential</option>
@@ -1013,7 +1013,7 @@
                             <span ng-show="param_e_rev_E_dist == '1'">
                                 <label class="control-label col-sm-2" for="param_e_rev_E_distribution">param_e_rev_E : </label>
                                 <div class="control-label col-sm-2">
-                                    <select id="param_e_rev_E_distribution" name="param_e_rev_E_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty">
+                                    <select id="param_e_rev_E_distribution" name="param_e_rev_E_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="param_e_rev_E_distribution">
                                         <option value="binomial" selected="selected">binomial</option>
                                         <option value="gamma">gamma</option>
                                         <option value="exponential">exponential</option>
@@ -1072,7 +1072,7 @@
                             <span ng-show="param_e_rev_I_dist == '1'">
                                 <label class="control-label col-sm-2" for="param_e_rev_I_distribution">param_e_rev_I : </label>
                                 <div class="control-label col-sm-2">
-                                    <select id="param_e_rev_I_distribution" name="param_e_rev_I_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty">
+                                    <select id="param_e_rev_I_distribution" name="param_e_rev_I_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="param_e_rev_I_distribution">
                                         <option value="binomial" selected="selected">binomial</option>
                                         <option value="gamma">gamma</option>
                                         <option value="exponential">exponential</option>
@@ -1131,7 +1131,7 @@
                             <span ng-show="param_v_thresh_dist == '1'">
                                 <label class="control-label col-sm-2" for="param_v_thresh_distribution">v_thresh : </label>
                                 <div class="control-label col-sm-2">
-                                    <select id="param_v_thresh_distribution" name="param_v_thresh_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty">
+                                    <select id="param_v_thresh_distribution" name="param_v_thresh_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="param_v_thresh_distribution">
                                         <option value="binomial" selected="selected">binomial</option>
                                         <option value="gamma">gamma</option>
                                         <option value="exponential">exponential</option>
@@ -1190,7 +1190,7 @@
                             <span ng-show="param_v_reset_dist == '1'">
                                 <label class="control-label col-sm-2" for="param_v_reset_distribution">v_reset : </label>
                                 <div class="control-label col-sm-2">
-                                    <select id="param_v_reset_distribution" name="param_v_reset_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty">
+                                    <select id="param_v_reset_distribution" name="param_v_reset_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="param_v_reset_distribution">
                                         <option value="binomial" selected="selected">binomial</option>
                                         <option value="gamma">gamma</option>
                                         <option value="exponential">exponential</option>
@@ -1249,7 +1249,7 @@
                             <span ng-show="param_i_offset_dist == '1'">
                                 <label class="control-label col-sm-2" for="param_i_offset_distribution">i_offset : </label>
                                 <div class="control-label col-sm-2">
-                                    <select id="param_i_offset_distribution" name="param_i_offset_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty">
+                                    <select id="param_i_offset_distribution" name="param_i_offset_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="param_i_offset_distribution">
                                         <option value="binomial" selected="selected">binomial</option>
                                         <option value="gamma">gamma</option>
                                         <option value="exponential">exponential</option>
@@ -1308,7 +1308,7 @@
                             <span ng-show="init_v_dist == '1'">
                                 <label class="control-label col-sm-2" for="init_v_distribution">init_v : </label>
                                 <div class="control-label col-sm-2">
-                                    <select id="init_v_distribution" name="init_v_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty">
+                                    <select id="init_v_distribution" name="init_v_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="init_v_distribution">
                                         <option value="binomial" selected="selected">binomial</option>
                                         <option value="gamma">gamma</option>
                                         <option value="exponential">exponential</option>
@@ -1369,7 +1369,7 @@
                             <span ng-show="param_gbar_Na_dist == '1'">
                                 <label class="control-label col-sm-2" for="param_gbar_Na_distribution">gbar_Na : </label>
                                 <div class="control-label col-sm-2">
-                                    <select id="param_gbar_Na_distribution" name="param_gbar_Na_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty">
+                                    <select id="param_gbar_Na_distribution" name="param_gbar_Na_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="param_gbar_Na_distribution">
                                         <option value="binomial" selected="selected">binomial</option>
                                         <option value="gamma">gamma</option>
                                         <option value="exponential">exponential</option>
@@ -1428,7 +1428,7 @@
                             <span ng-show="param_gbar_K_dist == '1'">
                                 <label class="control-label col-sm-2" for="param_gbar_K_distribution">gbar_K : </label>
                                 <div class="control-label col-sm-2">
-                                    <select id="param_gbar_K_distribution" name="param_gbar_K_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty">
+                                    <select id="param_gbar_K_distribution" name="param_gbar_K_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="param_gbar_K_distribution">
                                         <option value="binomial" selected="selected">binomial</option>
                                         <option value="gamma">gamma</option>
                                         <option value="exponential">exponential</option>
@@ -1487,7 +1487,7 @@
                             <span ng-show="param_g_leak_dist == '1'">
                                 <label class="control-label col-sm-2" for="param_g_leak_distribution">g_leak : </label>
                                 <div class="control-label col-sm-2">
-                                    <select id="param_g_leak_distribution" name="param_g_leak_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty">
+                                    <select id="param_g_leak_distribution" name="param_g_leak_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="param_g_leak_distribution">
                                         <option value="binomial" selected="selected">binomial</option>
                                         <option value="gamma">gamma</option>
                                         <option value="exponential">exponential</option>
@@ -1546,7 +1546,7 @@
                             <span ng-show="param_cm_dist == '1'">
                                 <label class="control-label col-sm-2" for="param_cm_distribution">cm : </label>
                                 <div class="control-label col-sm-2">
-                                    <select id="param_cm_distribution" name="param_cm_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty">
+                                    <select id="param_cm_distribution" name="param_cm_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="param_cm_distribution">
                                         <option value="binomial" selected="selected">binomial</option>
                                         <option value="gamma">gamma</option>
                                         <option value="exponential">exponential</option>
@@ -1605,7 +1605,7 @@
                             <span ng-show="param_v_offset_dist == '1'">
                                 <label class="control-label col-sm-2" for="param_v_offset_distribution">v_offset : </label>
                                 <div class="control-label col-sm-2">
-                                    <select id="param_v_offset_distribution" name="param_v_offset_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty">
+                                    <select id="param_v_offset_distribution" name="param_v_offset_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="param_v_offset_distribution">
                                         <option value="binomial" selected="selected">binomial</option>
                                         <option value="gamma">gamma</option>
                                         <option value="exponential">exponential</option>
@@ -1664,7 +1664,7 @@
                             <span ng-show="param_e_rev_Na_dist == '1'">
                                 <label class="control-label col-sm-2" for="param_e_rev_Na_distribution">e_rev_Na : </label>
                                 <div class="control-label col-sm-2">
-                                    <select id="param_e_rev_Na_distribution" name="param_e_rev_Na_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty">
+                                    <select id="param_e_rev_Na_distribution" name="param_e_rev_Na_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="param_e_rev_Na_distribution">
                                         <option value="binomial" selected="selected">binomial</option>
                                         <option value="gamma">gamma</option>
                                         <option value="exponential">exponential</option>
@@ -1723,7 +1723,7 @@
                             <span ng-show="param_e_rev_K_dist == '1'">
                                 <label class="control-label col-sm-2" for="param_e_rev_K_distribution">e_rev_K : </label>
                                 <div class="control-label col-sm-2">
-                                    <select id="param_e_rev_K_distribution" name="param_e_rev_K_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty">
+                                    <select id="param_e_rev_K_distribution" name="param_e_rev_K_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="param_e_rev_K_distribution">
                                         <option value="binomial" selected="selected">binomial</option>
                                         <option value="gamma">gamma</option>
                                         <option value="exponential">exponential</option>
@@ -1780,9 +1780,9 @@
                                 <div class="control-label col-sm-1">mV</div>
                             </span>
                             <span ng-show="param_e_rev_leak_dist == '1'">
-                                <label class="control-label col-sm-2" for="param_e_rev_K_distribution">e_rev_K : </label>
+                                <label class="control-label col-sm-2" for="param_e_rev_leak_distribution">e_rev_leak : </label>
                                 <div class="control-label col-sm-2">
-                                    <select id="param_e_rev_K_distribution" name="param_e_rev_K_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty">
+                                    <select id="param_e_rev_leak_distribution" name="param_e_rev_leak_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="param_e_rev_leak_distribution">
                                         <option value="binomial" selected="selected">binomial</option>
                                         <option value="gamma">gamma</option>
                                         <option value="exponential">exponential</option>
@@ -1841,7 +1841,7 @@
                             <span ng-show="param_e_rev_E_dist == '1'">
                                 <label class="control-label col-sm-2" for="param_e_rev_E_distribution">param_e_rev_E : </label>
                                 <div class="control-label col-sm-2">
-                                    <select id="param_e_rev_E_distribution" name="param_e_rev_E_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty">
+                                    <select id="param_e_rev_E_distribution" name="param_e_rev_E_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="param_e_rev_E_distribution">
                                         <option value="binomial" selected="selected">binomial</option>
                                         <option value="gamma">gamma</option>
                                         <option value="exponential">exponential</option>
@@ -1900,7 +1900,7 @@
                             <span ng-show="param_e_rev_I_dist == '1'">
                                 <label class="control-label col-sm-2" for="param_e_rev_I_distribution">param_e_rev_I : </label>
                                 <div class="control-label col-sm-2">
-                                    <select id="param_e_rev_I_distribution" name="param_e_rev_I_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty">
+                                    <select id="param_e_rev_I_distribution" name="param_e_rev_I_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="param_e_rev_I_distribution">
                                         <option value="binomial" selected="selected">binomial</option>
                                         <option value="gamma">gamma</option>
                                         <option value="exponential">exponential</option>
@@ -1959,7 +1959,7 @@
                             <span ng-show="param_tau_syn_E_dist == '1'">
                                 <label class="control-label col-sm-2" for="param_tau_syn_E_distribution">tau_syn_E : </label>
                                 <div class="control-label col-sm-2">
-                                    <select id="param_tau_syn_E_distribution" name="param_tau_syn_E_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty">
+                                    <select id="param_tau_syn_E_distribution" name="param_tau_syn_E_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="param_tau_syn_E_distribution">
                                         <option value="binomial" selected="selected">binomial</option>
                                         <option value="gamma">gamma</option>
                                         <option value="exponential">exponential</option>
@@ -2018,7 +2018,7 @@
                             <span ng-show="param_tau_syn_I_dist == '1'">
                                 <label class="control-label col-sm-2" for="param_tau_syn_I_distribution">tau_syn_I : </label>
                                 <div class="control-label col-sm-2">
-                                    <select id="param_tau_syn_I_distribution" name="param_tau_syn_I_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty">
+                                    <select id="param_tau_syn_I_distribution" name="param_tau_syn_I_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="param_tau_syn_I_distribution">
                                         <option value="binomial" selected="selected">binomial</option>
                                         <option value="gamma">gamma</option>
                                         <option value="exponential">exponential</option>
@@ -2077,7 +2077,7 @@
                             <span ng-show="param_i_offset_dist == '1'">
                                 <label class="control-label col-sm-2" for="param_i_offset_distribution">i_offset : </label>
                                 <div class="control-label col-sm-2">
-                                    <select id="param_i_offset_distribution" name="param_i_offset_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty">
+                                    <select id="param_i_offset_distribution" name="param_i_offset_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="param_i_offset_distribution">
                                         <option value="binomial" selected="selected">binomial</option>
                                         <option value="gamma">gamma</option>
                                         <option value="exponential">exponential</option>
@@ -2136,7 +2136,7 @@
                             <span ng-show="init_v_dist == '1'">
                                 <label class="control-label col-sm-2" for="init_v_distribution">v : </label>
                                 <div class="control-label col-sm-2">
-                                    <select id="init_v_distribution" name="init_v_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty">
+                                    <select id="init_v_distribution" name="init_v_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="init_v_distribution">
                                         <option value="binomial" selected="selected">binomial</option>
                                         <option value="gamma">gamma</option>
                                         <option value="exponential">exponential</option>
@@ -2197,7 +2197,7 @@
                             <span ng-show="param_cm_dist == '1'">
                                 <label class="control-label col-sm-2" for="param_cm_distribution">cm : </label>
                                 <div class="control-label col-sm-2">
-                                    <select id="param_cm_distribution" name="param_cm_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty">
+                                    <select id="param_cm_distribution" name="param_cm_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="param_cm_distribution">
                                         <option value="binomial" selected="selected">binomial</option>
                                         <option value="gamma">gamma</option>
                                         <option value="exponential">exponential</option>
@@ -2256,7 +2256,7 @@
                             <span ng-show="param_tau_refrac_dist == '1'">
                                 <label class="control-label col-sm-2" for="param_tau_refrac_distribution">tau_refrac : </label>
                                 <div class="control-label col-sm-2">
-                                    <select id="param_tau_refrac_distribution" name="param_tau_refrac_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty">
+                                    <select id="param_tau_refrac_distribution" name="param_tau_refrac_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="param_tau_refrac_distribution">
                                         <option value="binomial" selected="selected">binomial</option>
                                         <option value="gamma">gamma</option>
                                         <option value="exponential">exponential</option>
@@ -2315,7 +2315,7 @@
                             <span ng-show="param_v_spike_dist == '1'">
                                 <label class="control-label col-sm-2" for="param_v_spike_distribution">v_spike : </label>
                                 <div class="control-label col-sm-2">
-                                    <select id="param_v_spike_distribution" name="param_v_spike_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty">
+                                    <select id="param_v_spike_distribution" name="param_v_spike_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="param_v_spike_distribution">
                                         <option value="binomial" selected="selected">binomial</option>
                                         <option value="gamma">gamma</option>
                                         <option value="exponential">exponential</option>
@@ -2374,7 +2374,7 @@
                             <span ng-show="param_v_reset_dist == '1'">
                                 <label class="control-label col-sm-2" for="param_v_reset_distribution">v_reset : </label>
                                 <div class="control-label col-sm-2">
-                                    <select id="param_v_reset_distribution" name="param_v_reset_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty">
+                                    <select id="param_v_reset_distribution" name="param_v_reset_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="param_v_reset_distribution">
                                         <option value="binomial" selected="selected">binomial</option>
                                         <option value="gamma">gamma</option>
                                         <option value="exponential">exponential</option>
@@ -2433,7 +2433,7 @@
                             <span ng-show="param_v_rest_dist == '1'">
                                 <label class="control-label col-sm-2" for="param_v_rest_distribution">v_rest : </label>
                                 <div class="control-label col-sm-2">
-                                    <select id="param_v_rest_distribution" name="param_v_rest_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty">
+                                    <select id="param_v_rest_distribution" name="param_v_rest_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="param_v_rest_distribution" ng-model="param_v_rest_distribution">
                                         <option value="binomial" selected="selected">binomial</option>
                                         <option value="gamma">gamma</option>
                                         <option value="exponential">exponential</option>
@@ -2492,7 +2492,7 @@
                             <span ng-show="param_tau_m_dist == '1'">
                                 <label class="control-label col-sm-2" for="param_tau_m_distribution">tau_m : </label>
                                 <div class="control-label col-sm-2">
-                                    <select id="param_tau_m_distribution" name="param_tau_m_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty">
+                                    <select id="param_tau_m_distribution" name="param_tau_m_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="param_tau_m_distribution">
                                         <option value="binomial" selected="selected">binomial</option>
                                         <option value="gamma">gamma</option>
                                         <option value="exponential">exponential</option>
@@ -2551,7 +2551,7 @@
                             <span ng-show="param_i_offset_dist == '1'">
                                 <label class="control-label col-sm-2" for="param_i_offset_distribution">i_offset : </label>
                                 <div class="control-label col-sm-2">
-                                    <select id="param_i_offset_distribution" name="param_i_offset_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty">
+                                    <select id="param_i_offset_distribution" name="param_i_offset_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="param_i_offset_distribution">
                                         <option value="binomial" selected="selected">binomial</option>
                                         <option value="gamma">gamma</option>
                                         <option value="exponential">exponential</option>
@@ -2612,7 +2612,7 @@
                             <span ng-show="param_a_dist == '1'">
                                 <label class="control-label col-sm-2" for="param_a_distribution">a : </label>
                                 <div class="control-label col-sm-2">
-                                    <select id="param_a_distribution" name="param_a_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty">
+                                    <select id="param_a_distribution" name="param_a_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="param_a_distribution">
                                         <option value="binomial" selected="selected">binomial</option>
                                         <option value="gamma">gamma</option>
                                         <option value="exponential">exponential</option>
@@ -2673,7 +2673,7 @@
                             <span ng-show="param_b_dist == '1'">
                                 <label class="control-label col-sm-2" for="param_b_distribution">b : </label>
                                 <div class="control-label col-sm-2">
-                                    <select id="param_b_distribution" name="param_b_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty">
+                                    <select id="param_b_distribution" name="param_b_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="param_b_distribution">
                                         <option value="binomial" selected="selected">binomial</option>
                                         <option value="gamma">gamma</option>
                                         <option value="exponential">exponential</option>
@@ -2734,7 +2734,7 @@
                             <span ng-show="param_delta_T_dist == '1'">
                                 <label class="control-label col-sm-2" for="param_delta_T_distribution">delta_T : </label>
                                 <div class="control-label col-sm-2">
-                                    <select id="param_delta_T_distribution" name="param_delta_T_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty">
+                                    <select id="param_delta_T_distribution" name="param_delta_T_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="param_delta_T_distribution">
                                         <option value="binomial" selected="selected">binomial</option>
                                         <option value="gamma">gamma</option>
                                         <option value="exponential">exponential</option>
@@ -2795,7 +2795,7 @@
                             <span ng-show="param_tau_w_dist == '1'">
                                 <label class="control-label col-sm-2" for="param_tau_w_distribution">tau_w : </label>
                                 <div class="control-label col-sm-2">
-                                    <select id="param_tau_w_distribution" name="param_tau_w_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty">
+                                    <select id="param_tau_w_distribution" name="param_tau_w_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="param_tau_w_distribution">
                                         <option value="binomial" selected="selected">binomial</option>
                                         <option value="gamma">gamma</option>
                                         <option value="exponential">exponential</option>
@@ -2855,7 +2855,7 @@
                             <span ng-show="param_v_thresh_dist == '1'">
                                 <label class="control-label col-sm-2" for="param_v_thresh_distribution">v_thresh : </label>
                                 <div class="control-label col-sm-2">
-                                    <select id="param_v_thresh_distribution" name="param_v_thresh_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty">
+                                    <select id="param_v_thresh_distribution" name="param_v_thresh_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="param_v_thresh_distribution">
                                         <option value="binomial" selected="selected">binomial</option>
                                         <option value="gamma">gamma</option>
                                         <option value="exponential">exponential</option>
@@ -2914,7 +2914,7 @@
                             <span ng-show="param_e_rev_E_dist == '1'">
                                 <label class="control-label col-sm-2" for="param_e_rev_E_distribution">param_e_rev_E : </label>
                                 <div class="control-label col-sm-2">
-                                    <select id="param_e_rev_E_distribution" name="param_e_rev_E_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty">
+                                    <select id="param_e_rev_E_distribution" name="param_e_rev_E_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="param_e_rev_E_distribution">
                                         <option value="binomial" selected="selected">binomial</option>
                                         <option value="gamma">gamma</option>
                                         <option value="exponential">exponential</option>
@@ -2973,7 +2973,7 @@
                             <span ng-show="param_tau_syn_E_dist == '1'">
                                 <label class="control-label col-sm-2" for="param_tau_syn_E_distribution">tau_syn_E : </label>
                                 <div class="control-label col-sm-2">
-                                    <select id="param_tau_syn_E_distribution" name="param_tau_syn_E_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty">
+                                    <select id="param_tau_syn_E_distribution" name="param_tau_syn_E_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="param_tau_syn_E_distribution">
                                         <option value="binomial" selected="selected">binomial</option>
                                         <option value="gamma">gamma</option>
                                         <option value="exponential">exponential</option>
@@ -3032,7 +3032,7 @@
                             <span ng-show="param_e_rev_I_dist == '1'">
                                 <label class="control-label col-sm-2" for="param_e_rev_I_distribution">param_e_rev_I : </label>
                                 <div class="control-label col-sm-2">
-                                    <select id="param_e_rev_I_distribution" name="param_e_rev_I_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty">
+                                    <select id="param_e_rev_I_distribution" name="param_e_rev_I_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="param_e_rev_I_distribution">
                                         <option value="binomial" selected="selected">binomial</option>
                                         <option value="gamma">gamma</option>
                                         <option value="exponential">exponential</option>
@@ -3091,7 +3091,7 @@
                             <span ng-show="param_tau_syn_I_dist == '1'">
                                 <label class="control-label col-sm-2" for="param_tau_syn_I_distribution">tau_syn_I : </label>
                                 <div class="control-label col-sm-2">
-                                    <select id="param_tau_syn_I_distribution" name="param_tau_syn_I_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty">
+                                    <select id="param_tau_syn_I_distribution" name="param_tau_syn_I_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="param_tau_syn_I_distribution">
                                         <option value="binomial" selected="selected">binomial</option>
                                         <option value="gamma">gamma</option>
                                         <option value="exponential">exponential</option>
@@ -3156,7 +3156,7 @@
                             <span ng-show="init_v_dist == '1'">
                                 <label class="control-label col-sm-2" for="init_v_distribution">v : </label>
                                 <div class="control-label col-sm-2">
-                                    <select id="init_v_distribution" name="init_v_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty">
+                                    <select id="init_v_distribution" name="init_v_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="init_v_distribution">
                                         <option value="binomial" selected="selected">binomial</option>
                                         <option value="gamma">gamma</option>
                                         <option value="exponential">exponential</option>
@@ -3215,7 +3215,7 @@
                             <span ng-show="init_w_dist == '1'">
                                 <label class="control-label col-sm-2" for="init_w_distribution">w : </label>
                                 <div class="control-label col-sm-2">
-                                    <select id="init_w_distribution" name="init_w_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty">
+                                    <select id="init_w_distribution" name="init_w_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="init_w_distribution">
                                         <option value="binomial" selected="selected">binomial</option>
                                         <option value="gamma">gamma</option>
                                         <option value="exponential">exponential</option>
@@ -3276,7 +3276,7 @@
                             <span ng-show="param_rate_dist == '1'">
                                 <label class="control-label col-sm-2" for="param_rate_distribution">rate : </label>
                                 <div class="control-label col-sm-2">
-                                    <select id="param_rate_distribution" name="param_rate_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty">
+                                    <select id="param_rate_distribution" name="param_rate_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="param_rate_distribution">
                                         <option value="binomial" selected="selected">binomial</option>
                                         <option value="gamma">gamma</option>
                                         <option value="exponential">exponential</option>
@@ -3337,7 +3337,7 @@
                             <span ng-show="param_start_dist == '1'">
                                 <label class="control-label col-sm-2" for="param_start_distribution">start : </label>
                                 <div class="control-label col-sm-2">
-                                    <select id="param_start_distribution" name="param_start_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty">
+                                    <select id="param_start_distribution" name="param_start_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="param_start_distribution">
                                         <option value="binomial" selected="selected">binomial</option>
                                         <option value="gamma">gamma</option>
                                         <option value="exponential">exponential</option>
@@ -3398,7 +3398,7 @@
                             <span ng-show="param_duration_dist == '1'">
                                 <label class="control-label col-sm-2" for="param_duration_distribution">start : </label>
                                 <div class="control-label col-sm-2">
-                                    <select id="param_duration_distribution" name="param_duration_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty">
+                                    <select id="param_duration_distribution" name="param_duration_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="param_duration_distribution">
                                         <option value="binomial" selected="selected">binomial</option>
                                         <option value="gamma">gamma</option>
                                         <option value="exponential">exponential</option>
@@ -3461,7 +3461,7 @@
                             <span ng-show="param_spike_times_dist == '1'">
                                 <label class="control-label col-sm-2" for="param_spike_times_distribution">spike_times : </label>
                                 <div class="control-label col-sm-2">
-                                    <select id="param_spike_times_distribution" name="param_spike_times_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty">
+                                    <select id="param_spike_times_distribution" name="param_spike_times_distribution" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="param_spike_times_distribution">
                                         <option value="binomial" selected="selected">binomial</option>
                                         <option value="gamma">gamma</option>
                                         <option value="exponential">exponential</option>

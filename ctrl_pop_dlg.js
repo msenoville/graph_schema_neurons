@@ -1,92 +1,353 @@
 var graphSchemaApp = angular.module('graphSchemaApp');
 
 graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title', 'close', 'name_value', 'size', 'celltype',
-'param_v_rest', 'param_cm', 'param_tau_m', 'param_tau_m', 'param_tau_m', 'param_tau_refrac', 'param_tau_syn_E', 'param_tau_syn_I',
-'param_i_offset', 'param_v_reset', 'param_v_thresh', 'param_e_rev_E', 'param_e_rev_I', 'param_gbar_Na', 'param_gbar_K', 'param_g_leak',
-'param_v_offset', 'param_e_rev_Na', 'param_e_rev_K', 'param_e_rev_leak', 'param_tau_cm', 'param_v_spike', 'param_a', 'param_b',
-'param_delta_T', 'param_tau_w', 'init_isyn_exc', 'init_isyn_inh', 'init_gsyn_exc', 'init_gsyn_inh', 'init_v', 'init_w',
-'Recording_spikes', 'Recording_v', 'Simulation_time', 'Simulation_name', 'param_rate', 'param_start', 'param_duration',
+'v_rest_dist', 'param_v_rest_dist', 'param_v_rest', 'param_v_rest_distribution', 'param_v_rest_p1', 'param_v_rest_p2', 'param_v_rest_fx',
+'param_cm_dist', 'param_cm', 'param_cm_distribution', 'param_cm_p1', 'param_cm_p2', 'param_cm_fx',
+'param_tau_m_dist', 'param_tau_m', 'param_tau_m_distribution', 'param_tau_m_p1', 'param_tau_m_p2', 'param_tau_m_fx',
+'param_tau_refrac_dist', 'param_tau_refrac', 'param_tau_refrac_distribution', 'param_tau_refrac_p1', 'param_tau_refrac_p2', 'param_tau_refrac_fx',
+'param_tau_syn_E_dist', 'param_tau_syn_E', 'param_tau_syn_E_distribution', 'param_tau_syn_E_p1', 'param_tau_syn_E_p2', 'param_tau_syn_E_fx',
+'param_tau_syn_I_dist', 'param_tau_syn_I', 'param_tau_syn_I_distribution', 'param_tau_syn_I_p1', 'param_tau_syn_I_p2', 'param_tau_syn_I_fx',
+'param_i_offset_dist', 'param_i_offset', 'param_i_offset_distribution', 'param_i_offset_p1', 'param_i_offset_p2', 'param_i_offset_fx',
+'param_v_reset_dist', 'param_v_reset', 'param_v_reset_distribution', 'param_v_reset_p1', 'param_v_reset_p2', 'param_v_reset_fx',
+'param_v_thresh_dist', 'param_v_thresh', 'param_v_thresh_distribution', 'param_v_thresh_p1', 'param_v_thresh_p2', 'param_v_thresh_fx', 
+'param_e_rev_E_dist', 'param_e_rev_E', 'param_e_rev_E_distribution', 'param_e_rev_E_p1', 'param_e_rev_E_p2', 'param_e_rev_E_fx',
+'param_e_rev_I_dist', 'param_e_rev_I', 'param_e_rev_I_distribution', 'param_e_rev_I_p1', 'param_e_rev_I_p2', 'param_e_rev_I_fx',
+'param_gbar_Na_dist', 'param_gbar_Na', 'param_gbar_Na_distribution', 'param_gbar_Na_p1', 'param_gbar_Na_p2', 'param_gbar_Na_fx',
+'param_gbar_K_dist', 'param_gbar_K', 'param_gbar_K_distribution', 'param_gbar_K_p1', 'param_gbar_K_p2', 'param_gbar_K_fx',
+'param_g_leak_dist', 'param_g_leak', 'param_g_leak_distribution', 'param_g_leak_p1', 'param_g_leak_p2', 'param_g_leak_fx',
+'param_v_offset_dist', 'param_v_offset', 'param_v_offset_distribution', 'param_v_offset_p1', 'param_v_offset_p2', 'param_v_offset_fx',
+'param_e_rev_Na_dist', 'param_e_rev_Na', 'param_e_rev_Na_distribution', 'param_e_rev_Na_p1', 'param_e_rev_Na_p2', 'param_e_rev_Na_fx',
+'param_e_rev_K_dist', 'param_e_rev_K', 'param_e_rev_K_distribution', 'param_e_rev_K_p1', 'param_e_rev_K_p2', 'param_e_rev_K_fx',
+'param_e_rev_leak_dist', 'param_e_rev_leak', 'param_e_rev_leak_distribution', 'param_e_rev_leak_p1', 'param_e_rev_leak_p2', 'param_e_rev_leak_fx',
+'param_tau_cm', 
+'param_v_spike_dist', 'param_v_spike', 'param_v_spike_distribution', 'param_v_spike_p1', 'param_v_spike_p2', 'param_v_spike_fx',
+'param_a_dist', 'param_a', 'param_a_distribution', 'param_a_p1', 'param_a_p2', 'param_a_fx',
+'param_b_dist', 'param_b', 'param_b_distribution', 'param_b_p1', 'param_b_p2', 'param_b_fx',
+'param_delta_T_dist', 'param_delta_T', 'param_delta_T_distribution', 'param_delta_T_p1', 'param_delta_T_p2', 'param_delta_T_fx',
+'param_tau_w_dist', 'param_tau_w', 'param_tau_w_distribution', 'param_tau_w_p1', 'param_tau_w_p2', 'param_tau_w_fx',
+'init_isyn_exc', 
+'init_isyn_inh', 
+'init_gsyn_exc', 
+'init_gsyn_inh', 
+'init_v_dist', 'init_v', 'init_v_distribution', 'init_v_p1', 'init_v_p2', 'init_v_fx',
+'init_w_dist', 'init_w', 'init_w_distribution', 'init_w_p1', 'init_w_p2', 'init_w_fx',
+'Recording_spikes', 
+'Recording_v', 
+'Simulation_time', 
+'Simulation_name', 
+'param_rate_dist', 'param_rate', 'param_rate_p1', 'param_rate_p2', 'param_rate_fx',
+'param_start_dist', 'param_start', 'param_start_p1', 'param_start_p2', 'param_start_fx',
+'param_duration_dist', 'param_duration', 'param_duration_p1', 'param_duration_p2', 'param_duration_fx',
 	function($scope, $element, title, close, name_value, size, celltype,
-		param_v_rest, param_cm, param_tau_m, param_tau_m, param_tau_m, param_tau_refrac, param_tau_syn_E, param_tau_syn_I,
-		param_i_offset, param_v_reset, param_v_thresh, param_e_rev_E, param_e_rev_I, param_gbar_Na, param_gbar_K, param_g_leak,
-		param_v_offset, param_e_rev_Na, param_e_rev_K, param_e_rev_leak, param_tau_cm, param_v_spike, param_a, param_b,
-		param_delta_T, param_tau_w, init_isyn_exc, init_isyn_inh, init_gsyn_exc, init_gsyn_inh, init_v, init_w,
-		Recording_spikes, Recording_v, Simulation_time, Simulation_name, param_rate, param_start, param_duration) {
-		
-		$scope.v_rest_dist = 0;
-		$scope.param_v_rest_dist = 0;
-		$scope.param_cm_dist = 0;
-		$scope.param_tau_m_dist = 0;
-		$scope.param_tau_refrac_dist = 0;
-		$scope.param_tau_syn_E_dist = 0;
-		$scope.param_tau_syn_I_dist = 0;
-		$scope.param_i_offset_dist = 0;
-		$scope.param_v_reset_dist = 0;
-		$scope.param_v_thresh_dist = 0;
-		$scope.init_v_dist = 0;
-		$scope.init_w_dist = 0;
-		$scope.param_e_rev_E_dist = 0;
-		$scope.param_e_rev_I_dist = 0;
-		$scope.param_gbar_Na_dist = 0;
-		$scope.param_gbar_K_dist = 0;
-		$scope.param_g_leak_dist = 0;
-		$scope.param_v_offset_dist = 0;
-		$scope.param_e_rev_Na_dist = 0;
-		$scope.param_e_rev_K_dist = 0;
-		$scope.param_e_rev_leak_dist = 0;
-		$scope.param_v_spike_dist = 0;
-		$scope.param_a_dist = 0;
-		$scope.param_b_dist = 0;
-		$scope.param_delta_T_dist = 0;
-		$scope.param_tau_w_dist = 0;
-		$scope.param_rate_dist = 0;
-		$scope.param_start_dist = 0;
-		$scope.param_duration_dist = 0;
-		$scope.param_spike_times_dist = 0;
-		
+		v_rest_dist, param_v_rest_dist, param_v_rest, param_v_rest_distribution, param_v_rest_p1, param_v_rest_p2, param_v_rest_fx,
+		param_cm_dist, param_cm, param_cm_distribution, param_cm_p1, param_cm_p2, param_cm_fx,
+		param_tau_m_dist, param_tau_m, param_tau_m_distribution, param_tau_m_p1, param_tau_m_p2, param_tau_m_fx,
+		param_tau_refrac_dist, param_tau_refrac, param_tau_refrac_distribution, param_tau_refrac_p1, param_tau_refrac_p2, param_tau_refrac_fx,
+		param_tau_syn_E_dist, param_tau_syn_E, param_tau_syn_E_distribution, param_tau_syn_E_p1, param_tau_syn_E_p2, param_tau_syn_E_fx,
+		param_tau_syn_I_dist, param_tau_syn_I, param_tau_syn_I_distribution, param_tau_syn_I_p1, param_tau_syn_I_p2, param_tau_syn_I_fx,
+		param_i_offset_dist, param_i_offset, param_i_offset_distribution, param_i_offset_p1, param_i_offset_p2, param_i_offset_fx,
+		param_v_reset_dist, param_v_reset, param_v_reset_distribution, param_v_reset_p1, param_v_reset_p2, param_v_reset_fx,
+		param_v_thresh_dist, param_v_thresh, param_v_thresh_distribution, param_v_thresh_p1, param_v_thresh_p2, param_v_thresh_fx, 
+		param_e_rev_E_dist, param_e_rev_E, param_e_rev_E_distribution, param_e_rev_E_p1, param_e_rev_E_p2, param_e_rev_E_fx,
+		param_e_rev_I_dist, param_e_rev_I, param_e_rev_I_distribution, param_e_rev_I_p1, param_e_rev_I_p2, param_e_rev_I_fx,
+		param_gbar_Na_dist, param_gbar_Na, param_gbar_Na_distribution, param_gbar_Na_p1, param_gbar_Na_p2, param_gbar_Na_fx,
+		param_gbar_K_dist, param_gbar_K, param_gbar_K_distribution, param_gbar_K_p1, param_gbar_K_p2, param_gbar_K_fx,
+		param_g_leak_dist, param_g_leak, param_g_leak_distribution, param_g_leak_p1, param_g_leak_p2, param_g_leak_fx,
+		param_v_offset_dist, param_v_offset, param_v_offset_distribution, param_v_offset_p1, param_v_offset_p2, param_v_offset_fx,
+		param_e_rev_Na_dist, param_e_rev_Na, param_e_rev_Na_distribution, param_e_rev_Na_p1, param_e_rev_Na_p2, param_e_rev_Na_fx,
+		param_e_rev_K_dist, param_e_rev_K, param_e_rev_K_distribution, param_e_rev_K_p1, param_e_rev_K_p2, param_e_rev_K_fx,
+		param_e_rev_leak_dist, param_e_rev_leak, param_e_rev_leak_distribution, param_e_rev_leak_p1, param_e_rev_leak_p2, param_e_rev_leak_fx,
+		param_tau_cm, 
+		param_v_spike_dist, param_v_spike, param_v_spike_distribution, param_v_spike_p1, param_v_spike_p2, param_v_spike_fx,
+		param_a_dist, param_a, param_a_distribution, param_a_p1, param_a_p2, param_a_fx,
+		param_b_dist, param_b, param_b_distribution, param_b_p1, param_b_p2, param_b_fx,
+		param_delta_T_dist, param_delta_T, param_delta_T_distribution, param_delta_T_p1, param_delta_T_p2, param_delta_T_fx,
+		param_tau_w_dist, param_tau_w, param_tau_w_distribution, param_tau_w_p1, param_tau_w_p2, param_tau_w_fx,
+		init_isyn_exc, 
+		init_isyn_inh, 
+		init_gsyn_exc, 
+		init_gsyn_inh, 
+		init_v_dist, init_v, init_v_distribution, init_v_p1, init_v_p2, init_v_fx,
+		init_w_dist, init_w, init_w_distribution, init_w_p1, init_w_p2, init_w_fx,
+		Recording_spikes, 
+		Recording_v, 
+		Simulation_time, 
+		Simulation_name, 
+		param_rate_dist, param_rate, param_rate_p1, param_rate_p2, param_rate_fx,
+		param_start_dist, param_start, param_start_p1, param_start_p2, param_start_fx,
+		param_duration_dist, param_duration, param_duration_p1, param_duration_p2, param_duration_fx) {
+				
 		$scope.title = title;
 		$scope.name_value = name_value;
 		// $scope.level = level;
 		$scope.size = size;
 		$scope.celltype = celltype;
+		$scope.v_rest_dist = v_rest_dist;
+		$scope.param_v_rest_dist = param_v_rest_dist;
 		$scope.param_v_rest = param_v_rest;
+		$scope.param_v_rest_distribution = param_v_rest_distribution;
+		$scope.param_v_rest_p1 = param_v_rest_p1;
+		$scope.param_v_rest_p2 = param_v_rest_p2;
+		$scope.param_v_rest_fx = param_v_rest_fx;
+		$scope.param_cm_dist = param_cm_dist;
 		$scope.param_cm = param_cm;
+		$scope.param_cm_distribution = param_cm_distribution;
+		$scope.param_cm_p1 = param_cm_p1;
+		$scope.param_cm_p2 = param_cm_p2;
+		$scope.param_cm_fx = param_cm_fx;
+		$scope.param_tau_m_dist = param_tau_m_dist;
 		$scope.param_tau_m = param_tau_m;
+		$scope.param_tau_m_distribution = param_tau_m_distribution;
+		$scope.param_tau_m_p1 = param_tau_m_p1;
+		$scope.param_tau_m_p2 = param_tau_m_p2;
+		$scope.param_tau_m_fx = param_tau_m_fx;
+		$scope.param_tau_refrac_dist = param_tau_refrac_dist;
 		$scope.param_tau_refrac = param_tau_refrac;
+		$scope.param_tau_refrac_distribution = param_tau_refrac_distribution;
+		$scope.param_tau_refrac_p1 = param_tau_refrac_p1;
+		$scope.param_tau_refrac_p2 = param_tau_refrac_p2;
+		$scope.param_tau_refrac_fx = param_tau_refrac_fx;
+		$scope.param_tau_syn_E_dist = param_tau_syn_E_dist;
 		$scope.param_tau_syn_E = param_tau_syn_E;
+		$scope.param_tau_syn_E_distribution = param_tau_syn_E_distribution;
+		$scope.param_tau_syn_E_p1 = param_tau_syn_E_p1;
+		$scope.param_tau_syn_E_p2 = param_tau_syn_E_p2;
+		$scope.param_tau_syn_E_fx = param_tau_syn_E_fx;
+		$scope.param_tau_syn_I_dist = param_tau_syn_I_dist;
 		$scope.param_tau_syn_I = param_tau_syn_I;
+		$scope.param_tau_syn_I_distribution = param_tau_syn_I_distribution;
+		$scope.param_tau_syn_I_p1 = param_tau_syn_I_p1;
+		$scope.param_tau_syn_I_p2 = param_tau_syn_I_p2;
+		$scope.param_tau_syn_I_fx = param_tau_syn_I_fx;
+		$scope.param_i_offset_dist = param_i_offset_dist;
 		$scope.param_i_offset = param_i_offset;
+		$scope.param_i_offset_distribution = param_i_offset_distribution;
+		$scope.param_i_offset_p1 = param_i_offset_p1;
+		$scope.param_i_offset_p2 = param_i_offset_p2;
+		$scope.param_i_offset_fx = param_i_offset_fx;
+		$scope.param_v_reset_dist = param_v_reset_dist;
 		$scope.param_v_reset = param_v_reset;
+		$scope.param_v_reset_distribution = param_v_reset_distribution;
+		$scope.param_v_reset_p1 = param_v_reset_p1;
+		$scope.param_v_reset_p2 = param_v_reset_p2;
+		$scope.param_v_reset_fx = param_v_reset_fx;
+		$scope.param_v_thresh_dist = param_v_thresh_dist;
 		$scope.param_v_thresh = param_v_thresh;
+		$scope.param_v_thresh_distribution = param_v_thresh_distribution,
+		$scope.param_v_thresh_p1 = param_v_thresh_p1,
+		$scope.param_v_thresh_p2 = param_v_thresh_p2,
+		$scope.param_v_thresh_fx = param_v_thresh_fx,
+		$scope.param_e_rev_E_dist = param_e_rev_E_dist;
 		$scope.param_e_rev_E = param_e_rev_E;
+		$scope.param_e_rev_E_distribution = param_e_rev_E_distribution;
+		$scope.param_e_rev_E_p1 = param_e_rev_E_p1;
+		$scope.param_e_rev_E_p2 = param_e_rev_E_p2;
+		$scope.param_e_rev_E_fx = param_e_rev_E_fx;
+		$scope.param_e_rev_I_dist = param_e_rev_I_dist;
 		$scope.param_e_rev_I = param_e_rev_I;
+		$scope.param_e_rev_I_distribution = param_e_rev_I_distribution;
+		$scope.param_e_rev_I_p1 = param_e_rev_I_p1;
+		$scope.param_e_rev_I_p2 = param_e_rev_I_p2;
+		$scope.param_e_rev_I_fx = param_e_rev_I_fx;
+		$scope.param_gbar_Na_dist = param_gbar_Na_dist;
 		$scope.param_gbar_Na = param_gbar_Na;
+		$scope.param_gbar_Na_distribution = param_gbar_Na_distribution;
+		$scope.param_gbar_Na_p1 = param_gbar_Na_p1;
+		$scope.param_gbar_Na_p2 = param_gbar_Na_p2;
+		$scope.param_gbar_Na_fx = param_gbar_Na_fx;
+		$scope.param_gbar_K_dist = param_gbar_K_dist;
 		$scope.param_gbar_K = param_gbar_K;
+		$scope.param_gbar_K_distribution = param_gbar_K_distribution;
+		$scope.param_gbar_K_p1 = param_gbar_K_p1;
+		$scope.param_gbar_K_p2 = param_gbar_K_p2;
+		$scope.param_gbar_K_fx = param_gbar_K_fx;
+		$scope.param_g_leak_dist = param_g_leak_dist;
 		$scope.param_g_leak = param_g_leak;
+		$scope.param_g_leak_distribution = param_g_leak_distribution;
+		$scope.param_g_leak_p1 = param_g_leak_p1;
+		$scope.param_g_leak_p2 = param_g_leak_p2;
+		$scope.param_g_leak_fx = param_g_leak_fx;
+		$scope.param_v_offset_dist = param_v_offset_dist;
 		$scope.param_v_offset = param_v_offset;
+		$scope.param_v_offset_distribution = param_v_offset_distribution;
+		$scope.param_v_offset_p1 = param_v_offset_p1;
+		$scope.param_v_offset_p2 = param_v_offset_p2;
+		$scope.param_v_offset_fx = param_v_offset_fx;
+		$scope.param_e_rev_Na_dist = param_e_rev_Na_dist;
 		$scope.param_e_rev_Na = param_e_rev_Na;
+		$scope.param_e_rev_Na_distribution = param_e_rev_Na_distribution;
+		$scope.param_e_rev_Na_p1 = param_e_rev_Na_p1;
+		$scope.param_e_rev_Na_p2 = param_e_rev_Na_p2;
+		$scope.param_e_rev_Na_fx = param_e_rev_Na_fx;
+		$scope.param_e_rev_K_dist = param_e_rev_K_dist;
 		$scope.param_e_rev_K = param_e_rev_K;
+		$scope.param_e_rev_K_distribution = param_e_rev_K_distribution;
+		$scope.param_e_rev_K_p1 = param_e_rev_K_p1;
+		$scope.param_e_rev_K_p2 = param_e_rev_K_p2;
+		$scope.param_e_rev_K_fx = param_e_rev_K_fx;
+		$scope.param_e_rev_leak_dist = param_e_rev_leak_dist;
 		$scope.param_e_rev_leak = param_e_rev_leak;
+		$scope.param_e_rev_leak_distribution = param_e_rev_leak_distribution;
+		$scope.param_e_rev_leak_p1 = param_e_rev_leak_p1;
+		$scope.param_e_rev_leak_p2 = param_e_rev_leak_p2;
+		$scope.param_e_rev_leak_fx = param_e_rev_leak_fx;
 		$scope.param_tau_cm = param_tau_cm;
+		$scope.param_v_spike_dist = param_v_spike_dist;
 		$scope.param_v_spike = param_v_spike;
+		$scope.param_v_spike_distribution = param_v_spike_distribution;
+		$scope.param_v_spike_p1 = param_v_spike_p1;
+		$scope.param_v_spike_p2 = param_v_spike_p2;
+		$scope.param_v_spike_fx = param_v_spike_fx;
+		$scope.param_a_dist = param_a_dist;
 		$scope.param_a = param_a;
+		$scope.param_a_distribution = param_a_distribution;
+		$scope.param_a_p1 = param_a_p1;
+		$scope.param_a_p2 = param_a_p2;
+		$scope.param_a_fx = param_a_fx;
+		$scope.param_b_dist = param_b_dist;
 		$scope.param_b = param_b;
+		$scope.param_b_distribution = param_b_distribution;
+		$scope.param_b_p1 = param_b_p1;
+		$scope.param_b_p2 = param_b_p2;
+		$scope.param_b_fx = param_b_fx;
+		$scope.param_delta_T_dist = param_delta_T_dist;
 		$scope.param_delta_T = param_delta_T;
+		$scope.param_delta_T_distribution = param_delta_T_distribution;
+		$scope.param_delta_T_p1 = param_delta_T_p1;
+		$scope.param_delta_T_p2 = param_delta_T_p2;
+		$scope.param_delta_T_fx = param_delta_T_fx;
+		$scope.param_tau_w_dist = param_tau_w_dist;
 		$scope.param_tau_w = param_tau_w;
+		$scope.param_tau_w_distribution = param_tau_w_distribution;
+		$scope.param_tau_w_p1 = param_tau_w_p1;
+		$scope.param_tau_w_p2 = param_tau_w_p2;
+		$scope.param_tau_w_fx = param_tau_w_fx;
 		$scope.init_isyn_exc = init_isyn_exc;
 		$scope.init_isyn_inh = init_isyn_inh;
 		$scope.init_gsyn_exc = init_gsyn_exc;
 		$scope.init_gsyn_inh = init_gsyn_inh;
+		$scope.init_v_dist = init_v_dist;
 		$scope.init_v = init_v;
+		$scope.init_v_distribution = init_v_distribution;
+		$scope.init_v_p1 = init_v_p1;
+		$scope.init_v_p2 = init_v_p2;
+		$scope.init_v_fx = init_v_fx;
+		$scope.init_w_dist = init_w_dist;
 		$scope.init_w = init_w;
+		$scope.init_w_distribution = init_w_distribution;
+		$scope.init_w_p1 = init_w_p1;
+		$scope.init_w_p2 = init_w_p2;
+		$scope.init_w_fx = init_w_fx;
 		$scope.Recording_spikes = Recording_spikes;
 		$scope.Recording_v = Recording_v;
 		$scope.Simulation_time = Simulation_time;
 		$scope.Simulation_name = Simulation_name;
+		$scope.param_rate_dist = param_rate_dist;
 		$scope.param_rate = param_rate;
+		$scope.param_rate_p1 = param_rate_p1;
+		$scope.param_rate_p2 = param_rate_p2;
+		$scope.param_rate_fx = param_rate_fx;
+		$scope.param_start_dist = param_start_dist;
 		$scope.param_start = param_start;
+		$scope.param_start_p1 = param_start_p1;
+		$scope.param_start_p2 = param_start_p2;
+		$scope.param_start_fx = param_start_fx;
+		$scope.param_duration_dist = param_duration_dist;
 		$scope.param_duration = param_duration;
+		$scope.param_duration_p1 = param_duration_p1;
+		$scope.param_duration_p2 = param_duration_p2;
+		$scope.param_duration_fx = param_duration_fx;
 
+		if(($scope.v_rest_dist == "") || ($scope.v_rest_dist == null)){
+			$scope.v_rest_dist = 0;
+		}
+		if(($scope.param_v_rest_dist == "") || ($scope.param_v_rest_dist == null)){
+			$scope.param_v_rest_dist = 0;
+		}
+		if(($scope.param_cm_dist == "") || ($scope.param_cm_dist == null)){
+			$scope.param_cm_dist = 0;
+		}
+		if(($scope.param_tau_m_dist == "") || ($scope.param_tau_m_dist == null)){
+			$scope.param_tau_m_dist = 0;
+		}
+		if(($scope.param_tau_refrac_dist == "") || ($scope.param_tau_refrac_dist == null)){
+			$scope.param_tau_refrac_dist = 0;
+		}
+		if(($scope.param_tau_syn_E_dist == "") || ($scope.param_tau_syn_E_dist == null)){
+			$scope.param_tau_syn_E_dist = 0;
+		}
+		if(($scope.param_tau_syn_I_dist == "") || ($scope.param_tau_syn_I_dist == null)){
+			$scope.param_tau_syn_I_dist = 0;
+		}
+		if(($scope.param_i_offset_dist == "") || ($scope.param_i_offset_dist == null)){
+			$scope.param_i_offset_dist = 0;
+		}
+		if(($scope.param_v_reset_dist == "") || ($scope.param_v_reset_dist == null)){
+			$scope.param_v_reset_dist = 0;
+		}
+		if(($scope.param_v_thresh_dist == "") || ($scope.param_v_thresh_dist == null)){
+			$scope.param_v_thresh_dist = 0;
+		}
+		if(($scope.init_v_dist == "") || ($scope.init_v_dist == null)){
+			$scope.init_v_dist = 0;
+		}
+		if(($scope.init_w_dist == "") || ($scope.init_w_dist == null)){
+			$scope.init_w_dist = 0;
+		}
+		if(($scope.param_e_rev_E_dist == "") || ($scope.param_e_rev_E_dist == null)){
+			$scope.param_e_rev_E_dist = 0;
+		}
+		if(($scope.param_e_rev_I_dist == "") || ($scope.param_e_rev_I_dist == null)){
+			$scope.param_e_rev_I_dist = 0;
+		}
+		if(($scope.param_gbar_Na_dist == "") || ($scope.param_gbar_Na_dist == null)){
+			$scope.param_gbar_Na_dist = 0;
+		}
+		if(($scope.param_gbar_K_dist == "") || ($scope.param_gbar_K_dist == null)){
+			$scope.param_gbar_K_dist = 0;
+		}
+		if(($scope.param_g_leak_dist == "") || ($scope.param_g_leak_dist == null)){
+			$scope.param_g_leak_dist = 0;
+		}
+		if(($scope.param_v_offset_dist == "") || ($scope.param_v_offset_dist == null)){
+			$scope.param_v_offset_dist = 0;
+		}
+		if(($scope.param_e_rev_Na_dist == "") || ($scope.param_e_rev_Na_dist == null)){
+			$scope.param_e_rev_Na_dist = 0;
+		}
+		if(($scope.param_e_rev_K_dist == "") || ($scope.param_e_rev_K_dist == null)){
+			$scope.param_e_rev_K_dist = 0;
+		}
+		if(($scope.param_e_rev_leak_dist == "") || ($scope.param_e_rev_leak_dist == null)){
+			$scope.param_e_rev_leak_dist = 0;
+		}
+		if(($scope.param_v_spike_dist == "") || ($scope.param_v_spike_dist == null)){
+			$scope.param_v_spike_dist = 0;
+		}
+		if(($scope.param_a_dist == "") || ($scope.param_a_dist == null)){
+			$scope.param_a_dist = 0;
+		}
+		if(($scope.param_b_dist == "") || ($scope.param_b_dist == null)){
+			$scope.param_b_dist = 0;
+		}
+		if(($scope.param_delta_T_dist == "") || ($scope.param_delta_T_dist == null)){
+			$scope.param_delta_T_dist = 0;
+		}
+		if(($scope.param_tau_w_dist == "") || ($scope.param_tau_w_dist == null)){
+			$scope.param_tau_w_dist = 0;
+		}
+		if(($scope.param_rate_dist == "") || ($scope.param_rate_dist == null)){
+			$scope.param_rate_dist = 0;
+		}
+		if(($scope.param_start_dist == "") || ($scope.param_start_dist == null)){
+			$scope.param_start_dist = 0;
+		}
+		if(($scope.param_duration_dist == "") || ($scope.param_duration_dist == null)){
+			$scope.param_duration_dist = 0;
+		}
+		if(($scope.param_spike_times_dist == "") || ($scope.param_spike_times_dist == null)){
+			$scope.param_spike_times_dist = 0;
+		}
 		if($scope.celltype == "empty_no_edge"){
 			$scope.celltype = "IF_curr_alpha";
 		}
@@ -251,12 +512,339 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 		}
 		$scope.beforeClose = function(){
 			if(($scope.name_value == "") || ($scope.name_value == null)){
-				$scope.msgAlert = "Name is required."
+				$scope.msgAlert = "Name is required.";
 			}
 			else if(($scope.size == null) || ($scope.size.toString() == "")){
-				$scope.msgAlert = "Size value is required."
-			} else{
-				$scope.close()
+				$scope.msgAlert = "Size value is required.";
+			}
+
+			else if(($scope.v_rest_dist == "1") && (($scope.param_v_rest_distribution == "") || ($scope.param_v_rest_distribution == null))){
+				$scope.msgAlert = "v_rest Distrisubution value is required.";
+			}
+			else if(($scope.v_rest_dist == "1") && (($scope.param_v_rest_p1 == "") || ($scope.param_v_rest_p1 == null))){
+				$scope.msgAlert = "v_rest p1 value is required.";
+			}
+			else if(($scope.v_rest_dist == "1") && (($scope.param_v_rest_p2 == "") || ($scope.param_v_rest_p2 == null))){
+				$scope.msgAlert = "v_rest p2 value is required.";
+			}
+			else if(($scope.v_rest_dist == "2") && (($scope.param_v_rest_fx == "") || ($scope.param_v_rest_fx == null))){
+				$scope.msgAlert = "v_rest f(x) value is required.";	
+			}
+
+			else if(($scope.param_cm_dist == "1") && (($scope.param_cm_distribution == "") || ($scope.param_cm_distribution == null))){
+				$scope.msgAlert = "cm Distribution value is required.";	
+			}
+			else if(($scope.param_cm_dist == "1") && (($scope.param_cm_p1 == "") || ($scope.param_cm_p1 == null))){
+				$scope.msgAlert = "cm p1 value is required.";
+			}
+			else if(($scope.param_cm_dist == "1") && (($scope.param_cm_p2 == "") || ($scope.param_cm_p2 == null))){
+				$scope.msgAlert = "cm p2 value is required.";
+			}
+			else if(($scope.param_cm_dist == "2") && (($scope.param_cm_fx == "") || ($scope.param_cm_fx == null))){
+				$scope.msgAlert = "cm f(x) value is required.";	
+			}
+
+			else if(($scope.param_tau_m_dist == "1") && (($scope.param_tau_m_distribution == "") || ($scope.param_tau_m_distribution == null))){
+				$scope.msgAlert = "tau_m Distribution value is required.";	
+			}
+			else if(($scope.param_tau_m_dist == "1") && (($scope.param_tau_m_p1 == "") || ($scope.param_tau_m_p1 == null))){
+				$scope.msgAlert = "tau_m p1 value is required.";
+			}
+			else if(($scope.param_tau_m_dist == "1") && (($scope.param_tau_m_p2 == "") || ($scope.param_tau_m_p2 == null))){
+				$scope.msgAlert = "tau_m p2 value is required.";
+			}
+			else if(($scope.param_tau_m_dist == "2") && (($scope.param_tau_m_fx == "") || ($scope.param_tau_m_fx == null))){
+				$scope.msgAlert = "tau_m f(x) value is required.";	
+			}
+
+			else if(($scope.param_tau_refrac_dist == "1") && (($scope.param_tau_refrac_distribution == "") || ($scope.param_tau_refrac_distribution == null))){
+				$scope.msgAlert = "tau_refrac Distribution value is required.";	
+			}
+			else if(($scope.param_tau_refrac_dist == "1") && (($scope.param_tau_refrac_p1 == "") || ($scope.param_tau_refrac_p1 == null))){
+				$scope.msgAlert = "tau_refrac p1 value is required.";
+			}
+			else if(($scope.param_tau_refrac_dist == "1") && (($scope.param_tau_refrac_p2 == "") || ($scope.param_tau_refrac_p2 == null))){
+				$scope.msgAlert = "tau_refrac p2 value is required.";
+			}
+			else if(($scope.param_tau_refrac_dist == "2") && (($scope.param_tau_refrac_fx == "") || ($scope.param_tau_refrac_fx == null))){
+				$scope.msgAlert = "tau_refrac f(x) value is required.";	
+			}
+
+			else if(($scope.param_tau_syn_E_dist == "1") && (($scope.param_tau_syn_E_distribution == "") || ($scope.param_tau_syn_E_distribution == null))){
+				$scope.msgAlert = "tau_syn_E Distribution value is required.";	
+			}
+			else if(($scope.param_tau_syn_E_dist == "1") && (($scope.param_tau_syn_E_p1 == "") || ($scope.param_tau_syn_E_p1 == null))){
+				$scope.msgAlert = "tau_syn_E p1 value is required.";
+			}
+			else if(($scope.param_tau_syn_E_dist == "1") && (($scope.param_tau_syn_E_p2 == "") || ($scope.param_tau_syn_E_p2 == null))){
+				$scope.msgAlert = "tau_syn_E p2 value is required.";
+			}
+			else if(($scope.param_tau_syn_E_dist == "2") && (($scope.param_tau_syn_E_fx == "") || ($scope.param_tau_syn_E_fx == null))){
+				$scope.msgAlert = "tau_syn_E f(x) value is required.";	
+			}
+
+			else if(($scope.param_tau_syn_I_dist == "1") && (($scope.param_tau_syn_I_distribution == "") || ($scope.param_tau_syn_I_distribution == null))){
+				$scope.msgAlert = "tau_syn_I Distribution value is required.";	
+			}
+			else if(($scope.param_tau_syn_I_dist == "1") && (($scope.param_tau_syn_I_p1 == "") || ($scope.param_tau_syn_I_p1 == null))){
+				$scope.msgAlert = "tau_syn_I p1 value is required.";
+			}
+			else if(($scope.param_tau_syn_I_dist == "1") && (($scope.param_tau_syn_I_p2 == "") || ($scope.param_tau_syn_I_p2 == null))){
+				$scope.msgAlert = "tau_syn_I p2 value is required.";
+			}
+			else if(($scope.param_tau_syn_I_dist == "2") && (($scope.param_tau_syn_I_fx == "") || ($scope.param_tau_syn_I_fx == null))){
+				$scope.msgAlert = "tau_syn_I f(x) value is required.";	
+			}
+
+			else if(($scope.param_i_offset_dist == "1") && (($scope.param_i_offset_distribution == "") || ($scope.param_i_offset_distribution == null))){
+				$scope.msgAlert = "i_offset Distribution value is required.";	
+			}
+			else if(($scope.param_i_offset_dist == "1") && (($scope.param_i_offset_p1 == "") || ($scope.param_i_offset_p1 == null))){
+				$scope.msgAlert = "i_offset p1 value is required.";
+			}
+			else if(($scope.param_i_offset_dist == "1") && (($scope.param_i_offset_p2 == "") || ($scope.param_i_offset_p2 == null))){
+				$scope.msgAlert = "i_offset p2 value is required.";
+			}
+			else if(($scope.param_i_offset_dist == "2") && (($scope.param_i_offset_fx == "") || ($scope.param_i_offset_fx == null))){
+				$scope.msgAlert = "i_offset f(x) value is required.";	
+			}
+
+			else if(($scope.param_v_reset_dist == "1") && (($scope.param_v_reset_distribution == "") || ($scope.param_v_reset_distribution == null))){
+				$scope.msgAlert = "v_reset Distribution value is required.";	
+			}
+			else if(($scope.param_v_reset_dist == "1") && (($scope.param_v_reset_p1 == "") || ($scope.param_v_reset_p1 == null))){
+				$scope.msgAlert = "v_reset p1 value is required.";
+			}
+			else if(($scope.param_v_reset_dist == "1") && (($scope.param_v_reset_p2 == "") || ($scope.param_v_reset_p2 == null))){
+				$scope.msgAlert = "v_reset p2 value is required.";
+			}
+			else if(($scope.param_v_reset_dist == "2") && (($scope.param_v_reset_fx == "") || ($scope.param_v_reset_fx == null))){
+				$scope.msgAlert = "v_reset f(x) value is required.";	
+			}
+
+			else if(($scope.param_v_thresh_dist == "1") && (($scope.param_v_thresh_distribution == "") || ($scope.param_v_thresh_distribution == null))){
+				$scope.msgAlert = "v_thresh Distribution value is required.";	
+			}
+			else if(($scope.param_v_thresh_dist == "1") && (($scope.param_v_thresh_p1 == "") || ($scope.param_v_thresh_p1 == null))){
+				$scope.msgAlert = "v_thresh p1 value is required.";
+			}
+			else if(($scope.param_v_thresh_dist == "1") && (($scope.param_v_thresh_p2 == "") || ($scope.param_v_thresh_p2 == null))){
+				$scope.msgAlert = "v_thresh p2 value is required.";
+			}
+			else if(($scope.param_v_thresh_dist == "2") && (($scope.param_v_thresh_fx == "") || ($scope.param_v_thresh_fx == null))){
+				$scope.msgAlert = "v_thresh f(x) value is required.";	
+			}
+
+			else if(($scope.param_e_rev_E_dist == "1") && (($scope.param_e_rev_E_distribution == "") || ($scope.param_e_rev_E_distribution == null))){
+				$scope.msgAlert = "e_rev_E Distribution value is required.";	
+			}
+			else if(($scope.param_e_rev_E_dist == "1") && (($scope.param_e_rev_E_p1 == "") || ($scope.param_e_rev_E_p1 == null))){
+				$scope.msgAlert = "e_rev_E p1 value is required.";
+			}
+			else if(($scope.param_e_rev_E_dist == "1") && (($scope.param_e_rev_E_p2 == "") || ($scope.param_e_rev_E_p2 == null))){
+				$scope.msgAlert = "e_rev_E p2 value is required.";
+			}
+			else if(($scope.param_e_rev_E_dist == "2") && (($scope.param_e_rev_E_fx == "") || ($scope.param_e_rev_E_fx == null))){
+				$scope.msgAlert = "e_rev_E f(x) value is required.";	
+			}
+
+			else if(($scope.param_e_rev_I_dist == "1") && (($scope.param_e_rev_I_distribution == "") || ($scope.param_e_rev_I_distribution == null))){
+				$scope.msgAlert = "e_rev_I Distribution value is required.";	
+			}
+			else if(($scope.param_e_rev_I_dist == "1") && (($scope.param_e_rev_I_p1 == "") || ($scope.param_e_rev_I_p1 == null))){
+				$scope.msgAlert = "e_rev_I p1 value is required.";
+			}
+			else if(($scope.param_e_rev_I_dist == "1") && (($scope.param_e_rev_I_p2 == "") || ($scope.param_e_rev_I_p2 == null))){
+				$scope.msgAlert = "e_rev_I p2 value is required.";
+			}
+			else if(($scope.param_e_rev_I_dist == "2") && (($scope.param_e_rev_I_fx == "") || ($scope.param_e_rev_I_fx == null))){
+				$scope.msgAlert = "e_rev_I f(x) value is required.";	
+			}
+
+			else if(($scope.param_gbar_Na_dist == "1") && (($scope.param_gbar_Na_distribution == "") || ($scope.param_gbar_Na_distribution == null))){
+				$scope.msgAlert = "gbar_Na Distribution value is required.";	
+			}
+			else if(($scope.param_gbar_Na_dist == "1") && (($scope.param_gbar_Na_p1 == "") || ($scope.param_gbar_Na_p1 == null))){
+				$scope.msgAlert = "gbar_Na p1 value is required.";
+			}
+			else if(($scope.param_gbar_Na_dist == "1") && (($scope.param_gbar_Na_p2 == "") || ($scope.param_gbar_Na_p2 == null))){
+				$scope.msgAlert = "gbar_Na p2 value is required.";
+			}
+			else if(($scope.param_gbar_Na_dist == "2") && (($scope.param_gbar_Na_fx == "") || ($scope.param_gbar_Na_fx == null))){
+				$scope.msgAlert = "gbar_Na f(x) value is required.";	
+			}
+
+			else if(($scope.param_gbar_K_dist == "1") && (($scope.param_gbar_K_distribution == "") || ($scope.param_gbar_K_distribution == null))){
+				$scope.msgAlert = "gbar_K Distribution value is required.";	
+			}
+			else if(($scope.param_gbar_K_dist == "1") && (($scope.param_gbar_K_p1 == "") || ($scope.param_gbar_K_p1 == null))){
+				$scope.msgAlert = "gbar_K p1 value is required.";
+			}
+			else if(($scope.param_gbar_K_dist == "1") && (($scope.param_gbar_K_p2 == "") || ($scope.param_gbar_K_p2 == null))){
+				$scope.msgAlert = "gbar_K p2 value is required.";
+			}
+			else if(($scope.param_gbar_K_dist == "2") && (($scope.param_gbar_K_fx == "") || ($scope.param_gbar_K_fx == null))){
+				$scope.msgAlert = "gbar_K f(x) value is required.";	
+			}
+
+			else if(($scope.param_g_leak_dist == "1") && (($scope.param_v_offset_distribution == "") || ($scope.param_v_offset_distribution == null))){
+				$scope.msgAlert = "g_leak Distribution value is required.";	
+			}
+			else if(($scope.param_g_leak_dist == "1") && (($scope.param_g_leak_p1 == "") || ($scope.param_g_leak_p1 == null))){
+				$scope.msgAlert = "g_leak p1 value is required.";
+			}
+			else if(($scope.param_g_leak_dist == "1") && (($scope.param_g_leak_p2 == "") || ($scope.param_g_leak_p2 == null))){
+				$scope.msgAlert = "g_leak p2 value is required.";
+			}
+			else if(($scope.param_g_leak_dist == "2") && (($scope.param_g_leak_fx == "") || ($scope.param_g_leak_fx == null))){
+				$scope.msgAlert = "g_leak f(x) value is required.";	
+			}
+
+			else if(($scope.param_v_offset_dist == "1") && (($scope.param_v_offset_distribution == "") || ($scope.param_v_offset_distribution == null))){
+				$scope.msgAlert = "v_offset Distribution value is required.";	
+			}
+			else if(($scope.param_v_offset_dist == "1") && (($scope.param_v_offset_p1 == "") || ($scope.param_v_offset_p1 == null))){
+				$scope.msgAlert = "v_offset p1 value is required.";
+			}
+			else if(($scope.param_v_offset_dist == "1") && (($scope.param_v_offset_p2 == "") || ($scope.param_v_offset_p2 == null))){
+				$scope.msgAlert = "v_offset p2 value is required.";
+			}
+			else if(($scope.param_v_offset_dist == "2") && (($scope.param_v_offset_fx == "") || ($scope.param_v_offset_fx == null))){
+				$scope.msgAlert = "v_offset f(x) value is required.";	
+			}
+
+			else if(($scope.param_e_rev_Na_dist == "1") && (($scope.param_e_rev_Na_distribution == "") || ($scope.param_e_rev_Na_distribution == null))){
+				$scope.msgAlert = " e_rev_Na Distribution value is required.";	
+			}
+			else if(($scope.param_e_rev_Na_dist == "1") && (($scope.param_e_rev_Na_p1 == "") || ($scope.param_e_rev_Na_p1 == null))){
+				$scope.msgAlert = "e_rev_Na p1 value is required.";
+			}
+			else if(($scope.param_e_rev_Na_dist == "1") && (($scope.param_e_rev_Na_p2 == "") || ($scope.param_e_rev_Na_p2 == null))){
+				$scope.msgAlert = "e_rev_Na p2 value is required.";
+			}
+			else if(($scope.param_e_rev_Na_dist == "2") && (($scope.param_e_rev_Na_fx == "") || ($scope.param_e_rev_Na_fx == null))){
+				$scope.msgAlert = "e_rev_Na f(x) value is required.";	
+			}
+
+			else if(($scope.param_e_rev_K_dist == "1") && (($scope.param_e_rev_K_distribution == "") || ($scope.param_e_rev_K_distribution == null))){
+				$scope.msgAlert = "e_rev_K Distribution value is required.";	
+			}
+			else if(($scope.param_e_rev_K_dist == "1") && (($scope.param_e_rev_K_p1 == "") || ($scope.param_e_rev_K_p1 == null))){
+				$scope.msgAlert = "e_rev_K p1 value is required.";
+			}
+			else if(($scope.param_e_rev_K_dist == "1") && (($scope.param_e_rev_K_p2 == "") || ($scope.param_e_rev_K_p2 == null))){
+				$scope.msgAlert = "e_rev_K p2 value is required.";
+			}
+			else if(($scope.param_e_rev_K_dist == "2") && (($scope.param_e_rev_K_fx == "") || ($scope.param_e_rev_K_fx == null))){
+				$scope.msgAlert = "e_rev_K f(x) value is required.";	
+			}
+
+			else if(($scope.param_e_rev_leak_dist == "1") && (($scope.param_e_rev_leak_distribution == "") || ($scope.param_e_rev_leak_distribution == null))){
+				$scope.msgAlert = "e_rev_leak Distribution value is required.";	
+			}
+			else if(($scope.param_e_rev_leak_dist == "1") && (($scope.param_e_rev_leak_p1 == "") || ($scope.param_e_rev_leak_p1 == null))){
+				$scope.msgAlert = "e_rev_leak p1 value is required.";
+			}
+			else if(($scope.param_e_rev_leak_dist == "1") && (($scope.param_e_rev_leak_p2 == "") || ($scope.param_e_rev_leak_p2 == null))){
+				$scope.msgAlert = "e_rev_leak p2 value is required.";
+			}
+			else if(($scope.param_e_rev_leak_dist == "2") && (($scope.param_e_rev_leak_fx == "") || ($scope.param_e_rev_leak_fx == null))){
+				$scope.msgAlert = "e_rev_leak f(x) value is required.";	
+			}
+
+			else if(($scope.param_v_spike_dist == "1") && (($scope.param_v_spike_distribution == "") || ($scope.param_v_spike_distribution == null))){
+				$scope.msgAlert = "v_spike Distribution value is required.";	
+			}
+			else if(($scope.param_v_spike_dist == "1") && (($scope.param_v_spike_p1 == "") || ($scope.param_v_spike_p1 == null))){
+				$scope.msgAlert = "v_spike p1 value is required.";
+			}
+			else if(($scope.param_v_spike_dist == "1") && (($scope.param_v_spike_p2 == "") || ($scope.param_v_spike_p2 == null))){
+				$scope.msgAlert = "v_spike p2 value is required.";
+			}
+			else if(($scope.param_v_spike_dist == "2") && (($scope.param_v_spike_fx == "") || ($scope.param_v_spike_fx == null))){
+				$scope.msgAlert = "v_spike f(x) value is required.";	
+			}
+
+			else if(($scope.param_a_dist == "1") && (($scope.param_a_distribution == "") || ($scope.param_a_distribution == null))){
+				$scope.msgAlert = "a Distribution value is required.";	
+			}
+			else if(($scope.param_a_dist == "1") && (($scope.param_a_p1 == "") || ($scope.param_a_p1 == null))){
+				$scope.msgAlert = "a p1 value is required.";
+			}
+			else if(($scope.param_a_dist == "1") && (($scope.param_a_p2 == "") || ($scope.param_a_p2 == null))){
+				$scope.msgAlert = "a p2 value is required.";
+			}
+			else if(($scope.param_a_dist == "2") && (($scope.param_a_fx == "") || ($scope.param_a_fx == null))){
+				$scope.msgAlert = "a f(x) value is required.";	
+			}
+
+			else if(($scope.param_b_dist == "1") && (($scope.param_b_distribution == "") || ($scope.param_b_distribution == null))){
+				$scope.msgAlert = "b Distribution value is required.";	
+			}
+			else if(($scope.param_b_dist == "1") && (($scope.param_b_p1 == "") || ($scope.param_b_p1 == null))){
+				$scope.msgAlert = "b p1 value is required.";
+			}
+			else if(($scope.param_b_dist == "1") && (($scope.param_b_p2 == "") || ($scope.param_b_p2 == null))){
+				$scope.msgAlert = "b p2 value is required.";
+			}
+			else if(($scope.param_b_dist == "2") && (($scope.param_b_fx == "") || ($scope.param_b_fx == null))){
+				$scope.msgAlert = "b f(x) value is required.";	
+			}
+
+			else if(($scope.param_delta_T_dist == "1") && (($scope.param_delta_T_distribution == "") || ($scope.param_delta_T_distribution == null))){
+				$scope.msgAlert = "delta_T Distribution value is required.";	
+			}
+			else if(($scope.param_delta_T_dist == "1") && (($scope.param_delta_T_p1 == "") || ($scope.param_delta_T_p1 == null))){
+				$scope.msgAlert = "delta_T p1 value is required.";
+			}
+			else if(($scope.param_delta_T_dist == "1") && (($scope.param_delta_T_p2 == "") || ($scope.param_delta_T_p2 == null))){
+				$scope.msgAlert = "delta_T p2 value is required.";
+			}
+			else if(($scope.param_delta_T_dist == "2") && (($scope.param_delta_T_fx == "") || ($scope.param_delta_T_fx == null))){
+				$scope.msgAlert = "delta_T f(x) value is required.";	
+			}
+
+			else if(($scope.param_tau_w_dist == "1") && (($scope.param_tau_w_distribution == "") || ($scope.param_tau_w_distribution == null))){
+				$scope.msgAlert = "tau_w Distribution value is required.";	
+			}
+			else if(($scope.param_delta_T_dist == "1") && (($scope.param_tau_w_p1 == "") || ($scope.param_tau_w_p1 == null))){
+				$scope.msgAlert = "tau_w p1 value is required.";
+			}
+			else if(($scope.param_delta_T_dist == "1") && (($scope.param_tau_w_p2 == "") || ($scope.param_tau_w_p2 == null))){
+				$scope.msgAlert = "tau_w p2 value is required.";
+			}
+			else if(($scope.param_delta_T_dist == "2") && (($scope.param_tau_w_fx == "") || ($scope.param_tau_w_fx == null))){
+				$scope.msgAlert = "tau_w f(x) value is required.";	
+			}
+
+			else if(($scope.init_v_dist == "1") && (($scope.init_v_distribution == "") || ($scope.init_v_distribution == null))){
+				$scope.msgAlert = "init_v Distribution value is required.";	
+			}
+			else if(($scope.init_v_dist == "1") && (($scope.param_init_v_p1 == "") || ($scope.param_init_v_p1 == null))){
+				$scope.msgAlert = "init_v p1 value is required.";
+			}
+			else if(($scope.init_v_dist == "1") && (($scope.param_init_v_p2 == "") || ($scope.param_init_v_p2 == null))){
+				$scope.msgAlert = "init_v p2 value is required.";
+			}
+			else if(($scope.init_v_dist == "2") && (($scope.param_init_v_fx == "") || ($scope.param_init_v_fx == null))){
+				$scope.msgAlert = "init_v f(x) value is required.";	
+			}
+
+			else if(($scope.init_w_dist == "1") && (($scope.init_w_distribution == "") || ($scope.init_w_distribution == null))){
+				$scope.msgAlert = "init_w Distribution value is required.";	
+			}
+			else if(($scope.init_w_dist == "1") && (($scope.param_init_w_p1 == "") || ($scope.param_init_w_p1 == null))){
+				$scope.msgAlert = "init_w p1 value is required.";
+			}
+			else if(($scope.init_w_dist == "1") && (($scope.param_init_w_p2 == "") || ($scope.param_init_w_p2 == null))){
+				$scope.msgAlert = "init_w p2 value is required.";
+			}
+			else if(($scope.init_w_dist == "2") && (($scope.param_init_w_fx == "") || ($scope.param_init_w_fx == null))){
+				$scope.msgAlert = "init_w f(x) value is required.";	
+			}
+
+			else {
+				$scope.close();
 			}
 		};
 		$scope.close = function() {
@@ -265,43 +853,181 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 				// level: $scope.level,
 				size: $scope.size,
 				celltype: $scope.celltype,
+				v_rest_dist: $scope.v_rest_dist,
+				param_v_rest_dist: $scope.param_v_rest_dist,
 				param_v_rest: $scope.param_v_rest,
+				param_v_rest_distribution: $scope.param_v_rest_distribution,
+				param_v_rest_p1: $scope.param_v_rest_p1,
+				param_v_rest_p2: $scope.param_v_rest_p2, 
+				param_v_rest_fx: $scope.param_v_rest_fx,
+				param_cm_dist: $scope.param_cm_dist,
 				param_cm: $scope.param_cm,
+				param_cm_distribution: $scope.param_cm_distribution,
+				param_cm_p1: $scope.param_cm_p1, 
+				param_cm_p2: $scope.param_cm_p2, 
+				param_cm_fx: $scope.param_cm_fx,
+				param_tau_m_dist: $scope.param_tau_m_dist,
 				param_tau_m: $scope.param_tau_m,
+				param_tau_m_distribution: $scope.param_tau_m_distribution, 
+				param_tau_m_p1: $scope.param_tau_m_p1, 
+				param_tau_m_p2: $scope.param_tau_m_p2, 
+				param_tau_m_fx: $scope.param_tau_m_fx,
+				param_tau_refrac_dist: $scope.param_tau_refrac_dist,
 				param_tau_refrac: $scope.param_tau_refrac,
+				param_tau_refrac_distribution: $scope.param_tau_refrac_distribution,
+				param_tau_refrac_p1: $scope.param_tau_refrac_p1,
+				param_tau_refrac_p2: $scope.param_tau_refrac_p2,
+				param_tau_refrac_fx: $scope.param_tau_refrac_fx,
+				param_tau_syn_E_dist: $scope.param_tau_syn_E_dist,
 				param_tau_syn_E: $scope.param_tau_syn_E,
+				param_tau_syn_E_distribution: $scope.param_tau_syn_E_distribution,
+				param_tau_syn_E_p1: $scope.param_tau_syn_E_p1,
+				param_tau_syn_E_p2: $scope.param_tau_syn_E_p2,
+				param_tau_syn_E_fx: $scope.param_tau_syn_E_fx,
+				param_tau_syn_I_dist: $scope.param_tau_syn_E_dist,
 				param_tau_syn_I: $scope.param_tau_syn_I,
+				param_tau_syn_I_distribution: $scope.param_tau_syn_E_distribution,
+				param_tau_syn_I_p1: $scope.param_tau_syn_E_p1,
+				param_tau_syn_I_p2: $scope.param_tau_syn_E_p2,
+				param_tau_syn_I_fx: $scope.param_tau_syn_E_fx,
+				param_i_offset_dist: $scope.param_i_offset_dist,
 				param_i_offset: $scope.param_i_offset,
+				param_i_offset_distribution: $scope.param_i_offset_distribution,
+				param_i_offset_p1: $scope.param_i_offset_p1,
+				param_i_offset_p2: $scope.param_i_offset_p2,
+				param_i_offset_fx: $scope.param_i_offset_fx,
+				param_v_reset_dist: $scope.param_v_reset_dist,
 				param_v_reset: $scope.param_v_reset,
+				param_v_reset_distribution: $scope.param_v_reset_distribution,
+				param_v_reset_p1: $scope.param_v_reset_p1,
+				param_v_reset_p2: $scope.param_v_reset_p2,
+				param_v_reset_fx: $scope.param_v_reset_fx,
+				param_v_thresh_dist: $scope.param_v_thresh_dist,
 				param_v_thresh: $scope.param_v_thresh,
+				param_v_thresh_distribution: $scope.param_v_thresh_distribution,
+				param_v_thresh_p1: $scope.param_v_thresh_p1,
+				param_v_thresh_p2: $scope.param_v_thresh_p2,
+				param_v_thresh_fx: $scope.param_v_thresh_fx,
+				param_e_rev_E_dist: $scope.param_e_rev_E_dist,
 				param_e_rev_E: $scope.param_e_rev_E,
+				param_e_rev_E_distribution: $scope.param_e_rev_E_distribution,
+				param_e_rev_E_p1: $scope.param_e_rev_E_p1,
+				param_e_rev_E_p2: $scope.param_e_rev_E_p2,
+				param_e_rev_E_fx: $scope.param_e_rev_E_fx,
+				param_e_rev_I_dist: $scope.param_e_rev_I_dist,
 				param_e_rev_I: $scope.param_e_rev_I,
+				param_e_rev_I_distribution: $scope.param_e_rev_I_distribution,
+				param_e_rev_I_p1: $scope.param_e_rev_I_p1,
+				param_e_rev_I_p2: $scope.param_e_rev_I_p2,
+				param_e_rev_I_fx: $scope.param_e_rev_I_fx,
+				param_gbar_Na_dist: $scope.param_gbar_Na_dist,
 				param_gbar_Na: $scope.param_gbar_Na,
+				param_gbar_Na_distribution: $scope.param_gbar_Na_distribution,
+				param_gbar_Na_p1: $scope.param_gbar_Na_p1,
+				param_gbar_Na_p2: $scope.param_gbar_Na_p2,
+				param_gbar_Na_fx: $scope.param_gbar_Na_fx,
+				param_gbar_K_dist: $scope.param_gbar_K_dist,
 				param_gbar_K: $scope.param_gbar_K,
+				param_gbar_K_distribution: $scope.param_gbar_K_distribution,
+				param_gbar_K_p1: $scope.param_gbar_K_p1,
+				param_gbar_K_p2: $scope.param_gbar_K_p2,
+				param_gbar_K_fx: $scope.param_gbar_K_fx,
+				param_g_leak_dist: $scope.param_g_leak_dist,
 				param_g_leak: $scope.param_g_leak,
+				param_g_leak_distribution: $scope.param_g_leak_distribution,
+				param_g_leak_p1: $scope.param_g_leak_p1,
+				param_g_leak_p2: $scope.param_g_leak_p2,
+				param_g_leak_fx: $scope.param_g_leak_fx,
+				param_v_offset_dist: $scope.param_v_offset_dist,
 				param_v_offset: $scope.param_v_offset,
+				param_v_offset_distribution: $scope.param_v_offset_distribution,
+				param_v_offset_p1: $scope.param_v_offset_p1,
+				param_v_offset_p2: $scope.param_v_offset_p2,
+				param_v_offset_fx: $scope.param_v_offset_fx,
+				param_e_rev_Na_dist: $scope.param_e_rev_Na_dist,
 				param_e_rev_Na: $scope.param_e_rev_Na,
+				param_e_rev_Na_distribution: $scope.param_e_rev_Na_distribution,
+				param_e_rev_Na_p1: $scope.param_e_rev_Na_p1,
+				param_e_rev_Na_p2: $scope.param_e_rev_Na_p2,
+				param_e_rev_Na_fx: $scope.param_e_rev_Na_fx,
+				param_e_rev_K_dist: $scope.param_e_rev_K_dist,
 				param_e_rev_K: $scope.param_e_rev_K,
+				param_e_rev_K_distribution: $scope.param_e_rev_K_distribution,
+				param_e_rev_K_p1: $scope.param_e_rev_K_p1,
+				param_e_rev_K_p2: $scope.param_e_rev_K_p2,
+				param_e_rev_K_fx: $scope.param_e_rev_K_fx,
+				param_e_rev_leak_dist: $scope.param_e_rev_leak_dist,
 				param_e_rev_leak: $scope.param_e_rev_leak,
+				param_e_rev_leak_distribution: $scope.param_e_rev_leak_distribution,
+				param_e_rev_leak_p1: $scope.param_e_rev_leak_p1,
+				param_e_rev_leak_p2: $scope.param_e_rev_leak_p2,
+				param_e_rev_leak_fx: $scope.param_e_rev_leak_fx,
 				param_tau_cm: $scope.param_tau_cm,
+				param_v_spike_dist: $scope.param_v_spike_dist,
 				param_v_spike: $scope.param_v_spike,
+				param_v_spike_distribution: $scope.param_v_spike_distribution,
+				param_v_spike_p1: $scope.param_v_spike_p1,
+				param_v_spike_p2: $scope.param_v_spike_p2,
+				param_v_spike_fx: $scope.param_v_spike_fx,
+				param_a_dist: $scope.param_a_dist,
 				param_a: $scope.param_a,
+				param_a_distribution: $scope.param_a_distribution,
+				param_a_p1: $scope.param_a_p1,
+				param_a_p2: $scope.param_a_p2,
+				param_a_fx: $scope.param_a_fx,
+				param_b_dist: $scope.param_b_dist,
 				param_b: $scope.param_b,
+				param_b_distribution: $scope.param_b_distribution,
+				param_b_p1: $scope.param_b_p1,
+				param_b_p2: $scope.param_b_p2,
+				param_b_fx:$scope.param_b_fx,
+				param_delta_T_dist: $scope.param_delta_T_dist,
 				param_delta_T: $scope.param_delta_T,
+				param_delta_T_distribution: $scope.param_delta_T_distribution,
+				param_delta_T_p1: $scope.param_delta_T_p1,
+				param_delta_T_p2: $scope.param_delta_T_p2,
+				param_delta_T_fx: $scope.param_delta_T_fx,
+				param_tau_w_dist: $scope.param_tau_w_dist,
 				param_tau_w: $scope.param_tau_w,
+				param_tau_w_distribution: $scope.param_tau_w_distribution,
+				param_tau_w_p1: $scope.param_tau_w_p1,
+				param_tau_w_p2: $scope.param_tau_w_p2,
+				param_tau_w_fx: $scope.param_tau_w_fx,
 				init_isyn_exc: $scope.init_isyn_exc,
 				init_isyn_inh: $scope.init_isyn_inh,
 				init_gsyn_exc: $scope.init_gsyn_exc,
 				init_gsyn_inh: $scope.init_gsyn_inh,
+				init_v_dist: $scope.init_v_dist,
 				init_v: $scope.init_v,
+				init_v_distribution: $scope.init_v_distribution,
+				init_v_p1: $scope.init_v_p1,
+				init_v_p2: $scope.init_v_p2,
+				init_v_fx: $scope.init_v_fx,
+				init_w_dist: $scope.init_w_dist,
 				init_w: $scope.init_w,
+				init_w_distribution: $scope.init_w_distribution,
+				init_w_p1: $scope.init_w_p1,
+				init_w_p2: $scope.init_w_p2,
+				init_w_fx: $scope.init_w_fx,
 				Recording_spikes: $scope.Recording_spikes,
 				Recording_v: $scope.Recording_v,
 				Simulation_time: $scope.Simulation_time,
 				Simulation_name: $scope.Simulation_name,
+				param_rate_dist: $scope.param_rate_dist,
 				param_rate: $scope.param_rate,
+				param_rate_p1: $scope.param_rate_p1,
+				param_rate_p2: $scope.param_rate_p2,
+				param_rate_fx: $scope.param_rate_fx,
+				param_start_dist: $scope.param_start_dist,
 				param_start: $scope.param_start,
+				param_start_p1: $scope.param_start_p1,
+				param_start_p2: $scope.param_start_p2,
+				param_start_fx: $scope.param_start_fx,
+				param_duration_dist: $scope.param_duration_dist,
 				param_duration: $scope.param_duration,
+				param_duration_p1: $scope.param_duration_p1,
+				param_duration_p2: $scope.param_duration_p2,
+				param_duration_fx: $scope.param_duration_fx,
 			}, 100);
 			$('.modal-backdrop').remove();
 		};
@@ -312,47 +1038,185 @@ graphSchemaApp.controller('PopDialogController', ['$scope', '$element', 'title',
 			$element.modal('hide');
 			//  Now call close, returning control to the caller.
 			close({
-				name_value: name_value,
-				// level: level,
-				size: size,
-				celltype: celltype,
-				param_v_rest: param_v_rest,
-				param_cm: param_cm,
-				param_tau_m: param_tau_m,
-				param_tau_refrac: param_tau_refrac,
-				param_tau_syn_E: param_tau_syn_E,
-				param_tau_syn_I: param_tau_syn_I,
-				param_i_offset: param_i_offset,
-				param_v_reset: param_v_reset,
-				param_v_thresh: param_v_thresh,
-				param_e_rev_E: param_e_rev_E,
-				param_e_rev_I: param_e_rev_I,
-				param_gbar_Na: param_gbar_Na,
-				param_gbar_K: param_gbar_K,
-				param_g_leak: param_g_leak,
-				param_v_offset: param_v_offset,
-				param_e_rev_Na: param_e_rev_Na,
-				param_e_rev_K: param_e_rev_K,
-				param_e_rev_leak: param_e_rev_leak,
-				param_tau_cm: param_tau_cm,
-				param_v_spike: param_v_spike,
-				param_a: param_a,
-				param_b: param_b,
-				param_delta_T: param_delta_T,
-				param_tau_w: param_tau_w,
-				init_isyn_exc: init_isyn_exc,
-				init_isyn_inh: init_isyn_inh,
-				init_gsyn_exc: init_gsyn_exc,
-				init_gsyn_inh: init_gsyn_inh,
-				init_v: init_v,
-				init_w: init_w,
+				name_value: $scope.name_value,
+				// level: $scope.level,
+				size: $scope.size,
+				celltype: $scope.celltype,
+				v_rest_dist: $scope.v_rest_dist,
+				param_v_rest_dist: $scope.param_v_rest_dist,
+				param_v_rest: $scope.param_v_rest,
+				param_v_rest_distribution: $scope.param_v_rest_distribution,
+				param_v_rest_p1: $scope.param_v_rest_p1,
+				param_v_rest_p2: $scope.param_v_rest_p2, 
+				param_v_rest_fx: $scope.param_v_rest_fx,
+				param_cm_dist: $scope.param_cm_dist,
+				param_cm: $scope.param_cm,
+				param_cm_distribution: $scope.param_cm_distribution,
+				param_cm_p1: $scope.param_cm_p1, 
+				param_cm_p2: $scope.param_cm_p2, 
+				param_cm_fx: $scope.param_cm_fx,
+				param_tau_m_dist: $scope.param_tau_m_dist,
+				param_tau_m: $scope.param_tau_m,
+				param_tau_m_distribution: $scope.param_tau_m_distribution, 
+				param_tau_m_p1: $scope.param_tau_m_p1, 
+				param_tau_m_p2: $scope.param_tau_m_p2, 
+				param_tau_m_fx: $scope.param_tau_m_fx,
+				param_tau_refrac_dist: $scope.param_tau_refrac_dist,
+				param_tau_refrac: $scope.param_tau_refrac,
+				param_tau_refrac_distribution: $scope.param_tau_refrac_distribution,
+				param_tau_refrac_p1: $scope.param_tau_refrac_p1,
+				param_tau_refrac_p2: $scope.param_tau_refrac_p2,
+				param_tau_refrac_fx: $scope.param_tau_refrac_fx,
+				param_tau_syn_E_dist: $scope.param_tau_syn_E_dist,
+				param_tau_syn_E: $scope.param_tau_syn_E,
+				param_tau_syn_E_distribution: $scope.param_tau_syn_E_distribution,
+				param_tau_syn_E_p1: $scope.param_tau_syn_E_p1,
+				param_tau_syn_E_p2: $scope.param_tau_syn_E_p2,
+				param_tau_syn_E_fx: $scope.param_tau_syn_E_fx,
+				param_tau_syn_I_dist: $scope.param_tau_syn_E_dist,
+				param_tau_syn_I: $scope.param_tau_syn_I,
+				param_tau_syn_I_distribution: $scope.param_tau_syn_E_distribution,
+				param_tau_syn_I_p1: $scope.param_tau_syn_E_p1,
+				param_tau_syn_I_p2: $scope.param_tau_syn_E_p2,
+				param_tau_syn_I_fx: $scope.param_tau_syn_E_fx,
+				param_i_offset_dist: $scope.param_i_offset_dist,
+				param_i_offset: $scope.param_i_offset,
+				param_i_offset_distribution: $scope.param_i_offset_distribution,
+				param_i_offset_p1: $scope.param_i_offset_p1,
+				param_i_offset_p2: $scope.param_i_offset_p2,
+				param_i_offset_fx: $scope.param_i_offset_fx,
+				param_v_reset_dist: $scope.param_v_reset_dist,
+				param_v_reset: $scope.param_v_reset,
+				param_v_reset_distribution: $scope.param_v_reset_distribution,
+				param_v_reset_p1: $scope.param_v_reset_p1,
+				param_v_reset_p2: $scope.param_v_reset_p2,
+				param_v_reset_fx: $scope.param_v_reset_fx,
+				param_v_thresh_dist: $scope.param_v_thresh_dist,
+				param_v_thresh: $scope.param_v_thresh,
+				param_v_thresh_distribution: $scope.param_v_thresh_distribution,
+				param_v_thresh_p1: $scope.param_v_thresh_p1,
+				param_v_thresh_p2: $scope.param_v_thresh_p2,
+				param_v_thresh_fx: $scope.param_v_thresh_fx,
+				param_e_rev_E_dist: $scope.param_e_rev_E_dist,
+				param_e_rev_E: $scope.param_e_rev_E,
+				param_e_rev_E_distribution: $scope.param_e_rev_E_distribution,
+				param_e_rev_E_p1: $scope.param_e_rev_E_p1,
+				param_e_rev_E_p2: $scope.param_e_rev_E_p2,
+				param_e_rev_E_fx: $scope.param_e_rev_E_fx,
+				param_e_rev_I_dist: $scope.param_e_rev_I_dist,
+				param_e_rev_I: $scope.param_e_rev_I,
+				param_e_rev_I_distribution: $scope.param_e_rev_I_distribution,
+				param_e_rev_I_p1: $scope.param_e_rev_I_p1,
+				param_e_rev_I_p2: $scope.param_e_rev_I_p2,
+				param_e_rev_I_fx: $scope.param_e_rev_I_fx,
+				param_gbar_Na_dist: $scope.param_gbar_Na_dist,
+				param_gbar_Na: $scope.param_gbar_Na,
+				param_gbar_Na_distribution: $scope.param_gbar_Na_distribution,
+				param_gbar_Na_p1: $scope.param_gbar_Na_p1,
+				param_gbar_Na_p2: $scope.param_gbar_Na_p2,
+				param_gbar_Na_fx: $scope.param_gbar_Na_fx,
+				param_gbar_K_dist: $scope.param_gbar_K_dist,
+				param_gbar_K: $scope.param_gbar_K,
+				param_gbar_K_distribution: $scope.param_gbar_K_distribution,
+				param_gbar_K_p1: $scope.param_gbar_K_p1,
+				param_gbar_K_p2: $scope.param_gbar_K_p2,
+				param_gbar_K_fx: $scope.param_gbar_K_fx,
+				param_g_leak_dist: $scope.param_g_leak_dist,
+				param_g_leak: $scope.param_g_leak,
+				param_g_leak_distribution: $scope.param_g_leak_distribution,
+				param_g_leak_p1: $scope.param_g_leak_p1,
+				param_g_leak_p2: $scope.param_g_leak_p2,
+				param_g_leak_fx: $scope.param_g_leak_fx,
+				param_v_offset_dist: $scope.param_v_offset_dist,
+				param_v_offset: $scope.param_v_offset,
+				param_v_offset_distribution: $scope.param_v_offset_distribution,
+				param_v_offset_p1: $scope.param_v_offset_p1,
+				param_v_offset_p2: $scope.param_v_offset_p2,
+				param_v_offset_fx: $scope.param_v_offset_fx,
+				param_e_rev_Na_dist: $scope.param_e_rev_Na_dist,
+				param_e_rev_Na: $scope.param_e_rev_Na,
+				param_e_rev_Na_distribution: $scope.param_e_rev_Na_distribution,
+				param_e_rev_Na_p1: $scope.param_e_rev_Na_p1,
+				param_e_rev_Na_p2: $scope.param_e_rev_Na_p2,
+				param_e_rev_Na_fx: $scope.param_e_rev_Na_fx,
+				param_e_rev_K_dist: $scope.param_e_rev_K_dist,
+				param_e_rev_K: $scope.param_e_rev_K,
+				param_e_rev_K_distribution: $scope.param_e_rev_K_distribution,
+				param_e_rev_K_p1: $scope.param_e_rev_K_p1,
+				param_e_rev_K_p2: $scope.param_e_rev_K_p2,
+				param_e_rev_K_fx: $scope.param_e_rev_K_fx,
+				param_e_rev_leak_dist: $scope.param_e_rev_leak_dist,
+				param_e_rev_leak: $scope.param_e_rev_leak,
+				param_e_rev_leak_distribution: $scope.param_e_rev_leak_distribution,
+				param_e_rev_leak_p1: $scope.param_e_rev_leak_p1,
+				param_e_rev_leak_p2: $scope.param_e_rev_leak_p2,
+				param_e_rev_leak_fx: $scope.param_e_rev_leak_fx,
+				param_tau_cm: $scope.param_tau_cm,
+				param_v_spike_dist: $scope.param_v_spike_dist,
+				param_v_spike: $scope.param_v_spike,
+				param_v_spike_distribution: $scope.param_v_spike_distribution,
+				param_v_spike_p1: $scope.param_v_spike_p1,
+				param_v_spike_p2: $scope.param_v_spike_p2,
+				param_v_spike_fx: $scope.param_v_spike_fx,
+				param_a_dist: $scope.param_a_dist,
+				param_a: $scope.param_a,
+				param_a_distribution: $scope.param_a_distribution,
+				param_a_p1: $scope.param_a_p1,
+				param_a_p2: $scope.param_a_p2,
+				param_a_fx: $scope.param_a_fx,
+				param_b_dist: $scope.param_b_dist,
+				param_b: $scope.param_b,
+				param_b_distribution: $scope.param_b_distribution,
+				param_b_p1: $scope.param_b_p1,
+				param_b_p2: $scope.param_b_p2,
+				param_b_fx:$scope.param_b_fx,
+				param_delta_T_dist: $scope.param_delta_T_dist,
+				param_delta_T: $scope.param_delta_T,
+				param_delta_T_distribution: $scope.param_delta_T_distribution,
+				param_delta_T_p1: $scope.param_delta_T_p1,
+				param_delta_T_p2: $scope.param_delta_T_p2,
+				param_delta_T_fx: $scope.param_delta_T_fx,
+				param_tau_w_dist: $scope.param_tau_w_dist,
+				param_tau_w: $scope.param_tau_w,
+				param_tau_w_distribution: $scope.param_tau_w_distribution,
+				param_tau_w_p1: $scope.param_tau_w_p1,
+				param_tau_w_p2: $scope.param_tau_w_p2,
+				param_tau_w_fx: $scope.param_tau_w_fx,
+				init_isyn_exc: $scope.init_isyn_exc,
+				init_isyn_inh: $scope.init_isyn_inh,
+				init_gsyn_exc: $scope.init_gsyn_exc,
+				init_gsyn_inh: $scope.init_gsyn_inh,
+				init_v_dist: $scope.init_v_dist,
+				init_v: $scope.init_v,
+				init_v_distribution: $scope.init_v_distribution,
+				init_v_p1: $scope.init_v_p1,
+				init_v_p2: $scope.init_v_p2,
+				init_v_fx: $scope.init_v_fx,
+				init_w_dist: $scope.init_w_dist,
+				init_w: $scope.init_w,
+				init_w_distribution: $scope.init_w_distribution,
+				init_w_p1: $scope.init_w_p1,
+				init_w_p2: $scope.init_w_p2,
+				init_w_fx: $scope.init_w_fx,
 				Recording_spikes: $scope.Recording_spikes,
 				Recording_v: $scope.Recording_v,
 				Simulation_time: $scope.Simulation_time,
 				Simulation_name: $scope.Simulation_name,
+				param_rate_dist: $scope.param_rate_dist,
 				param_rate: $scope.param_rate,
+				param_rate_p1: $scope.param_rate_p1,
+				param_rate_p2: $scope.param_rate_p2,
+				param_rate_fx: $scope.param_rate_fx,
+				param_start_dist: $scope.param_start_dist,
 				param_start: $scope.param_start,
+				param_start_p1: $scope.param_start_p1,
+				param_start_p2: $scope.param_start_p2,
+				param_start_fx: $scope.param_start_fx,
+				param_duration_dist: $scope.param_duration_dist,
 				param_duration: $scope.param_duration,
+				param_duration_p1: $scope.param_duration_p1,
+				param_duration_p2: $scope.param_duration_p2,
+				param_duration_fx: $scope.param_duration_fx,
 			}, 100); // close, but give 100ms for bootstrap to animate
 			$('.modal-backdrop').remove();
 		};
